@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import {symbols} from '../../tools/settings.json';
+import {Symbols} from '../../tools/settings.json';
 
 export default class Block{
   private app: PIXI.Application;
@@ -21,7 +21,7 @@ export default class Block{
   }
 
   private createSymbol() {
-    const symbolName = symbols[this.value - 1];
+    const symbolName = Symbols[this.value - 1];
     const texture = this.app.loader.resources!.symbols.textures![`${symbolName}.png`];
     this.symbolSprite = new PIXI.Sprite(texture);
     this.symbolSprite.height = this.size;
@@ -31,7 +31,7 @@ export default class Block{
   }
 
   public updateValue() {
-    const symbolName = symbols[this.value - 1];
+    const symbolName = Symbols[this.value - 1];
     const texture = this.app.loader.resources!.symbols.textures![`${symbolName}.png`];
     this.symbolSprite.texture = texture;
   }

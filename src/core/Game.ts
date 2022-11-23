@@ -3,6 +3,9 @@ import Loader from './components/Loader';
 import Plinko from './plinko/Plinko';
 import Slot from './slot/Slot';
 import Home from './components/Home';
+import Scene from './components/Scene';
+import Functions from './Functions';
+
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 
@@ -20,33 +23,66 @@ export default class Game {
   private plinko: PIXI.Application;
   private slot: PIXI.Application;
   private home: Home;
+  private scene: Scene;
+  private diveGroupAnimation: Array<object> = []; 
+  private riseGroupAnimation: Array<object> = []; 
 
   constructor() {
-    this.gameContainer = new PIXI.Container;
-    this.homeContainer = new PIXI.Container;
-    this.mainContainer = new PIXI.Container;
-    this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight });
-    window.document.body.appendChild(this.main.view);
+    this.setSettings();
+    this.setRenderer();
 
     new Loader(this.main, this.init.bind(this));
   }
 
   private init() {
     this.setContainers();
+    this.createScene();
     this.createHome();
     this.createPlinko();
     this.createSlot();
-
+    this.setObjAnimation();
 
     this.startGame();
+  }
+
+  private setSettings() {
+    PIXI.settings.ROUND_PIXELS = true;
+    PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
+    PIXI.settings.RESOLUTION = 2;
+
+    this.gameContainer = new PIXI.Container;
+    this.homeContainer = new PIXI.Container;
+    this.mainContainer = new PIXI.Container;
+  }  
+
+  private setRenderer() {
+    this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight, autoDensity: true });
+    // const canvas = document.getElementById('ocean-story');
+
+    // const renderer = new PIXI.Renderer({
+    //   width: this.baseWidth,
+    //   height: this.baseHeight,
+    //   view: canvas,
+    //   antialias: false,
+    //   resolution: 3
+    // })
+
+    // renderer.render(this.main.stage)
+    window.document.body.appendChild(this.main.view)
   }
 
   private setContainers (){
     this.gameContainer.y = this.baseHeight;
   }
 
+  private createScene() {
+    this.scene = new Scene(this.main);
+    this.mainContainer.addChild(this.scene.container);
+    this.dive();
+  }
+
   private createHome() {
-    this.home = new Home(this.main);
+    this.home = new Home(this.main, this.dive.bind(this));
     this.homeContainer.addChild(this.home.container);
   }
 
@@ -54,7 +90,6 @@ export default class Game {
     this.plinko = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
     const plinko = new Plinko(this.plinko);
     this.plinko.stage.addChild(plinko.container);
-    this.gameContainer.addChild(this.plinko.stage);
   }
 
   private createSlot() {
@@ -63,38 +98,59 @@ export default class Game {
     const slot = new Slot(this.slot);
     this.slot.stage.addChild(slot.container);
     this.slot.stage.x = this.baseWidth/2;
-    this.gameContainer.addChild(this.slot.stage);
+    
+  }
+
+  private setObjAnimation() {
+    this.diveGroupAnimation = Functions.objGroupAnimation(
+      [
+        {sprite: this.scene.bgSprite, destination: -(this.scene.bgSprite.height/2)},
+        {sprite: this.gameContainer, destination: 0},
+        {sprite: this.homeContainer, destination: -this.baseHeight}
+      ]
+    )
+    this.riseGroupAnimation = Functions.objGroupAnimation(
+      [
+        {sprite: this.scene.bgSprite, destination: 0},
+        {sprite: this.gameContainer, destination: this.baseHeight},
+        {sprite: this.homeContainer, destination: 0}
+      ]
+    )
   }
 
   private startGame() {
+    this.gameContainer.addChild(this.plinko.stage);
+    this.gameContainer.addChild(this.slot.stage);
+
     this.mainContainer.addChild(this.homeContainer);
     this.mainContainer.addChild(this.gameContainer);
 
     this.main.stage.addChild(this.mainContainer)
   }
 
+
+
+
+
   private dive() {
-    gsap.to(this.home.bgSprite, {
-      y: -(this.home.bgSprite.height/2),
-      duration: this.animationSpeed,
-      delay: 1,
-    })
-    gsap.to(this.gameContainer, {
-      y: 0,
-      duration: this.animationSpeed,
-      delay: 1,
+    this.diveGroupAnimation.forEach((element: any) => {
+      const {sprite, destination} = element;
+
+      gsap.to(sprite, {
+        y: destination,
+        duration: this.animationSpeed
+      })
     })
   }
 
   private rise() {
-    gsap.to(this.home.bgSprite, {
-      y: 0,
-      duration: this.animationSpeed,
-    })
+    this.riseGroupAnimation.forEach((element: any) => {
+      const {sprite, destination} = element;
 
-    gsap.to(this.gameContainer, {
-      y: this.baseHeight,
-      duration: this.animationSpeed,
+      gsap.to(sprite, {
+        y: destination,
+        duration: this.animationSpeed
+      })
     })
   }
 

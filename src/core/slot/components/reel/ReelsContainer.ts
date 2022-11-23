@@ -34,7 +34,7 @@ export default class ReelsContainer {
   public spinReels() {
     // CHECK FOR BONUS ANIMATION
     this.slowSpinValidation();
-
+    console.log(this.reelsArray);
     this.reels.forEach((reel, index) => {
       reel.blocks = this.reelsArray[index];
       reel.startSpin();

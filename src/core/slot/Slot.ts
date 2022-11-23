@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import SlotFunctions from './tools/SlotFunctions';
 import Globals from './tools/globals.json';
 import ReelsContainer from './components/reel/ReelsContainer';
-import Reel from './components/reel/Reel';
+import {ReelOffset} from './tools/settings.json';
 
 export default class Slot {
   private app: PIXI.Application;
@@ -11,7 +11,7 @@ export default class Slot {
   private bet: number = 50;
   private readonly RTP: number = 0.9333;
   private reelsContainer: ReelsContainer;
-  private reel: Reel;
+  private background: PIXI.Sprite;
 
   constructor(app: PIXI.Application) {
     this.app = app;
@@ -22,18 +22,14 @@ export default class Slot {
   }
 
   private init() {
-    // this.createScene();
+    this.settings();
     this.createGenerateEvent();
     this.createReelsContainer();
+    this.createBackground();
   }
-  
-  private createScene() {
-    const scene = new PIXI.Graphics();
-    scene.beginFill(0x000000)
-    .drawRect(0, 0, this.app.screen.width, this.app.screen.height)
-    .endFill();
 
-    this.container.addChild(scene);
+  private settings() {
+    this.container.sortableChildren = true;
   }
 
   private createGenerateEvent() {
@@ -45,8 +41,21 @@ export default class Slot {
     this.reelsContainer = new ReelsContainer(this.app, initReelsArray);
     this.reelsContainer.container.x = (this.app.screen.width/2) - (this.reelsContainer.container.width/2);
     this.reelsContainer.container.y = (this.app.screen.width/2) - (this.reelsContainer.container.width/2);
+    this.reelsContainer.container.zIndex = 1;
 
     this.container.addChild(this.reelsContainer.container);
+  }
+
+  private createBackground() {
+    const texture = this.app.loader.resources!.slot.textures!['reels.png'];
+    this.background = new PIXI.Sprite(texture);
+    this.background.x = ReelOffset/2;
+    this.background.y = ReelOffset/2;
+    this.background.width = this.app.screen.width - ReelOffset;
+    this.background.height = this.container.height + (ReelOffset*3);
+    this.background.zIndex = 0;
+
+    this.container.addChild(this.background);
   }
 
   private getResult(e: any) {

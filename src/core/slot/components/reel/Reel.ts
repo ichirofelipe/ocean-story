@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Block from './Block';
-import {Reel as ReelValues, Columns, Rows, ActualRows} from '../../tools/settings.json';
+import {Reel as ReelValues, Columns, Rows, ActualRows, ReelOffset} from '../../tools/settings.json';
 import Globals from '../../tools/globals.json';
 
 import { gsap } from "gsap";
@@ -16,7 +16,7 @@ export default class Reel {
   private reelIndex: number;
   private reelBlocks: Array<Block> = [];
   private reelSpeed: number = 25; //spin velocity
-  public reelOffset: number = 10; //block spacing
+  public reelOffset: number = ReelOffset; //block spacing
   private spinTicker: PIXI.Ticker;
   private spinDuration: number = 1; //seconds
   private spinStart: number;

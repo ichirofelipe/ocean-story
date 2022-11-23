@@ -15,7 +15,8 @@ PixiPlugin.registerPIXI(PIXI);
 export default class Game {
   private baseWidth: number = 960;
   private baseHeight: number = 540;
-  private animationSpeed: number = 2; // animation speed (dive, rise)
+  private animationSpeed: number = 3; // animation speed (dive, rise)
+  private sceneContainer: PIXI.Container;
   private mainContainer: PIXI.Container;
   private homeContainer: PIXI.Container;
   private gameContainer: PIXI.Container;
@@ -50,6 +51,7 @@ export default class Game {
     PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
     PIXI.settings.RESOLUTION = 2;
 
+    this.sceneContainer = new PIXI.Container;
     this.gameContainer = new PIXI.Container;
     this.homeContainer = new PIXI.Container;
     this.mainContainer = new PIXI.Container;
@@ -57,28 +59,16 @@ export default class Game {
 
   private setRenderer() {
     this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight, autoDensity: true });
-    // const canvas = document.getElementById('ocean-story');
-
-    // const renderer = new PIXI.Renderer({
-    //   width: this.baseWidth,
-    //   height: this.baseHeight,
-    //   view: canvas,
-    //   antialias: false,
-    //   resolution: 3
-    // })
-
-    // renderer.render(this.main.stage)
     window.document.body.appendChild(this.main.view)
   }
 
   private setContainers (){
-    this.gameContainer.y = this.baseHeight;
+    this.gameContainer.y = this.baseHeight*2;
   }
 
   private createScene() {
     this.scene = new Scene(this.main);
-    this.mainContainer.addChild(this.scene.container);
-    this.dive();
+    this.sceneContainer.addChild(this.scene.container);
   }
 
   private createHome() {
@@ -90,6 +80,7 @@ export default class Game {
     this.plinko = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
     const plinko = new Plinko(this.plinko);
     this.plinko.stage.addChild(plinko.container);
+    this.gameContainer.addChild(this.plinko.stage);
   }
 
   private createSlot() {
@@ -98,30 +89,29 @@ export default class Game {
     const slot = new Slot(this.slot);
     this.slot.stage.addChild(slot.container);
     this.slot.stage.x = this.baseWidth/2;
-    
+    this.slot.stage.y = 50;
+    this.gameContainer.addChild(this.slot.stage);
   }
 
   private setObjAnimation() {
     this.diveGroupAnimation = Functions.objGroupAnimation(
       [
-        {sprite: this.scene.bgSprite, destination: -(this.scene.bgSprite.height/2)},
+        {sprite: this.sceneContainer, destination: -((this.sceneContainer.height/3)*2)},
         {sprite: this.gameContainer, destination: 0},
-        {sprite: this.homeContainer, destination: -this.baseHeight}
+        {sprite: this.homeContainer, destination: -this.baseHeight*2}
       ]
     )
     this.riseGroupAnimation = Functions.objGroupAnimation(
       [
-        {sprite: this.scene.bgSprite, destination: 0},
-        {sprite: this.gameContainer, destination: this.baseHeight},
+        {sprite: this.sceneContainer, destination: 0},
+        {sprite: this.gameContainer, destination: this.baseHeight*2},
         {sprite: this.homeContainer, destination: 0}
       ]
     )
   }
 
   private startGame() {
-    this.gameContainer.addChild(this.plinko.stage);
-    this.gameContainer.addChild(this.slot.stage);
-
+    this.mainContainer.addChild(this.sceneContainer);
     this.mainContainer.addChild(this.homeContainer);
     this.mainContainer.addChild(this.gameContainer);
 

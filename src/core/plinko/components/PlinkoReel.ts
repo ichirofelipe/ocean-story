@@ -39,6 +39,7 @@ export default class PlinkoReel{
       .drawRect(0, 0, width, this.height)
       .endFill();
       box.x = width*index;
+      box.alpha = 0.1;
   
       this.objBx.push(box);
   

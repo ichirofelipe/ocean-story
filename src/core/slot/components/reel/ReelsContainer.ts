@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import Reel from './Reel';
 import Globals from '../../tools/globals.json';
+import {Reel as ReelValues, Columns, Rows, ActualRows, ReelOffset} from '../../tools/settings.json';
 
 export default class ReelsContainer {
   private app: PIXI.Application;

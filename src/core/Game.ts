@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import Loader from './components/Loader';
 import Plinko from './plinko/Plinko';
 import Slot from './slot/Slot';
-import Home from './components/layouts/Home';
+import Home from './components/Home';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 
@@ -13,6 +13,8 @@ export default class Game {
   private baseWidth: number = 960;
   private baseHeight: number = 540;
   private animationSpeed: number = 2; // animation speed (dive, rise)
+  private mainContainer: PIXI.Container;
+  private homeContainer: PIXI.Container;
   private gameContainer: PIXI.Container;
   private main: PIXI.Application;
   private plinko: PIXI.Application;
@@ -21,8 +23,11 @@ export default class Game {
 
   constructor() {
     this.gameContainer = new PIXI.Container;
+    this.homeContainer = new PIXI.Container;
+    this.mainContainer = new PIXI.Container;
     this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight });
     window.document.body.appendChild(this.main.view);
+
     new Loader(this.main, this.init.bind(this));
   }
 
@@ -42,14 +47,14 @@ export default class Game {
 
   private createHome() {
     this.home = new Home(this.main);
-    this.dive();
-    this.main.stage.addChild(this.home.container);
+    this.homeContainer.addChild(this.home.container);
   }
 
   private createPlinko() {
     this.plinko = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
     const plinko = new Plinko(this.plinko);
     this.plinko.stage.addChild(plinko.container);
+    this.gameContainer.addChild(this.plinko.stage);
   }
 
   private createSlot() {
@@ -58,13 +63,14 @@ export default class Game {
     const slot = new Slot(this.slot);
     this.slot.stage.addChild(slot.container);
     this.slot.stage.x = this.baseWidth/2;
+    this.gameContainer.addChild(this.slot.stage);
   }
 
   private startGame() {
-    this.gameContainer.addChild(this.plinko.stage);
-    this.gameContainer.addChild(this.slot.stage);
+    this.mainContainer.addChild(this.homeContainer);
+    this.mainContainer.addChild(this.gameContainer);
 
-    this.main.stage.addChild(this.gameContainer);
+    this.main.stage.addChild(this.mainContainer)
   }
 
   private dive() {

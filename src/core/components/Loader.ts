@@ -28,7 +28,7 @@ export default class Loader {
 
     private loadAssets() {
         this.loader.add('symbols', 'assets/images/symbols/symbols.json');
-        this.loader.add('background', 'assets/images/main/background.jpg');
+        this.loader.add('home', 'assets/images/home/home.json');
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {

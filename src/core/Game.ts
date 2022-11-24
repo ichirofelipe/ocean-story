@@ -90,7 +90,7 @@ export default class Game {
     const slot = new Slot(this.slot);
     this.slot.stage.addChild(slot.container);
     this.slot.stage.x = this.baseWidth/2;
-    this.slot.stage.y = 50;
+    this.slot.stage.y = 140;
     this.gameContainer.addChild(this.slot.stage);
   }
 

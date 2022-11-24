@@ -77,7 +77,6 @@ export default class Reel {
   }
 
   private prolongSpin() {
-    console.log(Globals.slowSpinStart);
     if(Globals.slowSpinStart == -1)
       return 0;
     if(this.reelIndex < Globals.slowSpinStart)

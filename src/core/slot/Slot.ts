@@ -3,6 +3,7 @@ import SlotFunctions from './tools/SlotFunctions';
 import Globals from './tools/globals.json';
 import ReelsContainer from './components/reel/ReelsContainer';
 import {ReelOffsetX, ReelOffsetY} from './tools/settings.json';
+import Helpers from './tools/Helpers';
 
 export default class Slot {
   private app: PIXI.Application;
@@ -12,6 +13,7 @@ export default class Slot {
   private readonly RTP: number = 0.9333;
   private reelsContainer: ReelsContainer;
   private background: PIXI.Sprite;
+  private logo: PIXI.Sprite;
   private frameHeightAdjustment: number = 70;
   private frameWidthAdjustment: number = 10;
 
@@ -28,6 +30,7 @@ export default class Slot {
     this.createGenerateEvent();
     this.createReelsContainer();
     this.createBackground();
+    this.createLogo();
   }
 
   private settings() {
@@ -68,5 +71,17 @@ export default class Slot {
     const result = this.slotFunctions.generateResult();
     this.reelsContainer.reelsArray = result;
     this.reelsContainer.spinReels();
+  }
+
+  private createLogo() {
+    const texture = this.app.loader.resources!.slot.textures!['logo.png'];
+    this.logo = new PIXI.Sprite(texture);
+    const width = this.logo.width;
+    this.logo.height = Helpers.autoHeight(this.logo, (width*0.4))
+    this.logo.width = (width*0.4);
+    this.logo.x = (this.app.screen.width - (this.logo.width/2)) - 40;
+    this.logo.y = -((this.logo.height) - 90);
+    
+    this.background.addChild(this.logo);
   }
 }

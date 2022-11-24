@@ -90,5 +90,19 @@
       "right": 0,
       "zIndex": 1
     }
+  ],
+  "LoopingBubbles": [
+    {
+      "posX": 250,
+      "posY": 50
+    },
+    {
+      "posX": 800,
+      "posY": 50
+    },
+    {
+      "posX": 870,
+      "posY": 400
+    }
   ]
 }

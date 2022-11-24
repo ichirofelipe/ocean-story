@@ -109,7 +109,7 @@ export default class Game {
         {sprite: this.homeContainer, destination: 0}
       ]
     )
-    this.dive();
+    // this.dive();
   }
 
   private startGame() {
@@ -132,7 +132,7 @@ export default class Game {
 
       gsap.to(sprite, {
         y: destination,
-        duration: 0
+        duration: this.animationSpeed
       })
     })
   }

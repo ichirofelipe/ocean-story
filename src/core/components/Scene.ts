@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Helpers from '../slot/tools/Helpers';
-import {Reefs} from './sceneSettings.json';
+import {Reefs, LoopingBubbles} from './sceneSettings.json';
 import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
@@ -81,7 +81,34 @@ export default class Scene {
   }
 
   private createConBubbles() {
+    const texture = this.app.loader.resources!.scene.textures!['bubble.png'];
 
+    LoopingBubbles.forEach(loopB => {
+      for(let count=0; count < 10; count++){
+        const bubble = new PIXI.Sprite(texture);
+        bubble.height = Helpers.autoHeight(bubble, (150*0.1))
+        bubble.width = (150*0.1);
+        bubble.x = loopB.posX;
+        bubble.y = ((this.app.screen.height*3) - (bubble.height + loopB.posY));
+  
+        this.container.addChild(bubble);
+        
+        gsap.to(bubble, {
+          y: bubble.y - 300,
+          alpha: 0,
+          duration: 5,
+          repeat: -1,
+          delay: Functions.randMinMax(0.3, 1)*count
+        })
+        gsap.to(bubble, {
+          x: bubble.x - (bubble.width/Functions.randMinMax(0.5, 2)),
+          duration: Functions.randMinMax(1, 2.5),
+          yoyo: true,
+          repeat: -1,
+        })
+      }
+    })
+    
   }
 
   public bubbleAnimate() {

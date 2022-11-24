@@ -35,6 +35,13 @@ export default class Home {
     this.startSprite.addListener('pointerdown', this.startGame);
   }
 
+  // private fullscreen () {
+  //   let canvas = document.getElementsByTagName('canvas');
+  //   canvas[0].style.width = "auto";
+  //   canvas[0].style.height = "auto";
 
+  //   let elem = document.documentElement;
+  //   elem.requestFullscreen();
+  // }
 
 }

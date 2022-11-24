@@ -19,6 +19,13 @@ const objGroupAnimation = (array: any) => {
   return arr;
 }
 
+const randMinMax = (min:number, max:number) => {
+  let random = Math.random() * (max - min) + min;
+
+  return random;
+}
+
 export default {
-  objGroupAnimation
+  objGroupAnimation,
+  randMinMax
 }

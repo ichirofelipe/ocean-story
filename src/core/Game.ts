@@ -36,7 +36,7 @@ export default class Game {
   }
 
   private init() {
-    this.setContainers();
+    this.setContainers(); 
     this.createScene();
     this.createHome();
     this.createPlinko();
@@ -123,6 +123,8 @@ export default class Game {
 
 
   private dive() {
+    this.scene.bubbleAnimate();
+    
     this.diveGroupAnimation.forEach((element: any) => {
       const {sprite, destination} = element;
 

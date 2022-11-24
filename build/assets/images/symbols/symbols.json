@@ -1,0 +1,315 @@
+{
+	"frames": {
+		"j.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"a.png": {
+			"frame": {
+				"x": 1003,
+				"y": 1,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"anglerfish.png": {
+			"frame": {
+				"x": 2005,
+				"y": 1,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"bonus.png": {
+			"frame": {
+				"x": 1,
+				"y": 1003,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"fish.png": {
+			"frame": {
+				"x": 1003,
+				"y": 1003,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"hermit-crab.png": {
+			"frame": {
+				"x": 2005,
+				"y": 1003,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"jackpot.png": {
+			"frame": {
+				"x": 1,
+				"y": 2005,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"k.png": {
+			"frame": {
+				"x": 1003,
+				"y": 2005,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"sea orchin.png": {
+			"frame": {
+				"x": 2005,
+				"y": 2005,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"seahorse.png": {
+			"frame": {
+				"x": 3007,
+				"y": 1,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"starfish.png": {
+			"frame": {
+				"x": 3007,
+				"y": 1003,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"stingray.png": {
+			"frame": {
+				"x": 3007,
+				"y": 2005,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"treasure chest.png": {
+			"frame": {
+				"x": 1,
+				"y": 3007,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"turtle.png": {
+			"frame": {
+				"x": 1003,
+				"y": 3007,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		},
+		"wild.png": {
+			"frame": {
+				"x": 2005,
+				"y": 3007,
+				"w": 1000,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1000,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1000,
+				"h": 1000
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "symbols.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 4008,
+			"h": 4008
+		},
+		"scale": "1"
+	}
+}

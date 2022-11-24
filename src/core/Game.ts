@@ -78,8 +78,9 @@ export default class Game {
 
   private createPlinko() {
     this.plinko = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
-    const plinko = new Plinko(this.plinko);
+    const plinko = new Plinko(this.plinko,this.main.loader);
     this.plinko.stage.addChild(plinko.container);
+    this.plinko.stage.addChild(plinko.container2);
     this.gameContainer.addChild(this.plinko.stage);
   }
 

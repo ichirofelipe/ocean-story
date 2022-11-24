@@ -1,0 +1,55 @@
+{
+	"frames": {
+		"reels.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 908,
+				"h": 637
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 908,
+				"h": 637
+			},
+			"sourceSize": {
+				"w": 908,
+				"h": 637
+			}
+		},
+		"reels_old.png": {
+			"frame": {
+				"x": 911,
+				"y": 1,
+				"w": 868,
+				"h": 543
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 868,
+				"h": 543
+			},
+			"sourceSize": {
+				"w": 868,
+				"h": 543
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "slot.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 1780,
+			"h": 639
+		},
+		"scale": "1"
+	}
+}

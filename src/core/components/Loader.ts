@@ -31,6 +31,8 @@ export default class Loader {
         this.loader.add('home', 'assets/images/home/home.json');
         this.loader.add('scene', 'assets/images/scene/scene.json');
         this.loader.add('slot', 'assets/images/slot/slot.json');
+        this.loader.add('plinko', 'assets/images/plinko/plinko.json');
+        this.loader.add('crane', 'assets/images/plinko/crane.json');
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {

@@ -1,0 +1,95 @@
+{
+	"frames": {
+		"crane1.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 1448,
+				"h": 1619
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1448,
+				"h": 1619
+			},
+			"sourceSize": {
+				"w": 1448,
+				"h": 1619
+			}
+		},
+		"crane2.png": {
+			"frame": {
+				"x": 1451,
+				"y": 1,
+				"w": 1448,
+				"h": 1619
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1448,
+				"h": 1619
+			},
+			"sourceSize": {
+				"w": 1448,
+				"h": 1619
+			}
+		},
+		"crane3.png": {
+			"frame": {
+				"x": 2901,
+				"y": 1,
+				"w": 1448,
+				"h": 1619
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1448,
+				"h": 1619
+			},
+			"sourceSize": {
+				"w": 1448,
+				"h": 1619
+			}
+		},
+		"download.png": {
+			"frame": {
+				"x": 1,
+				"y": 1622,
+				"w": 1448,
+				"h": 1619
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1448,
+				"h": 1619
+			},
+			"sourceSize": {
+				"w": 1448,
+				"h": 1619
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "crane.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 4350,
+			"h": 3242
+		},
+		"scale": "1"
+	}
+}

@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Block from './Block';
-import {Reel as ReelValues, Columns, Rows, ActualRows, ReelOffset} from '../../tools/settings.json';
+import {Reel as ReelValues, Columns, Rows, ActualRows, ReelOffsetX, ReelOffsetY} from '../../tools/settings.json';
 import Globals from '../../tools/globals.json';
 
 import { gsap } from "gsap";
@@ -14,9 +14,11 @@ export default class Reel {
   public container: PIXI.Container;
   public blocks: Array<number> = [];
   private reelIndex: number;
-  private reelBlocks: Array<Block> = [];
+  public reelBlocks: Array<Block> = [];
   private reelSpeed: number = 25; //spin velocity
-  public reelOffset: number = ReelOffset; //block spacing
+  public reelOffsetX: number = ReelOffsetX; //block spacing
+  public reelOffsetY: number = ReelOffsetY; //block spacing
+  private reelMask: PIXI.Graphics;
   private spinTicker: PIXI.Ticker;
   private spinDuration: number = 1; //seconds
   private spinStart: number;
@@ -40,7 +42,7 @@ export default class Reel {
   private createBlocks() {
     this.blocks.forEach((block, index) => {
       const reelBlock = new Block(this.app, block);
-      reelBlock.container.y = (reelBlock.size + this.reelOffset) * index;
+      reelBlock.container.y = (reelBlock.size + this.reelOffsetY) * index;
 
       this.reelBlocks.push(reelBlock);
       this.container.addChild(reelBlock.container)
@@ -58,25 +60,27 @@ export default class Reel {
   public startSpin() {
     this.spinTicker = new PIXI.Ticker();
     this.spinTicker.add(this.spinner.bind(this));
-    
-    this.reelBlocks.forEach(block => {
-      gsap.to(block.container, {
-        y: block.container.y - 30,
-        duration: this.spinBounce,
-        repeat: 1,
-        yoyo: true,
-        delay: this.spinSuccessionDelay * (this.reelIndex + 1),
-        onComplete: () => {
-          this.spinTicker.start();
-          this.spinStart = Date.now() + (this.spinDuration*1000) + this.prolongSpin();
-        }
-      })
+
+    gsap.to(this.container, {
+      y: this.container.y - 25,
+      duration: this.spinBounce,
+      repeat: 1,
+      yoyo: true,
+      delay: this.spinSuccessionDelay * (this.reelIndex + 1),
+      onComplete: () => {
+        this.spinTicker.start();
+        this.spinStart = Date.now() + (this.spinDuration*1000) + this.prolongSpin();
+        this.activateMask(true);
+      }
     })
     
   }
 
   private prolongSpin() {
+    console.log(Globals.slowSpinStart);
     if(Globals.slowSpinStart == -1)
+      return 0;
+    if(this.reelIndex < Globals.slowSpinStart)
       return 0;
     return 1500 * ((this.reelIndex - Globals.slowSpinStart) + 1);
   }
@@ -86,9 +90,9 @@ export default class Reel {
 
     this.reelBlocks.forEach((block, index) => {
 
-      const reelHeight = (block.size + this.reelOffset) * this.reelBlocks.length;
+      const reelHeight = (block.size + this.reelOffsetY) * this.reelBlocks.length;
       let blockPace = block.container.y + reelSpeed;
-      let conHeight = reelHeight + this.reelOffset;
+      let conHeight = reelHeight + this.reelOffsetY;
       let heightDiff = blockPace - conHeight;
       
       if(heightDiff >= 0){
@@ -115,36 +119,44 @@ export default class Reel {
 
   private doneSpin() {
     this.spinTicker.stop();
+    let bounceForce = 20;
 
-    this.reelBlocks.forEach((block, index) => {
-      let bounceForce = 50;
-      if(index == 0)
-        bounceForce-=25;
-
-      gsap.to(block.container, {
-        y: block.container.y + bounceForce,
-        duration: this.spinBounce,
-        repeat: 1,
-        yoyo: true,
-        onComplete: () => {
-          if(this.reelIndex == Columns - 1)
-            Globals.isSpinning = false
-        }
-      })
+    gsap.to(this.container, {
+      y: this.container.y + bounceForce,
+      duration: this.spinBounce,
+      repeat: 1,
+      yoyo: true,
+      onComplete: () => {
+        this.activateMask(false);
+        if(this.reelIndex == Columns - 1)
+          Globals.isSpinning = false
+      }
     })
   }
 
   private createMask() {
-    const {width, height} = this.container;
-    const posX = (this.reelBlocks[0].size * (Rows - ActualRows)) / 2;
-    const heightDiff = this.reelBlocks[0].size * (Rows - ActualRows);
+    const posY = (this.reelBlocks[0].size * (Rows - ActualRows)) / 2;
+    const height = this.reelBlocks[0].size * ActualRows;
 
-    let mask = new PIXI.Graphics();
-    mask.beginFill(0x000000)
-    .drawRect(0, posX, width, height - heightDiff)
+    this.reelMask = new PIXI.Graphics();
+    this.reelMask.beginFill(0x000000)
+    .drawRect(0, posY, this.reelBlocks[0].size, height)
     .endFill();
+    // this.reelMask.alpha = (this.reelIndex + 1)*0.15;
 
-    this.container.addChild(mask);
-    this.container.mask = mask;
+    this.container.addChild(this.reelMask);
+    this.container.mask = this.reelMask;
+  }
+
+  private activateMask(active: boolean) {
+    if(this.reelMask === undefined)
+      return;
+    if(active){
+      this.reelMask.y += 5;
+      this.reelMask.height -= 10;
+    } else{
+      this.reelMask.y -= 5;
+      this.reelMask.height += 10;
+    }
   }
 }

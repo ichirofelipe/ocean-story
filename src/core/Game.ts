@@ -15,7 +15,7 @@ PixiPlugin.registerPIXI(PIXI);
 export default class Game {
   private baseWidth: number = 960;
   private baseHeight: number = 540;
-  private animationSpeed: number = 3; // animation speed (dive, rise)
+  private animationSpeed: number = 3.5; // animation speed (dive, rise)
   private sceneContainer: PIXI.Container;
   private mainContainer: PIXI.Container;
   private homeContainer: PIXI.Container;
@@ -108,6 +108,7 @@ export default class Game {
         {sprite: this.homeContainer, destination: 0}
       ]
     )
+    this.dive();
   }
 
   private startGame() {
@@ -124,13 +125,13 @@ export default class Game {
 
   private dive() {
     this.scene.bubbleAnimate();
-    
+
     this.diveGroupAnimation.forEach((element: any) => {
       const {sprite, destination} = element;
 
       gsap.to(sprite, {
         y: destination,
-        duration: this.animationSpeed
+        duration: 0
       })
     })
   }

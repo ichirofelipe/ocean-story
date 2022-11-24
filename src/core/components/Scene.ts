@@ -26,6 +26,7 @@ export default class Scene {
     this.createBG();
     this.createReefs();
     this.createBubbles();
+    this.createConBubbles();
   }
 
   private createBG() {
@@ -61,30 +62,38 @@ export default class Scene {
   private createBubbles() {
     const texture = this.app.loader.resources!.scene.textures!['bubble.png'];
 
-    for(let count=0; count < 150; count++){
+    for(let count=0; count < 130; count++){
       this.bubbles[count] = new PIXI.Sprite(texture);
 
       //RNG
-      let scale = Functions.randMinMax(0.2, 1);
+      let scale = Functions.randMinMax(0.1, 1);
       this.bubbles[count].height = Helpers.autoHeight(this.bubbles[count], (150*scale))
       this.bubbles[count].width = (150*scale);
       
       let posX = Functions.randMinMax(0, this.app.screen.width);
       this.bubbles[count].x = posX - this.bubbles[count].width;
 
-      let posY = Functions.randMinMax(this.bubbles[count].height+(this.app.screen.height*1.5), this.app.screen.height*3)
+      let posY = Functions.randMinMax(this.bubbles[count].height+(this.app.screen.height*1.5), this.app.screen.height*3);
       this.bubbles[count].y = posY - this.bubbles[count].height;
 
       this.container.addChild(this.bubbles[count]);
     }
   }
 
+  private createConBubbles() {
+
+  }
+
   public bubbleAnimate() {
+
     this.bubbles.forEach(bubble => {
-      console.log(bubble.height);
       gsap.to(bubble, {
         y: -bubble.height,
-        duration: (170-bubble.height)/5,
+        duration: (180-bubble.height)/6,
+      })
+      gsap.to(bubble, {
+        x: Functions.randMinMax(0, this.app.screen.width),
+        duration: 35,
       })
     })
   }

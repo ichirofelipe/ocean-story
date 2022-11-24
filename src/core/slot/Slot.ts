@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import SlotFunctions from './tools/SlotFunctions';
 import Globals from './tools/globals.json';
 import ReelsContainer from './components/reel/ReelsContainer';
-import {ReelOffset} from './tools/settings.json';
+import {ReelOffsetX, ReelOffsetY} from './tools/settings.json';
 
 export default class Slot {
   private app: PIXI.Application;
@@ -12,6 +12,8 @@ export default class Slot {
   private readonly RTP: number = 0.9333;
   private reelsContainer: ReelsContainer;
   private background: PIXI.Sprite;
+  private frameHeightAdjustment: number = 70;
+  private frameWidthAdjustment: number = 10;
 
   constructor(app: PIXI.Application) {
     this.app = app;
@@ -49,10 +51,10 @@ export default class Slot {
   private createBackground() {
     const texture = this.app.loader.resources!.slot.textures!['reels.png'];
     this.background = new PIXI.Sprite(texture);
-    this.background.x = ReelOffset/2;
-    this.background.y = ReelOffset/2;
-    this.background.width = this.app.screen.width - ReelOffset;
-    this.background.height = this.container.height + (ReelOffset*3);
+    this.background.x = ReelOffsetX/2 - (this.frameWidthAdjustment/2);
+    this.background.y = (ReelOffsetY/2) - (this.frameHeightAdjustment/2.5);
+    this.background.width = this.app.screen.width - ReelOffsetX + this.frameWidthAdjustment;
+    this.background.height = this.container.height + (ReelOffsetY*3) + this.frameHeightAdjustment;
     this.background.zIndex = 0;
 
     this.container.addChild(this.background);

@@ -1,7 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Reel from './Reel';
-import Globals from '../../tools/globals.json';
-import {Reel as ReelValues, Columns, Rows, ActualRows, ReelOffset} from '../../tools/settings.json';
+import Globals from '../../tools/globals.json'; 
 
 export default class ReelsContainer {
   private app: PIXI.Application;
@@ -25,7 +24,7 @@ export default class ReelsContainer {
   private createReels() {
     this.reelsArray.forEach((reel, index) => {
       this.reel = new Reel(this.app, reel, index);
-      this.reel.container.x = (this.reel.container.width + this.reel.reelOffset) * index;
+      this.reel.container.x = ((this.reel.reelBlocks[0].size - (this.reel.reelBlocks[0].sizeAdjustment/2)) + this.reel.reelOffsetX) * index;
 
       this.reels.push(this.reel);
       this.container.addChild(this.reel.container);
@@ -35,7 +34,6 @@ export default class ReelsContainer {
   public spinReels() {
     // CHECK FOR BONUS ANIMATION
     this.slowSpinValidation();
-    console.log(this.reelsArray);
     this.reels.forEach((reel, index) => {
       reel.blocks = this.reelsArray[index];
       reel.startSpin();
@@ -59,7 +57,6 @@ export default class ReelsContainer {
         Globals.slowSpinStart = reelIndex;
       if(blockArray!.length > 0)
         blockCount++;
-      
     })
     
   }

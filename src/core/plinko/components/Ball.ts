@@ -20,9 +20,12 @@ export default class Ball {
     private imageArray: Array<PIXI.Sprite>;
     private arrayPins: Array<PIXI.Graphics>;
     private lasthitindex: number = -1;
+    private app: PIXI.Application;
+    private addmoney: (type: number) => void;
+    private updategame: () => void;
+    private updatebar: (type: string) => void;
 
-
-    constructor(x: number, y: number, radius: number, loader: PIXI.Loader, container: PIXI.Container, reelposition: number, imageArray: Array<PIXI.Sprite>, arrayPins: Array<PIXI.Graphics>) {
+    constructor(x: number, y: number, radius: number, loader: PIXI.Loader, container: PIXI.Container, reelposition: number, imageArray: Array<PIXI.Sprite>, arrayPins: Array<PIXI.Graphics>, app: PIXI.Application, addmoney: (type: number) => void, updategame: () => void, updatebar: (type: string) => void) {
         this.ball = new PIXI.Graphics();
         this.ticker = new PIXI.Ticker();
         this.loader = loader;
@@ -31,6 +34,10 @@ export default class Ball {
         this.reelposition = reelposition;
         this.imageArray = imageArray;
         this.arrayPins = arrayPins;
+        this.app = app;
+        this.addmoney = addmoney;
+        this.updategame = updategame;
+        this.updatebar = updatebar;
         this.createBall(this.ball,x,y,radius);
     }
 
@@ -102,13 +109,49 @@ export default class Ball {
         let fish: PIXI.Sprite;
         let arr = this.imageArray;
         let position = ball.position.x;
+        let charindex: number = -1;
 
         arr.forEach((element, index) => {
             if(position >= element.getBounds().x && position < (element.getBounds().x + element.getBounds().width)){
                 fish = element;
+                charindex = index;
             }
         });
-    
+
+        //check if bottle index = 1,5,10 
+        if(charindex == 1 || charindex == 5 || charindex == 10){
+            charindex = -1;
+            console.log('bottle');
+            if(ball.position.x >= 0 && ball.position.x <= (this.app.screen.width / 2)){
+                this.updatebar('left');
+            }
+            else{
+                this.updatebar('right');
+            }
+        }
+        //check if treasure index = 11 x2 bet
+        else if(charindex == 12){
+            charindex = -1;
+            console.log('treasure');
+            this.addmoney(2);
+        }
+        //check if starfish spin all
+        else if(charindex == 2 || charindex == 4 || charindex == 7 || charindex == 9 || charindex == 13){
+            charindex = -1;
+            console.log('starfish');
+            this.updategame();
+        }
+        //check if fish
+        else if(charindex == 0 || charindex == 3 || charindex == 6){
+            charindex = -1;
+            console.log('fish');
+            this.addmoney(1);
+        }
+        else{
+            charindex = -1;
+            console.log('bomb');
+        }
+
         fish!.alpha = 0;
         let stopper = setTimeout(() => {
             fish.alpha = 1;

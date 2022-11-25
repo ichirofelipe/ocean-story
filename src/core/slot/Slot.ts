@@ -27,7 +27,7 @@ export default class Slot {
 
   private init() {
     this.settings();
-    this.createGenerateEvent();
+    // this.createGenerateEvent();
     this.createReelsContainer();
     this.createBackground();
     this.createLogo();
@@ -37,9 +37,9 @@ export default class Slot {
     this.container.sortableChildren = true;
   }
 
-  private createGenerateEvent() {
-    window.addEventListener('keypress', e => this.getResult(e))
-  }
+  // private createGenerateEvent() {
+  //   window.addEventListener('keypress', e => this.getResult(e))
+  // }
 
   private createReelsContainer() {
     let initReelsArray = this.slotFunctions.generateResult();
@@ -63,8 +63,18 @@ export default class Slot {
     this.container.addChild(this.background);
   }
 
-  private getResult(e: any) {
-    if(e.keyCode != 13 || Globals.isSpinning)
+  // private getResult(e: any) {
+  //   if(e.keyCode != 13 || Globals.isSpinning)
+  //     return;
+
+  //   Globals.isSpinning = true;
+  //   const result = this.slotFunctions.generateResult();
+  //   this.reelsContainer.reelsArray = result;
+  //   this.reelsContainer.spinReels();
+  // }
+
+  public getResult() {
+    if(Globals.isSpinning)
       return;
 
     // Globals.isSpinning = true;

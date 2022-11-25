@@ -79,7 +79,7 @@ export default class Slot {
     const width = this.logo.width;
     this.logo.height = Helpers.autoHeight(this.logo, (width*0.4))
     this.logo.width = (width*0.4);
-    this.logo.x = (this.app.screen.width - (this.logo.width/2)) - 40;
+    this.logo.x = (this.app.screen.width - (this.logo.width/2)) - 30;
     this.logo.y = -((this.logo.height) - 90);
     
     this.background.addChild(this.logo);

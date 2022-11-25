@@ -26,7 +26,7 @@ export default class Scene {
     this.createBG();
     this.createReefs();
     this.createBubbles();
-    this.createConBubbles();
+    this.createLoopBubbles();
   }
 
   private createBG() {
@@ -59,7 +59,7 @@ export default class Scene {
     });
   }
 
-  private createBubbles() {
+  public createBubbles() {
     const texture = this.app.loader.resources!.scene.textures!['bubble.png'];
 
     for(let count=0; count < 130; count++){
@@ -80,11 +80,18 @@ export default class Scene {
     }
   }
 
-  private createConBubbles() {
+  public deleteBubbles() {
+    this.bubbles.forEach(bubble => {
+      this.container.removeChild(bubble);
+    });
+    this.bubbles = [];
+  }
+
+  private createLoopBubbles() {
     const texture = this.app.loader.resources!.scene.textures!['bubble.png'];
 
     LoopingBubbles.forEach(loopB => {
-      for(let count=0; count < 10; count++){
+      for(let count=0; count < loopB.count; count++){
         const bubble = new PIXI.Sprite(texture);
         bubble.height = Helpers.autoHeight(bubble, (150*0.1))
         bubble.width = (150*0.1);
@@ -94,9 +101,10 @@ export default class Scene {
         this.container.addChild(bubble);
         
         gsap.to(bubble, {
-          y: bubble.y - 300,
-          alpha: 0,
-          duration: 5,
+          y: bubble.y - Functions.randMinMax(loopB.minHeight, loopB.maxHeight),
+          // alpha: 0,
+          ease: 'sine.in',
+          duration: Functions.randMinMax(loopB.minDuration, loopB.maxDuration),
           repeat: -1,
           delay: Functions.randMinMax(0.3, 1)*count
         })
@@ -116,12 +124,22 @@ export default class Scene {
     this.bubbles.forEach(bubble => {
       gsap.to(bubble, {
         y: -bubble.height,
+        alpha: 0,
         duration: (180-bubble.height)/6,
       })
       gsap.to(bubble, {
         x: Functions.randMinMax(0, this.app.screen.width),
-        duration: 35,
+        duration: 40,
       })
+
+      // let deleteBubbles = setTimeout(() => {
+      //   this.bubbles.forEach(bubble => {
+      //     this.container.removeChild(bubble);
+      //   });
+      //   this.bubbles = [];
+
+      //   clearTimeout(deleteBubbles)
+      // }, 20000);
     })
   }
 

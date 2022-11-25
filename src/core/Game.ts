@@ -118,6 +118,8 @@ export default class Game {
     this.mainContainer.addChild(this.gameContainer);
 
     this.main.stage.addChild(this.mainContainer)
+
+    window.addEventListener('keypress', e => this.bonus(e))
   }
 
 
@@ -132,7 +134,10 @@ export default class Game {
 
       gsap.to(sprite, {
         y: destination,
-        duration: this.animationSpeed
+        duration: this.animationSpeed,
+        onComplete: () => {
+          this.homeContainer.removeChild(this.home.container);
+        }
       })
     })
   }
@@ -143,9 +148,19 @@ export default class Game {
 
       gsap.to(sprite, {
         y: destination,
-        duration: this.animationSpeed
+        duration: 0
       })
     })
+  }
+
+  private bonus(e: any) {
+    if(e.keyCode != 109)
+      return;
+    console.log('bonus');
+    this.scene.deleteBubbles();
+    this.rise();
+    // this.scene.createBubbles();
+    // this.scene.bubbleAnimate();
   }
 
 }

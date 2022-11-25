@@ -93,16 +93,31 @@
   ],
   "LoopingBubbles": [
     {
-      "posX": 250,
-      "posY": 50
+      "posX": 210,
+      "posY": 70,
+      "minHeight": 350, 
+      "maxHeight": 500,
+      "minDuration": 5,
+      "maxDuration": 8,
+      "count": 12
     },
     {
-      "posX": 800,
-      "posY": 50
+      "posX": 810,
+      "posY": 50,
+      "minHeight": 350, 
+      "maxHeight": 500,
+      "minDuration": 5,
+      "maxDuration": 8,
+      "count": 12
     },
     {
-      "posX": 870,
-      "posY": 400
+      "posX": 880,
+      "posY": 400,
+      "minHeight": 80, 
+      "maxHeight": 250,
+      "minDuration": 2,
+      "maxDuration": 3,
+      "count": 8
     }
   ]
 }

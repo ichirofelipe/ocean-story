@@ -8,7 +8,7 @@ export default class SlotFunctions {
   private totalCombination: number = 1;
   private repeat: number = 10000;
   private lowestLineCombination: number = 3;
-  private baseMoney:number = 1000000;
+  private baseMoney:number = 100000000;
   private money!:number;
   private beforeMoney!:number;
   private bonusWin: boolean = false;
@@ -23,6 +23,7 @@ export default class SlotFunctions {
   private blocksWinrate: Array<number> = [];
   private uniqueWinPatterns: any = [];
   private sumOfUniquePatterns: number = 0;
+  private bonusPattern: string = '';
 
   constructor(bet: number, RTP: number) {
     this.bet = bet;
@@ -108,21 +109,21 @@ export default class SlotFunctions {
     let result = this.beautifyResult(reelResult);
     // console.log(result);
     
-    // console.log('repeat spin:', rep);
-    // console.log('current balance:', this.money);
-    // console.log('Total Repeat Win Count:', this.winCount);
-    // console.log('Overall Win Count:', this.winCountAll);
-    // console.log('Total Spins:', this.totalSpin);
-    // console.log('Highest Balance:', this.highestBalance);
-    // console.log('5 lines won:', this.lines[0]);
-    // console.log('4 lines won:', this.lines[1]);
-    // console.log('3 lines won:', this.lines[2]);
-    // console.log('Bonus Total Count:', this.bonusWinCount);
-    // console.log('Win Percentage', `${(this.winCountAll/this.totalSpin)*100}%`);
-    // console.log('Total Payout Percentage', `${(this.money/this.baseMoney)*100}%`);
-    // console.log('Total Repeat Payout Percentage', `${(this.money/this.beforeMoney)*100}%`);
+    console.log('repeat spin:', rep);
+    console.log('current balance:', this.money);
+    console.log('Total Repeat Win Count:', this.winCount);
+    console.log('Overall Win Count:', this.winCountAll);
+    console.log('Total Spins:', this.totalSpin);
+    console.log('Highest Balance:', this.highestBalance);
+    console.log('5 lines won:', this.lines[0]);
+    console.log('4 lines won:', this.lines[1]);
+    console.log('3 lines won:', this.lines[2]);
+    console.log('Bonus Total Count:', this.bonusWinCount);
+    console.log('Win Percentage', `${(this.winCountAll/this.totalSpin)*100}%`);
+    console.log('Total Payout Percentage', `${(this.money/this.baseMoney)*100}%`);
+    console.log('Total Repeat Payout Percentage', `${(this.money/this.beforeMoney)*100}%`);
 
-    console.log('Unique Patterns and Pay:', this.uniqueWinPatterns);
+    // console.log('Unique Patterns and Pay:', this.uniqueWinPatterns);
     console.log('RTP:', this.sumOfUniquePatterns/(this.totalCombination*this.bet));
 
     // this.blocksWinrate.forEach((winrate, index) => {
@@ -183,11 +184,16 @@ export default class SlotFunctions {
         });
         
         if (this.combinationValidation([...combination.values()]))
-          winningPattern.push({'index': patIndex,'combination': [...combination.values()], 'colCount': columnCount, 'blocks': blocks});
+        winningPattern.push({'index': patIndex,'combination': [...combination.values()], 'colCount': columnCount, 'blocks': blocks});
         counter++;
       }
-  
+      
     });
+    this.bonusPattern = '';
+    reels.forEach(reel => {
+      if(reel !== undefined)
+        this.bonusPattern += `${reel.join('-')}-`;
+    })
     
     return winningPattern;
   }
@@ -208,9 +214,10 @@ export default class SlotFunctions {
       this.money += this.computeBonusPayOut();
       this.bonusWinCount++;
 
-      if(this.uniqueWinPatterns["4-4-4"] === undefined){
-        this.sumOfUniquePatterns += this.computeBonusPayOut();
-        this.uniqueWinPatterns["4-4-4"] = this.computeBonusPayOut();
+      if(this.uniqueWinPatterns[this.bonusPattern] === undefined){
+        let combinations = 2;
+        this.sumOfUniquePatterns += (this.computeBonusPayOut());
+        this.uniqueWinPatterns[this.bonusPattern] = (this.computeBonusPayOut());
       }
     }
 
@@ -236,8 +243,17 @@ export default class SlotFunctions {
       
       const uniquePattern = win.blocks.join('-');
       if(this.uniqueWinPatterns[uniquePattern] === undefined){
-        this.sumOfUniquePatterns += this.computePayOut(win);
-        this.uniqueWinPatterns[uniquePattern] = this.computePayOut(win);
+        let multiplier = 1;
+        if(win.blocks.length == 3)
+          multiplier = 30;
+        if(win.blocks.length == 4)
+          multiplier = 900;
+        let combinations = 1;
+        win.blocks.forEach((block:number, index: number) => {
+          combinations *= Reel[index].filter((val) => val == block).length;
+        })
+        this.sumOfUniquePatterns += (this.computePayOut(win) * (combinations * multiplier));
+        this.uniqueWinPatterns[uniquePattern] = (this.computePayOut(win) * (combinations * multiplier));
       }
     })
   }
@@ -270,7 +286,7 @@ export default class SlotFunctions {
     // } else {
     //   payOut *= (multiplier/1.5)
     // }
-    console.log(payOut)
+    // console.log(payOut)
     return payOut;
   }
 }

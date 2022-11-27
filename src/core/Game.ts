@@ -270,7 +270,7 @@ export default class Game {
   private updateGame(){
     this.game = this.game + 1;
     this.gameText.text = 'Game: '+this.game;
-    this.slotgame.getResult();
+    // this.slotgame.getResult();
   }
 
   // end julius code

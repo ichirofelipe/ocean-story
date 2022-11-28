@@ -35,7 +35,7 @@ export default class Game {
   private gameText: PIXI.Text;
   private start: Boolean = false;
   private bet: number = 100;
-  private money: number = 50000;
+  private money: number = 1000;
   private game: number = 0;
 
   constructor() {

@@ -14,6 +14,8 @@ export default class Scene {
   public reefsContainer: PIXI.Container;
   public bgSprite: PIXI.Sprite;
   private bubbles: Array<PIXI.Sprite> = [];
+  private bottomTextures: Array<PIXI.Texture> = [];
+  private bottomAnimate: PIXI.AnimatedSprite;
 
   constructor(app: PIXI.Application) {
     this.app = app;
@@ -24,9 +26,23 @@ export default class Scene {
 
   private init() {
     this.createBG();
+    this.createAnimatedSprite();
     this.createReefs();
     this.createBubbles();
     this.createLoopBubbles();
+  }
+
+  private createAnimatedSprite(){
+    for(let img in this.app.loader.resources!.bottom.textures){
+        const texture = PIXI.Texture.from(img);
+        this.bottomTextures.push(texture);
+    } 
+    this.bottomAnimate = new PIXI.AnimatedSprite(this.bottomTextures);
+    this.bottomAnimate.scale.set(.5)
+    this.bottomAnimate.position.y = this.container.height - this.bottomAnimate.height;
+    this.bottomAnimate.animationSpeed = .1;
+    this.bottomAnimate.play();
+    this.container.addChild(this.bottomAnimate);
   }
 
   private createBG() {

@@ -34,6 +34,15 @@ export default class Loader {
         this.loader.add('plinko', 'assets/images/plinko/plinko.json');
         this.loader.add('crane', 'assets/images/plinko/crane.json');
         this.loader.add('bottom', 'assets/images/scene/bottom/bottom.json');
+
+        //REEFS
+        this.loader.add('plant-1', 'assets/images/scene/animations/plant-1/plant-1.json');
+        this.loader.add('plant-2', 'assets/images/scene/animations/plant-2/plant-2.json');
+        this.loader.add('plant-4', 'assets/images/scene/animations/plant-4/plant-4.json');
+        this.loader.add('plant-5', 'assets/images/scene/animations/plant-5/plant-5.json');
+        this.loader.add('plant-6', 'assets/images/scene/animations/plant-6/plant-6.json');
+        this.loader.add('plant-7', 'assets/images/scene/animations/plant-7/plant-7.json');
+        this.loader.add('plant-8', 'assets/images/scene/animations/plant-8/plant-8.json');
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {

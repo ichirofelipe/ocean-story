@@ -14,8 +14,7 @@ export default class Scene {
   public reefsContainer: PIXI.Container;
   public bgSprite: PIXI.Sprite;
   private bubbles: Array<PIXI.Sprite> = [];
-  private bottomTextures: Array<PIXI.Texture> = [];
-  private bottomAnimate: PIXI.AnimatedSprite;
+  private oceanBed: PIXI.AnimatedSprite;
 
   constructor(app: PIXI.Application) {
     this.app = app;
@@ -26,23 +25,25 @@ export default class Scene {
 
   private init() {
     this.createBG();
-    this.createAnimatedSprite();
+    this.createOceanBed();
     this.createReefs();
     this.createBubbles();
     this.createLoopBubbles();
   }
 
-  private createAnimatedSprite(){
+  private createOceanBed(){
+    let textures: Array<PIXI.Texture> = [];
+
     for(let img in this.app.loader.resources!.bottom.textures){
         const texture = PIXI.Texture.from(img);
-        this.bottomTextures.push(texture);
+        textures.push(texture);
     } 
-    this.bottomAnimate = new PIXI.AnimatedSprite(this.bottomTextures);
-    this.bottomAnimate.scale.set(.5)
-    this.bottomAnimate.position.y = this.container.height - this.bottomAnimate.height;
-    this.bottomAnimate.animationSpeed = .1;
-    this.bottomAnimate.play();
-    this.container.addChild(this.bottomAnimate);
+    this.oceanBed = new PIXI.AnimatedSprite(textures);
+    this.oceanBed.scale.set(.5)
+    this.oceanBed.position.y = this.container.height - this.oceanBed.height;
+    this.oceanBed.animationSpeed = 0.2;
+    this.oceanBed.play();
+    this.container.addChild(this.oceanBed);
   }
 
   private createBG() {
@@ -58,9 +59,23 @@ export default class Scene {
     this.container.sortableChildren = true;
     
     Reefs.forEach((reef: any, index) => {
-      const texture = this.app.loader.resources!.scene.textures![`${reef.name}.png`];
-      let img = new PIXI.Sprite(texture);
-      
+      let img: any;
+
+      if(reef.isAnimated){
+        let textures: Array<PIXI.Texture> = [];
+        for(let tmp in this.app.loader.resources![`${reef.name}`].textures){
+          const texture = PIXI.Texture.from(tmp);
+          textures.push(texture);
+        }
+        img = new PIXI.AnimatedSprite(textures);
+        img.play();
+      } else {
+        const texture = this.app.loader.resources!.scene.textures![`${reef.name}.png`];
+        img = new PIXI.Sprite(texture);
+      }
+
+
+      img.animationSpeed = 0.2;
       img.scale.set(0.5, 0.5);
       img.y = this.container.height - img.height - reef.bottom;
       if(reef.left !== undefined){

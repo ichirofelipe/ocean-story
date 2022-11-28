@@ -4,91 +4,106 @@
       "name": "plant-1",
       "bottom": 0,
       "left": 0,
-      "zIndex": 4
+      "zIndex": 4,
+      "isAnimated": true
     },
     {
       "name": "plant-2",
       "bottom": 90,
       "right": 25,
-      "zIndex": 2
+      "zIndex": 2,
+      "isAnimated": true
     },
     {
       "name": "plant-3",
       "bottom": 0,
       "left": 40,
-      "zIndex": 2
+      "zIndex": 2,
+      "isAnimated": false
     },
     {
       "name": "plant-4",
       "bottom": 0,
-      "right": 0,
-      "zIndex": 5
+      "right": -20,
+      "zIndex": 5,
+      "isAnimated": true
     },
     {
       "name": "plant-5",
       "bottom": 155,
       "left": 45,
-      "zIndex": 1
+      "zIndex": 1,
+      "isAnimated": true
     },
     {
       "name": "plant-6",
       "bottom": 115,
       "left": -5,
-      "zIndex": 0
+      "zIndex": 0,
+      "isAnimated": true
     },
     {
       "name": "plant-7",
       "bottom": 410,
       "right": 10,
-      "zIndex": 1
+      "zIndex": 1,
+      "isAnimated": true
     },
     {
       "name": "plant-8",
       "bottom": 0,
       "left": 215,
-      "zIndex": 0
+      "zIndex": 0,
+      "isAnimated": true
     },
     {
       "name": "plant-9",
       "bottom": 420,
       "right": 1,
-      "zIndex": 0
+      "zIndex": 0,
+      "isAnimated": false
     },
     {
       "name": "plant-10",
       "bottom": 412,
       "right": 45,
-      "zIndex": 0
+      "zIndex": 0,
+      "isAnimated": false
     },
     {
       "name": "rock-1",
       "bottom": 0,
       "left": 0,
-      "zIndex": 1
+      "zIndex": 1,
+      "isAnimated": false
     },
     {
       "name": "rock-2",
       "bottom": 0,
       "left": 0,
-      "zIndex": 3
+      "zIndex": 3,
+      "isAnimated": false
     },
     {
       "name": "rock-3",
       "bottom": 0,
       "right": 0,
-      "zIndex": 4
+      "zIndex": 4,
+      "isAnimated": false
     },
     {
       "name": "rock-4",
       "bottom": 0,
       "right": 0,
-      "zIndex": 0
+      "zIndex": 0,
+      "isAnimated": false
     },
     {
       "name": "rock-5",
       "bottom": 0,
       "right": 0,
-      "zIndex": 1
+      "zIndex": 1,
+      "isAnimated": false
     }
   ],
   "LoopingBubbles": [

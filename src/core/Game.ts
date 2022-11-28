@@ -5,7 +5,6 @@ import Slot from './slot/Slot';
 import Home from './components/Home';
 import Scene from './components/Scene';
 import Functions from './Functions';
-
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 
@@ -138,8 +137,8 @@ export default class Game {
   }
 
   private dive() {
+    this.home.stopBeat();
     this.scene.bubbleAnimate();
-
     this.diveGroupAnimation.forEach((element: any) => {
       const {sprite, destination} = element;
 

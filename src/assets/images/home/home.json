@@ -1,43 +1,23 @@
 {
 	"frames": {
-		"background.jpg": {
+		"play.png": {
 			"frame": {
 				"x": 1,
 				"y": 1,
-				"w": 960,
-				"h": 1080
+				"w": 234,
+				"h": 234
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 960,
-				"h": 1080
+				"w": 234,
+				"h": 234
 			},
 			"sourceSize": {
-				"w": 960,
-				"h": 1080
-			}
-		},
-		"start.png": {
-			"frame": {
-				"x": 963,
-				"y": 1,
-				"w": 1000,
-				"h": 403
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 1000,
-				"h": 403
-			},
-			"sourceSize": {
-				"w": 1000,
-				"h": 403
+				"w": 234,
+				"h": 234
 			}
 		}
 	},
@@ -47,8 +27,8 @@
 		"image": "home.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 1964,
-			"h": 1082
+			"w": 236,
+			"h": 236
 		},
 		"scale": "1"
 	}

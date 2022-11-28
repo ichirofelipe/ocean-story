@@ -5,6 +5,8 @@ export default class Home {
   private app: PIXI.Application;
   public container: PIXI.Container;
   public startSprite: PIXI.Sprite;
+  private playbuttonTextures: Array<PIXI.Texture> = [];
+  private playbuttonAnimate: PIXI.AnimatedSprite;
   private startGame: () => void;
 
   constructor(app: PIXI.Application, startGame: () => void) {
@@ -33,6 +35,17 @@ export default class Home {
 
     this.container.addChild(this.startSprite);
     this.startSprite.addListener('pointerdown', this.startGame);
+
+    for(let img in this.app.loader.resources!.playbutton.textures){
+      const texture = PIXI.Texture.from(img);
+      this.playbuttonTextures.push(texture);
+    } 
+    this.playbuttonAnimate = new PIXI.AnimatedSprite(this.playbuttonTextures);
+    this.playbuttonAnimate.scale.set(.5)
+    this.playbuttonAnimate.position.y = this.container.height - this.playbuttonAnimate.height;
+    this.playbuttonAnimate.animationSpeed = .1;
+    this.playbuttonAnimate.play();
+    this.container.addChild(this.playbuttonAnimate);
   }
 
   // private fullscreen () {

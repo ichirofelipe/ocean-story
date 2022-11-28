@@ -149,7 +149,7 @@ export default class SlotFunctions {
 
     // console.log('Unique Patterns and Pay:', this.uniqueWinPatterns);
     // console.log('Unique Patterns and Pay:', this.bonusWinPatterns);
-    // console.log('Unique Patterns Length:', this.totalNormalCombination);
+    console.log('Unique Patterns Length:', this.jsonCombination.length);
     // console.log('Total Bonus Combination Count:', this.bonusWinPatterns.length);
     console.log('RTP:', this.sumOfUniquePatterns/(this.totalCombination*this.bet));
     // this.blocksWinrate.forEach((winrate, index) => {
@@ -196,8 +196,8 @@ export default class SlotFunctions {
         bonusCount = 0
   
         reels.forEach((reel, index) => {
-          if(columnCount == 0 || columnCount == reels.length - 1)
-            return;
+          // if(columnCount == 0 || columnCount == reels.length - 1)
+          //   return;
 
           if(index < (columnCount)){
             combination.add(reel[pat[index] - 1])
@@ -261,7 +261,8 @@ export default class SlotFunctions {
         this.uniqueWinPatterns[this.bonusPattern] = this.computeBonusPayOut();
         this.jsonCombination.push({
           pattern: this.bonusPattern,
-          pay: this.computeBonusPayOut()
+          pay: this.computeBonusPayOut(),
+          isBonus: true
         })
         localStorage.setItem('BonusPatterns', JSON.stringify(this.jsonCombination));
       }
@@ -302,7 +303,8 @@ export default class SlotFunctions {
 
         this.jsonCombination.push({
           pattern: uniquePattern,
-          pay: (this.computePayOut(win) * (combinations * multiplier))
+          pay: (this.computePayOut(win) * (combinations * multiplier)),
+          isBonus: false
         })
         localStorage.setItem('BonusPatterns', JSON.stringify(this.jsonCombination));
       }

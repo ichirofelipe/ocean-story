@@ -9,7 +9,7 @@ export default class Slot {
   private app: PIXI.Application;
   public container: PIXI.Container;
   private slotFunctions: SlotFunctions;
-  private bet: number = 1;
+  private bet: number = 100;
   private readonly RTP: number = 1;
   private reelsContainer: ReelsContainer;
   private background: PIXI.Sprite;

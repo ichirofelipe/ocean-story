@@ -48,6 +48,29 @@ export default class Home {
     this.container.addChild(this.rightside);
     this.createStart();
     this.createLogo();
+    this.createText();
+  }
+
+  private createText(){
+    const style = new PIXI.TextStyle({
+      fontFamily: 'Luckiest Guy',
+      dropShadow: true,
+      dropShadowAlpha: 0.8,
+      dropShadowAngle: 2.1,
+      dropShadowBlur: 2,
+      dropShadowColor: '0x111111',
+      dropShadowDistance: 3,
+      fill: ['#FFE850', '#D5A300', '#AC8F00'],
+      stroke: '#000',
+      fontSize: 40,
+      fontWeight: 'lighter',
+      lineJoin: 'round',
+      strokeThickness: 5
+    });
+    const text = new PIXI.Text('WIN UP TO 5,000 x BET', style);
+    text.position.x = ((this.app.screen.width * .6) / 2) - (text.width / 2);
+    text.position.y = (this.app.screen.height * .7 + (text.height / 2)) - 20;
+    this.leftside.addChild(text)
   }
 
   private createStart() {

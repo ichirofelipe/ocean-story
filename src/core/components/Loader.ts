@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+const WebFont = require('webfontloader');
 
 export default class Loader {
     public loader: PIXI.Loader;
@@ -11,7 +12,14 @@ export default class Loader {
         this.loader = app.loader;
         this.onAssetsLoaded = onAssetsLoaded;
         
-        this.init();
+        WebFont.load({
+            google: {
+              families: ['Luckiest Guy']
+            },
+            active: () => {
+                this.init();
+            }
+        });
         
     }
 
@@ -43,6 +51,8 @@ export default class Loader {
         this.loader.add('plant-6', 'assets/images/scene/animations/plant-6/plant-6.json');
         this.loader.add('plant-7', 'assets/images/scene/animations/plant-7/plant-7.json');
         this.loader.add('plant-8', 'assets/images/scene/animations/plant-8/plant-8.json');
+
+        //fonts
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {

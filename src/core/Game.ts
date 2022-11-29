@@ -149,6 +149,12 @@ export default class Game {
           this.homeContainer.removeChild(this.home.container);
         }
       })
+
+      gsap.to(this.scene.sunRays, {
+        alpha: 1,
+        duration: this.animationSpeed,
+        ease: "power1.in"
+      })
     })
   }
 

@@ -4,6 +4,8 @@ import {Reefs, LoopingBubbles, Trees} from './sceneSettings.json';
 import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
+import { GodrayFilter } from 'pixi-filters';
+import { Graphics } from 'pixi.js';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -15,6 +17,7 @@ export default class Scene {
   public bgSprite: PIXI.Sprite;
   private bubbles: Array<PIXI.Sprite> = [];
   private oceanBed: PIXI.AnimatedSprite;
+  public sunRays: GodrayFilter;
 
   constructor(app: PIXI.Application) {
     this.app = app;
@@ -38,7 +41,24 @@ export default class Scene {
     this.bgSprite.height = Helpers.autoHeight(this.bgSprite, this.app.screen.width);
     this.bgSprite.width = this.app.screen.width;
 
+    this.sunRays = new GodrayFilter({
+      gain: 0.5,
+      lacunarity: 3,
+      alpha: 0,
+      parallel: false,
+      center: [700, -500],
+      time: 0,
+    });
 
+    gsap.to(this.sunRays, {
+      time: 1,
+      duration: 2,
+      loop: true
+    })
+    
+    this.bgSprite.filters = [this.sunRays];
+    // this.bgSprite.filters.a
+    
     this.container.addChild(this.bgSprite);
     this.container.sortableChildren = true;
   }

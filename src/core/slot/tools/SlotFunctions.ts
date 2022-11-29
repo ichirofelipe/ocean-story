@@ -9,7 +9,7 @@ export default class SlotFunctions {
   private totalCombination: number = 1;
   private repeat: number = 10000;
   private lowestLineCombination: number = 3;
-  private baseMoney:number = 1000000;
+  private baseMoney:number = 4000000;
   private money!:number;
   private beforeMoney!:number;
   private bonusWin: boolean = false;
@@ -24,7 +24,7 @@ export default class SlotFunctions {
   private blocksWinrate: Array<number> = [];
   private jsonCombination: Array<object> = [];
   private uniqueWinPatterns: any = [];
-  private bonusWinPatterns: any = [];
+  private bonusWinPatterns: Array<string> = [];
   private sumOfUniquePatterns: number = 0;
   private totalBonusCombination: number = 0;
   private totalNormalCombination: number = 0;
@@ -46,7 +46,7 @@ export default class SlotFunctions {
       this.totalCombination *= reel.length;
     })
 
-    this.setJSONCombinations()
+    // this.setJSONCombinations();
   }
 
   // GENERATE REEL RESULTS
@@ -82,7 +82,9 @@ export default class SlotFunctions {
 
   //INITIALIZE JSON COMBINATIONS FROM LOCAL STORAGE
   private setJSONCombinations() {
-    this.jsonCombination = JSON.parse(localStorage.getItem('BonusPatterns')!) ?? [];
+    this.jsonCombination = JSON.parse(localStorage.getItem('NormalPatterns')!) ?? [];
+    this.bonusWinPatterns = localStorage.getItem('BonusWinPatterns')?.split('/') ?? [];
+    let bonusWinPay = localStorage.getItem('BonusWinPay') ?? 0;
     if(this.jsonCombination){
       this.jsonCombination.forEach((com: any) => {
         let paramIndex: string = com.pattern;
@@ -92,6 +94,10 @@ export default class SlotFunctions {
         }
       })
     }
+
+    this.bonusWinPatterns.forEach(pat => {
+      this.sumOfUniquePatterns += Number(bonusWinPay);
+    })
     
     console.log(this.uniqueWinPatterns);
   }
@@ -255,16 +261,14 @@ export default class SlotFunctions {
       this.money += this.computeBonusPayOut();
       this.bonusWinCount++;
 
-      if(this.uniqueWinPatterns === undefined){
+      if(this.uniqueWinPatterns[this.bonusPattern] === undefined){
         this.sumOfUniquePatterns += this.computeBonusPayOut();
         this.totalBonusCombination++;
-        this.uniqueWinPatterns[this.bonusPattern] = this.computeBonusPayOut();
-        this.jsonCombination.push({
-          pattern: this.bonusPattern,
-          pay: this.computeBonusPayOut(),
-          isBonus: true
-        })
-        localStorage.setItem('BonusPatterns', JSON.stringify(this.jsonCombination));
+        // this.uniqueWinPatterns[this.bonusPattern] = this.computeBonusPayOut();
+        // this.bonusWinPatterns.push(this.bonusPattern);
+
+        // localStorage.setItem('BonusWinPatterns', this.bonusWinPatterns.join('/'));
+        // localStorage.setItem('BonusWinPay', ''+this.computeBonusPayOut());
       }
     }
 
@@ -301,12 +305,12 @@ export default class SlotFunctions {
         this.sumOfUniquePatterns += (this.computePayOut(win) * (combinations * multiplier));
         this.uniqueWinPatterns[uniquePattern] = (this.computePayOut(win) * (combinations * multiplier));
 
-        this.jsonCombination.push({
-          pattern: uniquePattern,
-          pay: (this.computePayOut(win) * (combinations * multiplier)),
-          isBonus: false
-        })
-        localStorage.setItem('BonusPatterns', JSON.stringify(this.jsonCombination));
+        // this.jsonCombination.push({
+        //   pattern: uniquePattern,
+        //   pay: (this.computePayOut(win) * (combinations * multiplier)),
+        //   isBonus: false
+        // })
+        // localStorage.setItem('NormalPatterns', JSON.stringify(this.jsonCombination));
       }
     })
   }

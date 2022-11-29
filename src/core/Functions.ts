@@ -1,3 +1,5 @@
+import * as PIXI from "pixi.js";
+
 const objGroupAnimation = (array: any) => {
   interface Animation {
     sprite: any;
@@ -25,7 +27,26 @@ const randMinMax = (min:number, max:number) => {
   return random;
 }
 
+const getSprite = (loader: PIXI.Loader, setting: any) => {
+  let img;
+  if(setting.isAnimated){
+    let textures: Array<PIXI.Texture> = [];
+    for(let tmp in loader.resources![`${setting.name}`].textures){
+      const texture = PIXI.Texture.from(tmp);
+      textures.push(texture);
+    }
+    img = new PIXI.AnimatedSprite(textures);
+    img.play();
+  } else {
+    const texture = loader.resources!.scene.textures![`${setting.name}.png`];
+    img = new PIXI.Sprite(texture);
+  }
+
+  return img;
+}
+
 export default {
   objGroupAnimation,
-  randMinMax
+  randMinMax,
+  getSprite
 }

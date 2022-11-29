@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Helpers from '../slot/tools/Helpers';
-import {Reefs, LoopingBubbles} from './sceneSettings.json';
+import {Reefs, LoopingBubbles, Trees} from './sceneSettings.json';
 import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
@@ -25,10 +25,49 @@ export default class Scene {
 
   private init() {
     this.createBG();
+    this.createTrees();
     this.createOceanBed();
     this.createReefs();
     this.createBubbles();
     this.createLoopBubbles();
+  }
+
+  private createBG() {
+    const texture = this.app.loader.resources!.scene.textures!['main-bg.jpg'];
+    this.bgSprite = new PIXI.Sprite(texture);
+    this.bgSprite.height = Helpers.autoHeight(this.bgSprite, this.app.screen.width);
+    this.bgSprite.width = this.app.screen.width;
+
+
+    this.container.addChild(this.bgSprite);
+    this.container.sortableChildren = true;
+  }
+
+  private createTrees() {
+    
+    Trees.forEach((tree:any, index) => {
+      let img: any = Functions.getSprite(this.app.loader, tree);
+
+      img.x = tree.posX;
+      img.y = tree.posY;
+      img.zIndex = tree.zIndex;
+      img.width = Helpers.autoWidth(img, tree.height);
+      img.height = tree.height;
+      img.animationSpeed = tree.animationSpeed;
+      img.onLoop = () => {
+        img.animationSpeed = Functions.randMinMax(0.2, 0.3);
+        if(Functions.randMinMax(0, 5) > 3)
+          img.textures.reverse();
+      }
+
+      if(tree.flip){
+        img.scale.x*=-1;
+        img.x += img.width;
+      }
+
+      this.container.addChild(img);
+    })
+
   }
 
   private createOceanBed(){
@@ -46,34 +85,10 @@ export default class Scene {
     this.container.addChild(this.oceanBed);
   }
 
-  private createBG() {
-    const texture = this.app.loader.resources!.scene.textures!['main-bg.jpg'];
-    this.bgSprite = new PIXI.Sprite(texture);
-    this.bgSprite.height = Helpers.autoHeight(this.bgSprite, this.app.screen.width);
-    this.bgSprite.width = this.app.screen.width;
-
-    this.container.addChild(this.bgSprite);
-  }
-
   private createReefs() {
-    this.container.sortableChildren = true;
     
     Reefs.forEach((reef: any, index) => {
-      let img: any;
-
-      if(reef.isAnimated){
-        let textures: Array<PIXI.Texture> = [];
-        for(let tmp in this.app.loader.resources![`${reef.name}`].textures){
-          const texture = PIXI.Texture.from(tmp);
-          textures.push(texture);
-        }
-        img = new PIXI.AnimatedSprite(textures);
-        img.play();
-      } else {
-        const texture = this.app.loader.resources!.scene.textures![`${reef.name}.png`];
-        img = new PIXI.Sprite(texture);
-      }
-
+      let img: any = Functions.getSprite(this.app.loader, reef);
 
       img.animationSpeed = 0.2;
       img.scale.set(0.5, 0.5);

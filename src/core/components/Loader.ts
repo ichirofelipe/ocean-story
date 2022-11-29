@@ -51,8 +51,10 @@ export default class Loader {
         this.loader.add('plant-6', 'assets/images/scene/animations/plant-6/plant-6.json');
         this.loader.add('plant-7', 'assets/images/scene/animations/plant-7/plant-7.json');
         this.loader.add('plant-8', 'assets/images/scene/animations/plant-8/plant-8.json');
+        
+        //HOME
+        this.loader.add('coconut', 'assets/images/scene/animations/coconut/coconut.json');
 
-        //fonts
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {

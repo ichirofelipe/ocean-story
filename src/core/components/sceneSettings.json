@@ -1,154 +1,186 @@
 {
-    "Reefs": [
-      {
-        "name": "plant-1",
-        "bottom": 0,
-        "left": 0,
-        "zIndex": 4,
-        "isAnimated": true
-      },
-      {
-        "name": "plant-2",
-        "bottom": 90,
-        "right": 25,
-        "zIndex": 2,
-        "isAnimated": true
-      },
-      {
-        "name": "plant-3",
-        "bottom": 0,
-        "left": 40,
-        "zIndex": 2,
-        "isAnimated": false
-      },
-      {
-        "name": "plant-4",
-        "bottom": 0,
-        "right": -20,
-        "zIndex": 5,
-        "isAnimated": true
-      },
-      {
-        "name": "plant-5",
-        "bottom": 155,
-        "left": 45,
-        "zIndex": 1,
-        "isAnimated": true
-      },
-      {
-        "name": "plant-6",
-        "bottom": 115,
-        "left": -5,
-        "zIndex": 0,
-        "isAnimated": true
-      },
-      {
-        "name": "plant-7",
-        "bottom": 410,
-        "right": 10,
-        "zIndex": 1,
-        "isAnimated": true
-      },
-      {
-        "name": "plant-8",
-        "bottom": 0,
-        "left": 215,
-        "zIndex": 0,
-        "isAnimated": true
-      },
-      {
-        "name": "plant-9",
-        "bottom": 420,
-        "right": 1,
-        "zIndex": 0,
-        "isAnimated": false
-      },
-      {
-        "name": "plant-10",
-        "bottom": 412,
-        "right": 45,
-        "zIndex": 0,
-        "isAnimated": false
-      },
-      {
-        "name": "rock-1",
-        "bottom": 0,
-        "left": 0,
-        "zIndex": 1,
-        "isAnimated": false
-      },
-      {
-        "name": "rock-2",
-        "bottom": 0,
-        "left": 0,
-        "zIndex": 3,
-        "isAnimated": false
-      },
-      {
-        "name": "rock-3",
-        "bottom": 0,
-        "right": 0,
-        "zIndex": 4,
-        "isAnimated": false
-      },
-      {
-        "name": "rock-4",
-        "bottom": 0,
-        "right": 0,
-        "zIndex": 0,
-        "isAnimated": false
-      },
-      {
-        "name": "rock-5",
-        "bottom": 0,
-        "right": 0,
-        "zIndex": 1,
-        "isAnimated": false
-      }
-    ],
-    "LoopingBubbles": [
-      {
-        "posX": 210,
-        "posY": 70,
-        "minHeight": 350, 
-        "maxHeight": 500,
-        "minDuration": 5,
-        "maxDuration": 8,
-        "count": 12
-      },
-      {
-        "posX": 810,
-        "posY": 50,
-        "minHeight": 350, 
-        "maxHeight": 500,
-        "minDuration": 5,
-        "maxDuration": 8,
-        "count": 12
-      },
-      {
-        "posX": 880,
-        "posY": 400,
-        "minHeight": 80, 
-        "maxHeight": 250,
-        "minDuration": 2,
-        "maxDuration": 3,
-        "count": 8
-      }
-    ],
-    "SlideShow": [
-      {
-        "name" : "slotui",
-        "fixedheight" : 0,
-        "fixedwidth" : 500,
-        "alpha" : 1,
-        "radio" : "on"
-      },
-      {
-        "name" : "plinkoui",
-        "fixedheight" : 300,
-        "fixedwidth" : 0,
-        "alpha" : 0,
-        "radio" : "off"
-      }
-    ]
-  }
+  "Reefs": [
+    {
+      "name": "plant-1",
+      "bottom": 0,
+      "left": 0,
+      "zIndex": 4,
+      "isAnimated": true
+    },
+    {
+      "name": "plant-2",
+      "bottom": 90,
+      "right": 25,
+      "zIndex": 2,
+      "isAnimated": true
+    },
+    {
+      "name": "plant-3",
+      "bottom": 0,
+      "left": 40,
+      "zIndex": 2,
+      "isAnimated": false
+    },
+    {
+      "name": "plant-4",
+      "bottom": 0,
+      "right": -20,
+      "zIndex": 5,
+      "isAnimated": true
+    },
+    {
+      "name": "plant-5",
+      "bottom": 155,
+      "left": 45,
+      "zIndex": 1,
+      "isAnimated": true
+    },
+    {
+      "name": "plant-6",
+      "bottom": 115,
+      "left": -5,
+      "zIndex": 0,
+      "isAnimated": true
+    },
+    {
+      "name": "plant-7",
+      "bottom": 410,
+      "right": 10,
+      "zIndex": 1,
+      "isAnimated": true
+    },
+    {
+      "name": "plant-8",
+      "bottom": 0,
+      "left": 215,
+      "zIndex": 0,
+      "isAnimated": true
+    },
+    {
+      "name": "plant-9",
+      "bottom": 420,
+      "right": 1,
+      "zIndex": 0,
+      "isAnimated": false
+    },
+    {
+      "name": "plant-10",
+      "bottom": 412,
+      "right": 45,
+      "zIndex": 0,
+      "isAnimated": false
+    },
+    {
+      "name": "rock-1",
+      "bottom": 0,
+      "left": 0,
+      "zIndex": 1,
+      "isAnimated": false
+    },
+    {
+      "name": "rock-2",
+      "bottom": 0,
+      "left": 0,
+      "zIndex": 3,
+      "isAnimated": false
+    },
+    {
+      "name": "rock-3",
+      "bottom": 0,
+      "right": 0,
+      "zIndex": 4,
+      "isAnimated": false
+    },
+    {
+      "name": "rock-4",
+      "bottom": 0,
+      "right": 0,
+      "zIndex": 0,
+      "isAnimated": false
+    },
+    {
+      "name": "rock-5",
+      "bottom": 0,
+      "right": 0,
+      "zIndex": 1,
+      "isAnimated": false
+    }
+  ],
+  "LoopingBubbles": [
+    {
+      "posX": 210,
+      "posY": 70,
+      "minHeight": 350, 
+      "maxHeight": 500,
+      "minDuration": 5,
+      "maxDuration": 8,
+      "count": 12
+    },
+    {
+      "posX": 810,
+      "posY": 50,
+      "minHeight": 350, 
+      "maxHeight": 500,
+      "minDuration": 5,
+      "maxDuration": 8,
+      "count": 12
+    },
+    {
+      "posX": 880,
+      "posY": 400,
+      "minHeight": 80, 
+      "maxHeight": 250,
+      "minDuration": 2,
+      "maxDuration": 3,
+      "count": 8
+    }
+  ],
+  "SlideShow": [
+    {
+      "name" : "slotui",
+      "fixedheight" : 0,
+      "fixedwidth" : 500,
+      "alpha" : 1,
+      "radio" : "on"
+    },
+    {
+      "name" : "plinkoui",
+      "fixedheight" : 300,
+      "fixedwidth" : 0,
+      "alpha" : 0,
+      "radio" : "off"
+    }
+  ],
+  "Trees": [
+    {
+      "name": "coconut",
+      "posX": 0,
+      "posY": 30,
+      "height": 340,
+      "flip": true,
+      "zIndex": 0,
+      "animationSpeed": 0.3,
+      "isAnimated": true
+    },
+    {
+      "name": "coconut",
+      "posX": 520,
+      "posY": 190,
+      "height": 200,
+      "flip": true,
+      "zIndex": 1,
+      "animationSpeed": 0.3,
+      "isAnimated": true
+    },
+    {
+      "name": "coconut",
+      "posX": 610,
+      "posY": 90,
+      "height": 300,
+      "flip": false,
+      "zIndex": 0,
+      "animationSpeed": 0.3,
+      "isAnimated": true
+    }
+  ]
+}

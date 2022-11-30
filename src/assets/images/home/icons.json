@@ -1,134 +1,134 @@
 {
 	"frames": {
-		"pause.png": {
+		"icons-arrow-down.png": {
 			"frame": {
 				"x": 1,
 				"y": 1,
-				"w": 234,
-				"h": 234
+				"w": 60,
+				"h": 60
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 234,
-				"h": 234
+				"w": 60,
+				"h": 60
 			},
 			"sourceSize": {
-				"w": 234,
-				"h": 234
+				"w": 60,
+				"h": 60
 			}
 		},
-		"plinkoui.png": {
+		"icons-arrow-up.png": {
 			"frame": {
-				"x": 237,
+				"x": 63,
 				"y": 1,
-				"w": 463,
-				"h": 429
+				"w": 60,
+				"h": 60
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 463,
-				"h": 429
+				"w": 60,
+				"h": 60
 			},
 			"sourceSize": {
-				"w": 463,
-				"h": 429
+				"w": 60,
+				"h": 60
 			}
 		},
-		"radiooff.png": {
+		"icons-menu.png": {
 			"frame": {
-				"x": 702,
-				"y": 1,
-				"w": 49,
-				"h": 49
+				"x": 1,
+				"y": 63,
+				"w": 60,
+				"h": 60
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 49,
-				"h": 49
+				"w": 60,
+				"h": 60
 			},
 			"sourceSize": {
-				"w": 49,
-				"h": 49
+				"w": 60,
+				"h": 60
 			}
 		},
-		"radioon.png": {
+		"icons-minus-circle.png": {
 			"frame": {
-				"x": 753,
-				"y": 1,
-				"w": 49,
-				"h": 49
+				"x": 63,
+				"y": 63,
+				"w": 60,
+				"h": 60
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 49,
-				"h": 49
+				"w": 60,
+				"h": 60
 			},
 			"sourceSize": {
-				"w": 49,
-				"h": 49
+				"w": 60,
+				"h": 60
 			}
 		},
-		"slotui.png": {
+		"icons-plus-circle.png": {
 			"frame": {
-				"x": 804,
+				"x": 125,
 				"y": 1,
-				"w": 1138,
-				"h": 640
+				"w": 60,
+				"h": 60
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1138,
-				"h": 640
+				"w": 60,
+				"h": 60
 			},
 			"sourceSize": {
-				"w": 1138,
-				"h": 640
+				"w": 60,
+				"h": 60
 			}
 		},
-		"start.png": {
+		"icons-volume.png": {
 			"frame": {
-				"x": 1944,
-				"y": 1,
-				"w": 234,
-				"h": 234
+				"x": 125,
+				"y": 63,
+				"w": 60,
+				"h": 60
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 234,
-				"h": 234
+				"w": 60,
+				"h": 60
 			},
 			"sourceSize": {
-				"w": 234,
-				"h": 234
+				"w": 60,
+				"h": 60
 			}
 		}
 	},
 	"meta": {
 		"app": "http://www.codeandweb.com/texturepacker",
 		"version": "1.0",
-		"image": "home.png",
+		"image": "icons.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 2179,
-			"h": 642
+			"w": 186,
+			"h": 124
 		},
 		"scale": "1"
 	}

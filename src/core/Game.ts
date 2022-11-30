@@ -3,6 +3,9 @@ import Loader from './components/Loader';
 import Plinko from './plinko/Plinko';
 import Slot from './slot/Slot';
 import Home from './components/Home';
+import TextBox from './components/TextBox';
+import PlayButton from './components/PlayButton';
+import Icons from './components/Icons';
 import Scene from './components/Scene';
 import Functions from './Functions';
 import { gsap } from "gsap";
@@ -19,6 +22,7 @@ export default class Game {
   private mainContainer: PIXI.Container;
   private homeContainer: PIXI.Container;
   private gameContainer: PIXI.Container;
+  private controllersContainer: PIXI.Container;
   private main: PIXI.Application;
   private plinko: PIXI.Application;
   private slot: PIXI.Application;
@@ -36,6 +40,9 @@ export default class Game {
   private bet: number = 100;
   private money: number = 1000;
   private game: number = 0;
+  private drop: number = 0;
+  private betBox: TextBox;
+  private playBtn: PlayButton;
 
   constructor() {
     this.setSettings();
@@ -64,6 +71,7 @@ export default class Game {
     this.gameContainer = new PIXI.Container;
     this.homeContainer = new PIXI.Container;
     this.mainContainer = new PIXI.Container;
+    this.controllersContainer = new PIXI.Container;
   }  
 
   private setRenderer() {
@@ -100,7 +108,7 @@ export default class Game {
     this.slotgame = new Slot(this.slot);
     this.slot.stage.addChild(this.slotgame.container);
     this.slot.stage.x = this.baseWidth/2;
-    this.slot.stage.y = 140;
+    this.slot.stage.y = 120;
     this.gameContainer.addChild(this.slot.stage);
   }
 
@@ -127,13 +135,8 @@ export default class Game {
     this.mainContainer.addChild(this.homeContainer);
     this.mainContainer.addChild(this.gameContainer);
     this.main.stage.addChild(this.mainContainer);
-
-    this.main.stage.addChild(this.mainContainer)
-
-    window.addEventListener('keypress', e => this.bonus(e))
-    // start julius code
+    window.addEventListener('keypress', e => this.bonus(e));
     this.createControllers();
-    // end julius code
   }
 
   private dive() {
@@ -181,52 +184,131 @@ export default class Game {
 
   // start julius code
   private createControllers(){
-    const style = new PIXI.TextStyle({
-        fontFamily: 'Questrial',
-        fontSize: 24,
-        fontWeight: 'bold',
-        fill: '#ffffff',
-    });
-    this.startText = new PIXI.Text('Drop on', style);
-    this.startText.interactive = true;
-    this.startText.buttonMode = true;
-    this.startText.addListener('pointerdown', this.startDrop.bind(this));
-    this.startText.position.y = this.main.screen.height - 50;
-    this.gameContainer.addChild(this.startText);
+    const boxheight = 32;
+    const toppadding = 2;
+    const sidepadding = 20;
+    const controllerheight = this.main.screen.height - this.plinkogame.container.height;
+    this.controllersContainer.position.y = this.plinkogame.container.height + toppadding;
+    this.gameContainer.addChild(this.controllersContainer);
+
+    //add parent rectangle
+    const parentRect = new PIXI.Graphics();
+    parentRect.beginFill(0x000000);
+    parentRect.drawRect(0,0, this.main.screen.width, controllerheight);
+    parentRect.alpha = .5;
+    this.controllersContainer.addChild(parentRect);
+    
+    //add menu button
+    const menubtn = new Icons(this.main, this.main.loader.resources!.icons.textures!['icons-menu.png']);
+    menubtn.container.position.y = (controllerheight / 2) - (menubtn.container.height / 2);
+    menubtn.container.position.x = sidepadding;
+    this.controllersContainer.addChild(menubtn.container);
+
+    //add play button
+    this.playBtn = new PlayButton(this.main,this.drop,230,(controllerheight * .6));
+    this.playBtn.container.position.x = (this.controllersContainer.width / 2) - (this.playBtn.container.width / 2);
+    this.playBtn.container.position.y = ((this.controllersContainer.height / 2) - (this.playBtn.container.height / 2));
+    this.playBtn.startSprite.addListener('pointerdown', this.startDrop.bind(this));
+    this.playBtn.minusgameSprite.sprite.addListener('pointerdown', this.minusDrop.bind(this));
+    this.playBtn.plusgameSprite.sprite.addListener('pointerdown', this.plusDrop.bind(this));
+    this.controllersContainer.addChild(this.playBtn.container);
+
+    //add volume button
+    const volumebtn = new Icons(this.main, this.main.loader.resources!.icons.textures!['icons-volume.png']);
+    volumebtn.container.position.y = (controllerheight / 2) - (volumebtn.container.height / 2);
+    volumebtn.container.position.x = (this.controllersContainer.width - volumebtn.container.width) - sidepadding;
+    this.controllersContainer.addChild(volumebtn.container);
+
+
+
+
+
+    //controllers fixe variables
+    
+    // const paddingtop = 10;
+    
+
+    
+
+    // //position y
+    // const posy = ;
+    // const posx = parentRect.width;
+
+
+
+
+
+
+
+    // //add bet contoller
+    // // this.betBox = new TextBox(this.main,'BET',999999999,180,32);
+    // // this.betBox.container.position.y = parentRect.position.y + paddingtop;
+    // // this.betBox.container.position.x = sidepadding;
+    // // this.gameContainer.addChild(this.betBox.container);
+
+
+
+    // const style = new PIXI.TextStyle({
+    //     fontFamily: 'Questrial',
+    //     fontSize: 24,
+    //     fontWeight: 'bold',
+    //     fill: '#ffffff',
+    // });
+    // this.startText = new PIXI.Text('Drop on', style);
+    // this.startText.interactive = true;
+    // this.startText.buttonMode = true;
+    // this.startText.addListener('pointerdown', this.startDrop.bind(this));
+    // this.startText.position.y = this.main.screen.height - 50;
+    // this.gameContainer.addChild(this.startText);
 
     //bet
-    this.betText = new PIXI.Text('Bet: '+this.bet, style);
-    this.betText.position.y = this.main.screen.height - 50;
-    this.betText.position.x = 150;
-    this.gameContainer.addChild(this.betText);
+    // this.betText = new PIXI.Text('Bet: '+this.bet, style);
+    // this.betText.position.y = this.main.screen.height - 50;
+    // this.betText.position.x = 150;
+    // this.gameContainer.addChild(this.betText);
 
-    //money
-    this.moneyText = new PIXI.Text('Money: '+this.money, style);
-    this.moneyText.position.y = this.main.screen.height - 50;
-    this.moneyText.position.x = 300;
-    this.gameContainer.addChild(this.moneyText);
+    // //money
+    // this.moneyText = new PIXI.Text('Money: '+this.money, style);
+    // this.moneyText.position.y = this.main.screen.height - 50;
+    // this.moneyText.position.x = 300;
+    // this.gameContainer.addChild(this.moneyText);
 
-    //game
-    this.gameText = new PIXI.Text('Game: '+this.game, style);
-    this.gameText.position.y = this.main.screen.height - 50;
-    this.gameText.position.x = 500;
-    this.gameContainer.addChild(this.gameText);
+    // //game
+    // this.gameText = new PIXI.Text('Game: '+this.game, style);
+    // this.gameText.position.y = this.main.screen.height - 50;
+    // this.gameText.position.x = 500;
+    // this.gameContainer.addChild(this.gameText);
+  }
+
+  private minusDrop(){
+    this.drop -= 5;
+    if(this.drop <= 0){
+      this.drop = 0;
+    }
+    this.playBtn.addMinus('dec',this.drop);
+  }
+
+  private plusDrop(){
+    if(this.drop <= 100){
+      this.drop += 5;
+    }
+    this.playBtn.addMinus('inc',this.drop);
   }
 
   private startDrop(){
-    if(this.bet > this.money){
-      alert("Not enough Money");
+    if(this.bet > this.money || this.drop <= 0){
+      alert("Not enough Money / No Drop Count");
     }
     else{
       if(this.plinkogame.up || this.plinkogame.down || this.plinkogame.downleft || this.plinkogame.downright){
         if(this.start){
           this.start = false;
-          this.startText.text = 'Drop on';
+          this.playBtn.startSprite.texture = this.main.loader.resources!.home.textures!['start.png'];
           this.plinkogame.startDrop = false;
         }
         else{
           this.start = true;
-          this.startText.text = 'Drop off';
+          this.playBtn.startSprite.texture = this.main.loader.resources!.home.textures!['pause.png'];
           this.plinkogame.startDrop = true;
         }
     
@@ -236,16 +318,19 @@ export default class Game {
   }
 
   private decMoney(){
+    console.log('wow');
     this.money = this.money - this.bet;
     this.moneyText.text = 'Money: '+this.money;
+    this.drop -= 1;
+    this.playBtn.changeDropValue();
   }
 
-  private dropOff(){
-    if(this.money < this.bet){
-      this.start = false;
-      this.startText.text = 'Drop on';
-      this.plinkogame.startDrop = false;
 
+  private dropOff(){
+    if(this.money < this.bet || this.drop <= 0){
+      this.start = false;
+      this.playBtn.startSprite.texture = this.main.loader.resources!.home.textures!['start.png'];
+      this.plinkogame.startDrop = false;
       this.checkBall();
     }
   }

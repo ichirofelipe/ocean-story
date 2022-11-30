@@ -74,7 +74,7 @@ export default class Home {
   }
 
   private createStart() {
-    const texture = this.app.loader.resources!.home.textures!['play.png'];
+    const texture = this.app.loader.resources!.home.textures!['start.png'];
     this.startSprite = new PIXI.Sprite(texture);
     this.startSprite.scale.set(.5) 
     this.startSprite.interactive = true;
@@ -209,15 +209,7 @@ export default class Home {
       this.radiobuttons[ind].texture = off;
     }
 
-    let index = 0
-    if(ind > 0){
-      index = ind - 1;
-    }
-    else{
-      index = ind + 1;
-    }
-
-    gsap.to(this.uis[index],{
+    gsap.to(this.uis[this.lastindex],{
       alpha: 0, duration: 1
     });
 

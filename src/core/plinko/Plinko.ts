@@ -61,6 +61,7 @@ export default class Game {
     private readonly pinGap: number = 7;
     private readonly stageHeight: number = .6;
     private readonly stageWidth: number = .9;
+    private readonly adjusty: number = 4;
 
     constructor(app: PIXI.Application, loader: PIXI.Loader, decmoney: () => void, dropoff: () => void, addmoney: (type: number) => void, updategame: () => void) {
         this.app = app;
@@ -140,7 +141,7 @@ export default class Game {
         this.pipeSprite.width = this.app.screen.width * this.stageWidth;
         this.pipeSprite.height = (this.app.screen.height *  this.stageHeight) - 100;
         this.pipeSprite.position.x = (this.app.screen.width / 2) - (this.pipeSprite.width / 2);
-        this.pipeSprite.position.y = 25;
+        this.pipeSprite.position.y = this.adjusty;
         this.container.addChild(this.pipeSprite);
     }
 
@@ -149,18 +150,18 @@ export default class Game {
         this.stageSprite.width = this.app.screen.width * this.stageWidth;
         this.stageSprite.height = this.app.screen.height *  this.stageHeight;
         this.stageSprite.position.x = (this.app.screen.width / 2) - (this.stageSprite.width / 2);
-        this.stageSprite.position.y = (this.pipeSprite.height / 2) + 25;
+        this.stageSprite.position.y = (this.pipeSprite.height / 2) + this.adjusty;
         this.container.addChild(this.stageSprite);
     }
 
     private createBar(){
         this.container2 = new PIXI.Container();
-
+        const posycontent = 123;
         //left
         this.barSpriteLeft = new PIXI.Sprite(this.bar1);
         this.barSpriteLeft.width = 85;
         this.barSpriteLeft.height = this.stageSprite.height + 11;
-        this.barSpriteLeft.position.y = (this.pipeSprite.height / 2) + 22;
+        this.barSpriteLeft.position.y = (this.pipeSprite.height / 2);
         this.barSpriteLeft.position.x = -9;
         this.container2.addChild(this.barSpriteLeft);
 
@@ -168,7 +169,7 @@ export default class Game {
         this.leftBar = new PIXI.Sprite(this.barcontent);
         this.leftBar.width = 37;
         this.leftBar.height = 310;
-        this.leftBar.position.y = 145;
+        this.leftBar.position.y = posycontent;
         this.leftBar.position.x = 15;
         this.container2.addChild(this.leftBar);
 
@@ -186,7 +187,7 @@ export default class Game {
         this.barSpriteRight = new PIXI.Sprite(this.bar2);
         this.barSpriteRight.width = 85;
         this.barSpriteRight.height = this.stageSprite.height + 11;
-        this.barSpriteRight.position.y = (this.pipeSprite.height / 2) + 22;
+        this.barSpriteRight.position.y = (this.pipeSprite.height / 2);
         this.barSpriteRight.position.x = this.stageSprite.width - 26;
         this.container2.addChild(this.barSpriteRight);
 
@@ -194,7 +195,7 @@ export default class Game {
         this.rightBar = new PIXI.Sprite(this.barcontent);
         this.rightBar.width = 37;
         this.rightBar.height = 310;
-        this.rightBar.position.y = 145;
+        this.rightBar.position.y = posycontent;
         this.rightBar.position.x = 430;
         this.container2.addChild(this.rightBar);
 
@@ -280,7 +281,7 @@ export default class Game {
             if(this.dropperContainer.position.x >= 405){
                 this.dropperContainer.position.y += 1;
                 this.dropperContainer.position.x += 1;
-                if(this.dropperContainer.position.y >= 40){
+                if(this.dropperContainer.position.y >= 21){
                     this.upright = false;
                     this.down = true;
                 }
@@ -290,10 +291,10 @@ export default class Game {
             }
         }
         if(this.up){
-            if(this.dropperContainer.position.y <= 45){
+            if(this.dropperContainer.position.y <= 24){
                 this.dropperContainer.position.y -= 1;
                 this.dropperContainer.position.x += 1; 
-                if(this.dropperContainer.position.y <= 25){
+                if(this.dropperContainer.position.y <= 6){
                     this.upright = true;
                     this.up = false;
                 }
@@ -318,7 +319,7 @@ export default class Game {
             }
         }
         if(this.downright){
-            if(this.dropperContainer.position.y <= 40){
+            if(this.dropperContainer.position.y <= 23){
                 this.dropperContainer.position.y -= 1;
                 this.dropperContainer.position.x -= 1;
                 if(this.dropperContainer.position.x <= 405){
@@ -334,7 +335,7 @@ export default class Game {
             if(this.dropperContainer.position.x <= 20){
                 this.dropperContainer.position.y += 1;
                 this.dropperContainer.position.x -= 1;
-                if(this.dropperContainer.position.y >= 40){
+                if(this.dropperContainer.position.y >= 20){
                     this.downleft = true;
                     this.upleft = false;
                 }

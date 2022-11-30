@@ -103,7 +103,7 @@ export default class Game {
     this.plinko = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
     this.plinkogame = new Plinko(this.plinko,this.main.loader,this.decMoney.bind(this),this.dropOff.bind(this), this.addMoney.bind(this), this.updateGame.bind(this));
     this.plinko.stage.addChild(this.plinkogame.container);
-    this.plinko.stage.addChild(this.plinkogame.container2);
+    // this.plinko.stage.addChild(this.plinkogame.container2);
     this.gameContainer.addChild(this.plinko.stage);
   }
 
@@ -156,13 +156,11 @@ export default class Game {
         duration: this.animationSpeed,
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
+          this.plinkogame.ticker.start();
+          this.plinkogame.ticker2.start();
         }
       })
     })
-    // gsap.to(rays, {
-    //   alpha: 1,
-    //   duration: this.animationSpeed
-    // })
   }
 
   private rise() {

@@ -16,8 +16,8 @@ export default class Game {
     private bar2: PIXI.Texture;
     private barSpriteLeft: PIXI.Sprite;
     private barSpriteRight: PIXI.Sprite;
-    private ticker: PIXI.Ticker;
-    private ticker2: PIXI.Ticker;
+    public ticker: PIXI.Ticker;
+    public ticker2: PIXI.Ticker;
     public downright: Boolean = false;
     public downleft: Boolean = false;
     private upright: Boolean = false;
@@ -97,6 +97,7 @@ export default class Game {
     private init() {
         this.createGame();
         this.createPipe();
+        this.createPipeMotion();
         this.createStage();
         this.createDropper();
         this.createMaze();
@@ -105,10 +106,29 @@ export default class Game {
         this.createBar();
         this.ticker = new PIXI.Ticker();
         this.ticker.add(this.movementsCrane.bind(this));
-        this.ticker.start();
+        // this.ticker.start();
         this.ticker2 = new PIXI.Ticker();
         this.ticker2.add(this.movementsReel.bind(this));
-        this.ticker2.start();
+        // this.ticker2.start();
+    }
+
+    private createPipeMotion(){
+        const realPath = new PIXI.Graphics();
+        // realPath.lineStyle(5, 0xFFFFFF, 1);
+        // realPath.moveTo(0, 0);
+        // realPath.lineTo(0, -1 * (this.pipeSprite.height - 27));
+        // realPath.arcTo(500,100,120,100,120)
+
+
+        realPath.lineStyle(5,0xFFCC00, 1);
+        realPath.moveTo(0, 0);
+        realPath.arcTo(0, 5, -100, 10, 10);
+        // realPath.lineTo(60, 60);
+        // realPath.lineTo(0, 60);
+        // realPath.endFill();
+        realPath.position.y = this.pipeSprite.position.y + this.pipeSprite.height;
+        realPath.position.x = this.pipeSprite.position.x
+        this.container.addChild(realPath);
     }
 
     private createDropper(){

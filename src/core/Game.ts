@@ -145,6 +145,7 @@ export default class Game {
   }
 
   private dive() {
+    
     this.home.stopBeat();
     this.scene.bubbleAnimate();
     this.diveGroupAnimation.forEach((element: any) => {
@@ -157,13 +158,11 @@ export default class Game {
           this.homeContainer.removeChild(this.home.container);
         }
       })
-
-      gsap.to(this.scene.lightRay, {
-        alpha: 1,
-        duration: this.animationSpeed,
-        ease: "power1.out"
-      })
     })
+    // gsap.to(rays, {
+    //   alpha: 1,
+    //   duration: this.animationSpeed
+    // })
   }
 
   private rise() {

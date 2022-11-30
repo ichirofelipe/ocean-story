@@ -88,9 +88,8 @@ export default class Slot {
   private createLogo() {
     const texture = this.app.loader.resources!.slot.textures!['logo.png'];
     this.logo = new PIXI.Sprite(texture);
-    const width = this.logo.width;
-    this.logo.height = Helpers.autoHeight(this.logo, (width*0.4))
-    this.logo.width = (width*0.4);
+    this.logo.height = Helpers.autoHeight(this.logo, 400)
+    this.logo.width = 400;
     this.logo.x = (this.app.screen.width - (this.logo.width/2)) - 30;
     this.logo.y = -((this.logo.height) - 90);
     

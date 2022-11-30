@@ -17,11 +17,13 @@ export default class Scene {
   public bgSprite: PIXI.Sprite;
   private bubbles: Array<PIXI.Sprite> = [];
   private oceanBed: PIXI.AnimatedSprite;
-  public sunRays: GodrayFilter;
+  public lightRay: PIXI.AnimatedSprite;
+  private mainContainer: PIXI.Container;
 
-  constructor(app: PIXI.Application) {
+  constructor(app: PIXI.Application, mainContainer: PIXI.Container) {
     this.app = app;
     this.container = new PIXI.Container;
+    this.mainContainer = mainContainer;
 
     this.init();
   }
@@ -29,6 +31,7 @@ export default class Scene {
   private init() {
     this.createBG();
     this.createTrees();
+    this.createRays();
     this.createOceanBed();
     this.createReefs();
     this.createBubbles();
@@ -40,24 +43,6 @@ export default class Scene {
     this.bgSprite = new PIXI.Sprite(texture);
     this.bgSprite.height = Helpers.autoHeight(this.bgSprite, this.app.screen.width);
     this.bgSprite.width = this.app.screen.width;
-
-    this.sunRays = new GodrayFilter({
-      gain: 0.5,
-      lacunarity: 3,
-      alpha: 0,
-      parallel: false,
-      center: [700, -500],
-      time: 0,
-    });
-
-    gsap.to(this.sunRays, {
-      time: 1,
-      duration: 2,
-      loop: true
-    })
-    
-    // this.bgSprite.filters = [this.sunRays];
-    // this.bgSprite.filters.a
     
     this.container.addChild(this.bgSprite);
     this.container.sortableChildren = true;
@@ -87,6 +72,26 @@ export default class Scene {
 
       this.container.addChild(img);
     })
+
+  }
+
+  private createRays () {
+
+    let textures: Array<PIXI.Texture> = [];
+
+    for(let img in this.app.loader.resources!.lightray.textures){
+        const texture = PIXI.Texture.from(img);
+        textures.push(texture);
+    } 
+    this.lightRay = new PIXI.AnimatedSprite(textures);
+    this.lightRay.height = Helpers.autoHeight(this.lightRay, this.app.screen.width);
+    this.lightRay.width = this.app.screen.width;
+    this.lightRay.position.y = 0;
+    this.lightRay.animationSpeed = 0.2;
+    this.lightRay.alpha = 0;
+    this.lightRay.zIndex = 1;
+    this.lightRay.play();
+    this.mainContainer.addChild(this.lightRay);
 
   }
 

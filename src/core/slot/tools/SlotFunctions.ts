@@ -153,9 +153,9 @@ export default class SlotFunctions {
     // console.log('Total Payout Percentage', `${(this.money/this.baseMoney)*100}%`);
     console.log('Total Repeat Payout Percentage', `${(this.money/this.beforeMoney)*100}%`);
 
-    // console.log('Unique Patterns and Pay:', this.uniqueWinPatterns);
-    // console.log('Unique Patterns and Pay:', this.bonusWinPatterns);
-    console.log('Unique Patterns Length:', this.jsonCombination.length);
+    console.log('Unique Patterns and Pay:', this.uniqueWinPatterns);
+    console.log('Total Normal Combination:', this.totalNormalCombination);
+    // console.log('Unique Patterns Length:', this.jsonCombination.length);
     // console.log('Total Bonus Combination Count:', this.bonusWinPatterns.length);
     console.log('RTP:', this.sumOfUniquePatterns/(this.totalCombination*this.bet));
     // this.blocksWinrate.forEach((winrate, index) => {
@@ -210,11 +210,11 @@ export default class SlotFunctions {
             blocks.push(reel[pat[index] - 1]);
 
             //CHECK BONUS COMBINATION
-            let bonusBlocks = reel.filter(val => val == BonusNumber);
-            if(bonusBlocks.length > 0)
-              bonusCount++
-            if(bonusCount == 3)
-              this.bonusWin = true;
+            // let bonusBlocks = reel.filter(val => val == BonusNumber);
+            // if(bonusBlocks.length > 0)
+            //   bonusCount++
+            // if(bonusCount == 3)
+            //   this.bonusWin = true;
           }
         });
         
@@ -293,17 +293,20 @@ export default class SlotFunctions {
       const uniquePattern = win.blocks.join('-');
       if(this.uniqueWinPatterns[uniquePattern] === undefined){
         let multiplier = 1;
-        if(win.blocks.length == 3)
-          multiplier = 30;
-        if(win.blocks.length == 4)
-          multiplier = 900;
         let combinations = 1;
+
+        if(win.blocks.length == 4)
+          multiplier = 30;
+        if(win.blocks.length == 3)
+          multiplier = 900;
+
         win.blocks.forEach((block:number, index: number) => {
           combinations *= Reel[index].filter((val) => val == block).length;
         })
+        
         this.totalNormalCombination++;
-        this.sumOfUniquePatterns += (this.computePayOut(win) * (combinations * multiplier));
-        this.uniqueWinPatterns[uniquePattern] = (this.computePayOut(win) * (combinations * multiplier));
+        this.sumOfUniquePatterns += (this.computePayOut(win) * (combinations * multiplier * Pattern.length));
+        this.uniqueWinPatterns[uniquePattern] = (this.computePayOut(win) * (combinations * multiplier * Pattern.length));
 
         // this.jsonCombination.push({
         //   pattern: uniquePattern,

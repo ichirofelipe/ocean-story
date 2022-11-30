@@ -66,7 +66,6 @@ export default class Game {
   private setSettings() {
     PIXI.settings.ROUND_PIXELS = true;
     PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
-    PIXI.settings.RESOLUTION = 1;
 
     this.sceneContainer = new PIXI.Container;
     this.gameContainer = new PIXI.Container;
@@ -76,17 +75,22 @@ export default class Game {
   }  
 
   private setRenderer() {
-    this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight});
+    this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight });
     this.main.stage.interactive = true;
+
     window.document.body.appendChild(this.main.view)
   }
 
   private setContainers (){
     this.gameContainer.y = this.baseHeight*2;
+    this.mainContainer.sortableChildren = true;
+
+    this.gameContainer.zIndex = 2;
+    this.homeContainer.zIndex = 2;
   }
 
   private createScene() {
-    this.scene = new Scene(this.main);
+    this.scene = new Scene(this.main, this.mainContainer);
     this.sceneContainer.addChild(this.scene.container);
   }
 
@@ -154,10 +158,10 @@ export default class Game {
         }
       })
 
-      gsap.to(this.scene.sunRays, {
+      gsap.to(this.scene.lightRay, {
         alpha: 1,
         duration: this.animationSpeed,
-        ease: "power1.in"
+        ease: "power1.out"
       })
     })
   }
@@ -178,7 +182,7 @@ export default class Game {
       return;
     console.log('bonus');
     this.scene.deleteBubbles();
-    this.rise();
+    // this.rise();
     // this.scene.createBubbles();
     // this.scene.bubbleAnimate();
   }

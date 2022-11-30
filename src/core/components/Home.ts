@@ -10,6 +10,7 @@ export default class Home {
   private startGame: () => void;
   private logo: PIXI.Sprite;
   private uis: Array<PIXI.Sprite> = [];
+  private uistext: Array<any> = [];
   private radiobuttons: Array<PIXI.Sprite> = [];
   private radiobuttonswidth: number;
   private leftside: PIXI.Container;
@@ -39,6 +40,7 @@ export default class Home {
     this.leftside.position.y = 0;
     this.container.addChild(this.leftside);
     this.createUI();
+    this.createText();
     this.createRadioButtons();
   }
 
@@ -48,7 +50,6 @@ export default class Home {
     this.container.addChild(this.rightside);
     this.createStart();
     this.createLogo();
-    this.createText();
   }
 
   private createText(){
@@ -67,10 +68,18 @@ export default class Home {
       lineJoin: 'round',
       strokeThickness: 5
     });
-    const text = new PIXI.Text('WIN UP TO 5,000 x BET', style);
-    text.position.x = ((this.app.screen.width * .6) / 2) - (text.width / 2);
-    text.position.y = (this.app.screen.height * .7 + (text.height / 2)) - 20;
-    this.leftside.addChild(text)
+    
+
+    SlideShow.forEach((img: any, index) => {
+      const text = new PIXI.Text(img.description, style);
+      text.position.x = ((this.app.screen.width * .6) / 2) - (text.width / 2);
+      text.position.y = (this.app.screen.height * .7 + (text.height / 2)) - 20;
+      if(index > 0){
+        text.alpha = 0;
+      }
+      this.uistext.push(text);
+      this.leftside.addChild(text);
+    });
   }
 
   private createStart() {
@@ -88,14 +97,16 @@ export default class Home {
   }
 
   private setBeat(){
-    gsap.to(this.startSprite.scale, {
-      x: .6, y: .6, duration: 1, repeat: -1, yoyo: true,
+    gsap.to(this.startSprite, {
+      width: 150, height: 150, duration: 1, repeat: -1, yoyo: true,
     });
   }
 
   public stopBeat(){
     this.slideticker.destroy();
-    gsap.killTweensOf(this.startSprite.scale)
+    gsap.killTweensOf(this.startSprite);
+    gsap.killTweensOf(this.uis)
+    gsap.killTweensOf(this.uistext)
   }
 
   private createLogo() {
@@ -214,6 +225,14 @@ export default class Home {
     });
 
     gsap.to(this.uis[ind],{
+      alpha: 1, duration: 1
+    });
+
+    gsap.to(this.uistext[this.lastindex],{
+      alpha: 0, duration: 1
+    });
+
+    gsap.to(this.uistext[ind],{
       alpha: 1, duration: 1
     });
 

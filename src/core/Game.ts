@@ -41,7 +41,8 @@ export default class Game {
   private money: number = 1000;
   private game: number = 0;
   private drop: number = 0;
-  private betBox: TextBox;
+  private gift: TextBox;
+  private balance: TextBox;
   private playBtn: PlayButton;
 
   constructor() {
@@ -65,7 +66,7 @@ export default class Game {
   private setSettings() {
     PIXI.settings.ROUND_PIXELS = true;
     PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
-    PIXI.settings.RESOLUTION = 2;
+    PIXI.settings.RESOLUTION = 1;
 
     this.sceneContainer = new PIXI.Container;
     this.gameContainer = new PIXI.Container;
@@ -75,7 +76,7 @@ export default class Game {
   }  
 
   private setRenderer() {
-    this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight, autoDensity: true });
+    this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight});
     this.main.stage.interactive = true;
     window.document.body.appendChild(this.main.view)
   }
@@ -240,11 +241,19 @@ export default class Game {
 
 
 
-    // //add bet contoller
-    // // this.betBox = new TextBox(this.main,'BET',999999999,180,32);
-    // // this.betBox.container.position.y = parentRect.position.y + paddingtop;
-    // // this.betBox.container.position.x = sidepadding;
-    // // this.gameContainer.addChild(this.betBox.container);
+    //add win contoller
+    this.gift = new TextBox(this.main,'WIN',999999999,135,32);
+    this.gift.container.position.x = this.controllersContainer.width - 200;
+    this.gift.container.position.y = 17;
+    this.controllersContainer.addChild(this.gift.container);
+
+    
+    //add balance contoller
+    this.balance = new TextBox(this.main,'BALANCE',this.money,135,32);
+    this.balance.container.position.x = this.controllersContainer.width - 350;
+    this.balance.container.position.y = 17;
+    this.controllersContainer.addChild(this.balance.container);
+
 
 
 

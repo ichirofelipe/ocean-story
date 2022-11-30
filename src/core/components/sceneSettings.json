@@ -141,14 +141,16 @@
       "fixedheight" : 0,
       "fixedwidth" : 500,
       "alpha" : 1,
-      "radio" : "on"
+      "radio" : "on",
+      "description" : "WIN UP TO 5,000 X BET"
     },
     {
       "name" : "plinkoui",
       "fixedheight" : 300,
       "fixedwidth" : 0,
       "alpha" : 0,
-      "radio" : "off"
+      "radio" : "off",
+      "description" : "WIN UP TO x2  BET"
     }
   ],
   "Trees": [

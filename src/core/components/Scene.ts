@@ -56,7 +56,7 @@ export default class Scene {
       loop: true
     })
     
-    this.bgSprite.filters = [this.sunRays];
+    // this.bgSprite.filters = [this.sunRays];
     // this.bgSprite.filters.a
     
     this.container.addChild(this.bgSprite);

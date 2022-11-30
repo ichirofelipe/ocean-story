@@ -4,7 +4,7 @@ export default class TextBox {
     public container: PIXI.Container;
     private app: PIXI.Application;
     private label: string;
-    private value: number;
+    public value: number;
     private labelstyle: PIXI.TextStyle;
     private valuestyle: PIXI.TextStyle;
     private fixedwidth: number;

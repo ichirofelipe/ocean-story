@@ -11,7 +11,7 @@
   "dependencies": {
     "@types/node": "^16.4.3",
     "gsap": "^3.11.3",
-    "pixi-filters": "^4.1.6",
+    "pixi-filters": "^4.2.0",
     "pixi.js": "^6.5.4",
     "ts-node": "^10.1.0",
     "webfontloader": "^1.6.28"

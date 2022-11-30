@@ -160,6 +160,10 @@ export default class Game {
           this.plinkogame.ticker2.start();
         }
       })
+    }) 
+    gsap.to(this.scene.lightRay, {
+      alpha: 1,
+      duration: this.animationSpeed
     })
   }
 

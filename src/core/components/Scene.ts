@@ -88,7 +88,7 @@ export default class Scene {
     this.lightRay.width = this.app.screen.width;
     this.lightRay.position.y = 0;
     this.lightRay.animationSpeed = 0.2;
-    this.lightRay.alpha = 0;
+    this.lightRay.alpha = 0.01;
     this.lightRay.zIndex = 1;
     this.lightRay.play();
     this.mainContainer.addChild(this.lightRay);

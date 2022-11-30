@@ -158,11 +158,11 @@ export default class Game {
           this.homeContainer.removeChild(this.home.container);
         }
       })
+    }) 
+    gsap.to(this.scene.lightRay, {
+      alpha: 1,
+      duration: this.animationSpeed
     })
-    // gsap.to(rays, {
-    //   alpha: 1,
-    //   duration: this.animationSpeed
-    // })
   }
 
   private rise() {

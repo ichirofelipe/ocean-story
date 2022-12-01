@@ -5,7 +5,8 @@ import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import { GodrayFilter } from 'pixi-filters';
-import { Graphics } from 'pixi.js';
+// import { Graphics } from 'pixi.js';
+
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);

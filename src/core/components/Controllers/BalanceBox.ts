@@ -1,6 +1,5 @@
 import * as PIXI from 'pixi.js';
 import Functions from '../../Functions';
-
 export default class BalanceBox {
     public container: PIXI.Container;
     private app: PIXI.Application;

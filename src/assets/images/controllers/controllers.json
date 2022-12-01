@@ -1,0 +1,315 @@
+{
+	"frames": {
+		"icon_arrowdown.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 20,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 20,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 20,
+				"h": 20
+			}
+		},
+		"icon_arrowup.png": {
+			"frame": {
+				"x": 23,
+				"y": 1,
+				"w": 20,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 20,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 20,
+				"h": 20
+			}
+		},
+		"icon_menu.png": {
+			"frame": {
+				"x": 45,
+				"y": 1,
+				"w": 17,
+				"h": 12
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 17,
+				"h": 12
+			},
+			"sourceSize": {
+				"w": 17,
+				"h": 12
+			}
+		},
+		"icon_minu.png": {
+			"frame": {
+				"x": 64,
+				"y": 1,
+				"w": 18,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 18,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 18,
+				"h": 18
+			}
+		},
+		"icon_plus.png": {
+			"frame": {
+				"x": 84,
+				"y": 1,
+				"w": 18,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 18,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 18,
+				"h": 18
+			}
+		},
+		"icon_volume.png": {
+			"frame": {
+				"x": 104,
+				"y": 1,
+				"w": 15,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 15
+			}
+		},
+		"pause.png": {
+			"frame": {
+				"x": 121,
+				"y": 1,
+				"w": 43,
+				"h": 43
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 43,
+				"h": 43
+			},
+			"sourceSize": {
+				"w": 43,
+				"h": 43
+			}
+		},
+		"play.png": {
+			"frame": {
+				"x": 166,
+				"y": 1,
+				"w": 43,
+				"h": 43
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 43,
+				"h": 43
+			},
+			"sourceSize": {
+				"w": 43,
+				"h": 43
+			}
+		},
+		"rectangle_balance.png": {
+			"frame": {
+				"x": 211,
+				"y": 1,
+				"w": 135,
+				"h": 22
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 135,
+				"h": 22
+			},
+			"sourceSize": {
+				"w": 135,
+				"h": 22
+			}
+		},
+		"rectangle_bet.png": {
+			"frame": {
+				"x": 348,
+				"y": 1,
+				"w": 115,
+				"h": 22
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 115,
+				"h": 22
+			},
+			"sourceSize": {
+				"w": 115,
+				"h": 22
+			}
+		},
+		"rectangle_dropnumber.png": {
+			"frame": {
+				"x": 465,
+				"y": 1,
+				"w": 97,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 97,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 97,
+				"h": 15
+			}
+		},
+		"rectangle_gamein.png": {
+			"frame": {
+				"x": 564,
+				"y": 1,
+				"w": 77,
+				"h": 22
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 77,
+				"h": 22
+			},
+			"sourceSize": {
+				"w": 77,
+				"h": 22
+			}
+		},
+		"rectangle_parent.png": {
+			"frame": {
+				"x": 1,
+				"y": 46,
+				"w": 964,
+				"h": 80
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 964,
+				"h": 80
+			},
+			"sourceSize": {
+				"w": 964,
+				"h": 80
+			}
+		},
+		"rectangle_start.png": {
+			"frame": {
+				"x": 1,
+				"y": 128,
+				"w": 225,
+				"h": 44
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 225,
+				"h": 44
+			},
+			"sourceSize": {
+				"w": 225,
+				"h": 44
+			}
+		},
+		"rectangle_win.png": {
+			"frame": {
+				"x": 643,
+				"y": 1,
+				"w": 135,
+				"h": 22
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 135,
+				"h": 22
+			},
+			"sourceSize": {
+				"w": 135,
+				"h": 22
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "controllers.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 966,
+			"h": 173
+		},
+		"scale": "1"
+	}
+}

@@ -45,8 +45,35 @@ const getSprite = (loader: PIXI.Loader, setting: any) => {
   return img;
 }
 
+const formatNumber = (number: number) => {
+  let num;
+  if(number > 0){
+    num = number.toLocaleString("en-US");
+  }
+  else{
+    num = "";
+  }
+  return num;
+}
+
+const formatGameNumber = (number: number) => {
+  let newnumber = '';
+  if(number >= 0 && number <= 9){
+    newnumber = '00'+number;
+  }
+  else if(number >= 10 && number <= 99){
+    newnumber = '0'+number;
+  }
+  else{
+    newnumber = number.toLocaleString("en-US");
+  }
+  return newnumber;
+}
+
 export default {
   objGroupAnimation,
   randMinMax,
-  getSprite
+  getSprite,
+  formatNumber,
+  formatGameNumber
 }

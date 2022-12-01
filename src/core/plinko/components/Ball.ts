@@ -22,10 +22,10 @@ export default class Ball {
     private lasthitindex: number = -1;
     private app: PIXI.Application;
     private addmoney: (type: number) => void;
-    private updategame: () => void;
+    private updategameplus: () => void;
+    private updategameminus: () => void;
     private updatebar: (type: string) => void;
-
-    constructor(x: number, y: number, radius: number, loader: PIXI.Loader, container: PIXI.Container, reelposition: number, imageArray: Array<PIXI.Sprite>, arrayPins: Array<PIXI.Graphics>, app: PIXI.Application, addmoney: (type: number) => void, updategame: () => void, updatebar: (type: string) => void) {
+    constructor(x: number, y: number, radius: number, loader: PIXI.Loader, container: PIXI.Container, reelposition: number, imageArray: Array<PIXI.Sprite>, arrayPins: Array<PIXI.Graphics>, app: PIXI.Application, updatebar: (type: string) => void, updategameplus: () => void, updategameminus: () => void, addmoney: (type: number) => void) {
         this.ball = new PIXI.Graphics();
         this.ticker = new PIXI.Ticker();
         this.loader = loader;
@@ -36,7 +36,8 @@ export default class Ball {
         this.arrayPins = arrayPins;
         this.app = app;
         this.addmoney = addmoney;
-        this.updategame = updategame;
+        this.updategameplus = updategameplus;
+        this.updategameminus = updategameminus;
         this.updatebar = updatebar;
         this.createBall(this.ball,x,y,radius);
     }
@@ -139,7 +140,7 @@ export default class Ball {
         else if(charindex == 2 || charindex == 4 || charindex == 7 || charindex == 9 || charindex == 13){
             charindex = -1;
             console.log('starfish');
-            this.updategame();
+            this.updategameplus();
         }
         //check if fish
         else if(charindex == 0 || charindex == 3 || charindex == 6){

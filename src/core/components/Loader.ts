@@ -42,7 +42,8 @@ export default class Loader {
         this.loader.add('plinko', 'assets/images/plinko/plinko.json');
         this.loader.add('crane', 'assets/images/plinko/crane.json');
         this.loader.add('bottom', 'assets/images/scene/bottom/bottom.json');
-        this.loader.add('icons', 'assets/images/home/icons.json');
+        this.loader.add('controllers', 'assets/images/controllers/controllers.json');
+        // this.loader.add('icons', 'assets/images/home/icons.json');
 
         //REEFS
         this.loader.add('plant-1', 'assets/images/scene/animations/plant-1/plant-1.json');

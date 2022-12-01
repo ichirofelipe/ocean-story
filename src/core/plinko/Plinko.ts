@@ -54,7 +54,8 @@ export default class Game {
     private decmoney: () => void;
     private dropoff: () => void;
     private addmoney: (type: number) => void;
-    private updategame: () => void;
+    private updategameplus: () => void;
+    private updategameminus: () => void;
     private readonly reelSpeed: number = 4;
     private readonly ballRadius: number = 14;
     private readonly pinRadius: number = 5;
@@ -62,8 +63,7 @@ export default class Game {
     private readonly stageHeight: number = .6;
     private readonly stageWidth: number = .9;
     private readonly adjusty: number = 4;
-
-    constructor(app: PIXI.Application, loader: PIXI.Loader, decmoney: () => void, dropoff: () => void, addmoney: (type: number) => void, updategame: () => void) {
+    constructor(app: PIXI.Application, loader: PIXI.Loader, updategameplus: () => void, updategameminus: () => void, decmoney: () => void, dropoff: () => void, addmoney: (type: number) => void) {
         this.app = app;
         this.loader = loader;
         this.stage = this.loader.resources!.plinko.textures!['stage.png'];
@@ -90,14 +90,14 @@ export default class Game {
         this.decmoney = decmoney;
         this.dropoff = dropoff;
         this.addmoney = addmoney;
-        this.updategame = updategame;
+        this.updategameplus = updategameplus;
+        this.updategameminus = updategameminus;
         this.init();
     }
 
     private init() {
         this.createGame();
         this.createPipe();
-        this.createPipeMotion();
         this.createStage();
         this.createDropper();
         this.createMaze();
@@ -112,24 +112,6 @@ export default class Game {
         // this.ticker2.start();
     }
 
-    private createPipeMotion(){
-        const realPath = new PIXI.Graphics();
-        // realPath.lineStyle(5, 0xFFFFFF, 1);
-        // realPath.moveTo(0, 0);
-        // realPath.lineTo(0, -1 * (this.pipeSprite.height - 27));
-        // realPath.arcTo(500,100,120,100,120)
-
-
-        realPath.lineStyle(5,0xFFCC00, 1);
-        realPath.moveTo(0, 0);
-        realPath.arcTo(0, 5, -100, 10, 10);
-        // realPath.lineTo(60, 60);
-        // realPath.lineTo(0, 60);
-        // realPath.endFill();
-        realPath.position.y = this.pipeSprite.position.y + this.pipeSprite.height;
-        realPath.position.x = this.pipeSprite.position.x
-        this.container.addChild(realPath);
-    }
 
     private createDropper(){
         this.dropperContainer = new PIXI.Container();
@@ -425,7 +407,7 @@ export default class Game {
                 const x = (this.dropperContainer.position.x) + (this.craneAnimate.width - (this.ballRadius * 2)) + posx;
                 const y = this.dropperContainer.position.y + (this.craneAnimate.height - this.ballRadius);
                 const reelposition = this.mazeheight + this.mazeContainer.position.y + 15;
-                const ball = new Ball(x, y, this.ballRadius, this.loader, this.container, reelposition, this.imageArray, this.arrayPins, this.app, this.addmoney, this.updategame, this.updateBar.bind(this));
+                const ball = new Ball(x, y, this.ballRadius, this.loader, this.container, reelposition, this.imageArray, this.arrayPins, this.app, this.updateBar.bind(this), this.updategameplus, this.updategameminus, this.addmoney);
                 this.container.addChild(ball.ball);
             }
         };

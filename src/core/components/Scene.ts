@@ -4,9 +4,7 @@ import {Reefs, LoopingBubbles, Trees} from './sceneSettings.json';
 import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
-import { GodrayFilter } from 'pixi-filters';
-// import { Graphics } from 'pixi.js';
-
+import { ReflectionFilter } from 'pixi-filters';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -14,7 +12,8 @@ PixiPlugin.registerPIXI(PIXI);
 export default class Scene {
   private app: PIXI.Application;
   public container: PIXI.Container;
-  public reefsContainer: PIXI.Container;
+  public homeScene: PIXI.Container;
+  public OceanBedContainer: PIXI.Container;
   public bgSprite: PIXI.Sprite;
   private bubbles: Array<PIXI.Sprite> = [];
   private oceanBed: PIXI.AnimatedSprite;
@@ -24,6 +23,8 @@ export default class Scene {
   constructor(app: PIXI.Application, mainContainer: PIXI.Container) {
     this.app = app;
     this.container = new PIXI.Container;
+    this.homeScene = new PIXI.Container;
+    this.OceanBedContainer = new PIXI.Container;
     this.mainContainer = mainContainer;
 
     this.init();
@@ -32,6 +33,7 @@ export default class Scene {
   private init() {
     this.createBG();
     this.createTrees();
+    this.createWaves();
     this.createRays();
     this.createOceanBed();
     this.createReefs();
@@ -47,6 +49,8 @@ export default class Scene {
     
     this.container.addChild(this.bgSprite);
     this.container.sortableChildren = true;
+    this.homeScene.sortableChildren = true;
+    this.OceanBedContainer.sortableChildren = true;
   }
 
   private createTrees() {
@@ -71,9 +75,49 @@ export default class Scene {
         img.x += img.width;
       }
 
-      this.container.addChild(img);
+      this.homeScene.addChild(img);
     })
 
+  }
+
+  private createWaves() {
+    const numberOfWaves = 2;
+    const texture = this.app.loader.resources!.scene.textures!['waves.png'];
+
+    let reflection = new ReflectionFilter({
+      boundary: 0.8,
+      amplitude: [0, 20],
+      waveLength: [50, 150],
+      alpha: [1, 1],
+      time: 0,
+      mirror: false,
+    });
+
+    const wave = new PIXI.TilingSprite(texture);
+    const waveSize = 1/numberOfWaves;
+
+    wave.height = 105;
+    wave.width = this.app.screen.width * numberOfWaves;
+    wave.tileScale.set(waveSize);
+    wave.position.y = this.app.screen.height - 103;
+    wave.position.x = - wave.width / numberOfWaves;
+    gsap.to(wave, {
+      x: wave.x + (wave.width/numberOfWaves),
+      duration: 25*numberOfWaves,
+      repeat: -1,
+      ease: "none",
+    })
+
+    this.homeScene.addChild(wave);
+
+    gsap.to(reflection, {
+      time: 1,
+      duration: 1,
+      repeat: -1,
+      yoyo: true,
+      ease: "none",
+    })
+    this.homeScene.filters = [reflection];
   }
 
   private createRays () {
@@ -127,7 +171,7 @@ export default class Scene {
       }
       img.zIndex = reef.zIndex;
 
-      this.container.addChild(img);
+      this.OceanBedContainer.addChild(img);
     });
   }
 

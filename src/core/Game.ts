@@ -60,7 +60,7 @@ export default class Game {
   private init() {
     this.setContainers(); 
     this.createScene();
-    this.createHome();
+    // this.createHome();
     this.createPlinko();
     this.createSlot();
     this.setObjAnimation();
@@ -79,7 +79,7 @@ export default class Game {
     this.modalContainer = new PIXI.Container;
   }  
   private setRenderer() {
-    this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight, antialias: true });
+    this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight, antialias: true});
     this.main.stage.interactive = true;
 
     window.document.body.appendChild(this.main.view)
@@ -94,6 +94,8 @@ export default class Game {
   private createScene() {
     this.scene = new Scene(this.main, this.mainContainer);
     this.sceneContainer.addChild(this.scene.container);
+    this.sceneContainer.addChild(this.scene.homeScene);
+    this.sceneContainer.addChild(this.scene.OceanBedContainer);
   }
   private createHome() {
     this.home = new Home(this.main, this.dive.bind(this));
@@ -145,6 +147,7 @@ export default class Game {
     
     this.home.stopBeat();
     this.scene.bubbleAnimate();
+
     this.diveGroupAnimation.forEach((element: any) => {
       const {sprite, destination} = element;
 
@@ -178,7 +181,7 @@ export default class Game {
       return;
     console.log('bonus');
     this.scene.deleteBubbles();
-    // this.rise();
+    this.rise();
     // this.scene.createBubbles();
     // this.scene.bubbleAnimate();
   }

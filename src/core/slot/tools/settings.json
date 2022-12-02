@@ -28,14 +28,14 @@
     "char-1": 0.4,
     "char-2": 0.4,
     "char-3": 0.4,
-    "char-4": 20.5891,
+    "char-4": 19.2,
     "char-5": 0.8,
     "char-6": 0.8,
     "char-7": 4,
     "char-8": 1.2,
     "char-9": 1.2,
     "char-10": 1.4,
-    "char-11": 0.563
+    "char-11": 0.3
 
   },
   "Paylines": {
@@ -60,5 +60,692 @@
     "bonus",
     "jackpot",
     "wild"
+  ],
+  "Formula": [
+    {
+      "lines": 5,
+      "wilds": 1,
+      "symbol": 1,
+      "total":7879680.00 
+    },
+    {
+      "lines": 5,
+      "wilds": 2,
+      "symbol": 1,
+      "total":13271040
+    },
+    {
+      "lines": 5,
+      "wilds": 3,
+      "symbol": 1,
+      "total":11016000
+    },
+    {
+      "lines": 5,
+      "wilds": 4,
+      "symbol": 1,
+      "total":4510080
+    },
+    {
+      "lines": 5,
+      "wilds": 1,
+      "symbol": 2,
+      "total":7551360
+    },
+    {
+      "lines": 5,
+      "wilds": 2,
+      "symbol": 2,
+      "total":12966480
+    },
+    {
+      "lines": 5,
+      "wilds": 3,
+      "symbol": 2,
+      "total":10924200
+    },
+    {
+      "lines": 5,
+      "wilds": 4,
+      "symbol": 2,
+      "total":4510080
+    },
+    {
+      "lines": 5,
+      "wilds": 1,
+      "symbol": 3,
+      "total":7002450
+    },
+    {
+      "lines": 5,
+      "wilds": 2,
+      "symbol": 3,
+      "total":12028500
+    },
+    {
+      "lines": 5,
+      "wilds": 3,
+      "symbol": 3,
+      "total":10258650
+    },
+    {
+      "lines": 5,
+      "wilds": 4,
+      "symbol": 3,
+      "total":4341600
+    },
+    {
+      "lines": 5,
+      "wilds": 1,
+      "symbol": 5,
+      "total":2022300
+    },
+    {
+      "lines": 5,
+      "wilds": 2,
+      "symbol": 5,
+      "total":5532300
+    },
+    {
+      "lines": 5,
+      "wilds": 3,
+      "symbol": 5,
+      "total":6790500
+    },
+    {
+      "lines": 5,
+      "wilds": 4,
+      "symbol": 5,
+      "total":3742200
+    },
+    {
+      "lines": 5,
+      "wilds": 1,
+      "symbol": 6,
+      "total":2494800
+    },
+    {
+      "lines": 5,
+      "wilds": 2,
+      "symbol": 6,
+      "total":6050700
+    },
+    {
+      "lines": 5,
+      "wilds": 3,
+      "symbol": 6,
+      "total":6925500
+    },
+    {
+      "lines": 5,
+      "wilds": 4,
+      "symbol": 6,
+      "total":3709800
+    },
+    {
+      "lines": 5,
+      "wilds": 1,
+      "symbol": 7,
+      "total":850860
+    },
+    {
+      "lines": 5,
+      "wilds": 2,
+      "symbol": 7,
+      "total":3651480
+    },
+    {
+      "lines": 5,
+      "wilds": 3,
+      "symbol": 7,
+      "total":6872580
+    },
+    {
+      "lines": 5,
+      "wilds": 4,
+      "symbol": 7,
+      "total":5138640
+    },
+    {
+      "lines": 5,
+      "wilds": 1,
+      "symbol": 8,
+      "total":2643840
+    },
+    {
+      "lines": 5,
+      "wilds": 2,
+      "symbol": 8,
+      "total":6735960
+    },
+    {
+      "lines": 5,
+      "wilds": 3,
+      "symbol": 8,
+      "total":7912080
+    },
+    {
+      "lines": 5,
+      "wilds": 4,
+      "symbol": 8,
+      "total":4160160
+    },
+    {
+      "lines": 5,
+      "wilds": 1,
+      "symbol": 9,
+      "total":2437290
+    },
+    {
+      "lines": 5,
+      "wilds": 2,
+      "symbol": 9,
+      "total":6701940
+    },
+    {
+      "lines": 5,
+      "wilds": 3,
+      "symbol": 9,
+      "total":8045730
+    },
+    {
+      "lines": 5,
+      "wilds": 4,
+      "symbol": 9,
+      "total":4218480
+    },
+    {
+      "lines": 5,
+      "wilds": 1,
+      "symbol": 10,
+      "total":1099170
+    },
+    {
+      "lines": 5,
+      "wilds": 2,
+      "symbol": 10,
+      "total":3849120
+    },
+    {
+      "lines": 5,
+      "wilds": 3,
+      "symbol": 10,
+      "total":5904090
+    },
+    {
+      "lines": 5,
+      "wilds": 4,
+      "symbol": 10,
+      "total":3769740
+    },
+    {
+      "lines": 4,
+      "wilds": 1,
+      "symbol": 1,
+      "total":31104000
+    },
+    {
+      "lines": 4,
+      "wilds": 2,
+      "symbol": 1,
+      "total":40158720
+    },
+    {
+      "lines": 4,
+      "wilds": 3,
+      "symbol": 1,
+      "total":22576320
+    },
+    {
+      "lines": 4,
+      "wilds": 1,
+      "symbol": 2,
+      "total":37324800
+    },
+    {
+      "lines": 4,
+      "wilds": 2,
+      "symbol": 2,
+      "total":45843840
+    },
+    {
+      "lines": 4,
+      "wilds": 3,
+      "symbol": 2,
+      "total":24261120
+    },
+    {
+      "lines": 4,
+      "wilds": 1,
+      "symbol": 3,
+      "total":34506000
+    },
+    {
+      "lines": 4,
+      "wilds": 2,
+      "symbol": 3,
+      "total":42638400
+    },
+    {
+      "lines": 4,
+      "wilds": 3,
+      "symbol": 3,
+      "total":23166000
+    },
+    {
+      "lines": 4,
+      "wilds": 1,
+      "symbol": 5,
+      "total":8573040
+    },
+    {
+      "lines": 4,
+      "wilds": 2,
+      "symbol": 5,
+      "total":19103040
+    },
+    {
+      "lines": 4,
+      "wilds": 3,
+      "symbol": 5,
+      "total":16634160
+    },
+    {
+      "lines": 4,
+      "wilds": 1,
+      "symbol": 6,
+      "total":18370800
+    },
+    {
+      "lines": 4,
+      "wilds": 2,
+      "symbol": 6,
+      "total":30792960
+    },
+    {
+      "lines": 4,
+      "wilds": 3,
+      "symbol": 6,
+      "total":20820240
+    },
+    {
+      "lines": 4,
+      "wilds": 1,
+      "symbol": 7,
+      "total":6907680
+    },
+    {
+      "lines": 4,
+      "wilds": 2,
+      "symbol": 7,
+      "total":22662720
+    },
+    {
+      "lines": 4,
+      "wilds": 3,
+      "symbol": 7,
+      "total":26036640
+    },
+    {
+      "lines": 4,
+      "wilds": 1,
+      "symbol": 8,
+      "total":19712160
+    },
+    {
+      "lines": 4,
+      "wilds": 2,
+      "symbol": 8,
+      "total":34992000
+    },
+    {
+      "lines": 4,
+      "wilds": 3,
+      "symbol": 8,
+      "total":23677920
+    },
+    {
+      "lines": 4,
+      "wilds": 1,
+      "symbol": 9,
+      "total":13394160
+    },
+    {
+      "lines": 4,
+      "wilds": 2,
+      "symbol": 9,
+      "total":27993600
+    },
+    {
+      "lines": 4,
+      "wilds": 3,
+      "symbol": 9,
+      "total":21364560
+    },
+    {
+      "lines": 4,
+      "wilds": 1,
+      "symbol": 10,
+      "total":6123600
+    },
+    {
+      "lines": 4,
+      "wilds": 2,
+      "symbol": 10,
+      "total":17184960
+    },
+    {
+      "lines": 4,
+      "wilds": 3,
+      "symbol": 10,
+      "total":17735760
+    },
+    {
+      "lines": 3,
+      "wilds": 1,
+      "symbol": 1,
+      "total":57024000
+    },
+    {
+      "lines": 3,
+      "wilds": 2,
+      "symbol": 1,
+      "total":42768000
+    },
+    {
+      "lines": 3,
+      "wilds": 1,
+      "symbol": 2,
+      "total":67003200
+    },
+    {
+      "lines": 3,
+      "wilds": 2,
+      "symbol": 2,
+      "total":46656000
+    },
+    {
+      "lines": 3,
+      "wilds": 1,
+      "symbol": 3,
+      "total":54529200
+    },
+    {
+      "lines": 3,
+      "wilds": 2,
+      "symbol": 3,
+      "total":41796000
+    },
+    {
+      "lines": 3,
+      "wilds": 1,
+      "symbol": 5,
+      "total":24008400
+    },
+    {
+      "lines": 3,
+      "wilds": 2,
+      "symbol": 5,
+      "total":31298400
+    },
+    {
+      "lines": 3,
+      "wilds": 1,
+      "symbol": 6,
+      "total":55404000
+    },
+    {
+      "lines": 3,
+      "wilds": 2,
+      "symbol": 6,
+      "total":44906400
+    },
+    {
+      "lines": 3,
+      "wilds": 1,
+      "symbol": 7,
+      "total":43027200
+    },
+    {
+      "lines": 3,
+      "wilds": 2,
+      "symbol": 7,
+      "total":62596800
+    },
+    {
+      "lines": 3,
+      "wilds": 1,
+      "symbol": 8,
+      "total":62985600
+    },
+    {
+      "lines": 3,
+      "wilds": 2,
+      "symbol": 8,
+      "total":52488000
+    },
+    {
+      "lines": 3,
+      "wilds": 1,
+      "symbol": 9,
+      "total":60361200
+    },
+    {
+      "lines": 3,
+      "wilds": 2,
+      "symbol": 9,
+      "total":50738400
+    },
+    {
+      "lines": 3,
+      "wilds": 1,
+      "symbol": 10,
+      "total":24105600
+    },
+    {
+      "lines": 3,
+      "wilds": 2,
+      "symbol": 10,
+      "total":36936000
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 1,
+      "total":1843200.00 
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 2,
+      "total":1728000
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 3,
+      "total":1620000
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 4,
+      "total":531343800.00 
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 4,
+      "total":73288800.00 
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 4,
+      "total":2369250.00 
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 5,
+      "total":259200
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 6,
+      "total":388800
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 7,
+      "total":72000
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 8,
+      "total":388800
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 9,
+      "total":291600
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 10,
+      "total":113400
+    },
+    {
+      "lines": 5,
+      "wilds": 0,
+      "symbol": 11,
+      "total":729000
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 1,
+      "total":8847360
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 2,
+      "total":11059200
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 3,
+      "total":10368000
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 5,
+      "total":1244160
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 6,
+      "total":3732480
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 7,
+      "total":691200
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 8,
+      "total":3732480
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 9,
+      "total":1866240
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 10,
+      "total":725760.00 
+    },
+    {
+      "lines": 4,
+      "wilds": 0,
+      "symbol": 11,
+      "total":4665600.00 
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 1,
+      "total":24883200.00 
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 2,
+      "total":31104000.00 
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 3,
+      "total":23328000.00 
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 5,
+      "total":4665600.00 
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 6,
+      "total":20995200.00 
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 7,
+      "total":7776000.00 
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 8,
+      "total":20995200.00 
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 9,
+      "total":20995200
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 10,
+      "total":4082400
+    },
+    {
+      "lines": 3,
+      "wilds": 0,
+      "symbol": 11,
+      "total":10497600.00 
+    }
+
   ]
 }

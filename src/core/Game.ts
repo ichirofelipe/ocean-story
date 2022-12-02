@@ -60,7 +60,7 @@ export default class Game {
   private init() {
     this.setContainers(); 
     this.createScene();
-    // this.createHome();
+    this.createHome();
     this.createPlinko();
     this.createSlot();
     this.setObjAnimation();
@@ -190,7 +190,7 @@ export default class Game {
     //add parent modal
     this.parentmodal = new ParentModal(this.main);
     this.modalContainer.addChild(this.parentmodal.container);
-    this.parentmodal.container.alpha = 0;
+    // this.parentmodal.container.alpha = 0;
     this.modalheight = this.parentmodal.container.height;
     //create modal component
     this.modal = new Modal(this.main, this.parentmodal.container);

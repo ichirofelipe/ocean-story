@@ -1,21 +1,70 @@
 import * as PIXI from 'pixi.js';
 import {ModalContent} from './Modal/modalSettings.json';
+import PayTable from './Modal/PayTable';
+import GameSettings from './Modal/GameSettings';
+import GameRules from './Modal/GameRules';
 
 export default class Modal {
     public container: PIXI.Container;
     private app: PIXI.Application;
     private sideline: Array<PIXI.Graphics> = [];
     private iconSprite: Array<PIXI.Sprite> = [];
+    private contents: Array<PIXI.Container> = [];
     private lastindex: number = 0;
+    private sidebarwidth: number;
+    private titlestyle: PIXI.TextStyle;
+    private subtitlestyle: PIXI.TextStyle;
+    private descstyle: PIXI.TextStyle;
+    private paytable: PayTable;
+    private gamesettings: GameSettings;
+    private gamerules: GameRules;
+    private readonly sidepadding: number = 200;
 
     constructor(app: PIXI.Application, container: PIXI.Container) {
         this.container = container;
         this.app = app;
+        this.titlestyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 30,
+            fontWeight: 'bold',
+            fill: '#FFE850'
+        });
+        this.subtitlestyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 17,
+            fontWeight: 'bold',
+            fill: '#ffffff'
+        });
+        this.descstyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 15,
+            fontWeight: 'bold',
+            fill: '#ffffff'
+        });
         this.init();
     }
 
     private init() {
         this.createSideBar();
+        this.createContent();
+    }
+
+    private createContent(){
+        //paytable
+        this.paytable = new PayTable(this.app,this.container,this.sidebarwidth,this.sidepadding,this.titlestyle,this.subtitlestyle,this.descstyle);
+        this.paytable.paytable.alpha = 1;
+        this.contents.push(this.paytable.paytable);
+        this.container.addChild(this.paytable.paytable);
+        //game settings
+        this.gamesettings = new GameSettings(this.app,this.container,this.sidebarwidth,this.sidepadding,this.titlestyle,this.subtitlestyle,this.descstyle);
+        this.contents.push(this.gamesettings.gamesettings);
+        this.gamesettings.gamesettings.alpha = 0;
+        this.container.addChild(this.gamesettings.gamesettings);
+        //game rules
+        this.gamerules = new GameRules(this.app,this.container,this.sidebarwidth,this.sidepadding,this.titlestyle,this.subtitlestyle,this.descstyle);
+        this.gamerules.gamerules.alpha = 0;
+        this.contents.push(this.gamerules.gamerules);
+        this.container.addChild(this.gamerules.gamerules);
     }
 
     private createSideBar(){
@@ -24,6 +73,7 @@ export default class Modal {
         const iconwidth = 6;
         const iconslength = ModalContent.length;
         const iconsheight = height / iconslength;
+        
 
         let linepositiony = 0;
         let linealpha = 1;
@@ -48,9 +98,10 @@ export default class Modal {
             iconSprite.interactive = true;
             iconSprite.buttonMode = true;
             iconSprite.position.y = (linepositiony + (iconsheight / 2)) - (iconSprite.height / 2);
-            iconSprite.position.x = width + iconwidth;
+            iconSprite.position.x = iconwidth + width;
             this.addEvent(iconSprite, index)
             //add and push
+            this.sidebarwidth = iconSprite.position.x + iconSprite.width;
             this.sideline.push(sideline);
             this.iconSprite.push(iconSprite);
             this.container.addChild(sideline);
@@ -72,7 +123,10 @@ export default class Modal {
             this.sideline[index].alpha = 1;
             this.iconSprite[this.lastindex].alpha = .5;
             this.iconSprite[index].alpha = 1;
+            this.contents[this.lastindex].alpha = 0;
+            this.contents[index].alpha = 1;
             this.lastindex = index;
+            
         });
     }
 }

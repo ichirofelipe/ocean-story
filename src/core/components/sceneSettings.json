@@ -17,7 +17,7 @@
     {
       "name": "plant-3",
       "bottom": 0,
-      "left": 40,
+      "left":340,
       "zIndex": 2,
       "isAnimated": false
     },
@@ -184,5 +184,22 @@
       "animationSpeed": 0.3,
       "isAnimated": true
     }
-  ]
+  ],
+  "Clouds": {
+    "name": ["cloud-1","cloud-2"],
+    "minHeight": 150, 
+    "maxHeight": 400,
+    "minDuration": 30,
+    "maxDuration": 60,
+    "fadeDuration": 10,
+    "count": 6
+  },
+  "Clouds2": {
+    "name": ["cloud-1","cloud-2"],
+    "minHeight": 15, 
+    "maxHeight": 30,
+    "minDuration": 10,
+    "maxDuration": 20,
+    "count": 5
+  }
 }

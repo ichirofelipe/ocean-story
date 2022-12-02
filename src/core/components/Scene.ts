@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Helpers from '../slot/tools/Helpers';
-import {Reefs, LoopingBubbles, Trees} from './sceneSettings.json';
+import {Reefs, LoopingBubbles, Trees, Clouds, Clouds2} from './sceneSettings.json';
 import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
@@ -32,12 +32,16 @@ export default class Scene {
 
   private init() {
     this.createBG();
+
+    this.createClouds();
     this.createTrees();
     this.createWaves();
+
+    this.createBubbles();
+
     this.createRays();
     this.createOceanBed();
     this.createReefs();
-    this.createBubbles();
     this.createLoopBubbles();
   }
 
@@ -51,6 +55,86 @@ export default class Scene {
     this.container.sortableChildren = true;
     this.homeScene.sortableChildren = true;
     this.OceanBedContainer.sortableChildren = true;
+  }
+
+  private createClouds() {
+    
+    Clouds2.name.forEach(name => {
+      const texture = this.app.loader.resources!.scene.textures![`${name}.png`];
+
+      // for(let count=0; count < Clouds.count; count++){
+      //   const direction = Functions.randMinMax(-1, 1);
+      //   const cloud = new PIXI.Sprite(texture);
+      //   let destination;
+      //   let opacity = Functions.randMinMax(0.5, 0.8);
+
+      //   cloud.height = Helpers.autoHeight(cloud, Functions.randMinMax(Clouds.minHeight, Clouds.minHeight))
+      //   cloud.width = Functions.randMinMax(Clouds.minHeight, Clouds.minHeight);
+      //   cloud.y = Functions.randMinMax((cloud.height/2), cloud.height*2);
+
+      //   if(direction > 0){
+      //     cloud.x = -cloud.width;
+      //     destination = Functions.randMinMax(this.app.screen.width-cloud.width, this.app.screen.width+cloud.width);
+      //   }
+      //   else {
+      //     cloud.x = this.app.screen.width;
+      //     destination = Functions.randMinMax(-cloud.width, cloud.width);
+      //   }
+  
+      //   this.homeScene.addChild(cloud);
+        
+      //   let duration = Functions.randMinMax(Clouds.minDuration, Clouds.maxDuration);
+      //   let delay = Functions.randMinMax((Clouds.minDuration/Clouds.count), (Clouds.maxDuration/Clouds.count))*count;
+
+      //   gsap.to(cloud, {
+      //     x: destination,
+      //     alpha: opacity - 0.5,
+      //     ease: 'none',
+      //     duration: duration,
+      //     repeat: -1,
+      //     delay: delay
+      //   })
+      // }
+
+      for(let count=0; count < Clouds.count; count++){
+        const direction = Functions.randMinMax(-1, 1);
+        const cloud = new PIXI.Sprite(texture);
+        const cloudSize = Functions.randMinMax(Clouds.minHeight, Clouds.maxHeight);
+
+        cloud.width = Helpers.autoWidth(cloud, cloudSize)
+        cloud.height = cloudSize;
+        cloud.y = -cloud.height;
+        cloud.x = Functions.randMinMax(0, this.app.screen.width-cloud.width);
+        
+        let duration = Functions.randMinMax(Clouds.minDuration, Clouds.maxDuration);
+        let delay = Functions.randMinMax((Clouds.minDuration/Clouds.count), (Clouds.maxDuration/Clouds.count))*count;
+        let opacity = Functions.randMinMax(0.5, 0.8);
+        let destinationY = Functions.randMinMax(cloud.height/2, cloud.height);
+        let destinationX;
+
+        if(direction > 0){
+          destinationX = Functions.randMinMax(cloud.x - (cloud.width/2), cloud.x - (cloud.width*1.5));
+        }
+        else {
+          destinationX = Functions.randMinMax(cloud.x + cloud.width/2, cloud.x + cloud.width*1.5);
+        }
+  
+        this.homeScene.addChild(cloud);
+
+        gsap.to(cloud, {
+          y: destinationY,
+          x: destinationX,
+          height: cloud.height * 0.2,
+          width: cloud.width * 0.2,
+          alpha: opacity - 0.5,
+          ease: 'none',
+          duration: duration,
+          repeat: -1,
+          delay: delay
+        })
+      }
+    })
+    
   }
 
   private createTrees() {
@@ -102,9 +186,10 @@ export default class Scene {
     wave.position.y = this.app.screen.height - 103;
     wave.position.x = - wave.width / numberOfWaves;
     gsap.to(wave, {
-      x: wave.x + (wave.width/numberOfWaves),
-      duration: 25*numberOfWaves,
+      x: wave.x + 25,
+      duration: 3,
       repeat: -1,
+      yoyo: true,
       ease: "none",
     })
 
@@ -112,7 +197,7 @@ export default class Scene {
 
     gsap.to(reflection, {
       time: 1,
-      duration: 1,
+      duration: 1.5,
       repeat: -1,
       yoyo: true,
       ease: "none",

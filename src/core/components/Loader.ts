@@ -59,6 +59,7 @@ export default class Loader {
         
         //HOME
         this.loader.add('coconut', 'assets/images/scene/animations/coconut/coconut.json');
+        this.loader.add('gabi', 'assets/images/scene/animations/gabi/gabi.json');
 
     }
 

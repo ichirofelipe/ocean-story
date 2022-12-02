@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import Helpers from "./slot/tools/Helpers";
 
 const objGroupAnimation = (array: any) => {
   interface Animation {
@@ -40,6 +41,32 @@ const getSprite = (loader: PIXI.Loader, setting: any) => {
   } else {
     const texture = loader.resources!.scene.textures![`${setting.name}.png`];
     img = new PIXI.Sprite(texture);
+  }
+
+  if(setting.height !== undefined){
+    img.width = Helpers.autoWidth(img, setting.height);
+    img.height = setting.height;
+  }
+
+  if(setting.rotation !== undefined){
+    img.x = img.width/2;
+    img.y = img.height/2;
+    img.anchor.set(0.5);
+    img.rotation = setting.rotation * Math.PI / 180;
+  }
+
+  if(setting.posX !== undefined)
+    img.x += setting.posX;
+
+  if(setting.posY !== undefined)
+    img.y += setting.posY;
+
+  if(setting.zIndex !== undefined)
+    img.zIndex = setting.zIndex;
+
+  if(setting.flip){
+    img.scale.x*=-1;
+    img.x += img.width;
   }
 
   return img;

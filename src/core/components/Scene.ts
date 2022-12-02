@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Helpers from '../slot/tools/Helpers';
-import {Reefs, LoopingBubbles, Trees, Clouds, Clouds2} from './sceneSettings.json';
+import {Reefs, LoopingBubbles, Trees, Clouds, Gabi} from './sceneSettings.json';
 import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
@@ -35,6 +35,7 @@ export default class Scene {
 
     this.createClouds();
     this.createTrees();
+    this.createGabi();
     this.createWaves();
 
     this.createBubbles();
@@ -59,42 +60,8 @@ export default class Scene {
 
   private createClouds() {
     
-    Clouds2.name.forEach(name => {
+    Clouds.name.forEach(name => {
       const texture = this.app.loader.resources!.scene.textures![`${name}.png`];
-
-      // for(let count=0; count < Clouds.count; count++){
-      //   const direction = Functions.randMinMax(-1, 1);
-      //   const cloud = new PIXI.Sprite(texture);
-      //   let destination;
-      //   let opacity = Functions.randMinMax(0.5, 0.8);
-
-      //   cloud.height = Helpers.autoHeight(cloud, Functions.randMinMax(Clouds.minHeight, Clouds.minHeight))
-      //   cloud.width = Functions.randMinMax(Clouds.minHeight, Clouds.minHeight);
-      //   cloud.y = Functions.randMinMax((cloud.height/2), cloud.height*2);
-
-      //   if(direction > 0){
-      //     cloud.x = -cloud.width;
-      //     destination = Functions.randMinMax(this.app.screen.width-cloud.width, this.app.screen.width+cloud.width);
-      //   }
-      //   else {
-      //     cloud.x = this.app.screen.width;
-      //     destination = Functions.randMinMax(-cloud.width, cloud.width);
-      //   }
-  
-      //   this.homeScene.addChild(cloud);
-        
-      //   let duration = Functions.randMinMax(Clouds.minDuration, Clouds.maxDuration);
-      //   let delay = Functions.randMinMax((Clouds.minDuration/Clouds.count), (Clouds.maxDuration/Clouds.count))*count;
-
-      //   gsap.to(cloud, {
-      //     x: destination,
-      //     alpha: opacity - 0.5,
-      //     ease: 'none',
-      //     duration: duration,
-      //     repeat: -1,
-      //     delay: delay
-      //   })
-      // }
 
       for(let count=0; count < Clouds.count; count++){
         const direction = Functions.randMinMax(-1, 1);
@@ -142,11 +109,6 @@ export default class Scene {
     Trees.forEach((tree:any, index) => {
       let img: any = Functions.getSprite(this.app.loader, tree);
 
-      img.x = tree.posX;
-      img.y = tree.posY;
-      img.zIndex = tree.zIndex;
-      img.width = Helpers.autoWidth(img, tree.height);
-      img.height = tree.height;
       img.animationSpeed = tree.animationSpeed;
       img.onLoop = () => {
         img.animationSpeed = Functions.randMinMax(0.2, 0.3);
@@ -154,14 +116,29 @@ export default class Scene {
           img.textures.reverse();
       }
 
-      if(tree.flip){
-        img.scale.x*=-1;
-        img.x += img.width;
-      }
+      // if(tree.flip){
+      //   img.scale.x*=-1;
+      //   img.x += img.width;
+      // }
 
       this.homeScene.addChild(img);
     })
 
+  }
+
+  private createGabi() {
+    Gabi.forEach((gabiPlant:any, index) => {
+      let img: any = Functions.getSprite(this.app.loader, gabiPlant);
+
+      img.animationSpeed = gabiPlant.animationSpeed;
+      img.onLoop = () => {
+        img.animationSpeed = Functions.randMinMax(0.2, 0.3);
+        if(Functions.randMinMax(0, 5) > 3)
+          img.textures.reverse();
+      }
+
+      this.homeScene.addChild(img);
+    })
   }
 
   private createWaves() {

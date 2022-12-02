@@ -1,0 +1,415 @@
+{
+	"frames": {
+		"gabi_00000.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00001.png": {
+			"frame": {
+				"x": 403,
+				"y": 1,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00002.png": {
+			"frame": {
+				"x": 805,
+				"y": 1,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00003.png": {
+			"frame": {
+				"x": 1207,
+				"y": 1,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00004.png": {
+			"frame": {
+				"x": 1,
+				"y": 403,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00005.png": {
+			"frame": {
+				"x": 403,
+				"y": 403,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00006.png": {
+			"frame": {
+				"x": 805,
+				"y": 403,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00007.png": {
+			"frame": {
+				"x": 1207,
+				"y": 403,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00008.png": {
+			"frame": {
+				"x": 1,
+				"y": 805,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00009.png": {
+			"frame": {
+				"x": 403,
+				"y": 805,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00010.png": {
+			"frame": {
+				"x": 805,
+				"y": 805,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00011.png": {
+			"frame": {
+				"x": 1207,
+				"y": 805,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00012.png": {
+			"frame": {
+				"x": 1,
+				"y": 1207,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00013.png": {
+			"frame": {
+				"x": 403,
+				"y": 1207,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00014.png": {
+			"frame": {
+				"x": 805,
+				"y": 1207,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00015.png": {
+			"frame": {
+				"x": 1207,
+				"y": 1207,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00016.png": {
+			"frame": {
+				"x": 1609,
+				"y": 1,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00017.png": {
+			"frame": {
+				"x": 1609,
+				"y": 403,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00018.png": {
+			"frame": {
+				"x": 1609,
+				"y": 805,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		},
+		"gabi_00019.png": {
+			"frame": {
+				"x": 1609,
+				"y": 1207,
+				"w": 400,
+				"h": 400
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 400,
+				"h": 400
+			},
+			"sourceSize": {
+				"w": 400,
+				"h": 400
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "gabi.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 2010,
+			"h": 1608
+		},
+		"scale": "1"
+	}
+}

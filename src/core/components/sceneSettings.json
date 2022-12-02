@@ -284,7 +284,7 @@
       "name": "bird",
       "height": 11,
       "zIndex": 0,
-      "animationSpeed": 0.5,
+      "animationSpeed": 0.7,
       "isAnimated": true,
       "count": 6
     },
@@ -292,7 +292,7 @@
       "name": "bird",
       "height": 8,
       "zIndex": 0,
-      "animationSpeed": 0.5,
+      "animationSpeed": 0.7,
       "isAnimated": true,
       "count": 3
     },
@@ -300,7 +300,7 @@
       "name": "bird",
       "height": 11,
       "zIndex": 0,
-      "animationSpeed": 0.5,
+      "animationSpeed": 0.7,
       "isAnimated": true,
       "count": 2
     }

@@ -60,7 +60,7 @@ export default class Game {
   private init() {
     this.setContainers(); 
     this.createScene();
-    // this.createHome();
+    this.createHome(); 
     this.createPlinko();
     this.createSlot();
     this.setObjAnimation();

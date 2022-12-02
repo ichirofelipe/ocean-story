@@ -1,0 +1,19 @@
+{
+  "ModalContent": [
+    {
+      "name": "paytable",
+      "icon": "icon_info.png",
+      "slides" : 2
+    },
+    {
+      "name": "settings",
+      "icon": "icon_settings.png",
+      "slides" : 1
+    },
+    {
+      "name": "rules",
+      "icon": "icon_rules.png",
+      "slides" : 1
+    }
+  ]
+}

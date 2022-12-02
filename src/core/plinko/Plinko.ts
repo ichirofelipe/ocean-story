@@ -56,10 +56,10 @@ export default class Game {
     private addmoney: (type: number) => void;
     private updategameplus: () => void;
     private updategameminus: () => void;
-    private readonly reelSpeed: number = 4;
+    private readonly reelSpeed: number = 3;
     private readonly ballRadius: number = 14;
     private readonly pinRadius: number = 5;
-    private readonly pinGap: number = 7;
+    private readonly pinGap: number = 10;
     private readonly stageHeight: number = .6;
     private readonly stageWidth: number = .9;
     private readonly adjusty: number = 4;
@@ -224,7 +224,7 @@ export default class Game {
 
         let x = 0;
         let y = 0;
-        let adjustx = 8;
+        let adjustx = 12;
         let adjusty = 15;
 
         for(let r = 0; r < this.pinrow; r++){

@@ -10,6 +10,9 @@ import { PixiPlugin } from "gsap/PixiPlugin";
 //controllers
 import ParentController from './components/Controllers/ParentController';
 import Controllers from './components/Controllers';
+//modal
+import Modal from './components/Modal';
+import ParentModal from './components/Modal/ParentModal';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -23,6 +26,7 @@ export default class Game {
   private homeContainer: PIXI.Container;
   private gameContainer: PIXI.Container;
   private controllersContainer: PIXI.Container;
+  private modalContainer: PIXI.Container;
   private main: PIXI.Application;
   private plinko: PIXI.Application;
   private slot: PIXI.Application;
@@ -39,9 +43,12 @@ export default class Game {
   private game: number = 0;
   private drop: number = 0;
   private parentcontroller: ParentController;
+  private parentmodal: ParentModal;
+  private modalheight: number;
   private controllerheight: number;
   private controllerposition: number;
   private controller: Controllers;
+  private modal: Modal;
   private readonly betmoney: number = 100;
 
   constructor() {
@@ -69,6 +76,7 @@ export default class Game {
     this.homeContainer = new PIXI.Container;
     this.mainContainer = new PIXI.Container;
     this.controllersContainer = new PIXI.Container;
+    this.modalContainer = new PIXI.Container;
   }  
   private setRenderer() {
     this.main = new PIXI.Application({ width: this.baseWidth, height: this.baseHeight, antialias: true });
@@ -131,6 +139,7 @@ export default class Game {
     this.main.stage.addChild(this.mainContainer);
     window.addEventListener('keypress', e => this.bonus(e));
     this.createControllers();
+    this.createModal();
   }
   private dive() {
     
@@ -174,6 +183,18 @@ export default class Game {
     // this.scene.bubbleAnimate();
   }
   // start julius code
+  private createModal(){
+    //add parent modal
+    this.parentmodal = new ParentModal(this.main);
+    this.modalContainer.addChild(this.parentmodal.container);
+    this.parentmodal.container.alpha = 0;
+    this.modalheight = this.parentmodal.container.height;
+    //create modal component
+    this.modal = new Modal(this.main, this.parentmodal.container);
+    this.modalContainer.addChild(this.modal.container);
+    //add modal container
+    this.gameContainer.addChild(this.modalContainer);
+  }
   private createControllers(){
     //add parent controller
     this.parentcontroller = new ParentController(this.main);
@@ -190,6 +211,7 @@ export default class Game {
     this.controller.playbutton.sprite.addListener('pointerdown', this.startDrop.bind(this));
     this.controller.minusbutton.sprite.addListener('pointerdown', this.minusDrop.bind(this));
     this.controller.plusbutton.sprite.addListener('pointerdown', this.plusDrop.bind(this));
+    this.controller.menubutton.sprite.addListener('pointerdown', this.showModal.bind(this))
     this.controllersContainer.addChild(this.controller.container);
   }
   private minusBet(){
@@ -280,7 +302,19 @@ export default class Game {
     }
     this.money += addedmoney;
     this.controller.winbox.updateWin(addedmoney);
-    this.controller.balancebox.updateBalance(this.money);
+    let reset = setTimeout(() => {
+      this.controller.balancebox.updateBalance(this.money);
+      clearTimeout(reset);
+    }, 6000);
+  }
+  private showModal(){
+    let alpha = 0;
+    if(this.modal.container.alpha == 0){
+      alpha = 1;
+    }
+    gsap.to(this.modal.container,{
+      alpha : alpha, duration : .5
+    });
   }
   // end julius code
 }

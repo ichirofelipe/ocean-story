@@ -11,11 +11,12 @@ import PlusButton from './Controllers/PlusButton';
 import VolumeButton from './Controllers/VolumeButton';
 import BalanceBox from './Controllers/BalanceBox';
 import WinBox from './Controllers/WinBox';
+import Modal from './Modal';
 
 export default class Controllers {
     public container: PIXI.Container;
     private app: PIXI.Application;
-    private menubutton: MenuButton;
+    public menubutton: MenuButton;
     public downbutton: DownButton;
     public upbutton: UpButton;
     public gameinbox: GameBox;

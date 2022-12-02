@@ -30,7 +30,7 @@ export default class BalanceBox {
     }
 
     public updateBalance(val: number){
-        this.text.text = Functions.formatGameNumber(val);
+        this.text.text = Functions.formatNumber(val);
         this.center();
     }
 

@@ -15,8 +15,9 @@ export default class Modal {
     private titlestyle: PIXI.TextStyle;
     private subtitlestyle: PIXI.TextStyle;
     private descstyle: PIXI.TextStyle;
+    private subdescstyle: PIXI.TextStyle;
     private paytable: PayTable;
-    private gamesettings: GameSettings;
+    public gamesettings: GameSettings;
     private gamerules: GameRules;
     private readonly sidepadding: number = 200;
 
@@ -41,6 +42,12 @@ export default class Modal {
             fontWeight: 'bold',
             fill: '#ffffff'
         });
+        this.subdescstyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 11,
+            fontWeight: 'bold',
+            fill: '#AAAAAA'
+        });
         this.init();
     }
 
@@ -56,7 +63,7 @@ export default class Modal {
         this.contents.push(this.paytable.paytable);
         this.container.addChild(this.paytable.paytable);
         //game settings
-        this.gamesettings = new GameSettings(this.app,this.container,this.sidebarwidth,this.sidepadding,this.titlestyle,this.subtitlestyle,this.descstyle);
+        this.gamesettings = new GameSettings(this.app,this.container,this.sidebarwidth,this.sidepadding,this.titlestyle,this.subtitlestyle,this.descstyle,this.subdescstyle);
         this.contents.push(this.gamesettings.gamesettings);
         this.gamesettings.gamesettings.alpha = 0;
         this.container.addChild(this.gamesettings.gamesettings);

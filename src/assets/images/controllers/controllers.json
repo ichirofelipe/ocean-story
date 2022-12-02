@@ -400,10 +400,30 @@
 				"h": 43
 			}
 		},
-		"rectangle_bet.png": {
+		"rectangle_balance.png": {
 			"frame": {
 				"x": 773,
 				"y": 1,
+				"w": 135,
+				"h": 22
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 135,
+				"h": 22
+			},
+			"sourceSize": {
+				"w": 135,
+				"h": 22
+			}
+		},
+		"rectangle_bet.png": {
+			"frame": {
+				"x": 440,
+				"y": 25,
 				"w": 115,
 				"h": 22
 			},
@@ -422,7 +442,7 @@
 		},
 		"rectangle_dropnumber.png": {
 			"frame": {
-				"x": 440,
+				"x": 773,
 				"y": 25,
 				"w": 97,
 				"h": 15
@@ -442,7 +462,7 @@
 		},
 		"rectangle_gamein.png": {
 			"frame": {
-				"x": 773,
+				"x": 872,
 				"y": 25,
 				"w": 77,
 				"h": 22
@@ -542,8 +562,8 @@
 		},
 		"seahorse.png": {
 			"frame": {
-				"x": 890,
-				"y": 1,
+				"x": 228,
+				"y": 628,
 				"w": 75,
 				"h": 75
 			},
@@ -562,7 +582,7 @@
 		},
 		"stingray.png": {
 			"frame": {
-				"x": 228,
+				"x": 305,
 				"y": 628,
 				"w": 107,
 				"h": 107
@@ -582,8 +602,8 @@
 		},
 		"toggle_off.png": {
 			"frame": {
-				"x": 337,
-				"y": 628,
+				"x": 910,
+				"y": 1,
 				"w": 52,
 				"h": 21
 			},
@@ -602,8 +622,8 @@
 		},
 		"toggle_on.png": {
 			"frame": {
-				"x": 391,
-				"y": 628,
+				"x": 505,
+				"y": 49,
 				"w": 52,
 				"h": 21
 			},
@@ -622,7 +642,7 @@
 		},
 		"turtle.png": {
 			"frame": {
-				"x": 445,
+				"x": 414,
 				"y": 628,
 				"w": 75,
 				"h": 75
@@ -642,7 +662,7 @@
 		},
 		"wild.png": {
 			"frame": {
-				"x": 522,
+				"x": 491,
 				"y": 628,
 				"w": 85,
 				"h": 85

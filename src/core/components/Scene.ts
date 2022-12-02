@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Helpers from '../slot/tools/Helpers';
-import {Reefs, LoopingBubbles, Trees, Clouds, Gabi, Grass, Chest} from './sceneSettings.json';
+import {Reefs, LoopingBubbles, Trees, Clouds, Gabi, Grass, Chest, Birds} from './sceneSettings.json';
 import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
@@ -19,6 +19,7 @@ export default class Scene {
   private oceanBed: PIXI.AnimatedSprite;
   public lightRay: PIXI.AnimatedSprite;
   private mainContainer: PIXI.Container;
+  public sceneHeightAdjusment: number = 0;
 
   constructor(app: PIXI.Application, mainContainer: PIXI.Container) {
     this.app = app;
@@ -33,6 +34,7 @@ export default class Scene {
   private init() {
     this.createBG();
 
+    // this.createBirds();
     this.createClouds();
     this.createTrees();
     this.createGabi();
@@ -60,8 +62,23 @@ export default class Scene {
     this.OceanBedContainer.sortableChildren = true;
   }
 
+  private createBirds() {
+    Birds.forEach((tree:any, index) => {
+      let img: any = Functions.getSprite(this.app.loader, tree);
+
+      img.animationSpeed = tree.animationSpeed;
+      img.onLoop = () => {
+        img.animationSpeed = Functions.randMinMax(0.2, 0.3);
+        if(Functions.randMinMax(0, 5) > 3)
+          img.textures.reverse();
+      }
+
+      this.homeScene.addChild(img);
+    })
+  }
+
   private createClouds() {
-    
+    let cloudMaxSize = 0;
     Clouds.name.forEach(name => {
       const texture = this.app.loader.resources!.scene.textures![`${name}.png`];
 
@@ -74,6 +91,8 @@ export default class Scene {
         cloud.height = cloudSize;
         cloud.y = -cloud.height;
         cloud.x = Functions.randMinMax(0, this.app.screen.width-cloud.width);
+        if(cloudMaxSize < cloudSize)
+          cloudMaxSize = cloudSize;
         
         let duration = Functions.randMinMax(Clouds.minDuration, Clouds.maxDuration);
         let delay = Functions.randMinMax((Clouds.minDuration/Clouds.count), (Clouds.maxDuration/Clouds.count))*count;
@@ -103,7 +122,8 @@ export default class Scene {
         })
       }
     })
-    
+
+    this.sceneHeightAdjusment += cloudMaxSize;
   }
 
   private createTrees() {

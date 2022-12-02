@@ -120,7 +120,7 @@ export default class Game {
   private setObjAnimation() {
     this.diveGroupAnimation = Functions.objGroupAnimation(
       [
-        {sprite: this.sceneContainer, destination: -((this.sceneContainer.height/3)*2)},
+        {sprite: this.sceneContainer, destination: -(((this.sceneContainer.height - this.scene.sceneHeightAdjusment)/3)*2)},
         {sprite: this.gameContainer, destination: 0},
         {sprite: this.homeContainer, destination: -this.baseHeight*2}
       ]

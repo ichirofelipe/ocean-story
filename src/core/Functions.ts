@@ -37,6 +37,7 @@ const getSprite = (loader: PIXI.Loader, setting: any) => {
       textures.push(texture);
     }
     img = new PIXI.AnimatedSprite(textures);
+    img.animationSpeed = setting.animationSpeed;
     img.play();
   } else {
     const texture = loader.resources!.scene.textures![`${setting.name}.png`];

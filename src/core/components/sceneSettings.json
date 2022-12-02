@@ -282,12 +282,27 @@
   "Birds": [
     {
       "name": "bird",
-      "posX": 100,
-      "posY": 100,
-      "height": 10,
+      "height": 11,
       "zIndex": 0,
-      "animationSpeed": 0.3,
-      "isAnimated": true
+      "animationSpeed": 0.5,
+      "isAnimated": true,
+      "count": 6
+    },
+    {
+      "name": "bird",
+      "height": 8,
+      "zIndex": 0,
+      "animationSpeed": 0.5,
+      "isAnimated": true,
+      "count": 3
+    },
+    {
+      "name": "bird",
+      "height": 11,
+      "zIndex": 0,
+      "animationSpeed": 0.5,
+      "isAnimated": true,
+      "count": 2
     }
   ]
 }

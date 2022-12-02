@@ -34,7 +34,7 @@ export default class Scene {
   private init() {
     this.createBG();
 
-    // this.createBirds();
+    this.createBirds();
     this.createClouds();
     this.createTrees();
     this.createGabi();
@@ -63,17 +63,62 @@ export default class Scene {
   }
 
   private createBirds() {
-    Birds.forEach((tree:any, index) => {
-      let img: any = Functions.getSprite(this.app.loader, tree);
+    Birds.forEach((bird:any, index) => {
+      let initialPosY = Functions.randMinMax(0, 100);
 
-      img.animationSpeed = tree.animationSpeed;
-      img.onLoop = () => {
-        img.animationSpeed = Functions.randMinMax(0.2, 0.3);
-        if(Functions.randMinMax(0, 5) > 3)
-          img.textures.reverse();
+      for(let count=0; count < bird.count; count++){
+        let img: any = Functions.getSprite(this.app.loader, bird);
+        let direction = Functions.randMinMax(-1, 1);
+        let destinationX;
+        //RANDOM INITIAL POSITION
+        img.y = initialPosY;
+        img.y += Functions.randMinMax(0, img.height * (bird.count/2));
+        
+        if(direction > 0){
+          img.x = -img.width;
+          img.x -= Functions.randMinMax(0, img.width * (bird.count/2));
+          destinationX = img.x + Functions.randMinMax(400, 600)
+        }
+        else {
+          img.x = this.app.screen.width + img.width;
+          img.scale.x*=-1;
+          img.x += img.width;
+          img.x += Functions.randMinMax(0, img.width * (bird.count/2));
+
+          destinationX = img.x - Functions.randMinMax(400, 600)
+        }
+        
+
+        gsap.to(img, {
+          x: destinationX,
+          y: img.y + Functions.randMinMax(-100, 100),
+          height: img.height * 0.3,
+          width: img.width * 0.3,
+          alpha: 0,
+          duration: Functions.randMinMax(25, 45),
+          repeat: -1,
+          delay: Functions.randMinMax(0, 15),
+          onComplete: () => {
+            direction = Functions.randMinMax(-1, 1);
+            if(direction > 0){
+              img.x = -img.width;
+              img.x -= Functions.randMinMax(0, img.width * (bird.count/2));
+              destinationX = img.x + Functions.randMinMax(400, 600)
+            }
+            else {
+              img.x = this.app.screen.width + img.width;
+              img.scale.x*=-1;
+              img.x += img.width;
+              img.x += Functions.randMinMax(0, img.width * (bird.count/2));
+
+              destinationX = img.x - Functions.randMinMax(400, 600)
+            }
+          }
+        })
+
+        this.homeScene.addChild(img);
       }
-
-      this.homeScene.addChild(img);
+      
     })
   }
 
@@ -131,7 +176,6 @@ export default class Scene {
     Trees.forEach((tree:any, index) => {
       let img: any = Functions.getSprite(this.app.loader, tree);
 
-      img.animationSpeed = tree.animationSpeed;
       img.onLoop = () => {
         img.animationSpeed = Functions.randMinMax(0.2, 0.3);
         if(Functions.randMinMax(0, 5) > 3)
@@ -147,7 +191,6 @@ export default class Scene {
     Gabi.forEach((gabiPlant:any, index) => {
       let img: any = Functions.getSprite(this.app.loader, gabiPlant);
 
-      img.animationSpeed = gabiPlant.animationSpeed;
       img.onLoop = () => {
         img.animationSpeed = Functions.randMinMax(0.2, 0.3);
         if(Functions.randMinMax(0, 5) > 3)

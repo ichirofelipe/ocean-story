@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Helpers from '../slot/tools/Helpers';
-import {Reefs, LoopingBubbles, Trees, Clouds, Gabi} from './sceneSettings.json';
+import {Reefs, LoopingBubbles, Trees, Clouds, Gabi, Grass, Chest} from './sceneSettings.json';
 import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
@@ -36,6 +36,8 @@ export default class Scene {
     this.createClouds();
     this.createTrees();
     this.createGabi();
+    this.createGrass();
+    this.createChest();
     this.createWaves();
 
     this.createBubbles();
@@ -116,11 +118,6 @@ export default class Scene {
           img.textures.reverse();
       }
 
-      // if(tree.flip){
-      //   img.scale.x*=-1;
-      //   img.x += img.width;
-      // }
-
       this.homeScene.addChild(img);
     })
 
@@ -136,6 +133,22 @@ export default class Scene {
         if(Functions.randMinMax(0, 5) > 3)
           img.textures.reverse();
       }
+
+      this.homeScene.addChild(img);
+    })
+  }
+
+  private createGrass() {
+    Grass.forEach((grassPlant:any, index) => {
+      let img: any = Functions.getSprite(this.app.loader, grassPlant);
+
+      this.homeScene.addChild(img);
+    })
+  }
+
+  private createChest() {
+    Chest.forEach((treasureChest:any, index) => {
+      let img: any = Functions.getSprite(this.app.loader, treasureChest);
 
       this.homeScene.addChild(img);
     })

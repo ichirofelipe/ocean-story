@@ -4,400 +4,400 @@
 			"frame": {
 				"x": 1,
 				"y": 1,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00001.png": {
 			"frame": {
-				"x": 403,
+				"x": 163,
 				"y": 1,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00002.png": {
 			"frame": {
-				"x": 805,
+				"x": 325,
 				"y": 1,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00003.png": {
 			"frame": {
-				"x": 1207,
+				"x": 487,
 				"y": 1,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00004.png": {
 			"frame": {
 				"x": 1,
-				"y": 403,
-				"w": 400,
-				"h": 400
+				"y": 163,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00005.png": {
 			"frame": {
-				"x": 403,
-				"y": 403,
-				"w": 400,
-				"h": 400
+				"x": 163,
+				"y": 163,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00006.png": {
 			"frame": {
-				"x": 805,
-				"y": 403,
-				"w": 400,
-				"h": 400
+				"x": 325,
+				"y": 163,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00007.png": {
 			"frame": {
-				"x": 1207,
-				"y": 403,
-				"w": 400,
-				"h": 400
+				"x": 487,
+				"y": 163,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00008.png": {
 			"frame": {
 				"x": 1,
-				"y": 805,
-				"w": 400,
-				"h": 400
+				"y": 325,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00009.png": {
 			"frame": {
-				"x": 403,
-				"y": 805,
-				"w": 400,
-				"h": 400
+				"x": 163,
+				"y": 325,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00010.png": {
 			"frame": {
-				"x": 805,
-				"y": 805,
-				"w": 400,
-				"h": 400
+				"x": 325,
+				"y": 325,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00011.png": {
 			"frame": {
-				"x": 1207,
-				"y": 805,
-				"w": 400,
-				"h": 400
+				"x": 487,
+				"y": 325,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00012.png": {
 			"frame": {
 				"x": 1,
-				"y": 1207,
-				"w": 400,
-				"h": 400
+				"y": 487,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00013.png": {
 			"frame": {
-				"x": 403,
-				"y": 1207,
-				"w": 400,
-				"h": 400
+				"x": 163,
+				"y": 487,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00014.png": {
 			"frame": {
-				"x": 805,
-				"y": 1207,
-				"w": 400,
-				"h": 400
+				"x": 325,
+				"y": 487,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00015.png": {
 			"frame": {
-				"x": 1207,
-				"y": 1207,
-				"w": 400,
-				"h": 400
+				"x": 487,
+				"y": 487,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00016.png": {
 			"frame": {
-				"x": 1609,
+				"x": 649,
 				"y": 1,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00017.png": {
 			"frame": {
-				"x": 1609,
-				"y": 403,
-				"w": 400,
-				"h": 400
+				"x": 649,
+				"y": 163,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00018.png": {
 			"frame": {
-				"x": 1609,
-				"y": 805,
-				"w": 400,
-				"h": 400
+				"x": 649,
+				"y": 325,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		},
 		"gabi_00019.png": {
 			"frame": {
-				"x": 1609,
-				"y": 1207,
-				"w": 400,
-				"h": 400
+				"x": 649,
+				"y": 487,
+				"w": 160,
+				"h": 160
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			},
 			"sourceSize": {
-				"w": 400,
-				"h": 400
+				"w": 160,
+				"h": 160
 			}
 		}
 	},
@@ -407,8 +407,8 @@
 		"image": "gabi.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 2010,
-			"h": 1608
+			"w": 810,
+			"h": 648
 		},
 		"scale": "1"
 	}

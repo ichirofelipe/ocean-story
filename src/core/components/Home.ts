@@ -112,8 +112,8 @@ export default class Home {
   private createLogo() {
     const texture = this.app.loader.resources!.slot.textures!['logo.png'];
     this.logo = new PIXI.Sprite(texture);
-    this.logo.height = Helpers.autoHeight(this.logo, 400)
-    this.logo.width = 400;
+    this.logo.height = Helpers.autoHeight(this.logo, 350)
+    this.logo.width = 350;
     this.logo.x = ((this.app.screen.width - this.rightside.position.x) / 2) - (this.logo.width / 2);
     this.logo.y = 15;
     this.rightside.addChild(this.logo);

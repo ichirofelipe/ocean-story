@@ -238,5 +238,45 @@
       "isAnimated": true,
       "rotation": 0
     }
+  ],
+  "Grass": [
+    {
+      "name": "grass",
+      "posX": 245,
+      "posY": 350,
+      "height": 27,
+      "flip": false,
+      "zIndex": 0,
+      "isAnimated": false
+    },
+    {
+      "name": "grass",
+      "posX": 670,
+      "posY": 370,
+      "height": 27,
+      "flip": false,
+      "zIndex": 1,
+      "isAnimated": false
+    },
+    {
+      "name": "grass",
+      "posX": 785,
+      "posY": 359,
+      "height": 22,
+      "flip": false,
+      "zIndex": 1,
+      "isAnimated": false
+    }
+  ],
+  "Chest": [
+    {
+      "name": "chest",
+      "posX": 705,
+      "posY": 355,
+      "height": 55,
+      "flip": false,
+      "zIndex": 1,
+      "isAnimated": false
+    }
   ]
 }

@@ -30,6 +30,7 @@ export default class GameRules {
         title.position.x = (gameruleswidth / 2) - (title.width / 2);
         title.position.y = posy[0];
         const description = new PIXI.Text(this.description, this.descstyle);
+        description.style.fontSize = 12;
         description.style.wordWrap = true;
         description.style.wordWrapWidth = gameruleswidth * .7;
         description.style.align = 'center';

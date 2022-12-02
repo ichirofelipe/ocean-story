@@ -7,7 +7,7 @@
             "imgy" : 150,
             "textx" : 20,
             "texty" : 225,
-            "sideway" : false
+            "sideways" : false
         },
         {
             "name" : "seahorse.png",
@@ -16,7 +16,7 @@
             "imgy" : 140,
             "textx" : 143,
             "texty" : 225,
-            "sideway" : false
+            "sideways" : false
         },
         {
             "name" : "crab.png",
@@ -25,7 +25,7 @@
             "imgy" : 150,
             "textx" : 255,
             "texty" : 225,
-            "sideway" : false
+            "sideways" : false
         },
         {
             "name" : "fish.png",
@@ -34,7 +34,7 @@
             "imgy" : 150,
             "textx" : 385,
             "texty" : 225,
-            "sideway" : false
+            "sideways" : false
         },
         {
             "name" : "stingray.png",
@@ -43,16 +43,52 @@
             "imgy" : 120,
             "textx" : 525,
             "texty" : 225,
-            "sideway" : false
+            "sideways" : false
         },
         {
             "name" : "J.png",
             "description" : "$10.00",
-            "imgx" : 88,
-            "imgy" : 250,
-            "textx" : 88,
+            "imgx" : 125,
+            "imgy" : 270,
+            "textx" : 125,
             "texty" : 250,
-            "sideway" : false
+            "sideways" : false
+        },
+        {
+            "name" : "k.png",
+            "description" : "$10.00",
+            "imgx" : 247,
+            "imgy" : 270,
+            "textx" : 247,
+            "texty" : 250,
+            "sideways" : false
+        },
+        {
+            "name" : "a.png",
+            "description" : "$10.00",
+            "imgx" : 368,
+            "imgy" : 265,
+            "textx" : 368,
+            "texty" : 250,
+            "sideways" : false
+        },
+        {
+            "name" : "bonus.png",
+            "description" : "$10.00",
+            "imgx" : 70,
+            "imgy" : 365,
+            "textx" : 368,
+            "texty" : 250,
+            "sideways" : true
+        },
+        {
+            "name" : "wild.png",
+            "description" : "$10.00",
+            "imgx" : 380,
+            "imgy" : 365,
+            "textx" : 368,
+            "texty" : 250,
+            "sideways" : true
         }
     ]
 }

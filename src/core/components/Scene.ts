@@ -5,6 +5,7 @@ import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import { ReflectionFilter } from 'pixi-filters';
+import { kill } from 'process';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -19,14 +20,18 @@ export default class Scene {
   private oceanBed: PIXI.AnimatedSprite;
   public lightRay: PIXI.AnimatedSprite;
   private mainContainer: PIXI.Container;
+  private sceneContainer: PIXI.Container;
   public sceneHeightAdjusment: number = 0;
+  public homeAnimations: Array<any> = []
+  public oceanBedAnimations: Array<any> = []
 
-  constructor(app: PIXI.Application, mainContainer: PIXI.Container) {
+  constructor(app: PIXI.Application, mainContainer: PIXI.Container, sceneContainer: PIXI.Container) {
     this.app = app;
     this.container = new PIXI.Container;
     this.homeScene = new PIXI.Container;
     this.OceanBedContainer = new PIXI.Container;
     this.mainContainer = mainContainer;
+    this.sceneContainer = sceneContainer;
 
     this.init();
   }
@@ -89,7 +94,7 @@ export default class Scene {
         }
         
 
-        gsap.to(img, {
+        const animation = gsap.to(img, {
           x: destinationX,
           y: img.y + Functions.randMinMax(-100, 100),
           height: img.height * 0.3,
@@ -115,6 +120,7 @@ export default class Scene {
             }
           }
         })
+        this.homeAnimations.push(animation, img)
 
         this.homeScene.addChild(img);
       }
@@ -154,7 +160,7 @@ export default class Scene {
   
         this.homeScene.addChild(cloud);
 
-        gsap.to(cloud, {
+        const animation = gsap.to(cloud, {
           y: destinationY,
           x: destinationX,
           height: cloud.height * 0.2,
@@ -165,6 +171,7 @@ export default class Scene {
           repeat: -1,
           delay: delay
         })
+        this.homeAnimations.push(animation);
       }
     })
 
@@ -177,10 +184,12 @@ export default class Scene {
       let img: any = Functions.getSprite(this.app.loader, tree);
 
       img.onLoop = () => {
-        img.animationSpeed = Functions.randMinMax(0.2, 0.3);
+        img.homeAnimationSpeed = Functions.randMinMax(0.2, 0.3);
         if(Functions.randMinMax(0, 5) > 3)
           img.textures.reverse();
       }
+
+      this.homeAnimations.push(img);
 
       this.homeScene.addChild(img);
     })
@@ -192,11 +201,11 @@ export default class Scene {
       let img: any = Functions.getSprite(this.app.loader, gabiPlant);
 
       img.onLoop = () => {
-        img.animationSpeed = Functions.randMinMax(0.2, 0.3);
+        img.homeAnimationSpeed = Functions.randMinMax(0.2, 0.3);
         if(Functions.randMinMax(0, 5) > 3)
           img.textures.reverse();
       }
-
+      this.homeAnimations.push(img);
       this.homeScene.addChild(img);
     })
   }
@@ -238,7 +247,7 @@ export default class Scene {
     wave.tileScale.set(waveSize);
     wave.position.y = this.app.screen.height - 103;
     wave.position.x = - wave.width / numberOfWaves;
-    gsap.to(wave, {
+    const animationX = gsap.to(wave, {
       x: wave.x + 25,
       duration: 3,
       repeat: -1,
@@ -248,13 +257,15 @@ export default class Scene {
 
     this.homeScene.addChild(wave);
 
-    gsap.to(reflection, {
+    const animationTime = gsap.to(reflection, {
       time: 1,
       duration: 1.5,
       repeat: -1,
       yoyo: true,
       ease: "none",
     })
+
+    this.homeAnimations.push(animationX, animationTime);
     this.homeScene.filters = [reflection];
   }
 
@@ -298,7 +309,6 @@ export default class Scene {
     Reefs.forEach((reef: any, index) => {
       let img: any = Functions.getSprite(this.app.loader, reef);
 
-      img.animationSpeed = 0.2;
       img.scale.set(0.5, 0.5);
       img.y = this.container.height - img.height - reef.bottom;
       if(reef.left !== undefined){
@@ -309,6 +319,8 @@ export default class Scene {
       }
       img.zIndex = reef.zIndex;
 
+      if(reef.isAnimated)
+        this.oceanBedAnimations.push(img);
       this.OceanBedContainer.addChild(img);
     });
   }
@@ -353,47 +365,55 @@ export default class Scene {
         bubble.y = ((this.app.screen.height*3) - (bubble.height + loopB.posY));
   
         this.container.addChild(bubble);
-        
-        gsap.to(bubble, {
+
+        const animationX = gsap.to(bubble, {
+          x: bubble.x - (bubble.width/Functions.randMinMax(0.5, 2)),
+          duration: Functions.randMinMax(1, 2.5),
+          yoyo: true,
+          ease: 'none',
+          repeat: -1,
+        })
+        const animationY = gsap.to(bubble, {
           y: bubble.y - Functions.randMinMax(loopB.minHeight, loopB.maxHeight),
-          // alpha: 0,
           ease: 'sine.in',
           duration: Functions.randMinMax(loopB.minDuration, loopB.maxDuration),
           repeat: -1,
           delay: Functions.randMinMax(0.3, 1)*count
         })
-        gsap.to(bubble, {
-          x: bubble.x - (bubble.width/Functions.randMinMax(0.5, 2)),
-          duration: Functions.randMinMax(1, 2.5),
-          yoyo: true,
-          repeat: -1,
-        })
+        animationX.pause();
+        animationY.pause();
+
+        this.oceanBedAnimations.push(animationX, animationY);
       }
     })
     
   }
 
   public bubbleAnimate() {
+    this.bubbles.forEach((bubble, index) => {
 
-    this.bubbles.forEach(bubble => {
-      gsap.to(bubble, {
-        y: -bubble.height,
-        alpha: 0,
-        duration: (180-bubble.height)/6,
-      })
-      gsap.to(bubble, {
+      const animateX = gsap.to(bubble, {
         x: Functions.randMinMax(0, this.app.screen.width),
+        ease: 'none',
         duration: 40,
       })
 
-      // let deleteBubbles = setTimeout(() => {
-      //   this.bubbles.forEach(bubble => {
-      //     this.container.removeChild(bubble);
-      //   });
-      //   this.bubbles = [];
-
-      //   clearTimeout(deleteBubbles)
-      // }, 20000);
+      const animateY = gsap.to(bubble, {
+        y: -bubble.height,
+        alpha: 0,
+        duration: (180-bubble.height)/6,
+        onUpdate: () => {
+          if(this.sceneContainer.y != 0 && Math.abs(this.sceneContainer.y) > (bubble.y + bubble.height)){
+            this.bubbles.splice(index, 1);
+            this.container.removeChild(bubble);
+            let killAnimation = setTimeout(() => {
+              animateX.kill();
+              animateY.kill();
+              clearTimeout(killAnimation);
+            }, 1000);
+          }
+        }
+      })
     })
   }
 

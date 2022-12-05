@@ -92,7 +92,7 @@ export default class Game {
     this.homeContainer.zIndex = 2;
   }
   private createScene() {
-    this.scene = new Scene(this.main, this.mainContainer);
+    this.scene = new Scene(this.main, this.mainContainer, this.sceneContainer);
     this.sceneContainer.addChild(this.scene.container);
     this.sceneContainer.addChild(this.scene.homeScene);
     this.sceneContainer.addChild(this.scene.OceanBedContainer);
@@ -144,7 +144,6 @@ export default class Game {
     this.createModal();
   }
   private dive() {
-    
     this.home.stopBeat();
     this.scene.bubbleAnimate();
 
@@ -158,6 +157,8 @@ export default class Game {
           this.homeContainer.removeChild(this.home.container);
           this.plinkogame.ticker.start();
           this.plinkogame.ticker2.start();
+          Functions.toggleAnimations(this.scene.homeAnimations, false);
+          Functions.toggleAnimations(this.scene.oceanBedAnimations, true);
         }
       })
     }) 
@@ -172,15 +173,19 @@ export default class Game {
 
       gsap.to(sprite, {
         y: destination,
-        duration: 0
+        duration: 0,
+        onComplete: () => {
+          Functions.toggleAnimations(this.scene.homeAnimations, true);
+          Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
+        }
       })
     })
   }
   private bonus(e: any) {
     if(e.keyCode != 109)
       return;
-    console.log('bonus');
-    this.scene.deleteBubbles();
+    // console.log('bonus');
+    // this.scene.deleteBubbles();
     this.rise();
     // this.scene.createBubbles();
     // this.scene.bubbleAnimate();

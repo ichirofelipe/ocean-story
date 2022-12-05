@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import { settings } from "pixi.js";
 import Helpers from "./slot/tools/Helpers";
 
 const objGroupAnimation = (array: any) => {
@@ -39,6 +40,8 @@ const getSprite = (loader: PIXI.Loader, setting: any) => {
     img = new PIXI.AnimatedSprite(textures);
     img.animationSpeed = setting.animationSpeed;
     img.play();
+    if(setting.isPlay !== undefined && setting.isPlay === false)
+      img.stop();
   } else {
     const texture = loader.resources!.scene.textures![`${setting.name}.png`];
     img = new PIXI.Sprite(texture);
@@ -98,10 +101,25 @@ const formatGameNumber = (number: number) => {
   return newnumber;
 }
 
+const toggleAnimations = (animations: Array<any>, play: boolean = true) => {
+  animations.forEach(anim => {
+    if(play){
+      anim.play();
+      return;
+    }
+    if(anim.textures !== undefined){
+      anim.stop();
+      return;
+    }
+    anim.pause();
+  })
+}
+
 export default {
   objGroupAnimation,
   randMinMax,
   getSprite,
   formatNumber,
-  formatGameNumber
+  formatGameNumber,
+  toggleAnimations
 }

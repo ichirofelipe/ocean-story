@@ -3,7 +3,7 @@ import Functions from '../../Functions';
 import Helpers from './Helpers';
 import {Reel, Pattern, Payouts, Paylines, BonusNumber, Rows, Formula} from './settings.json';
 
-export default class SlotFunctions {
+export default class TestFunctions {
   private bet: number;
   private RTP: number;
   private totalCombination: number = 1;
@@ -48,37 +48,6 @@ export default class SlotFunctions {
     })
 
     // this.setJSONCombinations();
-  }
-
-  // GENERATE REEL RESULTS
-  public generateResult(pretty: boolean = false) {
-    let result: Array<Array<number>> = [];
-    let prettyResult: Array<Array<number>> = [];
-    Reel.forEach((reel, rIndex) => {
-      result.push([]);
-
-      for(let row = 0; row < Rows; row++){
-        result[rIndex].push(reel[Math.floor(Math.random() * reel.length)]);
-      }
-
-    })
-
-    if(pretty){
-      result.forEach(reel => {
-        
-        reel.forEach((symbol, index) => {
-          if(!prettyResult[index])
-            prettyResult[index] = []
-  
-          prettyResult[index].push(symbol);
-        })
-  
-      })
-
-      return prettyResult;
-    }
-
-    return result;
   }
 
   //INITIALIZE JSON COMBINATIONS FROM LOCAL STORAGE

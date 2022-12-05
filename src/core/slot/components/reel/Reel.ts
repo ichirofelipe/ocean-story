@@ -24,8 +24,9 @@ export default class Reel {
   private spinStart: number;
   private spinBounce: number = 0.2; //seconds
   private spinSuccessionDelay: number = 0.3; //seconds
+  private reelStopped: () => void;
 
-  constructor(app: PIXI.Application, blocks: Array<number>, reelIndex: number ) {
+  constructor(app: PIXI.Application, blocks: Array<number>, reelIndex: number) {
     this.app = app;
     this.blocks = blocks;
     this.reelIndex = reelIndex;
@@ -36,13 +37,14 @@ export default class Reel {
 
   private init() {
     this.createBlocks();
-    this.createMask();
+    // this.createMask();
   }
 
   private createBlocks() {
     this.blocks.forEach((block, index) => {
       const reelBlock = new Block(this.app, block);
-      reelBlock.container.y = (reelBlock.size + this.reelOffsetY) * index;
+
+      reelBlock.container.y = ((reelBlock.size + this.reelOffsetY) * index);
 
       this.reelBlocks.push(reelBlock);
       this.container.addChild(reelBlock.container)
@@ -57,9 +59,10 @@ export default class Reel {
     block.updateValue();
   }
 
-  public startSpin() {
+  public startSpin(reelStopped: () => void) {
     this.spinTicker = new PIXI.Ticker();
     this.spinTicker.add(this.spinner.bind(this));
+    this.reelStopped = reelStopped;
 
     gsap.to(this.container, {
       y: this.container.y - 25,
@@ -70,7 +73,7 @@ export default class Reel {
       onComplete: () => {
         this.spinTicker.start();
         this.spinStart = Date.now() + (this.spinDuration*1000) + this.prolongSpin();
-        this.activateMask(true);
+        return;
       }
     })
     
@@ -126,36 +129,37 @@ export default class Reel {
       repeat: 1,
       yoyo: true,
       onComplete: () => {
-        this.activateMask(false);
-        if(this.reelIndex == Columns - 1)
-          Globals.isSpinning = false
+        if(this.reelIndex == Columns - 1){
+          console.log('DONEEEEE');
+          this.reelStopped();
+        }
       }
     })
   }
 
-  private createMask() {
-    const posY = (this.reelBlocks[0].size * (Rows - ActualRows)) / 2;
-    const height = this.reelBlocks[0].size * ActualRows;
+  // private createMask() {
+  //   const posY = (this.reelBlocks[0].size * (Rows - ActualRows)) / 2;
+  //   const height = this.reelBlocks[0].size * ActualRows;
 
-    this.reelMask = new PIXI.Graphics();
-    this.reelMask.beginFill(0x000000)
-    .drawRect(0, posY, this.reelBlocks[0].size, height)
-    .endFill();
-    // this.reelMask.alpha = (this.reelIndex + 1)*0.15;
+  //   this.reelMask = new PIXI.Graphics();
+  //   this.reelMask.beginFill(0x000000)
+  //   .drawRect(0, posY, this.reelBlocks[0].size * this.reelBlocks[0].overlapPixels, height)
+  //   .endFill();
+  //   // this.reelMask.alpha = (this.reelIndex + 1)*0.15;
 
-    this.container.addChild(this.reelMask);
-    this.container.mask = this.reelMask;
-  }
+  //   this.container.addChild(this.reelMask);
+  //   this.container.mask = this.reelMask;
+  // }
 
-  private activateMask(active: boolean) {
-    if(this.reelMask === undefined)
-      return;
-    if(active){
-      this.reelMask.y += 5;
-      this.reelMask.height -= 10;
-    } else{
-      this.reelMask.y -= 5;
-      this.reelMask.height += 10;
-    }
-  }
+  // private activateMask(active: boolean) {
+  //   if(this.reelMask === undefined)
+  //     return;
+  //   if(active){
+  //     this.reelMask.y += 5;
+  //     this.reelMask.height -= 10;
+  //   } else{
+  //     this.reelMask.y -= 5;
+  //     this.reelMask.height += 10;
+  //   }
+  // }
 }

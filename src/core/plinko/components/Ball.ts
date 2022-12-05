@@ -118,7 +118,7 @@ export default class Ball {
                 charindex = index;
             }
         });
-
+        this.updategameplus();
         //check if bottle index = 1,5,10 
         if(charindex == 1 || charindex == 5 || charindex == 10){
             charindex = -1;
@@ -140,7 +140,7 @@ export default class Ball {
         else if(charindex == 2 || charindex == 4 || charindex == 7 || charindex == 9 || charindex == 13){
             charindex = -1;
             console.log('starfish');
-            this.updategameplus();
+            // this.updategameplus();
         }
         //check if fish
         else if(charindex == 0 || charindex == 3 || charindex == 6){

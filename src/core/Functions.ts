@@ -108,7 +108,7 @@ const toggleAnimations = (animations: Array<any>, play: boolean = true) => {
       return;
     }
     if(anim.textures !== undefined){
-      anim.stop();
+      anim.gotoAndStop(0);
       return;
     }
     anim.pause();

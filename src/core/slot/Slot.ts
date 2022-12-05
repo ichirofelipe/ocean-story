@@ -1,14 +1,17 @@
 import * as PIXI from 'pixi.js';
-import SlotFunctions from './tools/SlotFunctions';
+import TestFunctions from './tools/TestFunctions';
+import Functions from './tools/Functions';
+import MainFunctions from '../Functions';
 import Globals from './tools/globals.json';
 import ReelsContainer from './components/reel/ReelsContainer';
-import {ReelOffsetX, ReelOffsetY} from './tools/settings.json';
+import {ReelOffsetX, ReelOffsetY, Pattern} from './tools/settings.json';
 import Helpers from './tools/Helpers';
 
 export default class Slot {
   private app: PIXI.Application;
   public container: PIXI.Container;
-  private slotFunctions: SlotFunctions;
+  private testFunctions: TestFunctions;
+  private functions: Functions;
   private bet: number = 100;
   private readonly RTP: number = 1;
   private reelsContainer: ReelsContainer;
@@ -20,7 +23,8 @@ export default class Slot {
   constructor(app: PIXI.Application) {
     this.app = app;
     this.container = new PIXI.Container;
-    this.slotFunctions = new SlotFunctions(this.bet, this.RTP);
+    this.testFunctions = new TestFunctions(this.bet, this.RTP);
+    this.functions = new Functions(this.bet, this.RTP);
 
     this.init();
   }
@@ -38,11 +42,11 @@ export default class Slot {
   }
 
   private createGenerateEvent() {
-    window.addEventListener('keypress', e => this.getResult(e))
+    window.addEventListener('keypress', e => this.testResult(e))
   }
 
   private createReelsContainer() {
-    let initReelsArray = this.slotFunctions.generateResult();
+    let initReelsArray = this.functions.generateResult();
     this.reelsContainer = new ReelsContainer(this.app, initReelsArray);
     this.reelsContainer.container.x = (this.app.screen.width/2) - (this.reelsContainer.container.width/2);
     this.reelsContainer.container.y = (this.app.screen.width/2) - (this.reelsContainer.container.width/2);
@@ -63,27 +67,57 @@ export default class Slot {
     this.container.addChild(this.background);
   }
 
-  private getResult(e: any) {
+  private testResult(e: any) {
     if(e.keyCode != 13 || Globals.isSpinning)
       return;
 
     // Globals.isSpinning = true;
-    // const result = this.slotFunctions.generateResult();
+    // const result = this.testFunctions.generateResult();
     // this.reelsContainer.reelsArray = result;
     // this.reelsContainer.spinReels();
-    this.slotFunctions.testResult()
+    this.testFunctions.testResult()
   }
 
-  // public getResult() {
-  //   if(Globals.isSpinning)
-  //     return;
+  public getResult(winnings: (win: number) => void) {
+    const result = this.functions.generateResult();
+    const formattedResult = this.functions.formatResult(result);
+    const symbolToAnimate = this.getSymbolToAnimate(formattedResult);
+    const win = this.getTotalWin(formattedResult);
 
-    // Globals.isSpinning = true;
-    // const result = this.slotFunctions.generateResult();
-    // this.reelsContainer.reelsArray = result;
-    // this.reelsContainer.spinReels();
-    // this.slotFunctions.testResult()
-  // }
+    this.reelsContainer.reelsArray = result;
+    this.reelsContainer.spinReels(() => {
+
+      MainFunctions.toggleAnimations(symbolToAnimate, true);
+      
+      if(symbolToAnimate.length > 0){
+        
+        let delay = setTimeout(() => {
+          MainFunctions.toggleAnimations(symbolToAnimate, false);
+          clearTimeout(delay);
+          winnings(win);
+        }, 4000);
+      }
+      else{
+        winnings(win);
+      }
+    });
+  }
+
+  private getTotalWin(result: Array<any>) {
+    return 0;
+  }
+
+  private getSymbolToAnimate(result: Array<any>) {
+    let symbols: Array<PIXI.AnimatedSprite> = [];
+    result.forEach(res => {
+      Pattern[res.index].forEach((value, reelIndex) => {
+        if(reelIndex < res.colCount)
+          symbols.push(this.reelsContainer.reels[reelIndex].reelBlocks[value].symbolSprite);
+      })
+    })
+
+    return symbols;
+  }
 
   private createLogo() {
     const texture = this.app.loader.resources!.slot.textures!['logo.png'];

@@ -62,6 +62,19 @@ export default class Loader {
         this.loader.add('gabi', 'assets/images/scene/animations/gabi/gabi.json');
         this.loader.add('bird', 'assets/images/scene/animations/bird/bird.json');
 
+        //SYMBOL ANIMATION
+        this.loader.add('a', 'assets/images/symbols/animations/a/a.json');
+        this.loader.add('j', 'assets/images/symbols/animations/j/j.json');
+        this.loader.add('k', 'assets/images/symbols/animations/k/k.json');
+        this.loader.add('bonus', 'assets/images/symbols/animations/bonus/bonus.json');
+        this.loader.add('fish', 'assets/images/symbols/animations/fish/fish.json');
+        this.loader.add('hermitcrab', 'assets/images/symbols/animations/hermitcrab/hermitcrab.json');
+        this.loader.add('jackpot', 'assets/images/symbols/animations/jackpot/jackpot.json');
+        this.loader.add('seahorse', 'assets/images/symbols/animations/seahorse/seahorse.json');
+        this.loader.add('stingray', 'assets/images/symbols/animations/stingray/stingray.json');
+        this.loader.add('turtle', 'assets/images/symbols/animations/turtle/turtle.json');
+        this.loader.add('wild', 'assets/images/symbols/animations/wild/wild.json');
+
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {

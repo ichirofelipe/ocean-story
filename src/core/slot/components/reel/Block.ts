@@ -5,9 +5,10 @@ export default class Block{
   private app: PIXI.Application;
   public container: PIXI.Container;
   public value: number;
+  public overlapPixels: number = 1.25;
   public size: number = 95;
-  public sizeAdjustment: number = 23;
-  private symbolSprite: PIXI.Sprite;
+  public sizeAdjustment: number = 30;
+  public symbolSprite: PIXI.AnimatedSprite;
 
   constructor(app: PIXI.Application, value: number){
     this.app = app;
@@ -23,23 +24,32 @@ export default class Block{
 
   private createSymbol() {
     const symbolName = Symbols[this.value - 1];
-    const texture = this.app.loader.resources!.symbols.textures![`${symbolName}.png`];
-    this.symbolSprite = new PIXI.Sprite(texture);
+    let textures: Array<PIXI.Texture> = [];
+    for(let tmp in this.app.loader.resources![symbolName].textures){
+      const texture = PIXI.Texture.from(tmp);
+      textures.push(texture);
+    }
+    this.symbolSprite = new PIXI.AnimatedSprite(textures);
+    this.symbolSprite.animationSpeed = 0.35;
 
     this.validateSymbolSize(symbolName);
   }
 
   public updateValue() {
     const symbolName = Symbols[this.value - 1];
-    const texture = this.app.loader.resources!.symbols.textures![`${symbolName}.png`];
-    this.symbolSprite.texture = texture;
+    let textures: Array<PIXI.Texture> = [];
+    for(let tmp in this.app.loader.resources![symbolName].textures){
+      const texture = PIXI.Texture.from(tmp);
+      textures.push(texture);
+    }
+    this.symbolSprite.textures = textures;
 
     this.validateSymbolSize(symbolName);
   }
 
   private validateSymbolSize(symbolName: string) {
-    this.symbolSprite.height = this.size;
-    this.symbolSprite.width = this.size;
+    this.symbolSprite.height = this.size * this.overlapPixels;
+    this.symbolSprite.width = this.size * this.overlapPixels;
     this.symbolSprite.x = 0;
     this.symbolSprite.y = 0;
 

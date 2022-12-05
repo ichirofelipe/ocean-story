@@ -5,6 +5,7 @@ import Slot from './slot/Slot';
 import Home from './components/Home';
 import Scene from './components/Scene';
 import Functions from './Functions';
+import Globals from './slot/tools/globals.json';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 //controllers
@@ -37,11 +38,11 @@ export default class Game {
   private plinkogame: Plinko;
   private slotgame: Slot;
   private start: Boolean = false;
-  private bet: number = 100;
-  private money: number = 1000;
+  private bet: number = 50;
+  private money: number = 100000;
   private win: number = -1;
   private game: number = 0;
-  private drop: number = 0;
+  private drop: number = 100;
   private parentcontroller: ParentController;
   private parentmodal: ParentModal;
   private modalheight: number;
@@ -49,7 +50,7 @@ export default class Game {
   private controllerposition: number;
   private controller: Controllers;
   private modal: Modal;
-  private readonly betmoney: number = 100;
+  private readonly betmoney: number = 50;
 
   constructor() {
     this.setSettings();
@@ -142,6 +143,8 @@ export default class Game {
     window.addEventListener('keypress', e => this.bonus(e));
     this.createControllers();
     this.createModal();
+
+    this.dive();
   }
   private dive() {
     this.home.stopBeat();
@@ -152,7 +155,7 @@ export default class Game {
 
       gsap.to(sprite, {
         y: destination,
-        duration: this.animationSpeed,
+        // duration: this.animationSpeed,
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
           this.plinkogame.ticker.start();
@@ -181,6 +184,22 @@ export default class Game {
       })
     })
   }
+
+  private slotPlay() {
+    // VALIDATION TO CHECK IF SLOT IS CURRENTLY SPINNING
+    if(Globals.isSpinning)
+      return;
+    Globals.isSpinning = true;
+
+    this.updateGameMinus();
+    this.slotgame.getResult((money: number) => {
+      Globals.isSpinning = false;
+      console.log('win amount:', money);
+
+      if(this.game > 0)
+        this.slotPlay();
+    });
+  }
   private bonus(e: any) {
     if(e.keyCode != 109)
       return;
@@ -190,6 +209,24 @@ export default class Game {
     // this.scene.createBubbles();
     // this.scene.bubbleAnimate();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // start julius code
   private createModal(){
     //add parent modal
@@ -240,7 +277,7 @@ export default class Game {
   private updateGamePlus(){
     this.game += 1;
     this.controller.gameinbox.updateGame(this.game);
-    // this.slotgame.getResult();
+    this.slotPlay();
   }
   private updateGameMinus(){
     this.game -= 1;

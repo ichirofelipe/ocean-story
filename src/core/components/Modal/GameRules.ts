@@ -5,27 +5,33 @@ export default class GameRules {
     public gamerules: PIXI.Container;
     private app: PIXI.Application;
     private titlestyle: PIXI.TextStyle;
-    private subtitlestyle: PIXI.TextStyle;
     private descstyle: PIXI.TextStyle;
-    private sidebarwidth: number;
-    private sidepadding: number;
     private readonly description: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-    constructor(app: PIXI.Application, container: PIXI.Container, sidebarwidth: number, sidepadding: number, titlestyle: PIXI.TextStyle, subtitlestyle: PIXI.TextStyle, descstyle: PIXI.TextStyle) {
+    constructor(app: PIXI.Application, container: PIXI.Container) {
         this.gamerules = new PIXI.Container();
         this.container = container;
         this.app = app;
-        this.titlestyle = titlestyle;
-        this.subtitlestyle = subtitlestyle;
-        this.descstyle = descstyle;
-        this.sidebarwidth = sidebarwidth;
-        this.sidepadding = sidepadding;
+        //text styles
+        this.titlestyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 30,
+            fontWeight: 'bold',
+            fill: '#FFE850'
+        });
+        this.descstyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 15,
+            fontWeight: 'bold',
+            fill: '#ffffff'
+        });
         this.init();
     }
 
     private init() {
         const posy = [50,120];
-        const gameruleswidth =  this.app.screen.width - this.sidebarwidth - this.sidepadding;
+        // const gameruleswidth =  this.app.screen.width - this.menuheight - this.sidepadding;
+        const gameruleswidth =  this.app.screen.width;
         const title = new PIXI.Text('GAME RULES', this.titlestyle);
         title.position.x = (gameruleswidth / 2) - (title.width / 2);
         title.position.y = posy[0];

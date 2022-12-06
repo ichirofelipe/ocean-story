@@ -17,7 +17,7 @@ export default class Ball {
     private BY: number = 2;
     private container: PIXI.Container;
     private reelposition: number;
-    private imageArray: Array<PIXI.Sprite>;
+    private imageArray: Array<PIXI.AnimatedSprite>;
     private arrayPins: Array<PIXI.Graphics>;
     private lasthitindex: number = -1;
     private app: PIXI.Application;
@@ -25,7 +25,7 @@ export default class Ball {
     private updategameplus: () => void;
     private updategameminus: () => void;
     private updatebar: (type: string) => void;
-    constructor(x: number, y: number, radius: number, loader: PIXI.Loader, container: PIXI.Container, reelposition: number, imageArray: Array<PIXI.Sprite>, arrayPins: Array<PIXI.Graphics>, app: PIXI.Application, updatebar: (type: string) => void, updategameplus: () => void, updategameminus: () => void, addmoney: (type: number) => void) {
+    constructor(x: number, y: number, radius: number, loader: PIXI.Loader, container: PIXI.Container, reelposition: number, imageArray: Array<PIXI.AnimatedSprite>, arrayPins: Array<PIXI.Graphics>, app: PIXI.Application, updatebar: (type: string) => void, updategameplus: () => void, updategameminus: () => void, addmoney: (type: number) => void) {
         this.ball = new PIXI.Graphics();
         this.ticker = new PIXI.Ticker();
         this.loader = loader;

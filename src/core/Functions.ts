@@ -78,7 +78,7 @@ const getSprite = (loader: PIXI.Loader, setting: any) => {
 
 const formatNumber = (number: number) => {
   let num;
-  if(number > 0){
+  if(number >= 0){
     num = number.toLocaleString("en-US");
   }
   else{

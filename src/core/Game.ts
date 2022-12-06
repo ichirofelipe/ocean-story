@@ -51,6 +51,7 @@ export default class Game {
   private controller: Controllers;
   private modal: Modal;
   private readonly betmoney: number = 50;
+  private tickerValidation: PIXI.Ticker;
 
   constructor() {
     this.setSettings();
@@ -65,9 +66,9 @@ export default class Game {
     this.createPlinko();
     this.createSlot();
     this.setObjAnimation();
-
     this.startGame();
   }
+  
   private setSettings() {
     PIXI.settings.ROUND_PIXELS = true;
     PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
@@ -158,6 +159,9 @@ export default class Game {
         // duration: this.animationSpeed,
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
+          this.plinkogame.charSprite.forEach(element => {
+            element.play();
+          });
           this.plinkogame.ticker.start();
           this.plinkogame.ticker2.start();
           Functions.toggleAnimations(this.scene.homeAnimations, false);
@@ -288,6 +292,7 @@ export default class Game {
       this.start = false;
       this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['play.png'];
       this.plinkogame.startDrop = false;
+      this.drop = 0;
       this.controller.dropbox.updateGame(0);
       this.checkBall();
     }
@@ -300,6 +305,7 @@ export default class Game {
     }
     else{
       this.plinkogame.isDrop = false;
+      this.tickerValidation.destroy();
     }
   }
   private startDrop(){
@@ -307,21 +313,36 @@ export default class Game {
       alert("Not enough Money / No Drop Count");
     }
     else{
-      if(this.plinkogame.up || this.plinkogame.down || this.plinkogame.downleft || this.plinkogame.downright){
-        if(this.start){
-          this.start = false;
-          this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['play.png'];
-          this.plinkogame.startDrop = false;
-        }
-        else{
-          this.start = true;
-          this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['pause.png'];
-          this.plinkogame.startDrop = true;
-        }
-    
-        this.checkBall();
+      if(this.start){
+        this.start = false;
+        this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['play.png'];
+        this.plinkogame.startDrop = false;
+        this.tickerValidation.destroy();
+      }
+      else{
+        this.start = true;
+        this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['pause.png'];
+        this.DropValidation();
       }
     }
+  }
+  private resetGame(){
+    this.start = false;
+    this.plinkogame.startDrop = false;
+    this.checkBall();
+    this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['play.png'];
+    this.tickerValidation.destroy();
+
+  }
+  private DropValidation(){
+    this.tickerValidation = new PIXI.Ticker();
+    this.tickerValidation.add((delta) => {
+      if(this.plinkogame.up || this.plinkogame.down || this.plinkogame.downleft || this.plinkogame.downright){
+        this.plinkogame.startDrop = true;
+        this.checkBall();
+      }
+    });
+    this.tickerValidation.start();
   }
   private minusDrop(){
     this.drop -= 5;
@@ -342,10 +363,13 @@ export default class Game {
     this.drop -= 1;
     this.controller.dropbox.updateGame(this.drop);
   }
-  private addMoney(type: number){
+  private addMoney(type: number, money: number = 0){
     let addedmoney = 0
     if(type == 1){
       addedmoney = (this.bet / 2);
+    }
+    else if(type == 2) {
+      addedmoney = money;
     }
     else{
       addedmoney = (this.bet * 2);

@@ -74,6 +74,19 @@ export default class Loader {
         this.loader.add('stingray', 'assets/images/symbols/animations/stingray/stingray.json');
         this.loader.add('turtle', 'assets/images/symbols/animations/turtle/turtle.json');
         this.loader.add('wild', 'assets/images/symbols/animations/wild/wild.json');
+        
+        //plinko animated characters
+        this.loader.add('fish1', 'assets/images/plinko/fish1.json');
+        this.loader.add('fish2', 'assets/images/plinko/fish2.json');
+        this.loader.add('fish3', 'assets/images/plinko/fish3.json');
+        this.loader.add('starfish1', 'assets/images/plinko/starfish1.json');
+        this.loader.add('starfish2', 'assets/images/plinko/starfish2.json');
+        this.loader.add('starfish3', 'assets/images/plinko/starfish3.json');
+        this.loader.add('starfish4', 'assets/images/plinko/starfish4.json');
+        this.loader.add('starfish5', 'assets/images/plinko/starfish5.json');
+        this.loader.add('bomb', 'assets/images/plinko/bomb.json');
+        this.loader.add('treasure', 'assets/images/plinko/treasure.json');
+        this.loader.add('bottle', 'assets/images/plinko/bottle.json');
 
     }
 

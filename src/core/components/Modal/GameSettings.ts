@@ -7,32 +7,42 @@ export default class GameSettings {
     private app: PIXI.Application;
     private titlestyle: PIXI.TextStyle;
     private subtitlestyle: PIXI.TextStyle;
-    private descstyle: PIXI.TextStyle;
     private subdescstyle: PIXI.TextStyle;
-    private sidebarwidth: number;
-    private sidepadding: number;
     private toggleoff: PIXI.Texture;
     private toggleon: PIXI.Texture;
     public toggleSprite: Array<PIXI.Sprite> = [];
 
-    constructor(app: PIXI.Application, container: PIXI.Container, sidebarwidth: number, sidepadding: number, titlestyle: PIXI.TextStyle, subtitlestyle: PIXI.TextStyle, descstyle: PIXI.TextStyle,subdescstyle: PIXI.TextStyle) {
+    constructor(app: PIXI.Application, container: PIXI.Container) {
         this.gamesettings = new PIXI.Container();
         this.container = container;
         this.app = app;
-        this.titlestyle = titlestyle;
-        this.subtitlestyle = subtitlestyle;
-        this.descstyle = descstyle;
-        this.subdescstyle = subdescstyle;
-        this.sidebarwidth = sidebarwidth;
-        this.sidepadding = sidepadding;
         this.toggleoff = this.app.loader.resources!.controllers.textures!['toggle_off.png'];
         this.toggleon = this.app.loader.resources!.controllers.textures!['toggle_on.png'];
+        //text styles
+        this.titlestyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 30,
+            fontWeight: 'bold',
+            fill: '#FFE850'
+        });
+        this.subtitlestyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 17,
+            fontWeight: 'bold',
+            fill: '#ffffff'
+        });
+        this.subdescstyle = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 11,
+            fontWeight: 'bold',
+            fill: '#AAAAAA'
+        });
         this.init();
     }
 
     private init() {
         const titleposy = 50;
-        const gamesettingswidth =  (this.app.screen.width - this.sidebarwidth - this.sidepadding) * .45;
+        const gamesettingswidth =  (this.app.screen.width) * .3;
         const title = new PIXI.Text('GAME SETTINGS', this.titlestyle);
         title.position.x = (gamesettingswidth / 2) - (title.width / 2);
         title.position.y = titleposy;

@@ -1,0 +1,615 @@
+{
+	"frames": {
+		"green-starfish_00000.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00001.png": {
+			"frame": {
+				"x": 153,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00002.png": {
+			"frame": {
+				"x": 305,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00003.png": {
+			"frame": {
+				"x": 457,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00004.png": {
+			"frame": {
+				"x": 609,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00005.png": {
+			"frame": {
+				"x": 761,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00006.png": {
+			"frame": {
+				"x": 913,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00007.png": {
+			"frame": {
+				"x": 1065,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00008.png": {
+			"frame": {
+				"x": 1217,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00009.png": {
+			"frame": {
+				"x": 1369,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00010.png": {
+			"frame": {
+				"x": 1521,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00011.png": {
+			"frame": {
+				"x": 1673,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00012.png": {
+			"frame": {
+				"x": 1825,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00013.png": {
+			"frame": {
+				"x": 1977,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00014.png": {
+			"frame": {
+				"x": 2129,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00015.png": {
+			"frame": {
+				"x": 2281,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00016.png": {
+			"frame": {
+				"x": 2433,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00017.png": {
+			"frame": {
+				"x": 2585,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00018.png": {
+			"frame": {
+				"x": 2737,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00019.png": {
+			"frame": {
+				"x": 2889,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00020.png": {
+			"frame": {
+				"x": 3041,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00021.png": {
+			"frame": {
+				"x": 3193,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00022.png": {
+			"frame": {
+				"x": 3345,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00023.png": {
+			"frame": {
+				"x": 3497,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00024.png": {
+			"frame": {
+				"x": 3649,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00025.png": {
+			"frame": {
+				"x": 3801,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00026.png": {
+			"frame": {
+				"x": 3953,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00027.png": {
+			"frame": {
+				"x": 4105,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00028.png": {
+			"frame": {
+				"x": 4257,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"green-starfish_00029.png": {
+			"frame": {
+				"x": 4409,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "starfish5.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 4560,
+			"h": 152
+		},
+		"scale": "1"
+	}
+}

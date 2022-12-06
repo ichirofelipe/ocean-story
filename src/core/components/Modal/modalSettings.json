@@ -1,14 +1,14 @@
 {
   "ModalContent": [
     {
-      "name": "paytable",
-      "icon": "icon_info.png",
-      "slides" : 2
-    },
-    {
       "name": "settings",
       "icon": "icon_settings.png",
       "slides" : 1
+    },
+    {
+      "name": "paytable",
+      "icon": "icon_info.png",
+      "slides" : 2
     },
     {
       "name": "rules",

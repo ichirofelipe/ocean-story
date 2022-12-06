@@ -2,6 +2,9 @@ import * as PIXI from 'pixi.js';
 import Pins from './components/Pins';
 import Ball from './components/Ball';
 import Coin from './components/Coin';
+import gsap from 'gsap';
+import {MotionPathPlugin} from 'gsap/MotionPathPlugin';
+gsap.registerPlugin(MotionPathPlugin);
 
 export default class Game {
     public app: PIXI.Application;
@@ -33,8 +36,7 @@ export default class Game {
     private reelContainer: PIXI.Container;
     private reelwidth: number;
     private reelheight: number;
-    private imgTextures: Array<PIXI.Texture>;
-    public imageArray: Array<PIXI.Sprite> = [];
+    public imageArray: Array<PIXI.AnimatedSprite> = [];
     private rectMask: PIXI.Graphics;
     private imgWidth: number;
     private spacing: number;
@@ -51,6 +53,9 @@ export default class Game {
     private arrayPins: Array<PIXI.Graphics> = [];
     public isDrop: Boolean = false;
     public startDrop: Boolean = false;
+    private charAssets: Array<any>;
+    private charAnimation: Array<PIXI.Texture> = [];
+    public charSprite: Array<PIXI.AnimatedSprite> = [];
     private decmoney: () => void;
     private dropoff: () => void;
     private addmoney: (type: number) => void;
@@ -63,6 +68,7 @@ export default class Game {
     private readonly stageHeight: number = .6;
     private readonly stageWidth: number = .9;
     private readonly adjusty: number = 4;
+    private readonly clawspeed: number = 4;
     constructor(app: PIXI.Application, loader: PIXI.Loader, updategameplus: () => void, updategameminus: () => void, decmoney: () => void, dropoff: () => void, addmoney: (type: number) => void) {
         this.app = app;
         this.loader = loader;
@@ -71,21 +77,21 @@ export default class Game {
         this.bar1 = this.loader.resources!.plinko.textures!['bar1.png'];
         this.bar2 = this.loader.resources!.plinko.textures!['bar2.png'];
         this.barcontent = this.loader.resources!.plinko.textures!['barcontent.png'];
-        this.imgTextures = [
-            this.loader.resources!.plinko.textures!['fish1.png'],
-            this.loader.resources!.plinko.textures!['bottle.png'],
-            this.loader.resources!.plinko.textures!['starfish1.png'],
-            this.loader.resources!.plinko.textures!['fish2.png'],
-            this.loader.resources!.plinko.textures!['starfish2.png'],
-            this.loader.resources!.plinko.textures!['bottle.png'],
-            this.loader.resources!.plinko.textures!['fish3.png'],
-            this.loader.resources!.plinko.textures!['starfish3.png'],
-            this.loader.resources!.plinko.textures!['bomb.png'],
-            this.loader.resources!.plinko.textures!['starfish4.png'],
-            this.loader.resources!.plinko.textures!['bottle.png'],
-            this.loader.resources!.plinko.textures!['bomb.png'],
-            this.loader.resources!.plinko.textures!['treasure.png'],
-            this.loader.resources!.plinko.textures!['starfish5.png']
+        this.charAssets = [
+            this.loader.resources!.fish1.textures,
+            this.loader.resources!.bottle.textures,
+            this.loader.resources!.starfish1.textures,
+            this.loader.resources!.fish2.textures,
+            this.loader.resources!.starfish2.textures,
+            this.loader.resources!.bottle.textures,
+            this.loader.resources!.fish3.textures,
+            this.loader.resources!.starfish3.textures,
+            this.loader.resources!.bomb.textures,
+            this.loader.resources!.starfish4.textures,
+            this.loader.resources!.bottle.textures,
+            this.loader.resources!.bomb.textures,
+            this.loader.resources!.treasure.textures,
+            this.loader.resources!.starfish5.textures
         ];
         this.decmoney = decmoney;
         this.dropoff = dropoff;
@@ -255,15 +261,27 @@ export default class Game {
         //set image
         let overall: number = 0;
         let width: number = 60;
-        for(let i = 0; i < this.imgTextures.length; i++){
-            const fishImage  = new PIXI.Sprite(this.imgTextures[i]);
-            fishImage.height = this.reelheight;
-            fishImage.width = width;
-            fishImage.position.x = i * width;
+        let texture: PIXI.Texture;
+        let characters: PIXI.AnimatedSprite;
+        for(let i = 0; i < this.charAssets.length; i++){
+            for(let img in this.charAssets[i]){
+                texture = PIXI.Texture.from(img);
+                this.charAnimation.push(texture);
+            }
+
+            characters = new PIXI.AnimatedSprite(this.charAnimation);
+            characters.height = this.reelheight;
+            characters.width = width;
+            characters.position.x = i * width;
             overall+=width;
-            this.imageArray.push(fishImage);
-            this.reelContainer.addChild(fishImage);
-        }
+            this.imageArray.push(characters);
+            this.charSprite.push(characters);
+            this.charAnimation = [];
+        }  
+        this.charSprite.forEach(element => {
+            element.animationSpeed = .6;
+            this.reelContainer.addChild(element);
+        });
         this.imgWidth = overall - width;
         this.container.addChild(this.reelContainer);
     }
@@ -278,36 +296,45 @@ export default class Game {
     }
 
     private movementsCrane(){
-        //ball and crane
-        if(this.upright){
-            if(this.dropperContainer.position.x >= 405){
-                this.dropperContainer.position.y += 1;
-                this.dropperContainer.position.x += 1;
-                if(this.dropperContainer.position.y >= 21){
-                    this.upright = false;
-                    this.down = true;
-                }
-            }
-            else{
-                this.dropperContainer.position.x += 2;
-            }
-        }
+        const path = [
+            { pointup1 : 24, pointup2 : 6, pointupright1 : 405, pointupright2 : 21, pointdown1 : 184, pointdownright1 : 23, pointdownright2 : 402, pointupleft1 : 20, pointupleft2 : 20 },
+            { pointup1 : 25, pointup2 : 7, pointupright1 : 404, pointupright2 : 21, pointdown1 : 184, pointdownright1 : 23, pointdownright2 : 405, pointupleft1 : 19, pointupleft2 : 20  },
+            { pointup1 : 26, pointup2 : 6, pointupright1 : 403.1, pointupright2 : 17, pointdown1 : 184, pointdownright1 : 23, pointdownright2 : 405, pointupleft1 : 22, pointupleft2 : 20  },
+            { pointup1 : 27, pointup2 : 6, pointupright1 : 402, pointupright2 : 17, pointdown1 : 184, pointdownright1 : 23, pointdownright2 : 405, pointupleft1 : 23, pointupleft2 : 20  },
+            { pointup1 : 24, pointup2 : 8.5, pointupright1 : 401, pointupright2 : 17, pointdown1 : 184, pointdownright1 : 23, pointdownright2 : 405, pointupleft1 : 24, pointupleft2 : 20  }
+        ]
+        //crane up
         if(this.up){
-            if(this.dropperContainer.position.y <= 24){
-                this.dropperContainer.position.y -= 1;
-                this.dropperContainer.position.x += 1; 
-                if(this.dropperContainer.position.y <= 6){
+            if(this.dropperContainer.position.y <= path[this.clawspeed - 1].pointup1){
+                this.dropperContainer.position.y -= this.clawspeed;
+                this.dropperContainer.position.x += this.clawspeed; 
+                if(this.dropperContainer.position.y <= path[this.clawspeed - 1].pointup2){
                     this.upright = true;
                     this.up = false;
                 }
             }
             else{
-                this.dropperContainer.position.y -= 2;
+                this.dropperContainer.position.y -= this.clawspeed;
             }
         }
+        //crane go to right
+        if(this.upright){
+            if(this.dropperContainer.position.x >= path[this.clawspeed - 1].pointupright1){
+                this.dropperContainer.position.y += this.clawspeed;
+                this.dropperContainer.position.x += this.clawspeed;
+                if(this.dropperContainer.position.y >= path[this.clawspeed - 1].pointupright2){
+                    this.upright = false;
+                    this.down = true;
+                }
+            }
+            else{
+                this.dropperContainer.position.x += this.clawspeed;
+            }
+        }
+        //crane go down
         if(this.down){
-            this.dropperContainer.position.y += 2;
-            if(this.dropperContainer.position.y >= 184){
+            this.dropperContainer.position.y += this.clawspeed;
+            if(this.dropperContainer.position.y >= path[this.clawspeed - 1].pointdown1){
                 if(!this.haveBall){
                     this.ball = new Coin((this.craneAnimate.width - (this.ballRadius * 2)), this.craneAnimate.height - this.ballRadius, this.ballRadius, this.loader);
                     this.dropperContainer.addChild(this.ball.ball);
@@ -320,34 +347,37 @@ export default class Game {
                 this.downright = true;
             }
         }
+        //crane go up in right
         if(this.downright){
-            if(this.dropperContainer.position.y <= 23){
-                this.dropperContainer.position.y -= 1;
-                this.dropperContainer.position.x -= 1;
-                if(this.dropperContainer.position.x <= 405){
+            if(this.dropperContainer.position.y <= path[this.clawspeed - 1].pointdownright1){
+                this.dropperContainer.position.y -= this.clawspeed;
+                this.dropperContainer.position.x -= this.clawspeed;
+                if(this.dropperContainer.position.x <= path[this.clawspeed - 1].pointdownright2){
                     this.upleft = true;
                     this.downright = false;
                 }
             }
             else{
-                this.dropperContainer.position.y -= 2;
+                this.dropperContainer.position.y -= this.clawspeed;
             }
         }
+        //crane goto left
         if(this.upleft){
-            if(this.dropperContainer.position.x <= 20){
-                this.dropperContainer.position.y += 1;
-                this.dropperContainer.position.x -= 1;
-                if(this.dropperContainer.position.y >= 20){
+            if(this.dropperContainer.position.x <= path[this.clawspeed - 1].pointupleft1){
+                this.dropperContainer.position.y += this.clawspeed;
+                this.dropperContainer.position.x -= this.clawspeed;
+                if(this.dropperContainer.position.y >= path[this.clawspeed - 1].pointupleft2){
                     this.downleft = true;
                     this.upleft = false;
                 }
             }
             else{
-                this.dropperContainer.position.x -= 2;
+                this.dropperContainer.position.x -= this.clawspeed;
             }
         }
+        //crane go down
         if(this.downleft){
-            if(this.dropperContainer.position.y >= 184){
+            if(this.dropperContainer.position.y >= path[this.clawspeed - 1].pointdown1){
                 if(!this.haveBall){
                     this.ball = new Coin((this.craneAnimate.width - (this.ballRadius * 2)), this.craneAnimate.height - this.ballRadius, this.ballRadius, this.loader);
                     this.dropperContainer.addChild(this.ball.ball);
@@ -360,10 +390,9 @@ export default class Game {
                 this.up = true;
             }
             else{
-                this.dropperContainer.position.y += 2;
+                this.dropperContainer.position.y += this.clawspeed;
             }
         }
-
         if(this.isDrop){
             if(this.dropperContainer.position.x >= 110 && this.dropperContainer.position.x <= 370){
                 if(this.upright){

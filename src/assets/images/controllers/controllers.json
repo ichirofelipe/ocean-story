@@ -204,25 +204,25 @@
 			"frame": {
 				"x": 482,
 				"y": 1,
-				"w": 22,
-				"h": 22
+				"w": 35,
+				"h": 35
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 22,
-				"h": 22
+				"w": 35,
+				"h": 35
 			},
 			"sourceSize": {
-				"w": 22,
-				"h": 22
+				"w": 35,
+				"h": 35
 			}
 		},
 		"icon_menu.png": {
 			"frame": {
-				"x": 506,
+				"x": 519,
 				"y": 1,
 				"w": 17,
 				"h": 12
@@ -242,7 +242,7 @@
 		},
 		"icon_minu.png": {
 			"frame": {
-				"x": 525,
+				"x": 538,
 				"y": 1,
 				"w": 18,
 				"h": 18
@@ -262,7 +262,7 @@
 		},
 		"icon_plus.png": {
 			"frame": {
-				"x": 545,
+				"x": 558,
 				"y": 1,
 				"w": 18,
 				"h": 18
@@ -282,47 +282,47 @@
 		},
 		"icon_rules.png": {
 			"frame": {
-				"x": 565,
+				"x": 578,
 				"y": 1,
-				"w": 21,
-				"h": 27
+				"w": 35,
+				"h": 35
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 21,
-				"h": 27
+				"w": 35,
+				"h": 35
 			},
 			"sourceSize": {
-				"w": 21,
-				"h": 27
+				"w": 35,
+				"h": 35
 			}
 		},
 		"icon_settings.png": {
 			"frame": {
-				"x": 588,
+				"x": 615,
 				"y": 1,
-				"w": 22,
-				"h": 23
+				"w": 35,
+				"h": 35
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 22,
-				"h": 23
+				"w": 35,
+				"h": 35
 			},
 			"sourceSize": {
-				"w": 22,
-				"h": 23
+				"w": 35,
+				"h": 35
 			}
 		},
 		"icon_volume.png": {
 			"frame": {
-				"x": 612,
+				"x": 652,
 				"y": 1,
 				"w": 15,
 				"h": 15
@@ -342,7 +342,7 @@
 		},
 		"k.png": {
 			"frame": {
-				"x": 629,
+				"x": 669,
 				"y": 1,
 				"w": 52,
 				"h": 52
@@ -362,7 +362,7 @@
 		},
 		"pause.png": {
 			"frame": {
-				"x": 683,
+				"x": 723,
 				"y": 1,
 				"w": 43,
 				"h": 43
@@ -382,7 +382,7 @@
 		},
 		"play.png": {
 			"frame": {
-				"x": 728,
+				"x": 768,
 				"y": 1,
 				"w": 43,
 				"h": 43
@@ -402,7 +402,7 @@
 		},
 		"rectangle_balance.png": {
 			"frame": {
-				"x": 773,
+				"x": 813,
 				"y": 1,
 				"w": 135,
 				"h": 22
@@ -422,7 +422,7 @@
 		},
 		"rectangle_bet.png": {
 			"frame": {
-				"x": 440,
+				"x": 813,
 				"y": 25,
 				"w": 115,
 				"h": 22
@@ -442,8 +442,8 @@
 		},
 		"rectangle_dropnumber.png": {
 			"frame": {
-				"x": 773,
-				"y": 25,
+				"x": 368,
+				"y": 49,
 				"w": 97,
 				"h": 15
 			},
@@ -462,8 +462,8 @@
 		},
 		"rectangle_gamein.png": {
 			"frame": {
-				"x": 872,
-				"y": 25,
+				"x": 467,
+				"y": 49,
 				"w": 77,
 				"h": 22
 			},
@@ -542,7 +542,7 @@
 		},
 		"rectangle_win.png": {
 			"frame": {
-				"x": 368,
+				"x": 723,
 				"y": 49,
 				"w": 135,
 				"h": 22
@@ -602,8 +602,8 @@
 		},
 		"toggle_off.png": {
 			"frame": {
-				"x": 910,
-				"y": 1,
+				"x": 519,
+				"y": 25,
 				"w": 52,
 				"h": 21
 			},
@@ -622,7 +622,7 @@
 		},
 		"toggle_on.png": {
 			"frame": {
-				"x": 505,
+				"x": 546,
 				"y": 49,
 				"w": 52,
 				"h": 21

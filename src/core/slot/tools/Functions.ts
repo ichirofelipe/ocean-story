@@ -1,4 +1,5 @@
-import {Reel, Rows, Pattern, BonusNumber} from './settings.json';
+import Helpers from './Helpers';
+import {Reel, Rows, Pattern, BonusNumber, Paylines, Payouts} from './settings.json';
 
 export default class Functions {
   private bet: number = 0;
@@ -59,13 +60,22 @@ export default class Functions {
   public formatResult(reels: Array<Array<number>>) {
     let winningPattern: Array<any> = [];
     let bonusWin = 0;
+    let bonusPattern: Array<string> = [];
 
     //CHECK BONUS COMBINATION
     reels.forEach((reel, index) => {  
       let bonusBlocks = reel.filter(val => val == BonusNumber);
       if(bonusBlocks.length > 0)
         bonusWin++
+
+      reel.forEach((block,bIndex) => {
+        if(block == 4)
+          bonusPattern.push(`${index}-${bIndex}`);
+      })
     });
+
+    if(bonusWin >= 3)
+      winningPattern.push({'index': -1,'combination': bonusPattern, 'colCount': bonusWin});
 
     Pattern.forEach((pat, patIndex) => {
       let counter = 0;
@@ -88,6 +98,8 @@ export default class Functions {
       }
     });
 
+
+
     return winningPattern;
   }
 
@@ -98,5 +110,31 @@ export default class Functions {
     if(combination.length == 2 && combination.find(val => val == 11) && !(combination.find(val => val == 4)))
       return true
     return false
+  }
+
+  public getTotalWin(result: Array<any>){
+    let totalWin = 0;
+
+    result.forEach(res => {
+      totalWin += this.computePayOut(res);
+    });
+
+    return totalWin;
+  }
+
+  // COMPUTE THE PAYOUT FOR BLOCK COMBINATIONS
+  private computePayOut(winPattern: any) {
+    const {blocks, colCount} = winPattern;
+    let pay: number = 0;
+    let payLine = Helpers.getKeyValue(Paylines)(`lines-${colCount}` as keyof typeof Paylines);
+
+    blocks.forEach((val: number) => {
+      pay += Helpers.getKeyValue(Payouts)(`char-${val}` as keyof typeof Payouts);
+    })
+
+    pay *= payLine;
+    pay *= this.RTP;
+    pay *= this.bet;
+    return pay;
   }
 }

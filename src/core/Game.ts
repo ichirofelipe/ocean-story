@@ -197,11 +197,28 @@ export default class Game {
 
     this.updateGameMinus();
     this.slotgame.getResult((money: number) => {
-      Globals.isSpinning = false;
-      console.log('win amount:', money);
+      this.addMoney(2, money);
 
-      if(this.game > 0)
-        this.slotPlay();
+      Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
+      this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 1);
+      
+      if(this.slotgame.symbolsToAnimate.length > 0){
+        
+        let delay = setTimeout(() => {
+          Globals.isSpinning = false;
+          Functions.toggleAnimations(this.slotgame.symbolsToAnimate, false);
+          this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 0);
+
+          if(this.game > 0)
+            this.slotPlay();
+          clearTimeout(delay);
+        }, 4000);
+      }
+      else{
+        Globals.isSpinning = false;
+        if(this.game > 0)
+          this.slotPlay();
+      }
     });
   }
   private bonus(e: any) {

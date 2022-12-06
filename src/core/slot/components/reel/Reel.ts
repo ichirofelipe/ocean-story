@@ -37,14 +37,14 @@ export default class Reel {
 
   private init() {
     this.createBlocks();
-    // this.createMask();
+    this.createMask();
   }
 
   private createBlocks() {
     this.blocks.forEach((block, index) => {
       const reelBlock = new Block(this.app, block);
 
-      reelBlock.container.y = ((reelBlock.size + this.reelOffsetY) * index);
+      reelBlock.container.y = (reelBlock.size + this.reelOffsetY) * index;
 
       this.reelBlocks.push(reelBlock);
       this.container.addChild(reelBlock.container)
@@ -73,6 +73,7 @@ export default class Reel {
       onComplete: () => {
         this.spinTicker.start();
         this.spinStart = Date.now() + (this.spinDuration*1000) + this.prolongSpin();
+        this.activateMask(true);
         return;
       }
     })
@@ -129,6 +130,7 @@ export default class Reel {
       repeat: 1,
       yoyo: true,
       onComplete: () => {
+        this.activateMask(false);
         if(this.reelIndex == Columns - 1){
           console.log('DONEEEEE');
           this.reelStopped();
@@ -137,29 +139,35 @@ export default class Reel {
     })
   }
 
-  // private createMask() {
-  //   const posY = (this.reelBlocks[0].size * (Rows - ActualRows)) / 2;
-  //   const height = this.reelBlocks[0].size * ActualRows;
+  private createMask() {
+    const sizeAdjustment = ((this.reelBlocks[0].size * (this.reelBlocks[0].overlapPixels - 1)) / 2);
+    const posY = ((this.reelBlocks[0].size * (Rows - ActualRows)) / 2);
+    const height = (this.reelBlocks[0].size * ActualRows);
+    const width = this.reelBlocks[0].size * this.reelBlocks[0].overlapPixels;
 
-  //   this.reelMask = new PIXI.Graphics();
-  //   this.reelMask.beginFill(0x000000)
-  //   .drawRect(0, posY, this.reelBlocks[0].size * this.reelBlocks[0].overlapPixels, height)
-  //   .endFill();
-  //   // this.reelMask.alpha = (this.reelIndex + 1)*0.15;
+    this.reelMask = new PIXI.Graphics();
+    this.reelMask.beginFill(0x000000)
+    .drawRect(0, posY - 3, width * this.reelBlocks[0].overlapPixels, height)
+    .endFill();
+    this.reelMask.alpha = (this.reelIndex + 1)*0.15;
+    this.reelMask.x -= sizeAdjustment;
+    this.reelMask.y += sizeAdjustment;
 
-  //   this.container.addChild(this.reelMask);
-  //   this.container.mask = this.reelMask;
-  // }
+    this.container.addChild(this.reelMask);
+    this.container.mask = this.reelMask;
+  }
 
-  // private activateMask(active: boolean) {
-  //   if(this.reelMask === undefined)
-  //     return;
-  //   if(active){
-  //     this.reelMask.y += 5;
-  //     this.reelMask.height -= 10;
-  //   } else{
-  //     this.reelMask.y -= 5;
-  //     this.reelMask.height += 10;
-  //   }
-  // }
+  private activateMask(active: boolean) {
+    const sizeAdjustment = 10;
+
+    if(this.reelMask === undefined)
+      return;
+    if(active){
+      this.reelMask.y += sizeAdjustment;
+      this.reelMask.height -= sizeAdjustment;
+    } else{
+      this.reelMask.y -= sizeAdjustment;
+      this.reelMask.height += sizeAdjustment;
+    }
+  }
 }

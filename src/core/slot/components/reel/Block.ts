@@ -7,7 +7,7 @@ export default class Block{
   public value: number;
   public overlapPixels: number = 1.25;
   public size: number = 95;
-  public sizeAdjustment: number = 30;
+  public sizeAdjustment: number = 23;
   public symbolSprite: PIXI.AnimatedSprite;
 
   constructor(app: PIXI.Application, value: number){
@@ -56,13 +56,13 @@ export default class Block{
     if(!LargeSymbols.includes(symbolName)){
       this.symbolSprite.height -= this.sizeAdjustment;
       this.symbolSprite.width -= this.sizeAdjustment;
-      this.symbolSprite.x = this.sizeAdjustment/2;
-      this.symbolSprite.y = this.sizeAdjustment/2;
+      this.symbolSprite.x += this.sizeAdjustment/2;
+      this.symbolSprite.y += this.sizeAdjustment/2;
     }
 
     const imgContainer = new PIXI.Graphics();
     imgContainer.beginFill(0x00000000)
-    .drawRect(0,0,this.size,this.size)
+    .drawRect(0,0,this.size * this.overlapPixels,this.size * this.overlapPixels)
     .endFill();
     imgContainer.alpha = 0;
 

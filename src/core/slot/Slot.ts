@@ -1,7 +1,6 @@
 import * as PIXI from 'pixi.js';
 import TestFunctions from './tools/TestFunctions';
 import Functions from './tools/Functions';
-import MainFunctions from '../Functions';
 import Globals from './tools/globals.json';
 import ReelsContainer from './components/reel/ReelsContainer';
 import {ReelOffsetX, ReelOffsetY, Pattern} from './tools/settings.json';
@@ -19,6 +18,7 @@ export default class Slot {
   private logo: PIXI.Sprite;
   private frameHeightAdjustment: number = 70;
   private frameWidthAdjustment: number = 10;
+  public symbolsToAnimate: Array<PIXI.AnimatedSprite> = [];
 
   constructor(app: PIXI.Application) {
     this.app = app;
@@ -71,52 +71,30 @@ export default class Slot {
     if(e.keyCode != 13 || Globals.isSpinning)
       return;
 
-    // Globals.isSpinning = true;
-    // const result = this.testFunctions.generateResult();
-    // this.reelsContainer.reelsArray = result;
-    // this.reelsContainer.spinReels();
     this.testFunctions.testResult()
   }
 
   public getResult(winnings: (win: number) => void) {
     const result = this.functions.generateResult();
     const formattedResult = this.functions.formatResult(result);
-    const symbolToAnimate = this.getSymbolToAnimate(formattedResult);
-    const win = this.getTotalWin(formattedResult);
-
+    const win = this.functions.getTotalWin(formattedResult);
+    
+    this.getSymbolsToAnimate(formattedResult);
     this.reelsContainer.reelsArray = result;
     this.reelsContainer.spinReels(() => {
-
-      MainFunctions.toggleAnimations(symbolToAnimate, true);
-      
-      if(symbolToAnimate.length > 0){
-        
-        let delay = setTimeout(() => {
-          MainFunctions.toggleAnimations(symbolToAnimate, false);
-          clearTimeout(delay);
-          winnings(win);
-        }, 4000);
-      }
-      else{
-        winnings(win);
-      }
+      winnings(win);
     });
   }
 
-  private getTotalWin(result: Array<any>) {
-    return 0;
-  }
+  private getSymbolsToAnimate(result: Array<any>) {
+    this.symbolsToAnimate = [];
 
-  private getSymbolToAnimate(result: Array<any>) {
-    let symbols: Array<PIXI.AnimatedSprite> = [];
     result.forEach(res => {
       Pattern[res.index].forEach((value, reelIndex) => {
         if(reelIndex < res.colCount)
-          symbols.push(this.reelsContainer.reels[reelIndex].reelBlocks[value].symbolSprite);
+          this.symbolsToAnimate.push(this.reelsContainer.reels[reelIndex].reelBlocks[value].symbolSprite);
       })
     })
-
-    return symbols;
   }
 
   private createLogo() {

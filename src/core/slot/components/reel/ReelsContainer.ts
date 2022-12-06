@@ -22,14 +22,12 @@ export default class ReelsContainer {
 
   private init() {
     this.createReels();
-    this.createMask();
   }
 
   private createReels() {
     this.reelsArray.forEach((reel, index) => {
       this.reel = new Reel(this.app, reel, index);
-      let overlapOffset = (this.reel.reelBlocks[0].size * (this.reel.reelBlocks[0].overlapPixels - 1)) / 2;
-      this.reel.container.x = (((this.reel.reelBlocks[0].size * this.reel.reelBlocks[0].overlapPixels) - (this.reel.reelBlocks[0].sizeAdjustment/2)) + this.reel.reelOffsetX - overlapOffset - 3) * index;
+      this.reel.container.x = ((this.reel.reelBlocks[0].size - ((this.reel.reelBlocks[0].sizeAdjustment/2))) + this.reel.reelOffsetX) * index;
 
       this.reels.push(this.reel);
       this.container.addChild(this.reel.container);
@@ -66,19 +64,5 @@ export default class ReelsContainer {
         blockCount++;
     })
     
-  }
-
-  private createMask() {
-    let width = this.reels[0].reelBlocks[0].size*Columns;
-    let height = this.reels[0].reelBlocks[0].size*ActualRows;
-
-    this.mask = new PIXI.Graphics()
-    this.mask.beginFill(0x000000)
-    .drawRect(0, 0, width, height)
-    .endFill();
-    this.mask.alpha = 0.2;
-    
-    this.container.addChild(this.mask);
-    this.container.mask = this.mask;
   }
 }

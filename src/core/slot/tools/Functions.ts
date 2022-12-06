@@ -139,4 +139,20 @@ export default class Functions {
     pay *= this.bet;
     return pay;
   }
+
+  // COMPUTE THE PAYOUT FOR BONUS COMBINATION
+  public computeBonusPayOut(bonusCount: number) {
+    let payLine = Helpers.getKeyValue(Paylines)(`lines-${bonusCount}` as keyof typeof Paylines);
+    let payOut = (((Helpers.getKeyValue(Payouts)(`char-${BonusNumber}` as keyof typeof Payouts) * bonusCount) * payLine) * this.RTP) * this.bet;
+    // let randPayout = Functions.randMinMax(payOut/4,payOut*1.75);
+    // let equation = Functions.randMinMax(1,0);
+
+    // if(equation == 0){
+    //   payOut /= (multiplier*1.5)
+    // } else {
+    //   payOut *= (multiplier/1.5)
+    // }
+    // console.log(payOut)
+    return payOut;
+  }
 }

@@ -62,7 +62,7 @@ export default class Game {
   private init() {
     this.setContainers(); 
     this.createScene();
-    this.createHome(); 
+    this.createHome();
     this.createPlinko();
     this.createSlot();
     this.setObjAnimation();
@@ -225,6 +225,8 @@ export default class Game {
   private startBonusGame(bonusCount: number) {
     this.scene.deleteBubbles();
     this.rise();
+    const bonusPay = this.slotgame.getBonusPayout(bonusCount);
+    const arrayBonusPay = [];
   }
 
 

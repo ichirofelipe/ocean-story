@@ -89,6 +89,10 @@ export default class Slot {
     });
   }
 
+  public getBonusPayout(bonusCount: number) {
+    return this.functions.computeBonusPayOut(bonusCount);
+  }
+
   private getSymbolsToAnimate(result: Array<any>) {
     this.symbolsToAnimate = [];
     

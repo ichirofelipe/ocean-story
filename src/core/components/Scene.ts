@@ -39,8 +39,12 @@ export default class Scene {
   private init() {
     this.createBG();
 
-    this.createBirds();
+    this.createSky();
     this.createClouds();
+    this.createBirds();
+    this.createRocks();
+    this.createSand();
+
     this.createTrees();
     this.createGabi();
     this.createGrass();
@@ -65,6 +69,15 @@ export default class Scene {
     this.container.sortableChildren = true;
     this.homeScene.sortableChildren = true;
     this.OceanBedContainer.sortableChildren = true;
+  }
+
+  private createSky() {
+    const texture = this.app.loader.resources!.scene.textures!['sky.png'];
+    let img = new PIXI.Sprite(texture);
+    img.height = Helpers.autoHeight(img, this.app.screen.width);
+    img.width = this.app.screen.width;
+    
+    this.homeScene.addChild(img);
   }
 
   private createBirds() {
@@ -176,6 +189,26 @@ export default class Scene {
     })
 
     this.sceneHeightAdjusment += cloudMaxSize;
+  }
+
+  private createRocks() {
+    const texture = this.app.loader.resources!.scene.textures!['rocks.png'];
+    let img = new PIXI.Sprite(texture);
+    img.height = Helpers.autoHeight(img, this.app.screen.width);
+    img.width = this.app.screen.width;
+    img.y = this.app.screen.height - (img.height + 100);
+    
+    this.homeScene.addChild(img);
+  }
+
+  private createSand() {
+    const texture = this.app.loader.resources!.scene.textures!['sand.png'];
+    let img = new PIXI.Sprite(texture);
+    img.height = Helpers.autoHeight(img, this.app.screen.width);
+    img.width = this.app.screen.width;
+    img.y = this.app.screen.height - (img.height + 100);
+    
+    this.homeScene.addChild(img);
   }
 
   private createTrees() {

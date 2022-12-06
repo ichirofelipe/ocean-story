@@ -88,6 +88,9 @@ export default class Loader {
         this.loader.add('treasure', 'assets/images/plinko/treasure.json');
         this.loader.add('bottle', 'assets/images/plinko/bottle.json');
 
+        //playbutton
+        this.loader.add('playbutton', 'assets/images/home/playbutton.json');
+
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {

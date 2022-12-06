@@ -150,7 +150,6 @@ export default class Game {
   }
 
   private dive() {
-    this.home.stopBeat();
     this.scene.bubbleAnimate();
 
     this.diveGroupAnimation.forEach((el: any) => {
@@ -160,11 +159,7 @@ export default class Game {
         duration: this.animationSpeed,
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
-          this.plinkogame.charSprite.forEach(element => {
-            element.play();
-          });
-          this.plinkogame.ticker.start();
-          this.plinkogame.ticker2.start();
+          this.stopAndPlay(true);
           Functions.toggleAnimations(this.scene.homeAnimations, false);
           Functions.toggleAnimations(this.scene.oceanBedAnimations, true);
         }
@@ -179,6 +174,7 @@ export default class Game {
         y: el.posY??0,
         alpha: el.alpha??1,
         onComplete: () => {
+          this.stopAndPlay(false);
           Functions.toggleAnimations(this.scene.homeAnimations, true);
           Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
         }
@@ -249,6 +245,23 @@ export default class Game {
 
 
   // start julius code
+  private stopAndPlay(type: Boolean){
+    if(type){
+      this.plinkogame.charSprite.forEach(element => {
+        element.play();
+      });
+      this.plinkogame.ticker.start();
+      this.plinkogame.ticker2.start();
+    }
+    else{
+      this.plinkogame.charSprite.forEach(element => {
+        element.gotoAndStop(0);
+      });
+      this.plinkogame.ticker.start();
+      this.plinkogame.ticker2.start();
+    }
+  }
+
   private createModal(){
     //add parent modal
     this.parentmodal = new ParentModal(this.main);

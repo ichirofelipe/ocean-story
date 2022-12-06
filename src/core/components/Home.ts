@@ -18,6 +18,10 @@ export default class Home {
   private slideticker: PIXI.Ticker;
   private tickertimer: number = 0;
   private lastindex: number;
+  private playbtnTextures: Array<PIXI.Texture> = [];
+  private playbtnAnimate: PIXI.AnimatedSprite;
+  private playbtnTexture: PIXI.Texture;
+  private bigger: Boolean;
   private readonly radiobuttonsspacing: number = 10;
 
   constructor(app: PIXI.Application, startGame: () => void) {
@@ -83,30 +87,93 @@ export default class Home {
   }
 
   private createStart() {
-    const texture = this.app.loader.resources!.home.textures!['start.png'];
-    this.startSprite = new PIXI.Sprite(texture);
-    this.startSprite.scale.set(.5) 
-    this.startSprite.interactive = true;
-    this.startSprite.buttonMode = true;
-    this.startSprite.anchor.set(.5)
-    this.startSprite.y = 400;
-    this.startSprite.x = ((this.app.screen.width - this.rightside.position.x) / 2);
-    this.rightside.addChild(this.startSprite);
-    this.startSprite.addListener('pointerdown', this.startGame);
-    this.setBeat();
+    // const texture = this.app.loader.resources!.home.textures!['start.png'];
+    // this.startSprite = new PIXI.Sprite(texture);
+    // this.startSprite.scale.set(.5) 
+    // this.startSprite.interactive = true;
+    // this.startSprite.buttonMode = true;
+    // this.startSprite.anchor.set(.5)
+    // this.startSprite.y = 400;
+    // this.startSprite.x = ((this.app.screen.width - this.rightside.position.x) / 2);
+    // this.rightside.addChild(this.startSprite);
+    // this.startSprite.addListener('pointerdown', this.startGame);
+    // this.setBeat();
+    for(let img in this.app.loader.resources!.playbutton.textures){
+        this.playbtnTexture = PIXI.Texture.from(img);
+        this.playbtnTextures.push(this.playbtnTexture);
+    } 
+    this.playbtnAnimate = new PIXI.AnimatedSprite(this.playbtnTextures);
+    this.playbtnAnimate.scale.set(.8) 
+    console.log(this.playbtnAnimate.height)
+    this.playbtnAnimate.interactive = true;
+    this.playbtnAnimate.buttonMode = true;
+    this.playbtnAnimate.anchor.set(.5)
+    this.playbtnAnimate.y = 400;
+    this.playbtnAnimate.x = ((this.app.screen.width - this.rightside.position.x) / 2);
+    this.playbtnAnimate.animationSpeed = .3;
+    this.playbtnAnimate.play();
+    this.rightside.addChild(this.playbtnAnimate);
+    this.playbtnAnimate.addListener('pointerdown', this.fullSpin.bind(this));
+    this.playbtnAnimate.addListener('mouseover', () => {
+      gsap.killTweensOf(this.playbtnAnimate);
+    });
+    this.playbtnAnimate.addListener('mouseout', () => {
+      if(this.bigger){
+        this.setSpinMax();
+      }
+      else{
+        this.setSpinMin();
+      }
+    });
+    this.setSpinMax();
   }
 
-  private setBeat(){
-    gsap.to(this.startSprite, {
-      width: 150, height: 150, duration: 1, repeat: -1, yoyo: true,
+  private fullSpin(){
+    let counter = 0;
+    this.playbtnAnimate.animationSpeed = 1;
+    gsap.killTweensOf(this.playbtnAnimate);
+    this.playbtnAnimate.removeListener('mouseover');
+    this.playbtnAnimate.removeListener('mouseout');
+    let reset = setTimeout(() => {
+      this.stopBeat();
+      clearTimeout(reset);
+    }, 2000);
+    this.playbtnAnimate.onLoop = () => {
+      counter++;
+      if(counter == 3){
+        this.playbtnAnimate.gotoAndStop(0);
+        this.startGame();
+      }
+    };
+  }
+
+  private setSpinMax(){
+    this.bigger = true;
+    gsap.to(this.playbtnAnimate, {
+      width: 250, height: 250, duration: 1,
+      onComplete: () => {
+        this.setSpinMin();
+      }
     });
   }
 
+  private setSpinMin(){
+    this.bigger = false;
+    gsap.to(this.playbtnAnimate, {
+      width: 200, height: 200, duration: 1,
+      onComplete: () => {
+        this.setSpinMax();
+      }
+    });
+  }
+
+
+
   public stopBeat(){
     this.slideticker.destroy();
-    gsap.killTweensOf(this.startSprite);
-    gsap.killTweensOf(this.uis)
-    gsap.killTweensOf(this.uistext)
+    gsap.killTweensOf(this.uis);
+    gsap.killTweensOf(this.uistext);
+    gsap.killTweensOf(this.playbtnAnimate);
   }
 
   private createLogo() {

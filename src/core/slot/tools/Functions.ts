@@ -67,9 +67,10 @@ export default class Functions {
       let bonusBlocks = reel.filter(val => val == BonusNumber);
       if(bonusBlocks.length > 0)
         bonusWin++
-
+      
       reel.forEach((block,bIndex) => {
-        if(block == 4)
+        console.log(block);
+        if(block == BonusNumber)
           bonusPattern.push(`${index}-${bIndex}`);
       })
     });
@@ -116,7 +117,8 @@ export default class Functions {
     let totalWin = 0;
 
     result.forEach(res => {
-      totalWin += this.computePayOut(res);
+      if(res.index != -1)
+        totalWin += this.computePayOut(res);
     });
 
     return totalWin;

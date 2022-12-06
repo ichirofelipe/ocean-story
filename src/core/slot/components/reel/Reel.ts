@@ -132,7 +132,6 @@ export default class Reel {
       onComplete: () => {
         this.activateMask(false);
         if(this.reelIndex == Columns - 1){
-          console.log('DONEEEEE');
           this.reelStopped();
         }
       }

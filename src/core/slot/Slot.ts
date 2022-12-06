@@ -19,6 +19,7 @@ export default class Slot {
   private frameHeightAdjustment: number = 70;
   private frameWidthAdjustment: number = 10;
   public symbolsToAnimate: Array<PIXI.AnimatedSprite> = [];
+  public bonusCount: number = 0;
 
   constructor(app: PIXI.Application) {
     this.app = app;
@@ -79,8 +80,10 @@ export default class Slot {
     const formattedResult = this.functions.formatResult(result);
     const win = this.functions.getTotalWin(formattedResult);
     
+    this.bonusCount = 0;
     this.getSymbolsToAnimate(formattedResult);
     this.reelsContainer.reelsArray = result;
+
     this.reelsContainer.spinReels(() => {
       winnings(win);
     });
@@ -88,12 +91,23 @@ export default class Slot {
 
   private getSymbolsToAnimate(result: Array<any>) {
     this.symbolsToAnimate = [];
-
+    
     result.forEach(res => {
-      Pattern[res.index].forEach((value, reelIndex) => {
-        if(reelIndex < res.colCount)
+      if(res.index == -1){
+        this.bonusCount = res.colCount;
+        res.combination.forEach((pat:string) => {
+          let reelIndex = Number(pat.split('-')[0]);
+          let value = Number(pat.split('-')[1]);
+
           this.symbolsToAnimate.push(this.reelsContainer.reels[reelIndex].reelBlocks[value].symbolSprite);
-      })
+        })
+      }
+      else{
+        Pattern[res.index].forEach((value, reelIndex) => {
+          if(reelIndex < res.colCount)
+            this.symbolsToAnimate.push(this.reelsContainer.reels[reelIndex].reelBlocks[value].symbolSprite);
+        })
+      }
     })
   }
 

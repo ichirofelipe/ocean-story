@@ -122,41 +122,42 @@ export default class Game {
   private setObjAnimation() {
     this.diveGroupAnimation = Functions.objGroupAnimation(
       [
-        {sprite: this.sceneContainer, destination: -(((this.sceneContainer.height - this.scene.sceneHeightAdjusment)/3)*2)},
-        {sprite: this.gameContainer, destination: 0},
-        {sprite: this.homeContainer, destination: -this.baseHeight*2}
+        {sprite: this.sceneContainer, posY: -(((this.sceneContainer.height - this.scene.sceneHeightAdjusment)/3)*2)},
+        {sprite: this.gameContainer, posY: 0},
+        {sprite: this.homeContainer, posY: -this.baseHeight*2},
+        {sprite: this.scene.lightRay, alpha: 1},
       ]
     )
     this.riseGroupAnimation = Functions.objGroupAnimation(
       [
-        {sprite: this.sceneContainer, destination: 0},
-        {sprite: this.gameContainer, destination: this.baseHeight*2},
-        {sprite: this.homeContainer, destination: 0}
+        {sprite: this.sceneContainer, posY: 0},
+        {sprite: this.gameContainer, posY: this.baseHeight*2},
+        {sprite: this.homeContainer, posY: 0},
+        {sprite: this.scene.lightRay, alpha: 0},
       ]
     )
-    // this.dive();
   }
+
   private startGame() {
     this.mainContainer.addChild(this.sceneContainer);
     this.mainContainer.addChild(this.homeContainer);
     this.mainContainer.addChild(this.gameContainer);
     this.main.stage.addChild(this.mainContainer);
-    window.addEventListener('keypress', e => this.bonus(e));
     this.createControllers();
     this.createModal();
 
-    this.dive();
+    // this.dive();
   }
+
   private dive() {
     this.home.stopBeat();
     this.scene.bubbleAnimate();
 
-    this.diveGroupAnimation.forEach((element: any) => {
-      const {sprite, destination} = element;
-
-      gsap.to(sprite, {
-        y: destination,
-        // duration: this.animationSpeed,
+    this.diveGroupAnimation.forEach((el: any) => {
+      gsap.to(el.sprite, {
+        y: el.posY??0,
+        alpha: el.alpha??1,
+        duration: this.animationSpeed,
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
           this.plinkogame.charSprite.forEach(element => {
@@ -168,19 +169,15 @@ export default class Game {
           Functions.toggleAnimations(this.scene.oceanBedAnimations, true);
         }
       })
-    }) 
-    gsap.to(this.scene.lightRay, {
-      alpha: 1,
-      duration: this.animationSpeed
     })
   }
+  
   private rise() {
-    this.riseGroupAnimation.forEach((element: any) => {
-      const {sprite, destination} = element;
+    this.riseGroupAnimation.forEach((el: any) => {
 
-      gsap.to(sprite, {
-        y: destination,
-        duration: 0,
+      gsap.to(el.sprite, {
+        y: el.posY??0,
+        alpha: el.alpha??1,
         onComplete: () => {
           Functions.toggleAnimations(this.scene.homeAnimations, true);
           Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
@@ -194,23 +191,31 @@ export default class Game {
     if(Globals.isSpinning)
       return;
     Globals.isSpinning = true;
-
     this.updateGameMinus();
     this.slotgame.getResult((money: number) => {
       this.addMoney(2, money);
-
-      Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
-      this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 1);
       
+      //CHECK IF THERE ARE SYMBOLS TO ANIMATE
       if(this.slotgame.symbolsToAnimate.length > 0){
+
+        //PLAY SYMBOL ANIMATION
+        Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
+        this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 1);
         
+        //DELAY 4 SECONDS TO BEFORE STOPPING ANIMATION
         let delay = setTimeout(() => {
-          Globals.isSpinning = false;
           Functions.toggleAnimations(this.slotgame.symbolsToAnimate, false);
           this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 0);
 
-          if(this.game > 0)
+          // CHECK IF THERE IS BONUS COMBINATION
+          if(this.slotgame.bonusCount >= 3){
+            this.startBonusGame(this.slotgame.bonusCount);
+          }
+          else if(this.game > 0){
+            Globals.isSpinning = false;
             this.slotPlay();
+          }
+          
           clearTimeout(delay);
         }, 4000);
       }
@@ -221,14 +226,9 @@ export default class Game {
       }
     });
   }
-  private bonus(e: any) {
-    if(e.keyCode != 109)
-      return;
-    // console.log('bonus');
-    // this.scene.deleteBubbles();
+  private startBonusGame(bonusCount: number) {
+    this.scene.deleteBubbles();
     this.rise();
-    // this.scene.createBubbles();
-    // this.scene.bubbleAnimate();
   }
 
 

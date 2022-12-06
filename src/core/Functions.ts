@@ -5,16 +5,18 @@ import Helpers from "./slot/tools/Helpers";
 const objGroupAnimation = (array: any) => {
   interface Animation {
     sprite: any;
-    destination: number,
+    posY: number,
+    alpha: number,
   }
   const arr: Animation[] = [];
 
   array.forEach((element: any) => {
-    const {sprite, destination} = element;
+    const {sprite, posY, alpha} = element;
 
     const arrTmp: Animation = {
       sprite: sprite,
-      destination: destination
+      posY: posY,
+      alpha: alpha
     }
 
     arr.push(arrTmp);

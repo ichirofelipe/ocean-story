@@ -76,22 +76,127 @@
             "name" : "bonus.png",
             "description" : "This is the bonus symbol. It shows up on all reels. Hit 3 or more BONUS symbols to trigger the                            .",
             "subdesc" : "BONUS GAME",
-            "imgx" : 130,
+            "imgx" : 15,
             "imgy" : 325,
-            "textx" : 220,
+            "textx" : 105,
             "texty" : 335,
-            "subdescx" : 275,
+            "subdescx" : 160,
             "subdescy" : 386,
             "sideways" : true
         },
         {
             "name" : "wild.png",
             "description" : "This is the WILD symbol. It substitutes all the symbols excep BONUS. It shows up on all reels.",
-            "imgx" : 370,
+            "imgx" : 260,
             "imgy" : 325,
-            "textx" : 465,
+            "textx" : 355,
             "texty" : 335,
             "sideways" : true
+        },
+        {
+            "name" : "mega.png",
+            "description" : "This is the JACKPOT symbol. It triggers same as the common symbols but pays higher than usual.",
+            "imgx" : 520,
+            "imgy" : 330,
+            "textx" : 600,
+            "texty" : 335,
+            "sideways" : true
+        }
+    ],
+    "paytable2" : [
+        {
+            "name" : "starfish1.png",
+            "imgx" : 100,
+            "imgy" : 115
+        },
+        {
+            "name" : "starfish2.png" ,
+            "imgx" : 225,
+            "imgy" : 115
+        },
+        {
+            "name" : "starfish3.png",
+            "imgx" : 350,
+            "imgy" : 115
+        },
+        {
+            "name" : "starfish4.png",
+            "imgx" : 475,
+            "imgy" : 115
+        },
+        {
+            "name" : "starfish5.png",
+            "imgx" : 600,
+            "imgy" : 115
+        },
+        {
+            "name" : "fish1.png",
+            "imgx" : 200,
+            "imgy" : 220
+        },
+        {
+            "name" : "fish2.png",
+            "imgx" : 350,
+            "imgy" : 220
+        },
+        {
+            "name" : "fish3.png",
+            "imgx" : 500,
+            "imgy" : 220
+        },
+        {
+            "name" : "seaurchin.png",
+            "imgx" : 200,
+            "imgy" : 320
+        },
+        {
+            "name" : "bottle.png",
+            "imgx" : 350,
+            "imgy" : 320
+        },
+        {
+            "name" : "treasure.png",
+            "imgx" : 500,
+            "imgy" : 320
+        }
+    ],
+    "paytable3" : [
+        {
+            "name" : "patterns.png",
+            "imgx" : 205,
+            "imgy" : 130
+        }
+    ],
+    "paytable2titles" : [
+        {
+            "text" : "Each symbols triggers corresponding actions",
+            "x" : 240,
+            "y" : 90
+        },
+        {
+            "text" : "Triggers the spin all features of the reels",
+            "x" : 297,
+            "y" : 195
+        },
+        {
+            "text" : "Split the bet amount into 2",
+            "x" : 323,
+            "y" : 293
+        },
+        {
+            "text" : "Does nothing",
+            "x" : 207,
+            "y" : 395
+        },
+        {
+            "text" : "Increase level bar amount",
+            "x" : 332,
+            "y" : 395
+        },
+        {
+            "text" : "Multiplies bet amount into 2",
+            "x" : 475,
+            "y" : 395
         }
     ]
 }

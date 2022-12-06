@@ -146,7 +146,7 @@ export default class Game {
     this.createControllers();
     this.createModal();
 
-    // this.dive();
+    this.dive();
   }
 
   private dive() {
@@ -156,7 +156,7 @@ export default class Game {
       gsap.to(el.sprite, {
         y: el.posY??0,
         alpha: el.alpha??1,
-        duration: this.animationSpeed,
+        // duration: this.animationSpeed,
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
           this.stopAndPlay(true);
@@ -272,6 +272,7 @@ export default class Game {
     this.modalheight = this.parentmodal.container.height;
     //create modal component
     this.modal = new Modal(this.main, this.parentmodal.container);
+    this.modal.close.addListener("pointerdown", this.showModal.bind(this));
     this.modal.gamesettings.toggleSprite.forEach(btn => {
       btn.addListener("pointerdown", () => {
         this.modal.gamesettings.toggleOnOff(btn);
@@ -297,7 +298,7 @@ export default class Game {
     this.controller.playbutton.sprite.addListener('pointerdown', this.startDrop.bind(this));
     this.controller.minusbutton.sprite.addListener('pointerdown', this.minusDrop.bind(this));
     this.controller.plusbutton.sprite.addListener('pointerdown', this.plusDrop.bind(this));
-    this.controller.menubutton.sprite.addListener('pointerdown', this.showModal.bind(this))
+    this.controller.menubutton.sprite.addListener('pointerdown', this.showModal.bind(this));
     this.controllersContainer.addChild(this.controller.container);
   }
   private minusBet(){

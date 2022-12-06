@@ -60,7 +60,7 @@
 				"h": 81
 			}
 		},
-		"crab.png": {
+		"bottle.png": {
 			"frame": {
 				"x": 233,
 				"y": 1,
@@ -80,9 +80,29 @@
 				"h": 64
 			}
 		},
-		"fish.png": {
+		"crab.png": {
 			"frame": {
 				"x": 299,
+				"y": 1,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
+		"fish.png": {
+			"frame": {
+				"x": 365,
 				"y": 1,
 				"w": 67,
 				"h": 67
@@ -100,9 +120,69 @@
 				"h": 67
 			}
 		},
+		"fish1.png": {
+			"frame": {
+				"x": 434,
+				"y": 1,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
+		"fish2.png": {
+			"frame": {
+				"x": 500,
+				"y": 1,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
+		"fish3.png": {
+			"frame": {
+				"x": 566,
+				"y": 1,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
 		"icon_arrowdown.png": {
 			"frame": {
-				"x": 368,
+				"x": 632,
 				"y": 1,
 				"w": 20,
 				"h": 20
@@ -122,7 +202,7 @@
 		},
 		"icon_arrowleft.png": {
 			"frame": {
-				"x": 390,
+				"x": 654,
 				"y": 1,
 				"w": 23,
 				"h": 40
@@ -142,7 +222,7 @@
 		},
 		"icon_arrowright.png": {
 			"frame": {
-				"x": 415,
+				"x": 679,
 				"y": 1,
 				"w": 23,
 				"h": 40
@@ -162,7 +242,7 @@
 		},
 		"icon_arrowup.png": {
 			"frame": {
-				"x": 440,
+				"x": 704,
 				"y": 1,
 				"w": 20,
 				"h": 20
@@ -182,7 +262,7 @@
 		},
 		"icon_close.png": {
 			"frame": {
-				"x": 462,
+				"x": 726,
 				"y": 1,
 				"w": 18,
 				"h": 18
@@ -202,7 +282,7 @@
 		},
 		"icon_info.png": {
 			"frame": {
-				"x": 482,
+				"x": 746,
 				"y": 1,
 				"w": 35,
 				"h": 35
@@ -222,7 +302,7 @@
 		},
 		"icon_menu.png": {
 			"frame": {
-				"x": 519,
+				"x": 783,
 				"y": 1,
 				"w": 17,
 				"h": 12
@@ -242,7 +322,7 @@
 		},
 		"icon_minu.png": {
 			"frame": {
-				"x": 538,
+				"x": 802,
 				"y": 1,
 				"w": 18,
 				"h": 18
@@ -262,7 +342,7 @@
 		},
 		"icon_plus.png": {
 			"frame": {
-				"x": 558,
+				"x": 822,
 				"y": 1,
 				"w": 18,
 				"h": 18
@@ -282,7 +362,7 @@
 		},
 		"icon_rules.png": {
 			"frame": {
-				"x": 578,
+				"x": 842,
 				"y": 1,
 				"w": 35,
 				"h": 35
@@ -302,7 +382,7 @@
 		},
 		"icon_settings.png": {
 			"frame": {
-				"x": 615,
+				"x": 879,
 				"y": 1,
 				"w": 35,
 				"h": 35
@@ -322,7 +402,7 @@
 		},
 		"icon_volume.png": {
 			"frame": {
-				"x": 652,
+				"x": 916,
 				"y": 1,
 				"w": 15,
 				"h": 15
@@ -342,8 +422,8 @@
 		},
 		"k.png": {
 			"frame": {
-				"x": 669,
-				"y": 1,
+				"x": 704,
+				"y": 38,
 				"w": 52,
 				"h": 52
 			},
@@ -360,10 +440,50 @@
 				"h": 52
 			}
 		},
+		"mega.png": {
+			"frame": {
+				"x": 758,
+				"y": 38,
+				"w": 70,
+				"h": 70
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 70,
+				"h": 70
+			},
+			"sourceSize": {
+				"w": 70,
+				"h": 70
+			}
+		},
+		"patterns.png": {
+			"frame": {
+				"x": 1,
+				"y": 92,
+				"w": 350,
+				"h": 231
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 350,
+				"h": 231
+			},
+			"sourceSize": {
+				"w": 350,
+				"h": 231
+			}
+		},
 		"pause.png": {
 			"frame": {
-				"x": 723,
-				"y": 1,
+				"x": 916,
+				"y": 18,
 				"w": 43,
 				"h": 43
 			},
@@ -382,8 +502,8 @@
 		},
 		"play.png": {
 			"frame": {
-				"x": 768,
-				"y": 1,
+				"x": 632,
+				"y": 63,
 				"w": 43,
 				"h": 43
 			},
@@ -402,8 +522,8 @@
 		},
 		"rectangle_balance.png": {
 			"frame": {
-				"x": 813,
-				"y": 1,
+				"x": 830,
+				"y": 63,
 				"w": 135,
 				"h": 22
 			},
@@ -422,8 +542,8 @@
 		},
 		"rectangle_bet.png": {
 			"frame": {
-				"x": 813,
-				"y": 25,
+				"x": 353,
+				"y": 87,
 				"w": 115,
 				"h": 22
 			},
@@ -442,8 +562,8 @@
 		},
 		"rectangle_dropnumber.png": {
 			"frame": {
-				"x": 368,
-				"y": 49,
+				"x": 470,
+				"y": 87,
 				"w": 97,
 				"h": 15
 			},
@@ -462,8 +582,8 @@
 		},
 		"rectangle_gamein.png": {
 			"frame": {
-				"x": 467,
-				"y": 49,
+				"x": 830,
+				"y": 38,
 				"w": 77,
 				"h": 22
 			},
@@ -483,7 +603,7 @@
 		"rectangle_menu.png": {
 			"frame": {
 				"x": 1,
-				"y": 84,
+				"y": 325,
 				"w": 960,
 				"h": 460
 			},
@@ -503,7 +623,7 @@
 		"rectangle_parent.png": {
 			"frame": {
 				"x": 1,
-				"y": 546,
+				"y": 787,
 				"w": 964,
 				"h": 80
 			},
@@ -522,8 +642,8 @@
 		},
 		"rectangle_start.png": {
 			"frame": {
-				"x": 1,
-				"y": 628,
+				"x": 470,
+				"y": 110,
 				"w": 225,
 				"h": 44
 			},
@@ -542,8 +662,8 @@
 		},
 		"rectangle_win.png": {
 			"frame": {
-				"x": 723,
-				"y": 49,
+				"x": 830,
+				"y": 87,
 				"w": 135,
 				"h": 22
 			},
@@ -562,8 +682,8 @@
 		},
 		"seahorse.png": {
 			"frame": {
-				"x": 228,
-				"y": 628,
+				"x": 353,
+				"y": 111,
 				"w": 75,
 				"h": 75
 			},
@@ -580,10 +700,130 @@
 				"h": 75
 			}
 		},
+		"seaurchin.png": {
+			"frame": {
+				"x": 697,
+				"y": 111,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
+		"starfish1.png": {
+			"frame": {
+				"x": 763,
+				"y": 111,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
+		"starfish2.png": {
+			"frame": {
+				"x": 829,
+				"y": 111,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
+		"starfish3.png": {
+			"frame": {
+				"x": 895,
+				"y": 111,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
+		"starfish4.png": {
+			"frame": {
+				"x": 430,
+				"y": 177,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
+		"starfish5.png": {
+			"frame": {
+				"x": 496,
+				"y": 177,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
 		"stingray.png": {
 			"frame": {
-				"x": 305,
-				"y": 628,
+				"x": 562,
+				"y": 177,
 				"w": 107,
 				"h": 107
 			},
@@ -602,8 +842,8 @@
 		},
 		"toggle_off.png": {
 			"frame": {
-				"x": 519,
-				"y": 25,
+				"x": 569,
+				"y": 87,
 				"w": 52,
 				"h": 21
 			},
@@ -622,8 +862,8 @@
 		},
 		"toggle_on.png": {
 			"frame": {
-				"x": 546,
-				"y": 49,
+				"x": 671,
+				"y": 177,
 				"w": 52,
 				"h": 21
 			},
@@ -640,10 +880,30 @@
 				"h": 21
 			}
 		},
+		"treasure.png": {
+			"frame": {
+				"x": 725,
+				"y": 177,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
 		"turtle.png": {
 			"frame": {
-				"x": 414,
-				"y": 628,
+				"x": 791,
+				"y": 177,
 				"w": 75,
 				"h": 75
 			},
@@ -662,8 +922,8 @@
 		},
 		"wild.png": {
 			"frame": {
-				"x": 491,
-				"y": 628,
+				"x": 868,
+				"y": 177,
 				"w": 85,
 				"h": 85
 			},
@@ -688,7 +948,7 @@
 		"format": "RGBA8888",
 		"size": {
 			"w": 966,
-			"h": 736
+			"h": 868
 		},
 		"scale": "1"
 	}

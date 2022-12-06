@@ -61,7 +61,8 @@ export default class Loader {
         this.loader.add('coconut', 'assets/images/scene/animations/coconut/coconut.json');
         this.loader.add('gabi', 'assets/images/scene/animations/gabi/gabi.json');
         this.loader.add('bird', 'assets/images/scene/animations/bird/bird.json');
-
+        this.loader.add('homebonus', 'assets/images/home/bonus/bonus.json');
+        
         //SYMBOL ANIMATION
         this.loader.add('a', 'assets/images/symbols/animations/a/a.json');
         this.loader.add('j', 'assets/images/symbols/animations/j/j.json');

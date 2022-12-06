@@ -4,6 +4,7 @@ import Plinko from './plinko/Plinko';
 import Slot from './slot/Slot';
 import Home from './components/Home';
 import Scene from './components/Scene';
+import Bonus from './components/Bonus/Bonus';
 import Functions from './Functions';
 import Globals from './slot/tools/globals.json';
 import { gsap } from "gsap";
@@ -37,6 +38,7 @@ export default class Game {
   private riseGroupAnimation: Array<object> = []; 
   private plinkogame: Plinko;
   private slotgame: Slot;
+  private bonus: Bonus;
   private start: Boolean = false;
   private bet: number = 50;
   private money: number = 100000;
@@ -146,7 +148,7 @@ export default class Game {
     this.createControllers();
     this.createModal();
 
-    // this.dive();
+    this.dive();
   }
 
   private dive() {
@@ -156,12 +158,14 @@ export default class Game {
       gsap.to(el.sprite, {
         y: el.posY??0,
         alpha: el.alpha??1,
-        duration: this.animationSpeed,
+        // duration: this.animationSpeed,
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
           this.stopAndPlay(true);
           Functions.toggleAnimations(this.scene.homeAnimations, false);
           Functions.toggleAnimations(this.scene.oceanBedAnimations, true);
+
+          this.startBonusGame(3);
         }
       })
     })
@@ -223,10 +227,22 @@ export default class Game {
     });
   }
   private startBonusGame(bonusCount: number) {
+    const bonusPay = this.slotgame.getBonusPayout(bonusCount);
+    const arrayBonusPay = [
+      Functions.randMinMax(0, 300),
+      Functions.randMinMax(0, 300),
+      Functions.randMinMax(0, 300),
+      Functions.randMinMax(0, 300),
+      Functions.randMinMax(0, 300),
+      Functions.randMinMax(0, 300),
+      Functions.randMinMax(0, 300),
+      Functions.randMinMax(0, 300),
+    ];
+
+    this.bonus = new Bonus(this.main, arrayBonusPay);
+    this.homeContainer.addChild(this.bonus.container);
     this.scene.deleteBubbles();
     this.rise();
-    const bonusPay = this.slotgame.getBonusPayout(bonusCount);
-    const arrayBonusPay = [];
   }
 
 

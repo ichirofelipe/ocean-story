@@ -1,0 +1,55 @@
+{
+	"frames": {
+		"clamp-close.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 300,
+				"h": 169
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 169
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 169
+			}
+		},
+		"frame.png": {
+			"frame": {
+				"x": 1,
+				"y": 172,
+				"w": 1280,
+				"h": 720
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1280,
+				"h": 720
+			},
+			"sourceSize": {
+				"w": 1280,
+				"h": 720
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "bonus.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 1282,
+			"h": 893
+		},
+		"scale": "1"
+	}
+}

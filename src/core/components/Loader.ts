@@ -62,6 +62,9 @@ export default class Loader {
         this.loader.add('gabi', 'assets/images/scene/animations/gabi/gabi.json');
         this.loader.add('bird', 'assets/images/scene/animations/bird/bird.json');
         this.loader.add('homebonus', 'assets/images/home/bonus/bonus.json');
+        this.loader.add('clam-white', 'assets/images/home/bonus/clam-white/clam-white.json');
+        this.loader.add('clam-gold', 'assets/images/home/bonus/clam-gold/clam-gold.json');
+        this.loader.add('clam-black', 'assets/images/home/bonus/clam-black/clam-black.json');
         
         //SYMBOL ANIMATION
         this.loader.add('a', 'assets/images/symbols/animations/a/a.json');

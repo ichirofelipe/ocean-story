@@ -1,8 +1,28 @@
 {
 	"frames": {
-		"clamp-close.png": {
+		"accept.png": {
 			"frame": {
 				"x": 1,
+				"y": 1,
+				"w": 154,
+				"h": 76
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 154,
+				"h": 76
+			},
+			"sourceSize": {
+				"w": 154,
+				"h": 76
+			}
+		},
+		"clamp-close.png": {
+			"frame": {
+				"x": 157,
 				"y": 1,
 				"w": 300,
 				"h": 169
@@ -38,6 +58,26 @@
 			"sourceSize": {
 				"w": 1280,
 				"h": 720
+			}
+		},
+		"reject.png": {
+			"frame": {
+				"x": 459,
+				"y": 1,
+				"w": 154,
+				"h": 76
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 154,
+				"h": 76
+			},
+			"sourceSize": {
+				"w": 154,
+				"h": 76
 			}
 		}
 	},

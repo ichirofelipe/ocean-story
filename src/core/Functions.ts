@@ -33,6 +33,11 @@ const randMinMax = (min:number, max:number) => {
 
 const getSprite = (loader: PIXI.Loader, setting: any) => {
   let img;
+  let loaderName = 'scene';
+
+  if(setting.loaderName !== undefined)
+    loaderName = setting.loaderName
+
   if(setting.isAnimated){
     let textures: Array<PIXI.Texture> = [];
     for(let tmp in loader.resources![`${setting.name}`].textures){
@@ -45,13 +50,18 @@ const getSprite = (loader: PIXI.Loader, setting: any) => {
     if(setting.isPlay !== undefined && setting.isPlay === false)
       img.stop();
   } else {
-    const texture = loader.resources!.scene.textures![`${setting.name}.png`];
+    const texture = loader.resources![loaderName].textures![`${setting.name}.png`];
     img = new PIXI.Sprite(texture);
   }
 
   if(setting.height !== undefined){
     img.width = Helpers.autoWidth(img, setting.height);
     img.height = setting.height;
+  }
+
+  if(setting.width !== undefined){
+    img.height = Helpers.autoHeight(img, setting.width);
+    img.width = setting.width;
   }
 
   if(setting.rotation !== undefined){

@@ -1,0 +1,615 @@
+{
+	"frames": {
+		"clam-black_00000.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00001.png": {
+			"frame": {
+				"x": 302,
+				"y": 1,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00002.png": {
+			"frame": {
+				"x": 603,
+				"y": 1,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00003.png": {
+			"frame": {
+				"x": 904,
+				"y": 1,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00004.png": {
+			"frame": {
+				"x": 1205,
+				"y": 1,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00005.png": {
+			"frame": {
+				"x": 1,
+				"y": 254,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00006.png": {
+			"frame": {
+				"x": 302,
+				"y": 254,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00007.png": {
+			"frame": {
+				"x": 603,
+				"y": 254,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00008.png": {
+			"frame": {
+				"x": 904,
+				"y": 254,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00009.png": {
+			"frame": {
+				"x": 1205,
+				"y": 254,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00010.png": {
+			"frame": {
+				"x": 1,
+				"y": 507,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00011.png": {
+			"frame": {
+				"x": 302,
+				"y": 507,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00012.png": {
+			"frame": {
+				"x": 603,
+				"y": 507,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00013.png": {
+			"frame": {
+				"x": 904,
+				"y": 507,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00014.png": {
+			"frame": {
+				"x": 1205,
+				"y": 507,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00015.png": {
+			"frame": {
+				"x": 1,
+				"y": 760,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00016.png": {
+			"frame": {
+				"x": 302,
+				"y": 760,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00017.png": {
+			"frame": {
+				"x": 603,
+				"y": 760,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00018.png": {
+			"frame": {
+				"x": 904,
+				"y": 760,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00019.png": {
+			"frame": {
+				"x": 1205,
+				"y": 760,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00020.png": {
+			"frame": {
+				"x": 1,
+				"y": 1013,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00021.png": {
+			"frame": {
+				"x": 302,
+				"y": 1013,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00022.png": {
+			"frame": {
+				"x": 603,
+				"y": 1013,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00023.png": {
+			"frame": {
+				"x": 904,
+				"y": 1013,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00024.png": {
+			"frame": {
+				"x": 1205,
+				"y": 1013,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00025.png": {
+			"frame": {
+				"x": 1506,
+				"y": 1,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00026.png": {
+			"frame": {
+				"x": 1506,
+				"y": 254,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00027.png": {
+			"frame": {
+				"x": 1506,
+				"y": 507,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00028.png": {
+			"frame": {
+				"x": 1506,
+				"y": 760,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		},
+		"clam-black_00029.png": {
+			"frame": {
+				"x": 1506,
+				"y": 1013,
+				"w": 299,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 299,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 299,
+				"h": 251
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "clam-black.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 1806,
+			"h": 1265
+		},
+		"scale": "1"
+	}
+}

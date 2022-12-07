@@ -1,0 +1,55 @@
+{
+  "Flow": [
+    {
+      "instruction": "Please choose your clam.",
+      "clams": 1
+    },
+    {
+      "instruction": "Do you wish to open your clam now?",
+      "action": true
+    },
+    {
+      "instruction": "Please choose {clams} clams to be revealed.",
+      "clams": 3
+    },
+    {
+      "instruction": "Total Money Offer",
+      "offer": true,
+      "action": true
+    },
+    {
+      "instruction": "Please choose {clams} clams to be revealed.",
+      "clams": 2
+    },
+    {
+      "instruction": "Total Money Offer",
+      "offer": true,
+      "action": true
+    },
+    {
+      "instruction": "Please choose {clams} clam to be revealed.",
+      "clams": 1
+    },
+    {
+      "instruction": "Do you wish to open your clam now?",
+      "action": true
+    },
+    {
+      "instruction": "Congratulations!",
+      "offer": true,
+      "bigClam": true
+    }
+  ],
+  "clamSettings": {
+    "name": "clam-black",
+    "width": 120,
+    "animationSpeed": 0.15,
+    "isAnimated": true
+  },
+  "bigClamSettings": {
+    "name": "clam-black",
+    "width": 300,
+    "animationSpeed": 0.15,
+    "isAnimated": true
+  }
+}

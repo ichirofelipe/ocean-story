@@ -72,8 +72,8 @@ export default class Game {
   }
   
   private setSettings() {
-    PIXI.settings.ROUND_PIXELS = true;
-    PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
+    // PIXI.settings.ROUND_PIXELS = true;
+    // PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.HIGH;
 
     this.sceneContainer = new PIXI.Container;
     this.gameContainer = new PIXI.Container;
@@ -229,22 +229,27 @@ export default class Game {
   private startBonusGame(bonusCount: number) {
     const bonusPay = this.slotgame.getBonusPayout(bonusCount);
     const arrayBonusPay = [
-      Functions.randMinMax(0, 300),
-      Functions.randMinMax(0, 300),
-      Functions.randMinMax(0, 300),
-      Functions.randMinMax(0, 300),
-      Functions.randMinMax(0, 300),
-      Functions.randMinMax(0, 300),
-      Functions.randMinMax(0, 300),
-      Functions.randMinMax(0, 300),
+      Math.round(Functions.randMinMax(0, 100)),
+      Math.round(Functions.randMinMax(0, 100)),
+      Math.round(Functions.randMinMax(0, 100)),
+      Math.round(Functions.randMinMax(0, 100)),
+      Math.round(Functions.randMinMax(0, 100)),
+      Math.round(Functions.randMinMax(0, 100)),
+      Math.round(Functions.randMinMax(0, 100)),
+      Math.round(Functions.randMinMax(0, 100)),
     ];
 
-    this.bonus = new Bonus(this.main, arrayBonusPay);
+    this.bonus = new Bonus(this.main, arrayBonusPay, this.bonusDone.bind(this));
     this.homeContainer.addChild(this.bonus.container);
     this.scene.deleteBubbles();
     this.rise();
   }
 
+  private bonusDone(money: number) {
+    this.dive();
+    console.log('You won:', money);
+    //show jackpot animation
+  }
 
 
 

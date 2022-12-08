@@ -99,7 +99,7 @@ const formatNumber = (number: number) => {
   return num;
 }
 
-const formatGameNumber = (number: number) => {
+const formatGameNumber = (number: number, decimals: number = 2) => {
   let newnumber = '';
   if(number >= 0 && number <= 9){
     newnumber = '00'+number;
@@ -110,6 +110,7 @@ const formatGameNumber = (number: number) => {
   else{
     newnumber = number.toLocaleString("en-US");
   }
+  
   return newnumber;
 }
 
@@ -127,11 +128,16 @@ const toggleAnimations = (animations: Array<any>, play: boolean = true) => {
   })
 }
 
+const formatNum = (num: number, decimals: number = 2) => {
+  return num.toFixed(decimals).toString().replace(/\d(?=(\d{3})+\.)/g, '$&,');
+}
+
 export default {
   objGroupAnimation,
   randMinMax,
   getSprite,
   formatNumber,
   formatGameNumber,
-  toggleAnimations
+  toggleAnimations,
+  formatNum
 }

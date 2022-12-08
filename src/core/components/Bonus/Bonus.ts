@@ -19,6 +19,7 @@ export default class Bonus {
   private bigClam: PIXI.Graphics;
   private bigClamIndex: number;
   private bigClamValue: number;
+  private offerValue: number;
   private positionText: PIXI.Text;
   private instructionText: PIXI.Text;
   private offerText: PIXI.Text;
@@ -27,11 +28,13 @@ export default class Bonus {
   private clamsToPick: number = 0;
   private actionType: number;
   private activeClams: Array<Clam> = [];
-  private bonusDone: (money: number) => void;
+  private bonusPay: number;
+  private bonusDone: (money: number, percent: number) => void;
   
-  constructor(app: PIXI.Application, clams: Array<number>, bonusDone: (money: number) => void) {
+  constructor(app: PIXI.Application, clams: Array<number>, bonusPay: number, bonusDone: (money: number, percent: number) => void) {
     this.app = app;
     this.clams = clams;
+    this.bonusPay = bonusPay;
     this.container = new PIXI.Container;
     this.bonusDone = bonusDone;
 
@@ -79,8 +82,8 @@ export default class Bonus {
 
         if(this.bigClamIndex === undefined){
           this.clamsToPick--;
-          this.activeClams = this.activeClams.filter(aClam => aClam.value != clam.value);
           this.setBigClam(clam);
+          this.activeClams = this.activeClams.filter(aClam => aClam.value != clam.value);
           clam.disable();
           this.nextSequence();
           return;
@@ -162,6 +165,12 @@ export default class Bonus {
         this.bigClam.removeChildren();
         this.bigClam.addChild(img)
         this.createDisplayValue(this.bigClam, this.bigClamValue);
+
+        let money = this.bonusPay * (this.bigClamValue / 100);
+        let delayBeforeExit = setTimeout(() => {
+          this.bonusDone(money, this.bigClamValue);
+          clearTimeout(delayBeforeExit);
+        }, 5000);
       }
     })
   }
@@ -291,15 +300,33 @@ export default class Bonus {
       this.actionDisable();
     }
 
-    if(data.offer !== undefined)
-      this.updateText(this.offerText, '$1,430.25');
+    this.offerText.text = '';
+    if(data.offer !== undefined){
+      this.offerValue = Functions.randMinMax(20, 60);
+      let offerMoney = 0;
+      if(Functions.randMinMax(-1.5,1) > 0){
+        this.offerValue += 5;
+      } else {
+        this.offerValue -= 5;
+      }
+      offerMoney = this.bonusPay * (this.offerValue / 100);
+
+      if(this.sequence < Flow.length - 1){
+        this.bigClamValue = this.offerValue;
+        this.updateText(this.offerText, `${Functions.formatNum(offerMoney)}`);
+      }
+    }
     
     if(data.clams !== undefined && this.clamsToPick == 0)
       this.clamsToPick = data.clams;
 
     if(data.bigClam !== undefined){
       if(this.actionType == 0){
+
+        let offerMoney = this.bonusPay * (this.bigClamValue / 100);
+        this.updateText(this.offerText, `${Functions.formatNum(offerMoney)}`);
         this.showBigClam();
+
       } else {
         let clam = this.activeClams[0].clam;
         const clamAnim = gsap.to(clam, {
@@ -323,8 +350,14 @@ export default class Bonus {
           ease: 'none',
           onComplete: () => {
             bigClamAnim.revert();
+            let smallClamNewIndex = this.bigClamIndex;
             this.bigClamIndex = this.activeClams[0].position;
             this.bigClamValue = this.activeClams[0].value;
+            this.positionText.text = this.activeClams[0].position + 1;
+            this.activeClams[0].positionText.text = smallClamNewIndex + 1;
+
+            let offerMoney = this.bonusPay * (this.bigClamValue / 100);
+            this.updateText(this.offerText, `${Functions.formatNum(offerMoney)}`);
             this.showBigClam();
           }
         })
@@ -348,14 +381,9 @@ export default class Bonus {
   }
 
   private acceptOffer() {
-    let money = 1000;
     this.actionType = 0;
     this.sequence = Flow.length - 1;
     this.continueBonusSequence();
-
-    let delayBeforeExit = setTimeout(() => {
-      this.bonusDone(money);
-    }, 5000);
   }
 
   private createDisplayValue(clam: PIXI.Graphics, value: number) {
@@ -375,7 +403,7 @@ export default class Bonus {
       dropShadowBlur: 3
     })
 
-    const textValue = new PIXI.Text(value, style);
+    const textValue = new PIXI.Text(value.toFixed(0), style);
     textValue.x = ((clam.width - textValue.width) / 2) + 5;
     textValue.y = ((clam.height - textValue.height) / 2) - 30;
 

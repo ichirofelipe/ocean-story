@@ -1,8 +1,7 @@
 import * as PIXI from 'pixi.js';
 import Reel from './Reel';
 import Globals from '../../tools/globals.json';
-import {ActualRows, Columns} from '../../tools/settings.json';
-import { Graphics } from 'pixi.js';
+import {BonusNumber} from '../../tools/settings.json';
 
 export default class ReelsContainer {
   private app: PIXI.Application;
@@ -46,19 +45,20 @@ export default class ReelsContainer {
   }
 
   private slowSpinValidation() {
-    let blockToCheck = 4; // DEFAULT IS BONUS BLOCK
     let blockCount = 0;
 
     // SET TO DEFAULT VALUE
     Globals.slowSpinStart = -1;
 
+    console.log(this.reelsArray);
+
     // CHECK FOR BLOCK COUNT TO ANIMATE SLOW MO SPIN
     this.reelsArray.forEach((reel, reelIndex) => {
       const blockArray = reel.filter((block, index) => {
-        if(block == blockToCheck && index != 0 && index != this.reelsArray.length - 1)
+        if(block == BonusNumber && index != 0 && index != this.reelsArray.length - 1)
           return block
       })
-      if(blockCount > 1 && Globals.slowSpinStart == -1)
+      if(blockCount >= 2 && Globals.slowSpinStart == -1)
         Globals.slowSpinStart = reelIndex;
       if(blockArray!.length > 0)
         blockCount++;

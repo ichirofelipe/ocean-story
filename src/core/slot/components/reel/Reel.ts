@@ -20,10 +20,10 @@ export default class Reel {
   public reelOffsetY: number = ReelOffsetY; //block spacing
   private reelMask: PIXI.Graphics;
   private spinTicker: PIXI.Ticker;
-  private spinDuration: number = 1.5; //seconds
+  private spinDuration: number = 1; //seconds
   private spinStart: number;
   private spinBounce: number = 0.2; //seconds
-  private spinSuccessionDelay: number = 0.4; //seconds
+  private spinSuccessionDelay: number = 0.3; //seconds
   private reelStopped: () => void;
 
   constructor(app: PIXI.Application, blocks: Array<number>, reelIndex: number) {

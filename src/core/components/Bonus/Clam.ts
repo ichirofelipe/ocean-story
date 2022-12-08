@@ -5,7 +5,6 @@ import { clamSettings } from './bonusSettings.json';
 
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
-import { text } from 'stream/consumers';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -17,7 +16,7 @@ export default class Clam {
   public value: number;
   private perColumn: number = 2;
   public position: number;
-  private positionText: PIXI.Text;
+  public positionText: PIXI.Text;
   public clam: PIXI.Graphics;
   private clamSettings = {
     name: "clam-black",

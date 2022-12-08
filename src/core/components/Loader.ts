@@ -91,10 +91,16 @@ export default class Loader {
         this.loader.add('bomb', 'assets/images/plinko/bomb.json');
         this.loader.add('treasure', 'assets/images/plinko/treasure.json');
         this.loader.add('bottle', 'assets/images/plinko/bottle.json');
-
+        
         //playbutton
         this.loader.add('playbutton', 'assets/images/home/playbutton.json');
-
+        
+        //POPUPS
+        this.loader.add('mega_win', 'assets/images/popups/mega_win/mega_win.json');
+        this.loader.add('big_win', 'assets/images/popups/big_win/big_win.json');
+        this.loader.add('coin', 'assets/images/popups/coin/coin.json');
+        this.loader.add('overlay', 'assets/images/popups/overlay.png');
+        
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {

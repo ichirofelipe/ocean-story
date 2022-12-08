@@ -64,12 +64,14 @@ export default class Functions {
 
     //CHECK BONUS COMBINATION
     reels.forEach((reel, index) => {  
-      let bonusBlocks = reel.filter(val => val == BonusNumber);
+      let bonusBlocks = reel.filter(val => {
+        if(val == BonusNumber && index != 0 && index != reels.length - 1)
+          return val
+      });
       if(bonusBlocks.length > 0)
         bonusWin++
       
       reel.forEach((block,bIndex) => {
-        console.log(block);
         if(block == BonusNumber)
           bonusPattern.push(`${index}-${bIndex}`);
       })

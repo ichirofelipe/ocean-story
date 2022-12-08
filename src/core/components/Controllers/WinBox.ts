@@ -36,7 +36,7 @@ export default class DropBox {
         let reset = setTimeout(() => {
             this.text.text = '';
             clearTimeout(reset);
-        }, 4000);
+        }, 6000);
     }
 
     private center(){

@@ -104,7 +104,6 @@ export default class Home {
     } 
     this.playbtnAnimate = new PIXI.AnimatedSprite(this.playbtnTextures);
     this.playbtnAnimate.scale.set(.8) 
-    console.log(this.playbtnAnimate.height)
     this.playbtnAnimate.interactive = true;
     this.playbtnAnimate.buttonMode = true;
     this.playbtnAnimate.anchor.set(.5)

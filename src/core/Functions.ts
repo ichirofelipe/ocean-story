@@ -97,6 +97,9 @@ const formatGameNumber = (number: number) => {
   else if(number >= 10 && number <= 99){
     newnumber = '0'+number;
   }
+  else if(number == -1){
+    newnumber = 'Ꝏ';
+  }
   else{
     newnumber = number.toLocaleString("en-US");
   }

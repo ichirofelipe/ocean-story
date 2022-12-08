@@ -90,6 +90,10 @@ export default class Loader {
 
         //playbutton
         this.loader.add('playbutton', 'assets/images/home/playbutton.json');
+        //splash spinall no spin
+        this.loader.add('splash', 'assets/images/plinko/splash.json');
+        this.loader.add('spinall', 'assets/images/plinko/spinall.json');
+        this.loader.add('nospin', 'assets/images/plinko/nospin.json');
 
     }
 

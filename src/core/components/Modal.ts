@@ -86,21 +86,25 @@ export default class Modal {
 
         //game settings
         this.gamesettings = new GameSettings(this.app,this.container);
-        this.contents.push(this.gamesettings.gamesettings);
         this.gamesettings.gamesettings.alpha = 0;
-        this.container.addChild(this.gamesettings.gamesettings);
 
         //paytable
         this.paytable = new PayTable(this.app,this.container,this.menuheight,this.sidepadding);
         this.paytable.paytable.alpha = 1;
-        this.contents.push(this.paytable.paytable);
-        this.container.addChild(this.paytable.paytable);
 
         //game rules
         this.gamerules = new GameRules(this.app,this.container);
         this.gamerules.gamerules.alpha = 0;
+        
+        //push
+        this.contents.push(this.gamesettings.gamesettings);
+        this.contents.push(this.paytable.paytable);
         this.contents.push(this.gamerules.gamerules);
+
+        //add child
+        this.container.addChild(this.paytable.paytable);
         this.container.addChild(this.gamerules.gamerules);
+        this.container.addChild(this.gamesettings.gamesettings);
     }
 
     private addEvent(sprite: PIXI.Sprite, index: number){

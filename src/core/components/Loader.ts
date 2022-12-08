@@ -99,7 +99,7 @@ export default class Loader {
         this.loader.add('mega_win', 'assets/images/popups/mega_win/mega_win.json');
         this.loader.add('big_win', 'assets/images/popups/big_win/big_win.json');
         this.loader.add('coin', 'assets/images/popups/coin/coin.json');
-        this.loader.add('overlay', 'assets/images/popups/overlay.png');
+        this.loader.add('popups', 'assets/images/popups/popups.json');
         
     }
 

@@ -3,6 +3,7 @@ import Functions from '../../Functions';
 
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
+import Helpers from '../../slot/tools/Helpers';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -11,6 +12,7 @@ export default class Win {
   private app: PIXI.Application;
   public container: PIXI.Container;
   private coinsContainer: PIXI.Container;
+  private bubblesContainer: PIXI.Container;
   private money: number;
   private bet: number;
   private overlay: PIXI.Sprite;
@@ -35,6 +37,7 @@ export default class Win {
     this.bet = bet;
     this.container = new PIXI.Container;
     this.coinsContainer = new PIXI.Container;
+    this.bubblesContainer = new PIXI.Container;
     this.closeWin = closeWin;
     
     this.init();
@@ -45,6 +48,7 @@ export default class Win {
     this.createOverlay();
     this.createWin();
     this.createCoin();
+    this.createBubbles();
     this.createDisplayMoney();
   }
 
@@ -56,7 +60,7 @@ export default class Win {
   }
 
   private createOverlay() {
-    const texture = this.app.loader.resources!.overlay.texture;
+    const texture = this.app.loader.resources!.popups.textures!['overlay.png'];
     this.overlay = new PIXI.Sprite(texture);
     this.overlay.width = this.app.screen.width;
     this.overlay.height = this.app.screen.height;
@@ -70,6 +74,8 @@ export default class Win {
 
   private createWin() {
     this.win = Functions.getSprite(this.app.loader, this.winSettings);
+    // this.win.height = Helpers.autoHeight(this.win, 400)
+    // this.win.width = 400;
     this.win.x = (this.app.screen.width - this.win.width) / 2;
     this.win.y = (this.app.screen.height - this.win.height) / 2;
     this.win.anchor.set(0.5);
@@ -202,6 +208,78 @@ export default class Win {
     this.container.addChild(this.coinsContainer);
   }
 
+  private createBubbles() {
+    const texture = this.app.loader.resources!.popups.textures!['bubble-blue.png'];
+
+    for(let count = 0; count < 40; count++){
+      let bubble = new PIXI.Sprite(texture);
+      let size = Functions.randMinMax(20, 50);
+
+      bubble.height = Helpers.autoHeight(bubble, size)
+      bubble.width = size;
+      bubble.x = Functions.randMinMax(350, 400);
+      bubble.y = this.app.screen.height;
+      bubble.alpha = 0;
+
+      this.bubblesContainer.addChild(bubble);
+
+      const animationX = gsap.to(bubble, {
+        x: bubble.x - Functions.randMinMax(140, 250),
+        duration: Functions.randMinMax(3, 7),
+        ease: 'power.out'
+      })
+      const animationY = gsap.to(bubble, {
+        y: bubble.y - Functions.randMinMax(350, 500),
+        ease: 'sine.in',
+        duration: Functions.randMinMax(1.5, 2.5),
+        repeat: -1,
+        delay: Functions.randMinMax(0.1, 0.3)*count,
+        onStart: () => {
+          bubble.alpha = 1;
+        },
+        onRepeat: () => {
+          animationX.restart();
+        }
+      })
+
+    }
+
+    for(let count = 0; count < 40; count++){
+      let bubble = new PIXI.Sprite(texture);
+      let size = Functions.randMinMax(20, 50);
+
+      bubble.height = Helpers.autoHeight(bubble, size)
+      bubble.width = size;
+      bubble.x = Functions.randMinMax(500, 550);
+      bubble.y = this.app.screen.height;
+      bubble.alpha = 0;
+
+      this.bubblesContainer.addChild(bubble);
+
+      const animationX = gsap.to(bubble, {
+        x: bubble.x + Functions.randMinMax(140, 250),
+        duration: Functions.randMinMax(3, 7),
+        ease: 'power.out'
+      })
+      const animationY = gsap.to(bubble, {
+        y: bubble.y - Functions.randMinMax(350, 500),
+        ease: 'sine.in',
+        duration: Functions.randMinMax(1.5, 2.5),
+        repeat: -1,
+        delay: Functions.randMinMax(0.1, 0.3)*count,
+        onStart: () => {
+          bubble.alpha = 1;
+        },
+        onRepeat: () => {
+          animationX.restart();
+        }
+      })
+
+    }
+
+    this.container.addChild(this.bubblesContainer);
+  }
+
   public show() {
     gsap.to(this.overlay, {
       alpha: 1,
@@ -255,6 +333,13 @@ export default class Win {
       duration: 0.8,
       onComplete: () => {
         this.container.removeChild(this.coinsContainer);
+      }
+    })
+    gsap.to(this.bubblesContainer, {
+      alpha: 0,
+      duration: 0.8,
+      onComplete: () => {
+        this.container.removeChild(this.bubblesContainer);
       }
     })
   }

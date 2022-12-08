@@ -151,6 +151,7 @@ export default class Game {
     this.createModal();
 
     // this.dive();
+    // this.winPopup(2500, 50);
   }
 
   private dive() {

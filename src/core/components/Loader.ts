@@ -1,15 +1,26 @@
 import * as PIXI from 'pixi.js';
 const WebFont = require('webfontloader');
+import gsap from 'gsap';
+const {Howl, Howler} = require('howler');
 
 export default class Loader {
     public loader: PIXI.Loader;
     private app: PIXI.Application;
-    private loadingScreen: PIXI.Text;
+    private loadingScreen: PIXI.Sprite;
+    private container: PIXI.Container;
+    private btncontainer: PIXI.Container;
+    private loadingon: PIXI.Sprite;
+    private loadingoff: PIXI.Sprite;
+    private text: PIXI.Text;
+    private btn1: PIXI.Sprite;
+    private btn2: PIXI.Sprite;
     private onAssetsLoaded: () => void;
 
     constructor(app: PIXI.Application, onAssetsLoaded: () => void) {
         this.app = app;
         this.loader = app.loader;
+        this.container = new PIXI.Container();
+        this.btncontainer = new PIXI.Container();
         this.onAssetsLoaded = onAssetsLoaded;
         
         WebFont.load({
@@ -24,13 +35,32 @@ export default class Loader {
     }
 
     private init() {
-        this.loadAssets();
         this.createLoadingScreen(this.app.screen.width, this.app.screen.height);
-        this.app.stage.addChild(this.loadingScreen);
-
+        this.loadAssets();
+        this.loader.onProgress.add(() => {
+            if(this.loadingon.width <= 295){
+                this.loadingon.width += this.getRandomInt(1,5);
+            }
+        });
         this.loader.load(() => {
-            this.app.stage.removeChild(this.loadingScreen);
-            this.onAssetsLoaded();
+            this.loadingon.width = 295;
+            this.fadeInOut(this.loadingon, 0, .3);
+            this.fadeInOut(this.loadingoff, 0, .3);
+            let stopper = setTimeout(() => {
+                this.fadeInOut(this.text, 1, 1);
+                this.fadeInOut(this.btncontainer, .5, .2);
+                clearTimeout(stopper);
+            }, 100);
+        });
+    }
+
+    private fadeInOut(sprite: any, value: number, duration: number){
+        let gsapper = gsap.to(sprite, {
+            alpha: value,
+            duration: duration,
+            onComplete: () => {
+                gsapper.kill();
+            }
         });
     }
 
@@ -111,21 +141,86 @@ export default class Loader {
         this.loader.add('spinall', 'assets/images/plinko/spinall.json');
         this.loader.add('nospin', 'assets/images/plinko/nospin.json');
 
-        //sound
-        this.loader.add('bgm', 'assets/sounds/bgm.mp3');
-
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {
+        const logo = PIXI.Sprite.from('assets/images/loading/logo.png');
+        logo.width = 277;
+        logo.height = 131;
+        logo.position.x = (appWidth / 2) - (logo.width / 2);
+        logo.position.y = appHeight * .2;
+        this.loadingoff = PIXI.Sprite.from('assets/images/loading/loadingoff.png');
+        this.loadingoff.width = 277;
+        this.loadingoff.height = 6;
+        this.loadingoff.position.x = (appWidth / 2) - (this.loadingoff.width / 2);
+        this.loadingoff.position.y = logo.position.y + logo.height + 20;
+        this.loadingon = PIXI.Sprite.from('assets/images/loading/loadingon.png');
+        this.loadingon.width = 295;
+        this.loadingon.height = 24;
+        this.loadingon.position.x = (appWidth / 2) - (this.loadingon.width / 2);
+        this.loadingon.position.y = logo.position.y + logo.height + 11;
+        this.loadingScreen = PIXI.Sprite.from('assets/images/loading/bg.png');
+        this.loadingScreen.width = appWidth;
+        this.loadingScreen.height = appHeight;
+        this.loadingon.width = 1;
         const style = new PIXI.TextStyle({
             fontFamily: 'Questrial',
-            fontSize: 36,
-            fontWeight: 'bold',
+            fontSize: 15,
             fill: '#ffffff',
         });
-        const playText = new PIXI.Text('Loading...', style);
-        playText.x = (appWidth - playText.width) / 2;
-        playText.y = (appHeight - playText.height) / 2;
-        this.loadingScreen = playText;
+        this.text = new PIXI.Text('Do you want to play with sound?', style);
+        this.text.x = (appWidth - this.text.width) / 2;
+        this.text.y = logo.position.y + logo.height + 15;
+        this.text.alpha = 0;
+        
+        this.btn1 = PIXI.Sprite.from('assets/images/loading/btnenable.png');
+        this.btn1.width = 111;
+        this.btn1.height = 31;
+        this.btn1.interactive = true;
+        this.btn1.buttonMode = true;
+        this.btn1.addListener("pointerdown", () => {
+            this.startgame(true)
+        });
+
+        this.btn2 = PIXI.Sprite.from('assets/images/loading/btndisable.png');
+        this.btn2.width = 111;
+        this.btn2.height = 31;
+        this.btn2.position.x = this.btn1.width + 20;
+        this.btn2.interactive = true;
+        this.btn2.buttonMode = true;
+        this.btn2.addListener("pointerdown", () => {
+            this.startgame(false)
+        });
+
+        this.btncontainer.addChild(this.btn1);
+        this.btncontainer.addChild(this.btn2);
+        this.btncontainer.position.y = this.text.y + this.text.height + 15;
+        this.btncontainer.position.x = (appWidth / 2) - ((this.btn1.width + this.btn2.width + 20) / 2);
+        this.btncontainer.alpha = 0;
+
+        this.container.addChild(this.loadingScreen);
+        this.container.addChild(logo);
+        this.container.addChild(this.loadingoff);
+        this.container.addChild(this.loadingon);
+        this.container.addChild(this.text);
+        this.container.addChild(this.btncontainer);
+        this.app.stage.addChild(this.container);
+    }
+
+    private startgame(play: Boolean){
+        var sound = new Howl({
+            src: ['assets/sounds/bgm.mp3'],
+            loop: true
+        });
+        let id = sound.play();
+        if(!play){
+            sound.mute(true, id);
+        }
+        this.app.stage.removeChild(this.container);
+        this.onAssetsLoaded();
+    }
+
+    private getRandomInt(min: number, max: number) {
+        return Math.random() * (max - min) + min;
     }
 }

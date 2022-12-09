@@ -172,7 +172,7 @@ export default class Game {
       gsap.to(el.sprite, {
         y: el.posY??0,
         alpha: el.alpha??1,
-        // duration: this.animationSpeed,
+        duration: this.animationSpeed,
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
           this.stopAndPlay(true);

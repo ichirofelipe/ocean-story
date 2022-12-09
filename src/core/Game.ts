@@ -77,8 +77,8 @@ export default class Game {
     this.createHome();
     this.createSlot();
     this.createControllers();
-    this.createModal();
     this.createPlinko();
+    this.createModal();
     this.setObjAnimation();
     this.startGame();
 
@@ -493,7 +493,7 @@ export default class Game {
 
   private powerUp(){
     const money = this.allbet * this.powerup;
-    this.controller.winbox.updateWin(money);
+    this.addMoney(0,money);
     this.allbet = 0;
   }
 

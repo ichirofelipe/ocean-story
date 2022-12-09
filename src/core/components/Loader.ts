@@ -80,7 +80,8 @@ export default class Loader {
         this.loader.add('wild', 'assets/images/symbols/animations/wild/wild.json');
         
         //REEL ANIMATION
-        this.loader.add('reelEffect', 'assets/images/slot/reel-effect/reel-effect.json');
+        this.loader.add('reelEffectBg', 'assets/images/slot/reel-effect-bg/reel-effect-bg.json');
+        this.loader.add('reelEffectLines', 'assets/images/slot/reel-effect-lines/reel-effect-lines.json');
 
         
         //plinko animated characters

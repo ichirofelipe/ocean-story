@@ -188,19 +188,19 @@ export default class Game {
   }
   
   private rise() {
-    // this.riseGroupAnimation.forEach((el: any) => {
+    this.riseGroupAnimation.forEach((el: any) => {
 
-    //   gsap.to(el.sprite, {
-    //     y: el.posY??0,
-    //     alpha: el.alpha??1,
-    //     onComplete: () => {
-    //       this.stopAndPlay(false);
-    //       Functions.toggleAnimations(this.scene.homeAnimations, true);
-    //       Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
-    //     }
-    //   })
-    // })
-    this.stopAndPlay(false);
+      gsap.to(el.sprite, {
+        y: el.posY??0,
+        alpha: el.alpha??1,
+        onComplete: () => {
+          this.stopAndPlay(false);
+          Functions.toggleAnimations(this.scene.homeAnimations, true);
+          Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
+        }
+      })
+    })
+    // this.stopAndPlay(false);
   }
 
   private slotPlay() {
@@ -211,7 +211,7 @@ export default class Game {
     this.updateGameMinus();
     this.slotgame.getResult((money: number) => {
       if(money != 0)
-        this.addMoney(2, money);
+        this.addMoney(3, money);
       
       //CHECK IF THERE ARE SYMBOLS TO ANIMATE
       if(this.slotgame.symbolsToAnimate.length > 0){
@@ -281,7 +281,7 @@ export default class Game {
     Globals.isSpinning = false;
     this.dive();
 
-    this.addMoney(2, money);
+    this.addMoney(3, money);
   }
 
   private winPopup(money:number, bet:number) {
@@ -395,6 +395,9 @@ export default class Game {
       }
       this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['play.png'];
     }
+
+    this.slotgame.bet = this.bet;
+    this.slotgame.updateFunctions();
   }
   private plusBet(){
     this.resetGame();
@@ -504,7 +507,6 @@ export default class Game {
     }
     else if(type == 2) {
       addedmoney = (this.bet * 2);
-      
     }
     else{
       addedmoney = money;

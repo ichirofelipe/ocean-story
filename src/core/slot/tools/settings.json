@@ -747,5 +747,19 @@
       "total":10497600.00 
     }
 
+  ],
+  "ReelEffects": [
+    {
+      "name": "reelEffectBg",
+      "isAnimated": true,
+      "isPlay": false,
+      "animationSpeed": 0.6
+    },
+    {
+      "name": "reelEffectLines",
+      "isAnimated": true,
+      "isPlay": false,
+      "animationSpeed": 0.6
+    }
   ]
 }

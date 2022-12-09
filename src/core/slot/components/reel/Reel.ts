@@ -1,13 +1,14 @@
 import * as PIXI from 'pixi.js';
 import Block from './Block';
-import {Reel as ReelValues, Columns, Rows, ActualRows, ReelOffsetX, ReelOffsetY} from '../../tools/settings.json';
+import {Reel as ReelValues, Columns, Rows, ActualRows, ReelOffsetX, ReelOffsetY, ReelEffects} from '../../tools/settings.json';
 import Globals from '../../tools/globals.json';
 
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import Helpers from '../../tools/Helpers';
-import { settings } from 'pixi.js';
+import { AnimatedSprite, settings } from 'pixi.js';
 import { clear } from 'console';
+import Functions from '../../../Functions';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -15,6 +16,7 @@ PixiPlugin.registerPIXI(PIXI);
 export default class Reel {
   private app: PIXI.Application;
   public container: PIXI.Container;
+  public reelEffectContainer: PIXI.Container;
   public blocks: Array<number> = [];
   private reelIndex: number;
   public reelBlocks: Array<Block> = [];
@@ -27,6 +29,8 @@ export default class Reel {
   private spinStart: number;
   private spinBounce: number = 0.2; //seconds
   private spinSuccessionDelay: number = 0.3; //seconds
+  public reelEffects: Array<any> = [];
+  private reelEffectsFlag: boolean = false;
   private reelStopped: () => void;
 
   constructor(app: PIXI.Application, blocks: Array<number>, reelIndex: number) {
@@ -34,6 +38,7 @@ export default class Reel {
     this.blocks = blocks;
     this.reelIndex = reelIndex;
     this.container = new PIXI.Container;
+    this.reelEffectContainer = new PIXI.Container;
 
     this.init();
   }
@@ -89,11 +94,15 @@ export default class Reel {
       return 0;
     if(this.reelIndex < Globals.slowSpinStart)
       return 0;
-    return 1500 * ((this.reelIndex - Globals.slowSpinStart) + 1);
+    return 2000 * ((this.reelIndex - Globals.slowSpinStart) + 1);
   }
 
   private spinner() {
     let reelSpeed = this.reelSpeed;
+
+    if(this.prolongSpin() > 0 && (Date.now() - (this.spinStart - 2000)) > 0 && !this.reelEffectsFlag){
+      this.showReelEffects();
+    }
 
     this.reelBlocks.forEach((block, index) => {
 
@@ -135,6 +144,7 @@ export default class Reel {
       yoyo: true,
       onComplete: () => {
         this.activateMask(false);
+        this.hideReelEffects();
         if(this.reelIndex == Columns - 1){
           this.reelStopped();
         }
@@ -175,33 +185,45 @@ export default class Reel {
   }
 
   private createReelEffect() {
-    const textures = [];
-    for(let tmp in this.app.loader.resources!.reelEffect.textures){
-      const texture = PIXI.Texture.from(tmp);
-      textures.push(texture);
-    }
+    ReelEffects.forEach(effect => {
+      let reelEffect = Functions.getSprite(this.app.loader, effect);
+      reelEffect.height = this.reelBlocks[0].size * ActualRows;
+      reelEffect.width = this.reelBlocks[0].size * this.reelBlocks[0].overlapPixels;
+      reelEffect.y = this.reelMask.y;
+      reelEffect.alpha = 0.01;
 
-    let leftReelEffect = new PIXI.AnimatedSprite(textures);
-    leftReelEffect.play();
-    leftReelEffect.animationSpeed = 0.4;
-    leftReelEffect.height = (this.reelBlocks[0].size*this.reelBlocks[0].overlapPixels) * ActualRows;
-    leftReelEffect.width = 35;
-    leftReelEffect.y = ((this.reelBlocks[0].size*this.reelBlocks[0].overlapPixels)/2) + 10;
+      this.reelEffects.push(reelEffect);
+    })
+    
+    Functions.toggleAnimations(this.reelEffects, true);
+    
+  }
+  
+  public showReelEffects() {
+    this.reelEffectsFlag = true;
+    
+    this.reelEffects.forEach(effect => {
+      gsap.to(effect, {
+        alpha: 1,
+        duration: 0.5,
+        onStart: () => {
+          effect.play();
+        }
+      })
+    })
+  }
 
-    this.container.addChild(leftReelEffect);
+  public hideReelEffects() {
+    this.reelEffectsFlag = false;
 
-
-    let rightReelEffect = new PIXI.AnimatedSprite(textures);
-    let delayEffect = setTimeout(() => {
-      rightReelEffect.play();
-      clearTimeout(delayEffect);
-    }, 3200);
-    rightReelEffect.animationSpeed = 0.4;
-    rightReelEffect.height = (this.reelBlocks[0].size*this.reelBlocks[0].overlapPixels) * ActualRows;
-    rightReelEffect.width = 35;
-    rightReelEffect.x = (this.reelBlocks[0].size*this.reelBlocks[0].overlapPixels + ReelOffsetX) - rightReelEffect.width;
-    rightReelEffect.y = (this.reelBlocks[0].size*this.reelBlocks[0].overlapPixels)/2;
-
-    this.container.addChild(rightReelEffect);
+    this.reelEffects.forEach(effect => {
+      gsap.to(effect, {
+        alpha: 0.01,
+        duration: 0.5,
+        onComplete: () => {
+          effect.gotoAndStop(0);
+        }
+      })
+    })
   }
 }

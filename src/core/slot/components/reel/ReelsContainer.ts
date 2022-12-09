@@ -27,9 +27,12 @@ export default class ReelsContainer {
     this.reelsArray.forEach((reel, index) => {
       this.reel = new Reel(this.app, reel, index);
       this.reel.container.x = ((this.reel.reelBlocks[0].size - ((this.reel.reelBlocks[0].sizeAdjustment/2))) + this.reel.reelOffsetX) * index;
-
+      this.reel.reelEffects[0].x = this.reel.container.x;
+      this.reel.reelEffects[1].x = this.reel.container.x;
       this.reels.push(this.reel);
+      this.container.addChild(this.reel.reelEffects[0]);
       this.container.addChild(this.reel.container);
+      this.container.addChild(this.reel.reelEffects[1]);
     })
   }
 

@@ -11,8 +11,8 @@ export default class Slot {
   public container: PIXI.Container;
   private testFunctions: TestFunctions;
   private functions: Functions;
-  private bet: number = 1;
-  private readonly RTP: number = 1;
+  public bet: number = 1;
+  public RTP: number = 1;
   private reelsContainer: ReelsContainer;
   private background: PIXI.Sprite;
   private logo: PIXI.Sprite;
@@ -38,6 +38,11 @@ export default class Slot {
     this.createReelsContainer();
     this.createBackground();
     this.createLogo();
+  }
+
+  public updateFunctions(){
+    this.testFunctions = new TestFunctions(this.bet, this.RTP);
+    this.functions = new Functions(this.bet, this.RTP);
   }
 
   private settings() {

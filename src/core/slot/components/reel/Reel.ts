@@ -55,6 +55,9 @@ export default class Reel {
 
       reelBlock.container.y = (reelBlock.size + this.reelOffsetY) * index;
 
+      if(index == 0 || index == this.blocks.length - 1)
+        reelBlock.container.alpha = 0;
+
       this.reelBlocks.push(reelBlock);
       this.container.addChild(reelBlock.container)
     })
@@ -82,6 +85,10 @@ export default class Reel {
       onComplete: () => {
         this.spinTicker.start();
         this.spinStart = Date.now() + (this.spinDuration*1000) + this.prolongSpin();
+        this.reelBlocks.forEach((block, index) => {
+          if(index == 0 || index == this.reelBlocks.length - 1)
+            block.container.alpha = 1;
+        })
         this.activateMask(true);
         return;
       }
@@ -137,19 +144,55 @@ export default class Reel {
     this.spinTicker.stop();
     let bounceForce = 20;
 
-    gsap.to(this.container, {
-      y: this.container.y + bounceForce,
-      duration: this.spinBounce,
-      repeat: 1,
-      yoyo: true,
-      onComplete: () => {
-        this.activateMask(false);
-        this.hideReelEffects();
-        if(this.reelIndex == Columns - 1){
-          this.reelStopped();
+    if(!this.reelEffectsFlag){
+
+      gsap.to(this.container, {
+        y: this.container.y + bounceForce,
+        duration: this.spinBounce,
+        repeat: 1,
+        yoyo: true,
+        onComplete: () => {
+          this.activateMask(false);
+          this.hideReelEffects();
+          if(this.reelIndex == Columns - 1){
+            this.reelStopped();
+          }
+          this.reelBlocks.forEach((block, index) => {
+            if(index == 0 || index == this.reelBlocks.length - 1)
+              block.container.alpha = 0;
+          })
         }
-      }
-    })
+      })
+
+    } else{
+      gsap.to(this.container, {
+        y: this.container.y + 15,
+        duration: 0.1,
+        repeat: 1,
+        yoyo: true,
+        ease: 'power.in',
+        onComplete: () => {
+          this.activateMask(false);
+          this.hideReelEffects();
+          if(this.reelIndex == Columns - 1){
+            this.reelStopped();
+          }
+          this.reelBlocks.forEach((block, index) => {
+            if(index == 0 || index == this.reelBlocks.length - 1)
+              block.container.alpha = 0;
+          })
+        }
+      })
+
+      gsap.to(this.app.stage, {
+        y: this.app.stage.y + 15,
+        duration: 0.1,
+        repeat: 1,
+        yoyo: true,
+        ease: 'power.in',
+      })
+
+    }
   }
 
   private createMask() {
@@ -187,7 +230,7 @@ export default class Reel {
   private createReelEffect() {
     ReelEffects.forEach(effect => {
       let reelEffect = Functions.getSprite(this.app.loader, effect);
-      reelEffect.height = this.reelBlocks[0].size * ActualRows;
+      reelEffect.height = this.reelBlocks[0].size * ActualRows - 5;
       reelEffect.width = this.reelBlocks[0].size * this.reelBlocks[0].overlapPixels;
       reelEffect.y = this.reelMask.y;
       reelEffect.alpha = 0.01;

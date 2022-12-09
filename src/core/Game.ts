@@ -161,7 +161,7 @@ export default class Game {
     this.main.stage.addChild(this.mainContainer);
 
 
-    this.dive();
+    // this.dive();
     // this.winPopup(2500, 50);
   }
 

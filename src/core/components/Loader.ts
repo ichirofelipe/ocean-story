@@ -106,6 +106,9 @@ export default class Loader {
         this.loader.add('spinall', 'assets/images/plinko/spinall.json');
         this.loader.add('nospin', 'assets/images/plinko/nospin.json');
 
+        //sound
+        this.loader.add('bgm', 'assets/sounds/bgm.mp3');
+
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {

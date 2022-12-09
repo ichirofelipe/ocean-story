@@ -1,0 +1,266 @@
+{
+    "contents" : [
+        {
+            "id" : 1,
+            "withimage" : false,
+            "description" : "Ocean story slot which the user gets to play classic reel based slot and plinko at the same time. It's also a 5 reels and 3 rows slot machine with 9 pay lines. The game is always played with all pay lines active.The theoretical retrun to player for this game is 93.33%.",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 2,
+            "withimage" : false,
+            "description" : "Starting with the leftmost reel, wins on a payline are examinde sequentially. Multiple paylines wins are added. For pay line wins, wild symbols can be used in place of al symbols other than the bonus symbol.",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 3,
+            "withimage" : false,
+            "description" : "During a spin, up to three bonus symbols may appear. The bonus game is initiated by landing three bonus symbols anywhere on the playing field. Compared to regular symbols, super jackpot symbols pay out more. The user's chosen currency is used to display winning. Your chosen bet size will automatically be reduced to the largest amount if your balance falls bellow that amount.",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 4,
+            "withimage" : false,
+            "description" : "Each symbols for the plinko triggers corresponding actions.",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 5,
+            "withimage" : false,
+            "description" : "All starfish symbols triggers spin all and then spin all the reels for the slot.",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 6,
+            "withimage" : false,
+            "description" : "All fish symbols splits the bet amount and then add to the player's win.",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 7,
+            "withimage" : false,
+            "description" : "The sea urchin symbol is a void symbol and does nothing for the reels.",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 8,
+            "withimage" : false,
+            "description" : "Water symbol increases the level bar amound and when the max level is reached for both bars the total bet amount he spent from the time he started (without reloading the game) will then be multiplied by 40 and the play will be rewarded with total result.",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 9,
+            "withimage" : false,
+            "description" : "The treasure chest symbol multiplies the bet amount into 2 and player gets the result.",
+            "istitle" : false,
+            "images": [],
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 10,
+            "withimage" : false,
+            "description" : "BONUS GAME",
+            "images": [],
+            "istitle" : true,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : false
+        },
+        {
+            "id" : 11,
+            "withimage" : false,
+            "description" : "When three or more bonus symbols appear on the reels, the bonus game is activated. The game interface will scroll to the top if it is activated, and 8 clamps will then be displayed. An initial random clam is chosen and taken out of the pool, but the outcome is kept a secret. The player has two options: manually remove clams from the pool and accept a new offer based on the average of the remaining clams, or open this clam, reveal the outcome, and end the bonus game to receive the amount of the clam that he gets. The player has two options: accept and take the offered money to end the bonus game, or reject once more and make additional picks.",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 12,
+            "withimage" : false,
+            "description" : "This keeps happening until there is just one clam left. When that occurs, the player is given the option to either open the first clam that was given to them at random or the remaining ones. The bonus game will then come to a finish, and the player will receive the quantity of clams he selected.",
+            "istitle" : false,
+            "images": [],
+            "type" : 0,
+            "issubtitle": false,
+            "text" : true
+        },
+        {
+            "id" : 13,
+            "withimage" : false,
+            "description" : "HOW TO PLAY",
+            "istitle" : true,
+            "images": [],
+            "type" : 0,
+            "issubtitle": false,
+            "text" : false
+        },
+        {
+            "id" : 14,
+            "withimage" : true,
+            "description" : "Click buttons above to adjust the number of game/drop for the slot",
+            "images": ["icon_minu.png","icon_plus.png"],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : false
+        },
+        {
+            "id" : 15,
+            "withimage" : true,
+            "description" : "Click the buttons above to adjust the amount per bet",
+            "images": ["icon_arrowdown.png","icon_arrowup.png"],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : false
+        },
+        {
+            "id" : 16,
+            "withimage" : true,
+            "description" : "Click the button above to play and pause the game",
+            "images": ["play.png"],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : false
+        },
+        {
+            "id" : 17,
+            "withimage" : true,
+            "description" : "Opens the menu for paytable, settings and game rules",
+            "images": ["icon_menu.png"],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : false
+        },
+        {
+            "id" : 18,
+            "withimage" : true,
+            "description" : "Opens the menu for paytable, settings and game rules",
+            "images": [
+                {
+                    "img" : "icon_settings.png",
+                    "text" : "Navigate to game settings"
+                },
+                {
+                    "img" : "icon_rules.png",
+                    "text" : "Navigate to game rules"
+                },
+                {
+                    "img" : "icon_info.png",
+                    "text" : "Navigate to paytable"
+                }
+            ],
+            "istitle" : false,
+            "type" : 1,
+            "text" : false
+        },
+        {
+            "id" : 19,
+            "withimage" : false,
+            "description" : "GAME SETTINGS",
+            "istitle" : true,
+            "images": [],
+            "type" : 0,
+            "issubtitle": false,
+            "text" : false
+        },
+        {
+            "id" : 20,
+            "withimage" : false,
+            "description" : "QUICK SPIN",
+            "istitle" : false,
+            "images": [],
+            "type" : 0,
+            "issubtitle": true,
+            "text" : false
+        },
+        {
+            "id" : 21,
+            "withimage" : false,
+            "description" : "Choose the quick spin option to have the game start and stop automatically when it is release",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : false
+        },
+        {
+            "id" : 22,
+            "withimage" : false,
+            "description" : "AMBIENT",
+            "istitle" : false,
+            "images": [],
+            "type" : 0,
+            "issubtitle": true,
+            "text" : false
+        },
+        {
+            "id" : 23,
+            "withimage" : false,
+            "description" : "Turns on and off the game's background music and sound effects",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : false
+        },
+        {
+            "id" : 24,
+            "withimage" : false,
+            "description" : "SOUND FX",
+            "istitle" : false,
+            "images": [],
+            "type" : 0,
+            "issubtitle": true,
+            "text" : false
+        },
+        {
+            "id" : 25,
+            "withimage" : false,
+            "description" : "Enables and disables the game's sound effects",
+            "images": [],
+            "istitle" : false,
+            "type" : 0,
+            "issubtitle": false,
+            "text" : false
+        }
+    ]
+}

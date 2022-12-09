@@ -1,22 +1,16 @@
 {
   "GameSettings": [
     {
-        "title" : "QUICK SPIN",
-        "description" : "PLAY FASTER BY REDUCING TOTAL SPIN TIME",
+        "title" : "AMBIENT MUSIC",
+        "description" : "TURN ON OFF THE GAME MUSIC",
         "textposition1" : [120,140],
         "toggleposition1" : 130
     },
     {
-        "title" : "AMBIENT MUSIC",
-        "description" : "TURN ON OFF THE GAME MUSIC",
-        "textposition1" : [210,230],
-        "toggleposition1" : 220
-    },
-    {
         "title" : "SOUND FX",
         "description" : "TURN ON OFF THE GAME SOUNDS",
-        "textposition1" : [300,320],
-        "toggleposition1" : 310
+        "textposition1" : [210,230],
+        "toggleposition1" : 220
     }
 ]
 }

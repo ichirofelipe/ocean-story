@@ -101,6 +101,11 @@ export default class Loader {
         this.loader.add('coin', 'assets/images/popups/coin/coin.json');
         this.loader.add('popups', 'assets/images/popups/popups.json');
         
+        //splash spinall no spin
+        this.loader.add('splash', 'assets/images/plinko/splash.json');
+        this.loader.add('spinall', 'assets/images/plinko/spinall.json');
+        this.loader.add('nospin', 'assets/images/plinko/nospin.json');
+
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {

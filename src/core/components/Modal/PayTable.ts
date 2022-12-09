@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import json from './paytableSettings.json';
 import SlotUI from './SlotUI';
 import PlinkoUI from './PlinkoUI';
+import PatternsUI from './PatternsUI';
 
 export default class PayTable {
     private container: PIXI.Container;
@@ -26,7 +27,8 @@ export default class PayTable {
         this.sidepadding = sidepadding;
         this.components = [
             SlotUI,
-            PlinkoUI
+            PlinkoUI,
+            PatternsUI
         ];
         this.titlestyle = new PIXI.TextStyle({
             fontFamily: 'Arial',
@@ -61,8 +63,14 @@ export default class PayTable {
         const subtitle2 = new PIXI.Text('PLINKO', this.subtitlestyle);
         subtitle2.position.x = (paytablewidth / 2) - (subtitle2.width / 2);
         subtitle2.position.y =  posy[1];
-        subtitle.alpha = 0;
+        subtitle2.alpha = 0;
         this.texts.push(subtitle2);
+
+        const subtitle3 = new PIXI.Text('PATTERNS', this.subtitlestyle);
+        subtitle3.position.x = (paytablewidth / 2) - (subtitle3.width / 2);
+        subtitle3.position.y =  posy[1];
+        subtitle3.alpha = 0;
+        this.texts.push(subtitle3);
 
         //add arrow left right
         const lefttexture = this.app.loader.resources!.controllers.textures!['icon_arrowleft.png'];
@@ -103,6 +111,7 @@ export default class PayTable {
         this.paytable.addChild(title);
         this.paytable.addChild(subtitle);
         this.paytable.addChild(subtitle2);
+        this.paytable.addChild(subtitle3);
         this.paytable.addChild(this.rightarrow);
         this.paytable.addChild(this.leftarrow);
         this.paytable.position.x = ((this.app.screen.width / 2) - (paytablewidth / 2));

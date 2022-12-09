@@ -61,7 +61,16 @@ export default class Game {
     private addmoney: (type: number) => void;
     private updategameplus: () => void;
     private updategameminus: () => void;
-    private readonly reelSpeed: number = 3;
+    private powerup: () => void;
+    public ballArray: Array<Ball> = [];
+    private ballIndex: number = 0;
+    private origheightright: number;
+    private origpositionright: number;
+    private origheightleft: number;
+    private origpositionleft: number;
+    private readonly fullbarheight: number = 310;
+    private readonly baradd: number = 6.2;
+    private readonly reelSpeed: number = 4;
     private readonly ballRadius: number = 14;
     private readonly pinRadius: number = 5;
     private readonly pinGap: number = 10;
@@ -69,7 +78,8 @@ export default class Game {
     private readonly stageWidth: number = .9;
     private readonly adjusty: number = 4;
     private readonly clawspeed: number = 4;
-    constructor(app: PIXI.Application, loader: PIXI.Loader, updategameplus: () => void, updategameminus: () => void, decmoney: () => void, dropoff: () => void, addmoney: (type: number) => void) {
+
+    constructor(app: PIXI.Application, loader: PIXI.Loader, updategameplus: () => void, updategameminus: () => void, decmoney: () => void, dropoff: () => void, addmoney: (type: number) => void, powerup: () => void) {
         this.app = app;
         this.loader = loader;
         this.stage = this.loader.resources!.plinko.textures!['stage.png'];
@@ -98,6 +108,7 @@ export default class Game {
         this.addmoney = addmoney;
         this.updategameplus = updategameplus;
         this.updategameminus = updategameminus;
+        this.powerup = powerup;
         this.init();
     }
 
@@ -116,7 +127,49 @@ export default class Game {
         this.ticker2 = new PIXI.Ticker();
         this.ticker2.add(this.movementsReel.bind(this));
         // this.ticker2.start();
+        // this.createMotionPath();
     }
+
+    // private createMotionPath(){
+    //     this.dropperContainer2 = new PIXI.Container();
+    //     for(let img in this.loader.resources!.crane.textures){
+    //         this.craneTexture2 = PIXI.Texture.from(img);
+    //         this.craneTextures2.push(this.craneTexture2);
+    //     } 
+    //     this.craneAnimate2 = new PIXI.AnimatedSprite(this.craneTextures2);
+    //     this.craneAnimate2.width = 55;
+    //     this.craneAnimate2.height = 80;
+    //     this.ball = new Coin((this.craneAnimate2.width - (this.ballRadius * 2)), this.craneAnimate2.height - this.ballRadius, this.ballRadius, this.loader);
+    //     this.dropperContainer2.addChild(this.craneAnimate2);
+    //     this.dropperContainer2.addChild(this.ball.ball);
+    //     this.craneAnimate2.animationSpeed = 0.2;
+        
+
+    //     const container = new PIXI.Container();
+    //     container.position.y = 230;
+    //     container.position.x = 5;
+
+    //     // const bunny = new PIXI.Sprite(this.loader.resources!.plinko.textures!['pin.png']);
+    //     // bunny.anchor.set(.5)
+    //     container.addChild(this.dropperContainer2);
+
+    //     gsap.to(this.dropperContainer2, {
+    //         duration: 3, 
+    //         repeat: -1,
+    //         yoyo: true,
+    //         ease: "none",
+    //         motionPath:{
+    //           path: 'M 0 0 L 0 -181 C 0 -225 0 -225 59 -225 H 350 C 415 -225 415 -225 415 -183 V 0'
+    //         },
+    //         onRepeat: () => {
+    //             console.log("wow")
+    //         }
+    //     });
+
+    //     this.container.addChild(container);
+
+    //     // this.container.addChild(this.dropperContainer2);
+    // }
 
 
     private createDropper(){
@@ -188,6 +241,8 @@ export default class Game {
         this.leftBarMask.endFill();
         this.leftBarMask.position.y = (this.leftBar.position.y + this.leftBar.height) - this.leftBarMask.height;
         this.leftBarMask.position.x = 24;
+        this.origheightleft = this.leftBarMask.height;
+        this.origpositionleft = this.leftBarMask.position.y;
         this.container2.addChild(this.leftBarMask);
         this.leftBar.mask = this.leftBarMask;
 
@@ -213,6 +268,8 @@ export default class Game {
         this.rightBarMask.drawRect(0,0,22,.1);
         this.rightBarMask.endFill();
         this.rightBarMask.position.y = (this.rightBar.position.y + this.rightBar.height) - this.rightBarMask.height;
+        this.origheightright = this.rightBarMask.height;
+        this.origpositionright = this.rightBarMask.position.y;
         this.rightBarMask.position.x = 439;
         this.container2.addChild(this.rightBarMask);
         this.rightBar.mask = this.rightBarMask;
@@ -436,8 +493,10 @@ export default class Game {
                 const x = (this.dropperContainer.position.x) + (this.craneAnimate.width - (this.ballRadius * 2)) + posx;
                 const y = this.dropperContainer.position.y + (this.craneAnimate.height - this.ballRadius);
                 const reelposition = this.mazeheight + this.mazeContainer.position.y + 15;
-                const ball = new Ball(x, y, this.ballRadius, this.loader, this.container, reelposition, this.imageArray, this.arrayPins, this.app, this.updateBar.bind(this), this.updategameplus, this.updategameminus, this.addmoney);
+                this.ballIndex++;
+                const ball = new Ball(x, y, this.ballRadius, this.loader, this.container, this.container2, reelposition, this.imageArray, this.arrayPins, this.app, this.updateBar.bind(this), this.updategameplus, this.updategameminus, this.addmoney, this.removeElement.bind(this), this.ballIndex);
                 this.container.addChild(ball.ball);
+                this.ballArray.push(ball);
             }
         };
         this.craneAnimate.onComplete = () => {
@@ -448,18 +507,79 @@ export default class Game {
         }
     }
 
+    private powerOff(height1: number, position1: number, height2: number, position2: number){
+        let gsapper = gsap.to(this.leftBarMask, {
+            height: height1,
+            y: position1,
+            alpha: 1,
+            duration: .3,
+            onComplete: () => {
+                let stopper = setTimeout(() => {
+                    gsapper.kill();
+                    clearTimeout(stopper);
+                }, 1000);
+            }
+        });
+
+        let gsapper2 = gsap.to(this.rightBarMask, {
+            height: height2,
+            y: position2,
+            alpha: 1,
+            duration: .3,
+            onComplete: () => {
+                let stopper = setTimeout(() => {
+                    gsapper2.kill();
+                    clearTimeout(stopper);
+                }, 1000);
+            }
+        });
+
+        this.powerup();
+    }
+
+    private powerUpChecker(mask: PIXI.Graphics){
+        if(mask.height >= this.fullbarheight){
+            this.powerOff(this.origheightleft, this.origpositionleft, this.origheightright, this.origpositionright);
+        }
+    }
+
+    private powerOn(mask: PIXI.Graphics, bar: PIXI.Sprite){
+        let gsapper = gsap.to(mask, {
+            height: mask.height = mask.height + this.baradd,
+            y: (bar.position.y + bar.height) - mask.height,
+            duration: 1,
+            onComplete: () => {
+                let stopper = setTimeout(() => {
+                    this.powerUpChecker(mask);
+                    gsapper.kill();
+                    clearTimeout(stopper);
+                }, 1000);
+            }
+        });
+    }
+
     private updateBar(type: string){
         if(type == 'right'){
-            this.rightBarMask.height = this.rightBarMask.height + 7.75;
-            this.rightBarMask.position.y = (this.rightBar.position.y + this.rightBar.height) - this.rightBarMask.height;
+            this.powerOn(this.rightBarMask, this.rightBar);
         }
         else{
-            this.leftBarMask.height = this.leftBarMask.height + 7.75;
-            this.leftBarMask.position.y = (this.leftBar.position.y + this.leftBar.height) - this.leftBarMask.height;
+            this.powerOn(this.leftBarMask, this.leftBar);
         }
     }
 
     private getRandomInt(min: number, max: number) {
         return Math.random() * (max - min) + min;
+    }
+
+    public removeElement(element: any){
+        let array: Array<Ball> = [];
+
+        this.ballArray.forEach(ball => {
+            if(ball.ballname != element){
+                array.push(ball);
+            }
+        });
+
+        this.ballArray = array;
     }
 }

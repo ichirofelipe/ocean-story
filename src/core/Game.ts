@@ -41,11 +41,15 @@ export default class Game {
   private slotgame: Slot;
   private bonus: Bonus;
   private start: Boolean = false;
-  private bet: number = 50;
+  private bet: number = 1;
+  private arrBetIndex: number = 0;
+  private arrBet: Array<number> = [1,5,10,20,50,100];
+  private arrDropIndex: number = 0;
+  private arrDrop: Array<number> = [5, 10, 25, 50, 100, 250, 500, 1000, -1];
   private money: number = 100000;
   private win: number = -1;
   private game: number = 0;
-  private drop: number = 100;
+  private drop: number = 5;
   private parentcontroller: ParentController;
   private parentmodal: ParentModal;
   private modalheight: number;
@@ -56,6 +60,9 @@ export default class Game {
   private readonly betmoney: number = 50;
   private tickerValidation: PIXI.Ticker;
   private winPopupAnimation: Win;
+  private tickervalid: Boolean = false;
+  private allbet: number = 0;
+  private readonly powerup: number = 40;
 
   constructor() {
     this.setSettings();
@@ -67,8 +74,10 @@ export default class Game {
     this.setContainers(); 
     this.createScene();
     this.createHome();
-    this.createPlinko();
     this.createSlot();
+    this.createControllers();
+    this.createModal();
+    this.createPlinko();
     this.setObjAnimation();
     this.startGame();
   }
@@ -109,7 +118,7 @@ export default class Game {
   }
   private createPlinko() {
     this.plinko = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
-    this.plinkogame = new Plinko(this.plinko,this.main.loader, this.updateGamePlus.bind(this), this.updateGameMinus.bind(this), this.decMoney.bind(this),this.dropOff.bind(this),this.addMoney.bind(this));
+    this.plinkogame = new Plinko(this.plinko,this.main.loader, this.updateGamePlus.bind(this), this.updateGameMinus.bind(this), this.decMoney.bind(this),this.dropOff.bind(this),this.addMoney.bind(this), this.powerUp.bind(this));
     this.plinko.stage.addChild(this.plinkogame.container);
     this.plinko.stage.addChild(this.plinkogame.container2);
     this.gameContainer.addChild(this.plinko.stage);
@@ -147,8 +156,7 @@ export default class Game {
     this.mainContainer.addChild(this.homeContainer);
     this.mainContainer.addChild(this.gameContainer);
     this.main.stage.addChild(this.mainContainer);
-    this.createControllers();
-    this.createModal();
+
 
     // this.dive();
     // this.winPopup(2500, 50);
@@ -177,18 +185,19 @@ export default class Game {
   }
   
   private rise() {
-    this.riseGroupAnimation.forEach((el: any) => {
+    // this.riseGroupAnimation.forEach((el: any) => {
 
-      gsap.to(el.sprite, {
-        y: el.posY??0,
-        alpha: el.alpha??1,
-        onComplete: () => {
-          this.stopAndPlay(false);
-          Functions.toggleAnimations(this.scene.homeAnimations, true);
-          Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
-        }
-      })
-    })
+    //   gsap.to(el.sprite, {
+    //     y: el.posY??0,
+    //     alpha: el.alpha??1,
+    //     onComplete: () => {
+    //       this.stopAndPlay(false);
+    //       Functions.toggleAnimations(this.scene.homeAnimations, true);
+    //       Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
+    //     }
+    //   })
+    // })
+    this.stopAndPlay(false);
   }
 
   private slotPlay() {
@@ -308,13 +317,22 @@ export default class Game {
       });
       this.plinkogame.ticker.start();
       this.plinkogame.ticker2.start();
+      this.plinkogame.ballArray.forEach(element => {
+        element.ticker.start();
+      });
     }
     else{
-      this.plinkogame.charSprite.forEach(element => {
-        element.gotoAndStop(0);
-      });
-      this.plinkogame.ticker.start();
-      this.plinkogame.ticker2.start();
+      let stopper = setTimeout(() => {
+        this.plinkogame.charSprite.forEach(element => {
+          element.gotoAndStop(0);
+        });
+        this.plinkogame.ticker.stop();
+        this.plinkogame.ticker2.stop();
+        this.plinkogame.ballArray.forEach(element => {
+          element.ticker.stop();
+        });
+        clearTimeout(stopper);
+      }, 800);
     }
   }
 
@@ -326,6 +344,7 @@ export default class Game {
     this.modalheight = this.parentmodal.container.height;
     //create modal component
     this.modal = new Modal(this.main, this.parentmodal.container);
+    this.modal.close.addListener("pointerdown", this.showModal.bind(this));
     this.modal.gamesettings.toggleSprite.forEach(btn => {
       btn.addListener("pointerdown", () => {
         this.modal.gamesettings.toggleOnOff(btn);
@@ -345,24 +364,42 @@ export default class Game {
     this.controllersContainer.position.y = this.controllerposition;
     this.gameContainer.addChild(this.controllersContainer);
     //create controller component
-    this.controller = new Controllers(this.main, this.parentcontroller.container, this.bet, this.game, this.drop, this.money, this.win);
+    this.controller = new Controllers(this.main, this.parentcontroller.container, this.arrBet[this.arrBetIndex], this.game, this.drop, this.money, this.win);
     this.controller.downbutton.sprite.addListener("pointerdown", this.minusBet.bind(this));
     this.controller.upbutton.sprite.addListener("pointerdown", this.plusBet.bind(this));
     this.controller.playbutton.sprite.addListener('pointerdown', this.startDrop.bind(this));
     this.controller.minusbutton.sprite.addListener('pointerdown', this.minusDrop.bind(this));
     this.controller.plusbutton.sprite.addListener('pointerdown', this.plusDrop.bind(this));
-    this.controller.menubutton.sprite.addListener('pointerdown', this.showModal.bind(this))
+    this.controller.menubutton.sprite.addListener('pointerdown', this.showModal.bind(this));
     this.controllersContainer.addChild(this.controller.container);
   }
   private minusBet(){
-    if(this.bet > this.betmoney){
-      this.bet -= this.betmoney;
-      this.controller.betbox.updateMoney(this.bet);
+    this.resetGame();
+    if(this.arrBetIndex > 0){
+      this.arrBetIndex -= 1;
+      this.bet = this.arrBet[this.arrBetIndex];
+      this.controller.betbox.updateMoney(this.arrBet[this.arrBetIndex]);
+    }
+  }
+  private resetGame(){
+    if(this.tickervalid){
+      this.start = false;
+      this.tickervalid = false;
+      this.plinkogame.startDrop = false;
+      this.plinkogame.isDrop = false;
+      if(this.tickerValidation.started){
+        this.tickerValidation.destroy();
+      }
+      this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['play.png'];
     }
   }
   private plusBet(){
-    this.bet += this.betmoney;
-    this.controller.betbox.updateMoney(this.bet);
+    this.resetGame();
+    if(this.arrBetIndex < this.arrBet.length - 1){
+      this.arrBetIndex += 1;
+      this.bet = this.arrBet[this.arrBetIndex];
+      this.controller.betbox.updateMoney(this.arrBet[this.arrBetIndex]);
+    }
   }
   private updateGamePlus(){
     this.game += 1;
@@ -374,13 +411,15 @@ export default class Game {
     this.controller.gameinbox.updateGame(this.game);
   }
   private dropOff(){
-    if(this.money < this.bet || this.drop <= 0){
-      this.start = false;
-      this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['play.png'];
-      this.plinkogame.startDrop = false;
-      this.drop = 0;
-      this.controller.dropbox.updateGame(0);
-      this.checkBall();
+    if(this.drop != -1){
+      if(this.money < this.bet || this.drop <= 0){
+        this.start = false;
+        this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['play.png'];
+        this.plinkogame.startDrop = false;
+        this.drop = 0;
+        this.controller.dropbox.updateGame(0);
+        this.checkBall();
+      }
     }
   }
   private checkBall(){
@@ -395,7 +434,7 @@ export default class Game {
     }
   }
   private startDrop(){
-    if(this.bet > this.money || this.drop <= 0){
+    if(this.bet > this.money || this.drop == 0){
       alert("Not enough Money / No Drop Count");
     }
     else{
@@ -408,17 +447,10 @@ export default class Game {
       else{
         this.start = true;
         this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['pause.png'];
+        this.tickervalid = true;
         this.DropValidation();
       }
     }
-  }
-  private resetGame(){
-    this.start = false;
-    this.plinkogame.startDrop = false;
-    this.checkBall();
-    this.controller.playbutton.sprite.texture = this.main.loader.resources!.controllers.textures!['play.png'];
-    this.tickerValidation.destroy();
-
   }
   private DropValidation(){
     this.tickerValidation = new PIXI.Ticker();
@@ -431,41 +463,55 @@ export default class Game {
     this.tickerValidation.start();
   }
   private minusDrop(){
-    this.drop -= 5;
-    if(this.drop <= 0){
-      this.drop = 0;
+    this.resetGame();
+    if(this.arrDropIndex > 0){
+      this.arrDropIndex -= 1;
+      this.drop = this.arrDrop[this.arrDropIndex];
+      this.controller.dropbox.updateGame(this.arrDrop[this.arrDropIndex]);
     }
-    this.controller.dropbox.updateGame(this.drop);
   }
   private plusDrop(){
-    if(this.drop < 100){
-      this.drop += 5;
+    this.resetGame();
+    if(this.arrDropIndex < this.arrDrop.length - 1){
+      this.arrDropIndex += 1;
+      this.drop = this.arrDrop[this.arrDropIndex];
+      this.controller.dropbox.updateGame(this.arrDrop[this.arrDropIndex]);
+    }
+  }
+  private decMoney(){
+    this.allbet += this.bet;
+    this.money = this.money - this.bet;
+    this.controller.balancebox.updateBalance(this.money);
+    if(this.drop != -1){
+      this.drop -= 1;
     }
     this.controller.dropbox.updateGame(this.drop);
   }
-  private decMoney(){
-    this.money = this.money - this.bet;
-    this.controller.balancebox.updateBalance(this.money);
-    this.drop -= 1;
-    this.controller.dropbox.updateGame(this.drop);
+
+  private powerUp(){
+    const money = this.allbet * this.powerup;
+    this.controller.winbox.updateWin(money);
+    this.allbet = 0;
   }
+
   private addMoney(type: number, money: number = 0){
     let addedmoney = 0
     if(type == 1){
       addedmoney = (this.bet / 2);
     }
     else if(type == 2) {
-      addedmoney = money;
+      addedmoney = (this.bet * 2);
+      
     }
     else{
-      addedmoney = (this.bet * 2);
+      addedmoney = money;
     }
     this.money += addedmoney;
     this.controller.winbox.updateWin(addedmoney);
     let reset = setTimeout(() => {
       this.controller.balancebox.updateBalance(this.money);
       clearTimeout(reset);
-    }, 6000);
+    }, 5000);
 
     if((money/this.bet) >= 20)
       this.winPopup(money, this.bet);

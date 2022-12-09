@@ -81,7 +81,9 @@ export default class Game {
     this.createPlinko();
     this.setObjAnimation();
     this.startGame();
-  }
+
+    //set sound
+  } 
   
   private setSettings() {
     // PIXI.settings.ROUND_PIXELS = true;

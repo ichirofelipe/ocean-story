@@ -5,6 +5,9 @@ import Globals from '../../tools/globals.json';
 
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
+import Helpers from '../../tools/Helpers';
+import { settings } from 'pixi.js';
+import { clear } from 'console';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -20,7 +23,7 @@ export default class Reel {
   public reelOffsetY: number = ReelOffsetY; //block spacing
   private reelMask: PIXI.Graphics;
   private spinTicker: PIXI.Ticker;
-  private spinDuration: number = 1; //seconds
+  private spinDuration: number = 2; //seconds
   private spinStart: number;
   private spinBounce: number = 0.2; //seconds
   private spinSuccessionDelay: number = 0.3; //seconds
@@ -38,6 +41,7 @@ export default class Reel {
   private init() {
     this.createBlocks();
     this.createMask();
+    this.createReelEffect();
   }
 
   private createBlocks() {
@@ -168,5 +172,36 @@ export default class Reel {
       this.reelMask.y -= sizeAdjustment;
       this.reelMask.height += sizeAdjustment;
     }
+  }
+
+  private createReelEffect() {
+    const textures = [];
+    for(let tmp in this.app.loader.resources!.reelEffect.textures){
+      const texture = PIXI.Texture.from(tmp);
+      textures.push(texture);
+    }
+
+    let leftReelEffect = new PIXI.AnimatedSprite(textures);
+    leftReelEffect.play();
+    leftReelEffect.animationSpeed = 0.4;
+    leftReelEffect.height = (this.reelBlocks[0].size*this.reelBlocks[0].overlapPixels) * ActualRows;
+    leftReelEffect.width = 35;
+    leftReelEffect.y = ((this.reelBlocks[0].size*this.reelBlocks[0].overlapPixels)/2) + 10;
+
+    this.container.addChild(leftReelEffect);
+
+
+    let rightReelEffect = new PIXI.AnimatedSprite(textures);
+    let delayEffect = setTimeout(() => {
+      rightReelEffect.play();
+      clearTimeout(delayEffect);
+    }, 3200);
+    rightReelEffect.animationSpeed = 0.4;
+    rightReelEffect.height = (this.reelBlocks[0].size*this.reelBlocks[0].overlapPixels) * ActualRows;
+    rightReelEffect.width = 35;
+    rightReelEffect.x = (this.reelBlocks[0].size*this.reelBlocks[0].overlapPixels + ReelOffsetX) - rightReelEffect.width;
+    rightReelEffect.y = (this.reelBlocks[0].size*this.reelBlocks[0].overlapPixels)/2;
+
+    this.container.addChild(rightReelEffect);
   }
 }

@@ -33,6 +33,7 @@ export default class Win {
 
   constructor(app: PIXI.Application, money: number, bet: number, closeWin: () => void) {
     this.app = app;
+    console.log(money);
     this.money = money;
     this.bet = bet;
     this.container = new PIXI.Container;

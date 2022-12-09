@@ -11,7 +11,7 @@ export default class Slot {
   public container: PIXI.Container;
   private testFunctions: TestFunctions;
   private functions: Functions;
-  private bet: number = 100;
+  private bet: number = 1;
   private readonly RTP: number = 1;
   private reelsContainer: ReelsContainer;
   private background: PIXI.Sprite;
@@ -21,9 +21,11 @@ export default class Slot {
   public symbolsToAnimate: Array<PIXI.AnimatedSprite> = [];
   public bonusCount: number = 0;
 
-  constructor(app: PIXI.Application) {
+  constructor(app: PIXI.Application, bet: number, RTP: number) {
     this.app = app;
     this.container = new PIXI.Container;
+    this.bet = bet;
+    this.RTP = RTP;
     this.testFunctions = new TestFunctions(this.bet, this.RTP);
     this.functions = new Functions(this.bet, this.RTP);
 

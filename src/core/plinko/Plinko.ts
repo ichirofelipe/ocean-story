@@ -69,6 +69,7 @@ export default class Game {
     private origheightleft: number;
     private origpositionleft: number;
     private readonly fullbarheight: number = 310;
+    // private readonly baradd: number = 6.2;
     private readonly baradd: number = 6.2;
     private readonly reelSpeed: number = 4;
     private readonly ballRadius: number = 14;

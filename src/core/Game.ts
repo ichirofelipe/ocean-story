@@ -42,6 +42,7 @@ export default class Game {
   private bonus: Bonus;
   private start: Boolean = false;
   private bet: number = 1;
+  private readonly RTP: number = 1;
   private arrBetIndex: number = 0;
   private arrBet: Array<number> = [1,5,10,20,50,100];
   private arrDropIndex: number = 0;
@@ -57,7 +58,7 @@ export default class Game {
   private controllerposition: number;
   private controller: Controllers;
   private modal: Modal;
-  private readonly betmoney: number = 50;
+  private readonly betmoney: number = 1;
   private tickerValidation: PIXI.Ticker;
   private winPopupAnimation: Win;
   private tickervalid: Boolean = false;
@@ -126,7 +127,7 @@ export default class Game {
   private createSlot() {
     this.slot = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
     this.slot.loader = this.main.loader;
-    this.slotgame = new Slot(this.slot);
+    this.slotgame = new Slot(this.slot, this.bet, this.RTP);
     this.slot.stage.addChild(this.slotgame.container);
     this.slot.stage.x = this.baseWidth/2;
     this.slot.stage.y = 120;
@@ -158,7 +159,7 @@ export default class Game {
     this.main.stage.addChild(this.mainContainer);
 
 
-    // this.dive();
+    this.dive();
     // this.winPopup(2500, 50);
   }
 
@@ -169,7 +170,7 @@ export default class Game {
       gsap.to(el.sprite, {
         y: el.posY??0,
         alpha: el.alpha??1,
-        duration: this.animationSpeed,
+        // duration: this.animationSpeed,
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
           this.stopAndPlay(true);
@@ -207,7 +208,7 @@ export default class Game {
     Globals.isSpinning = true;
     this.updateGameMinus();
     this.slotgame.getResult((money: number) => {
-      if(money > 0)
+      if(money != 0)
         this.addMoney(2, money);
       
       //CHECK IF THERE ARE SYMBOLS TO ANIMATE
@@ -513,8 +514,8 @@ export default class Game {
       clearTimeout(reset);
     }, 5000);
 
-    if((money/this.bet) >= 20)
-      this.winPopup(money, this.bet);
+    if((addedmoney/this.bet) >= 20)
+      this.winPopup(addedmoney, this.bet);
   }
   private showModal(){
     let alpha = 0;

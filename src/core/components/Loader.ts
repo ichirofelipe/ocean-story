@@ -79,6 +79,10 @@ export default class Loader {
         this.loader.add('turtle', 'assets/images/symbols/animations/turtle/turtle.json');
         this.loader.add('wild', 'assets/images/symbols/animations/wild/wild.json');
         
+        //REEL ANIMATION
+        this.loader.add('reelEffect', 'assets/images/slot/reel-effect/reel-effect.json');
+
+        
         //plinko animated characters
         this.loader.add('fish1', 'assets/images/plinko/fish1.json');
         this.loader.add('fish2', 'assets/images/plinko/fish2.json');

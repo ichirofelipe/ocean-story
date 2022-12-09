@@ -218,9 +218,9 @@ export default class Game {
             this.startBonusGame(this.slotgame.bonusCount);
             return
           }
-
+          
+          Globals.isSpinning = false;
           if(this.game > 0){
-            Globals.isSpinning = false;
             this.slotPlay();
           }
 

@@ -103,7 +103,7 @@ export default class Reel {
         block.container.y = reelSpeed;
         
         // RANDOMIZE BLOCKS WITHIN SPECIFIED TIMER BEFORE SETTING UP GENERATED RESULTS
-        if(Date.now() > this.spinStart - ((this.spinBounce*1000)*this.reelIndex)){
+        if(Date.now() > this.spinStart - (this.spinBounce*2000)){
           block.value = this.blocks[index];
           block.updateValue();
         }else{

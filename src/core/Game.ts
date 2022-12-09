@@ -64,6 +64,7 @@ export default class Game {
   private tickervalid: Boolean = false;
   private allbet: number = 0;
   private readonly powerup: number = 40;
+  private symbolContinuesAnimation: any;
 
   constructor() {
     this.setSettings();
@@ -172,7 +173,7 @@ export default class Game {
       gsap.to(el.sprite, {
         y: el.posY??0,
         alpha: el.alpha??1,
-        // duration: this.animationSpeed,
+        duration: this.animationSpeed,
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
           this.stopAndPlay(true);
@@ -213,6 +214,10 @@ export default class Game {
       if(money != 0)
         this.addMoney(3, money);
       
+      let symbolAnimationLength = 4000;
+      if((money/this.bet) >= 20)
+        symbolAnimationLength += 4000;
+      
       //CHECK IF THERE ARE SYMBOLS TO ANIMATE
       if(this.slotgame.symbolsToAnimate.length > 0){
 
@@ -221,7 +226,7 @@ export default class Game {
         this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 1);
         
         //DELAY 4 SECONDS TO BEFORE STOPPING ANIMATION
-        let delay = setTimeout(() => {
+        this.symbolContinuesAnimation = setTimeout(() => {
           Functions.toggleAnimations(this.slotgame.symbolsToAnimate, false);
           this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 0);
 
@@ -237,8 +242,8 @@ export default class Game {
           }
 
           
-          clearTimeout(delay);
-        }, 4000);
+          clearTimeout(this.symbolContinuesAnimation);
+        }, symbolAnimationLength);
       }
       else{
         Globals.isSpinning = false;
@@ -292,7 +297,7 @@ export default class Game {
   }
 
   private removeWin() {
-    console.log('remove WIn');
+    clearTimeout(this.symbolContinuesAnimation);
     this.mainContainer.removeChild(this.winPopupAnimation.container);
   }
 

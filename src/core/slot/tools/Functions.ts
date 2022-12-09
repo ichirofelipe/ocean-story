@@ -63,8 +63,8 @@ export default class Functions {
     let bonusPattern: Array<string> = [];
 
     //CHECK BONUS COMBINATION
-    reels.forEach((reel, index) => {  
-      let bonusBlocks = reel.filter(val => {
+    reels.forEach((reel, reelIndex) => {  
+      let bonusBlocks = reel.filter((val, index) => {
         if(val == BonusNumber && index != 0 && index != reels.length - 1)
           return val
       });
@@ -73,12 +73,14 @@ export default class Functions {
       
       reel.forEach((block,bIndex) => {
         if(block == BonusNumber)
-          bonusPattern.push(`${index}-${bIndex}`);
+          bonusPattern.push(`${reelIndex}-${bIndex}`);
       })
     });
 
-    if(bonusWin >= 3)
+    if(bonusWin >= 3){
+      console.log('BONUS GAME!');
       winningPattern.push({'index': -1,'combination': bonusPattern, 'colCount': bonusWin});
+    }
 
     Pattern.forEach((pat, patIndex) => {
       let counter = 0;

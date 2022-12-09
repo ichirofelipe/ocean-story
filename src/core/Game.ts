@@ -64,7 +64,6 @@ export default class Game {
   private tickervalid: Boolean = false;
   private allbet: number = 0;
   private readonly powerup: number = 40;
-  private symbolContinuesAnimation: any;
 
   constructor() {
     this.setSettings();
@@ -214,10 +213,6 @@ export default class Game {
       if(money != 0)
         this.addMoney(3, money);
       
-      let symbolAnimationLength = 4000;
-      if((money/this.bet) >= 20)
-        symbolAnimationLength += 4000;
-      
       //CHECK IF THERE ARE SYMBOLS TO ANIMATE
       if(this.slotgame.symbolsToAnimate.length > 0){
 
@@ -225,25 +220,15 @@ export default class Game {
         Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
         this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 1);
         
-        //DELAY 4 SECONDS TO BEFORE STOPPING ANIMATION
-        this.symbolContinuesAnimation = setTimeout(() => {
-          Functions.toggleAnimations(this.slotgame.symbolsToAnimate, false);
-          this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 0);
-
-          // CHECK IF THERE IS BONUS COMBINATION
-          if(this.slotgame.bonusCount >= 3){
-            this.startBonusGame(this.slotgame.bonusCount);
-            return
-          }
-          
-          Globals.isSpinning = false;
-          if(this.game > 0){
-            this.slotPlay();
-          }
-
-          
-          clearTimeout(this.symbolContinuesAnimation);
-        }, symbolAnimationLength);
+        if((money/this.bet) < 20){
+          //DELAY 4 SECONDS TO BEFORE STOPPING ANIMATION
+          let delay = setTimeout(() => {
+            
+            this.stopSymbolAnimation();
+            
+            clearTimeout(delay);
+          }, 4000);
+        }
       }
       else{
         Globals.isSpinning = false;
@@ -252,6 +237,23 @@ export default class Game {
       }
     });
   }
+
+  private stopSymbolAnimation() {
+    Functions.toggleAnimations(this.slotgame.symbolsToAnimate, false);
+    this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 0);
+
+    // CHECK IF THERE IS BONUS COMBINATION
+    if(this.slotgame.bonusCount >= 3){
+      this.startBonusGame(this.slotgame.bonusCount);
+      return
+    }
+    
+    Globals.isSpinning = false;
+    if(this.game > 0){
+      this.slotPlay();
+    }
+  }
+
   private startBonusGame(bonusCount: number) {
     const bonusPay = this.slotgame.getBonusPayout(bonusCount);
     const arrayBonusPay = [
@@ -297,7 +299,7 @@ export default class Game {
   }
 
   private removeWin() {
-    clearTimeout(this.symbolContinuesAnimation);
+    this.stopSymbolAnimation();
     this.mainContainer.removeChild(this.winPopupAnimation.container);
   }
 

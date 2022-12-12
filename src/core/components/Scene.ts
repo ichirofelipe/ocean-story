@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Helpers from '../slot/tools/Helpers';
-import {Reefs, LoopingBubbles, Trees, Clouds, Gabi, Grass, Chest, Birds} from './sceneSettings.json';
+import {Reefs, LoopingBubbles, Trees, Clouds, Gabi, Grass, Chest, Birds, Fishes} from './sceneSettings.json';
 import Functions from '../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
@@ -52,11 +52,12 @@ export default class Scene {
     this.createWaves();
 
     this.createBubbles();
-
+    
     this.createRays();
     this.createOceanBed();
     this.createReefs();
     this.createLoopBubbles();
+    this.createFish();
   }
 
   private createBG() {
@@ -420,6 +421,53 @@ export default class Scene {
       }
     })
     
+  }
+
+  private createFish() {
+    Fishes.forEach((fish: any, index) => {
+      
+      let schoolOfFishCount = Functions.randMinMax(3, 7);
+      let direction = 1;
+      if(Functions.randMinMax(-1, 1) < 0)
+        direction = 0
+
+      for(let count = 0; count < schoolOfFishCount; count++){
+        let img: any = Functions.getSprite(this.app.loader, fish);
+        let maxX = img.width * (schoolOfFishCount/2);
+        let maxY = img.height * (schoolOfFishCount/2);
+        let dirX = this.app.screen.width * direction;
+        
+        img.scale.set(0.75);
+        img.y = this.app.screen.height*2;
+        img.x = - Functions.randMinMax(0, maxX);
+        if(direction == 0){
+          img.x = Math.abs(img.x) + this.app.screen.width;
+          img.scale.x*=-1;
+        }
+        
+        img.y += Functions.randMinMax(0, maxY);
+
+        const fishX = gsap.to(img, {
+          x: dirX,
+          duration: Functions.randMinMax(8,13),
+          ease: "power.in",
+          repeat: -1,
+        });
+
+        const fishY = gsap.to(img, {
+          y: img.y + Functions.randMinMax(0,maxY),
+          duration: Functions.randMinMax(2,4),
+          ease: "power.out",
+          repeat: -1,
+          yoyo: true,
+        });
+        fishX.pause();
+        fishY.pause();
+
+        this.oceanBedAnimations.push(img, fishX, fishY);
+        this.OceanBedContainer.addChild(img);
+      }
+    });
   }
 
   public bubbleAnimate() {

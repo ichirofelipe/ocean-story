@@ -326,5 +326,13 @@
       "isAnimated": true,
       "count": 2
     }
+  ],
+  "Fishes": [
+    {
+      "name": "fishes",
+      "animationSpeed": 0.4,
+      "isAnimated": true,
+      "isPlay": false
+    }
   ]
 }

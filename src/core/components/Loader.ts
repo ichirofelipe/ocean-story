@@ -86,6 +86,7 @@ export default class Loader {
 
         //OCEAN BED
         this.loader.add('lightray', 'assets/images/scene/animations/lightray/lightray.json');
+        this.loader.add('fishes', 'assets/images/scene/animations/fishes/fishes.json');
         
         //HOME
         this.loader.add('coconut', 'assets/images/scene/animations/coconut/coconut.json');

@@ -126,6 +126,7 @@ export default class Win {
       const gravity = 0.15;
       coin.scale.set(Functions.randMinMax(0.15, 0.25));
       coin.anchor.set(0.5);
+      coin.animationSpeed = Functions.randMinMax(0.3, 0.5);
       coin.x += coin.width;
       coin.y += coin.height;
       coin.x = - coin.width;

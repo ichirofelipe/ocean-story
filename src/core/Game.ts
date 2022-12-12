@@ -61,7 +61,6 @@ export default class Game {
   private readonly betmoney: number = 1;
   private tickerValidation: PIXI.Ticker;
   private winPopupAnimation: Win;
-  private winPopupDelay: any;
   private tickervalid: Boolean = false;
   private allbet: number = 0;
   private readonly powerup: number = 40;
@@ -179,6 +178,8 @@ export default class Game {
           this.stopAndPlay(true);
           Functions.toggleAnimations(this.scene.homeAnimations, false);
           Functions.toggleAnimations(this.scene.oceanBedAnimations, true);
+
+          
           if(this.game > 0)
             this.slotPlay();
 
@@ -211,25 +212,21 @@ export default class Game {
     Globals.isSpinning = true;
     this.updateGameMinus();
     this.slotgame.getResult((money: number) => {
-      if(money != 0)
-        this.addMoney(3, money);
-      
       //CHECK IF THERE ARE SYMBOLS TO ANIMATE
       if(this.slotgame.symbolsToAnimate.length > 0){
+        this.addMoney(3, money);
 
         //PLAY SYMBOL ANIMATION
         Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
-        this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 1);
-        
+
         if((money/this.bet) < 20){
-          //DELAY 4 SECONDS TO BEFORE STOPPING ANIMATION
-          this.winPopupDelay = setTimeout(() => {
-            
+
+          let winPopupDelay = setTimeout(() => {
             this.stopSymbolAnimation();
-            
-            clearTimeout(this.winPopupDelay);
+            clearTimeout(winPopupDelay);
           }, 4000);
         }
+
       }
       else{
         Globals.isSpinning = false;
@@ -282,27 +279,34 @@ export default class Game {
     this.rise();
   }
 
-  private bonusDone(money: number, percent: number) {
+  private bonusDone(money: number) {
+    this.slotgame.bonusCount = 0;
     this.homeContainer.removeChild(this.bonus.container);
     this.scene.createBubbles();
     this.scene.bubbleAnimate();
-    Globals.isSpinning = false;
     this.dive();
 
     this.addMoney(3, money);
+
+    if((money/this.bet) < 20){
+      Globals.isSpinning = false;
+      if(this.game > 0)
+        this.slotPlay();
+    }
+
   }
 
   private winPopup(money:number, bet:number) {
     this.winPopupAnimation = new Win(this.main, money, bet, this.removeWin.bind(this));
     this.winPopupAnimation.container.zIndex = 10;
+
     this.mainContainer.addChild(this.winPopupAnimation.container);
-    this.winPopupAnimation.show()
   }
 
   private removeWin() {
     this.stopSymbolAnimation();
-    clearTimeout(this.winPopupDelay);
     Functions.killAnimations(this.winPopupAnimation.toRemoveAnimations);
+
     this.mainContainer.removeChild(this.winPopupAnimation.container);
   }
 

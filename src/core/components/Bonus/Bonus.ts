@@ -29,9 +29,9 @@ export default class Bonus {
   private actionType: number;
   private activeClams: Array<Clam> = [];
   private bonusPay: number;
-  private bonusDone: (money: number, percent: number) => void;
+  private bonusDone: (money: number) => void;
   
-  constructor(app: PIXI.Application, clams: Array<number>, bonusPay: number, bonusDone: (money: number, percent: number) => void) {
+  constructor(app: PIXI.Application, clams: Array<number>, bonusPay: number, bonusDone: (money: number) => void) {
     this.app = app;
     this.clams = clams;
     this.bonusPay = bonusPay;
@@ -79,22 +79,19 @@ export default class Bonus {
   private createClams() {
     this.clams.forEach((val, index) => {
       const clam = new Clam(this.app, val, index, this.frame, () => {
-
+        
         if(this.bigClamIndex === undefined){
-          this.clamsToPick--;
-          this.setBigClam(clam);
-          this.activeClams = this.activeClams.filter(aClam => aClam.value != clam.value);
+          this.bigClamText(clam);
+          this.setBigClam();
           clam.disable();
-          this.nextSequence();
-          return;
+        } else{
+          clam.openClam();
         }
 
-        if(this.clamsToPick > 0){
-          this.clamsToPick--;
-          this.activeClams = this.activeClams.filter(aClam => aClam.value != clam.value);
-          clam.openClam();
-          this.nextSequence();
-        }
+        
+        this.clamsToPick--;
+        this.activeClams = this.activeClams.filter(aClam => aClam.value != clam.value);
+        this.nextSequence();
       });
 
       this.activeClams.push(clam);
@@ -120,18 +117,20 @@ export default class Bonus {
     this.container.addChild(this.bigClam);
   }
 
-  private setBigClam(clam: Clam) {
-    const {position, value} = clam; 
+  private setBigClam() {
+    if(this.bigClamValue > 20)
+      bigClamSettings.name = 'clam-white';
+    if(this.bigClamValue > 70)
+      bigClamSettings.name = 'clam-gold';
+  }
+
+  private bigClamText(clam: Clam) {
+    const {position, value} = clam;
+
+    this.createPositionText(position, value);
 
     this.bigClamIndex = position;
     this.bigClamValue = value;
-
-    if(value > 20)
-      bigClamSettings.name = 'clam-white';
-    if(value > 70)
-      bigClamSettings.name = 'clam-gold';
-
-    this.createPositionText(position, value);
 
     gsap.to(this.bigClam, {
       alpha: 1,
@@ -146,6 +145,7 @@ export default class Bonus {
   }
 
   private showBigClam() {
+    this.setBigClam();
     this.bigClam.x += this.bigClam.width/2;
     this.bigClam.y += this.bigClam.height/2;
     this.bigClam.pivot.x = this.bigClam.width/2;
@@ -168,7 +168,7 @@ export default class Bonus {
 
         let money = this.bonusPay * (this.bigClamValue / 100);
         let delayBeforeExit = setTimeout(() => {
-          this.bonusDone(money, this.bigClamValue);
+          this.bonusDone(money);
           clearTimeout(delayBeforeExit);
         }, 5000);
       }
@@ -319,6 +319,12 @@ export default class Bonus {
     
     if(data.clams !== undefined && this.clamsToPick == 0)
       this.clamsToPick = data.clams;
+
+    if(data.clams !== undefined){
+      this.activeClams.forEach(clam => clam.enable());
+    } else {
+      this.activeClams.forEach(clam => clam.disable(false));
+    }
 
     if(data.bigClam !== undefined){
       if(this.actionType == 0){

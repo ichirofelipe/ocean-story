@@ -52,10 +52,12 @@ export default class Win {
   private init() {
     this.setInitValues();
     this.createOverlay();
-    this.createWin();
+    this.createWinLogo();
     this.createCoin();
     this.createBubbles();
     this.createDisplayMoney();
+
+    this.show();
   }
 
   private setInitValues() {
@@ -78,10 +80,8 @@ export default class Win {
     this.container.addChild(this.overlay);
   }
 
-  private createWin() {
+  private createWinLogo() {
     this.win = Functions.getSprite(this.app.loader, this.winSettings);
-    // this.win.height = Helpers.autoHeight(this.win, 400)
-    // this.win.width = 400;
     this.win.x = (this.app.screen.width - this.win.width) / 2;
     this.win.y = (this.app.screen.height - this.win.height) / 2;
     this.win.anchor.set(0.5);

@@ -145,12 +145,14 @@ export default class Clam {
     this.clam.addChild(textValue);
   }
 
-  public disable() {
-    gsap.to(this.positionText, {
-      alpha: 0,
-      duration: 0.5,
-      ease: 'none'
-    })
+  public disable(text:boolean = true) {
+    if(text){
+      gsap.to(this.positionText, {
+        alpha: 0,
+        duration: 0.5,
+        ease: 'none'
+      })
+    }
     gsap.to(this.clam, {
       alpha: 0.5,
       duration: 0.5,

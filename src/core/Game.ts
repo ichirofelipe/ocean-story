@@ -61,6 +61,7 @@ export default class Game {
   private readonly betmoney: number = 1;
   private tickerValidation: PIXI.Ticker;
   private winPopupAnimation: Win;
+  private winPopupDelay: any;
   private tickervalid: Boolean = false;
   private allbet: number = 0;
   private readonly powerup: number = 40;
@@ -222,11 +223,11 @@ export default class Game {
         
         if((money/this.bet) < 20){
           //DELAY 4 SECONDS TO BEFORE STOPPING ANIMATION
-          let delay = setTimeout(() => {
+          this.winPopupDelay = setTimeout(() => {
             
             this.stopSymbolAnimation();
             
-            clearTimeout(delay);
+            clearTimeout(this.winPopupDelay);
           }, 4000);
         }
       }
@@ -300,6 +301,8 @@ export default class Game {
 
   private removeWin() {
     this.stopSymbolAnimation();
+    clearTimeout(this.winPopupDelay);
+    Functions.killAnimations(this.winPopupAnimation.toRemoveAnimations);
     this.mainContainer.removeChild(this.winPopupAnimation.container);
   }
 

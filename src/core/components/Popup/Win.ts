@@ -4,6 +4,7 @@ import Functions from '../../Functions';
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import Helpers from '../../slot/tools/Helpers';
+import { clear } from 'console';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -19,6 +20,7 @@ export default class Win {
   private displayMoney: PIXI.Text;
   private win: PIXI.Sprite;
   private closeWin: () => void;
+  private delayBeforeClose: any;
   private winSettings = {
     name: "",
     animationSpeed: 0.3,
@@ -30,6 +32,9 @@ export default class Win {
     isAnimated: true,
     isPlay: false,
   }
+  private moneyAnimationFlag: boolean = false;
+  private overlayMoneyAnimation: any;
+  public toRemoveAnimations: Array<any> = [];
 
   constructor(app: PIXI.Application, money: number, bet: number, closeWin: () => void) {
     this.app = app;
@@ -68,7 +73,7 @@ export default class Win {
     this.overlay.interactive = true;
     this.overlay.buttonMode = true;
     this.overlay.alpha = 0.01;
-    this.overlay.addListener("pointerdown", this.hide.bind(this))
+    this.overlay.addListener("pointerdown", this.clickValidation.bind(this))
     
     this.container.addChild(this.overlay);
   }
@@ -281,67 +286,85 @@ export default class Win {
     this.container.addChild(this.bubblesContainer);
   }
 
+  private clickValidation() {
+    if(this.moneyAnimationFlag){
+      this.hide();
+      return;
+    }
+    this.moneyAnimationFlag = true;
+    this.overlayMoneyAnimation.kill();
+    this.displayMoney.text = `$${Functions.formatNum(this.money)}`;
+    this.delayBeforeClose = setTimeout(() => {
+      this.hide();
+    }, 3000);
+  }
+
   public show() {
-    gsap.to(this.overlay, {
+    const overlayShow = gsap.to(this.overlay, {
       alpha: 1,
       duration: 0.8,
     })
-    gsap.to(this.win.scale, {
+    const overlayScale = gsap.to(this.win.scale, {
       x: 1,
       y: 1,
-      duration: 0.8,
+      duration: 0.8
+    })
+
+    let target = { val: 0 };
+    this.overlayMoneyAnimation = gsap.to(target, {
+      val: this.money,
+      duration: 4,
+      ease: "power1.in",
+      onUpdate: () => {
+        this.displayMoney.text = `$${Functions.formatNum(target.val)}`;
+        this.displayMoney.x = (this.app.screen.width - this.displayMoney.width) / 2;
+      },
       onComplete: () => {
-        let target = { val: 0 };
-        gsap.to(target, {
-          val: this.money,
-          duration: 4,
-          ease: "power1.in",
-          onUpdate: () => {
-            this.displayMoney.text = `$${Functions.formatNum(target.val)}`;
-            this.displayMoney.x = (this.app.screen.width - this.displayMoney.width) / 2;
-          },
-          onComplete: () => {
-            let delayBeforeClose = setTimeout(() => {
-              this.hide();
-              clearTimeout(delayBeforeClose);
-            }, 3000);
-          }
-        })
+        this.delayBeforeClose = setTimeout(() => {
+          this.hide();
+        }, 3000);
       }
     })
+
+    this.toRemoveAnimations.push(overlayScale, overlayShow, this.overlayMoneyAnimation)
   }
 
   public hide() {
-    gsap.to(this.overlay, {
+    clearTimeout(this.delayBeforeClose);
+
+    const overlayHide = gsap.to(this.overlay, {
       alpha: 0,
       duration: 0.8,
     })
-    gsap.to(this.win.scale, {
+    const overlayScale = gsap.to(this.win.scale, {
       x: 0,
       y: 0,
       duration: 0.8,
       onComplete: () => {
+        console.log('close');
         this.overlay.interactive = false;
         this.closeWin();
       }
     })
-    gsap.to(this.displayMoney, {
+    const overlayMoney = gsap.to(this.displayMoney, {
       alpha: 0,
       duration: 0.8,
     })
-    gsap.to(this.coinsContainer, {
+    const coinsContainer = gsap.to(this.coinsContainer, {
       alpha: 0,
       duration: 0.8,
       onComplete: () => {
         this.container.removeChild(this.coinsContainer);
       }
     })
-    gsap.to(this.bubblesContainer, {
+    const bubblesContainer = gsap.to(this.bubblesContainer, {
       alpha: 0,
       duration: 0.8,
       onComplete: () => {
         this.container.removeChild(this.bubblesContainer);
       }
     })
+
+    this.toRemoveAnimations.push(overlayHide, overlayScale, overlayMoney, coinsContainer, bubblesContainer);
   }
 }

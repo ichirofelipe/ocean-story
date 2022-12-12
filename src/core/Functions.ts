@@ -131,6 +131,16 @@ const toggleAnimations = (animations: Array<any>, play: boolean = true) => {
   })
 }
 
+const killAnimations = (animations: Array<any>) => {
+  animations.forEach(anim => {
+    if(anim.textures !== undefined){
+      anim.gotoAndStop(0);
+      return;
+    }
+    anim.kill();
+  })
+}
+
 const formatNum = (num: number, decimals: number = 2) => {
   return num.toFixed(decimals).toString().replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
@@ -142,5 +152,6 @@ export default {
   formatNumber,
   formatGameNumber,
   toggleAnimations,
+  killAnimations,
   formatNum
 }

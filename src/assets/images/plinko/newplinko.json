@@ -59,6 +59,46 @@
 				"w": 110,
 				"h": 655
 			}
+		},
+		"frame_levelbar_4.png": {
+			"frame": {
+				"x": 337,
+				"y": 1,
+				"w": 110,
+				"h": 655
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 110,
+				"h": 655
+			},
+			"sourceSize": {
+				"w": 110,
+				"h": 655
+			}
+		},
+		"golden_pipe.png": {
+			"frame": {
+				"x": 449,
+				"y": 1,
+				"w": 560,
+				"h": 285
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 560,
+				"h": 285
+			},
+			"sourceSize": {
+				"w": 560,
+				"h": 285
+			}
 		}
 	},
 	"meta": {
@@ -67,7 +107,7 @@
 		"image": "newplinko.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 336,
+			"w": 1010,
 			"h": 657
 		},
 		"scale": "1"

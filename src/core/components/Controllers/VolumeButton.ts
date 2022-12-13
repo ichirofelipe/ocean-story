@@ -21,4 +21,5 @@ export default class VolumeButton {
         this.sprite.buttonMode = true;
         this.container.addChild(this.sprite);
     }
+
 }

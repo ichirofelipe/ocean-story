@@ -413,6 +413,7 @@ export default class Game {
     this.controller.minusbutton.sprite.addListener('pointerdown', this.minusDrop.bind(this));
     this.controller.plusbutton.sprite.addListener('pointerdown', this.plusDrop.bind(this));
     this.controller.menubutton.sprite.addListener('pointerdown', this.showModal.bind(this));
+    this.controller.volumebutton.sprite.addListener("pointerdown", this.turnOnOff.bind(this));
     this.controllersContainer.addChild(this.controller.container);
   }
   private minusBet(){
@@ -538,6 +539,7 @@ export default class Game {
     const money = (this.allbet / this.allbetmultiplier) * this.powerup;
     this.addMoney(0,money);
     this.allbet = 0;
+    this.allbetmultiplier = 0;
   }
 
   private addMoney(type: number, money: number = 0){
@@ -577,6 +579,9 @@ export default class Game {
     this.globalbool = play;
     this.soundPlay(this.globalbool, 0);
     this.soundPlay(this.globalbool, 1);
+    if(!play){
+      this.controller.volumebutton.sprite.texture = this.main.loader.resources!.controllers.textures!['mute-icon.png'];
+    }
   }
 
   private soundPlay(play: Boolean, index: number, volume: number = 1){
@@ -602,6 +607,22 @@ export default class Game {
 
   private volumeTransition(volume: number, index: number){
     this.sound[index].volume(volume.toFixed(2), this.soundid[index]);
+  }
+
+  private turnOnOff(){
+    const arrplay = [0,3];
+
+    if(this.controller.volumebutton.sprite.texture == this.main.loader.resources!.controllers.textures!['icon_volume.png']){
+      this.controller.volumebutton.sprite.texture = this.main.loader.resources!.controllers.textures!['mute-icon.png'];
+      this.globalbool = false;
+      this.soundStop(0);
+      console.log("if")
+    }
+    else{
+      this.controller.volumebutton.sprite.texture = this.main.loader.resources!.controllers.textures!['icon_volume.png'];
+      this.globalbool = true;
+      this.soundPlay(this.globalbool, 0);
+    }
   }
 
   private toggleSoundMusic(bool: Boolean){

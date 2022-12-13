@@ -146,6 +146,7 @@ export default class Loader {
 
         //new plinko
         this.loader.add('newplinko', 'assets/images/plinko/newplinko.json');
+        this.loader.add('waves', 'assets/images/plinko/waves.json');
 
         //music index 0
         this.setUpSounds('assets/sounds/bgm.mp3', true);
@@ -221,7 +222,6 @@ export default class Loader {
     private startgame(play: Boolean){
         this.app.stage.removeChild(this.container);
         this.onAssetsLoaded();
-        console.log(play)
         this.sounds(play, this.bgm);
     }
 

@@ -18,11 +18,16 @@ export default class Game {
     private bar1: PIXI.Texture;
     private bar2: PIXI.Texture;
     private bar1_back: PIXI.Texture;
+    private bar1_shape: PIXI.Texture;
     private bar2_back: PIXI.Texture;
     private barSpriteLeft: PIXI.Sprite;
     private barSpriteRight: PIXI.Sprite;
     private barSpriteLeft_back: PIXI.Sprite;
     private barSpriteRight_back: PIXI.Sprite;
+    private barSpriteRight_shape: PIXI.Sprite;
+    private barSpriteLeft_shape: PIXI.Sprite;
+    private shape1_level: number = 290;
+    private shape2_level: number = 290;
     public ticker: PIXI.Ticker;
     public ticker2: PIXI.Ticker;
     public downright: Boolean = false;
@@ -49,11 +54,11 @@ export default class Game {
     private craneTextures: Array<PIXI.Texture> = [];
     private craneAnimate: PIXI.AnimatedSprite;
     private craneTexture: PIXI.Texture;
+    private wavesTextures: Array<PIXI.Texture> = [];
+    private wavesTexture: PIXI.Texture;
     private barcontent: PIXI.Texture;
-    private leftBar: PIXI.Sprite;
-    private leftBarMask: PIXI.Graphics;
-    private rightBar: PIXI.Sprite;
-    private rightBarMask: PIXI.Graphics;
+    private leftBar: PIXI.AnimatedSprite;
+    private rightBar: PIXI.AnimatedSprite;
     private arrayPins: Array<PIXI.Graphics> = [];
     public isDrop: Boolean = false;
     public startDrop: Boolean = false;
@@ -68,12 +73,10 @@ export default class Game {
     private powerup: () => void;
     public ballArray: Array<Ball> = [];
     private ballIndex: number = 0;
-    private origheightright: number;
     private origpositionright: number;
-    private origheightleft: number;
     private origpositionleft: number;
     private readonly fullbarheight: number = 335;
-    private readonly baradd: number = 6.7;
+    private readonly baradd: number = 5.8;
     private readonly reelSpeed: number = 4;
     private readonly ballRadius: number = 14;
     private readonly pinRadius: number = 5;
@@ -87,12 +90,13 @@ export default class Game {
         this.app = app;
         this.loader = loader;
         this.stage = this.loader.resources!.plinko.textures!['stage.png'];
-        this.pipe = this.loader.resources!.plinko.textures!['pipe.png'];
+        this.pipe = this.loader.resources!.newplinko.textures!['golden_pipe.png'];
         this.bar1 = this.loader.resources!.newplinko.textures!['frame_levelbar_1.png'];
         this.bar2 = this.loader.resources!.newplinko.textures!['frame_levelbar_1.png'];
         this.bar1_back = this.loader.resources!.newplinko.textures!['frame_levelbar_3.png'];
         this.bar2_back = this.loader.resources!.newplinko.textures!['frame_levelbar_3.png'];
         this.barcontent = this.loader.resources!.newplinko.textures!['frame_levelbar_2.png'];
+        this.bar1_shape = this.loader.resources!.newplinko.textures!['frame_levelbar_4.png'];
         this.charAssets = [
             this.loader.resources!.fish1.textures,
             this.loader.resources!.bottle.textures,
@@ -222,59 +226,74 @@ export default class Game {
     }
 
     private createBar(){
+        //create waves
+        for(let img in this.loader.resources!.waves.textures){
+            this.wavesTexture = PIXI.Texture.from(img);
+            this.wavesTextures.push(this.wavesTexture);
+        } 
+
         this.container2 = new PIXI.Container();
-        const posycontent = 123;
+        const barleftposx = 5;
+        const barrightposx = 19;
 
         //back left
         this.barSpriteLeft_back = new PIXI.Sprite(this.bar1_back);
         this.barSpriteLeft_back.width = 60;
         this.barSpriteLeft_back.height = this.stageSprite.height + 11;
         this.barSpriteLeft_back.position.y = (this.pipeSprite.height / 2);
-        this.barSpriteLeft_back.position.x = 2;
+        this.barSpriteLeft_back.position.x = barleftposx;
         this.container2.addChild(this.barSpriteLeft_back);
 
         //left bar content
-        this.leftBar = new PIXI.Sprite(this.barcontent);
+        // this.leftBar = new PIXI.Sprite(this.barcontent);
+        this.leftBar = new PIXI.AnimatedSprite(this.wavesTextures);
+        this.leftBar.animationSpeed = .2;
+        this.leftBar.play();
         this.leftBar.width = 60;
         this.leftBar.height = this.stageSprite.height + 11;
-        this.leftBar.position.y = (this.pipeSprite.height / 2);
-        this.leftBar.position.x = 2;
+        this.leftBar.position.y = (this.pipeSprite.height / 2) + this.shape1_level;
+        this.origpositionleft = this.shape1_level;
+        this.leftBar.position.x = barleftposx;
         this.container2.addChild(this.leftBar);
+
+        
 
         //left
         this.barSpriteLeft = new PIXI.Sprite(this.bar1);
         this.barSpriteLeft.width = 60;
         this.barSpriteLeft.height = this.stageSprite.height + 11;
         this.barSpriteLeft.position.y = (this.pipeSprite.height / 2);
-        this.barSpriteLeft.position.x = 2;
+        this.barSpriteLeft.position.x = barleftposx;
         this.container2.addChild(this.barSpriteLeft);
 
-        //left mask
-        this.leftBarMask = new PIXI.Graphics();
-        this.leftBarMask.beginFill(0x000000);
-        this.leftBarMask.drawRect(0,0,60,0.1);
-        this.leftBarMask.endFill();
-        this.leftBarMask.position.y = (this.leftBar.position.y + this.leftBar.height) - this.leftBarMask.height;
-        this.leftBarMask.position.x = 2;
-        this.origheightleft = this.leftBarMask.height;
-        this.origpositionleft = this.leftBarMask.position.y;
-        this.container2.addChild(this.leftBarMask);
-        this.leftBar.mask = this.leftBarMask;
+        //back shape
+        this.barSpriteRight_shape = new PIXI.Sprite(this.bar1_shape);
+        this.barSpriteRight_shape.width = 60;
+        this.barSpriteRight_shape.height = this.stageSprite.height + 11;
+        this.barSpriteRight_shape.position.y = (this.pipeSprite.height / 2);
+        this.barSpriteRight_shape.position.x = barleftposx;
+        this.container2.addChild(this.barSpriteRight_shape);
+        
+        this.leftBar.mask = this.barSpriteRight_shape;
 
         //back right
         this.barSpriteRight_back = new PIXI.Sprite(this.bar2_back);
         this.barSpriteRight_back.width = 60;
         this.barSpriteRight_back.height = this.stageSprite.height + 11;
         this.barSpriteRight_back.position.y = (this.pipeSprite.height / 2);
-        this.barSpriteRight_back.position.x = this.stageSprite.width - 14;
+        this.barSpriteRight_back.position.x = this.stageSprite.width - barrightposx;
         this.container2.addChild(this.barSpriteRight_back);
 
         //right bar content
-        this.rightBar = new PIXI.Sprite(this.barcontent);
+        // this.rightBar = new PIXI.Sprite(this.barcontent);
+        this.rightBar = new PIXI.AnimatedSprite(this.wavesTextures);
+        this.rightBar.animationSpeed = .2;
+        this.rightBar.play();
         this.rightBar.width = 60;
         this.rightBar.height = this.stageSprite.height + 11;
-        this.rightBar.position.y = (this.pipeSprite.height / 2);
-        this.rightBar.position.x = this.stageSprite.width - 14;
+        this.rightBar.position.y = (this.pipeSprite.height / 2) + this.shape2_level;
+        this.origpositionright = this.shape2_level;
+        this.rightBar.position.x = this.stageSprite.width - barrightposx;
         this.container2.addChild(this.rightBar);
 
         //right
@@ -282,20 +301,18 @@ export default class Game {
         this.barSpriteRight.width = 60;
         this.barSpriteRight.height = this.stageSprite.height + 11;
         this.barSpriteRight.position.y = (this.pipeSprite.height / 2);
-        this.barSpriteRight.position.x = this.stageSprite.width - 14;
+        this.barSpriteRight.position.x = this.stageSprite.width - barrightposx;
         this.container2.addChild(this.barSpriteRight);
 
-        //right mask
-        this.rightBarMask = new PIXI.Graphics();
-        this.rightBarMask.beginFill(0x000000);
-        this.rightBarMask.drawRect(0,0,60,0.1);
-        this.rightBarMask.endFill();
-        this.rightBarMask.position.y = (this.rightBar.position.y + this.rightBar.height) - this.rightBarMask.height;
-        this.origheightright = this.rightBarMask.height;
-        this.origpositionright = this.rightBarMask.position.y;
-        this.rightBarMask.position.x = this.stageSprite.width - 14;;
-        this.container2.addChild(this.rightBarMask);
-        this.rightBar.mask = this.rightBarMask;
+        //back shape
+        this.barSpriteLeft_shape = new PIXI.Sprite(this.bar1_shape);
+        this.barSpriteLeft_shape.width = 60;
+        this.barSpriteLeft_shape.height = this.stageSprite.height + 11;
+        this.barSpriteLeft_shape.position.y = (this.pipeSprite.height / 2);
+        this.barSpriteLeft_shape.position.x = this.stageSprite.width - barrightposx;
+        this.container2.addChild(this.barSpriteLeft_shape);
+        this.rightBar.mask = this.barSpriteLeft_shape;
+
     }
 
     private createMaze(){
@@ -530,12 +547,13 @@ export default class Game {
         }
     }
 
-    private powerOff(height1: number, position1: number, height2: number, position2: number){
-        let gsapper = gsap.to(this.leftBarMask, {
-            height: height1,
-            y: position1,
+    private powerOff(position1: number, position2: number){
+        this.shape1_level = this.origpositionleft;
+        this.shape2_level = this.origpositionright;
+        let gsapper = gsap.to(this.leftBar, {
+            y: (this.pipeSprite.height / 2) + position1,
             alpha: 1,
-            duration: .3,
+            duration: .6,
             onComplete: () => {
                 let stopper = setTimeout(() => {
                     gsapper.kill();
@@ -544,11 +562,10 @@ export default class Game {
             }
         });
 
-        let gsapper2 = gsap.to(this.rightBarMask, {
-            height: height2,
-            y: position2,
+        let gsapper2 = gsap.to(this.rightBar, {
+            y: (this.pipeSprite.height / 2) + position2,
             alpha: 1,
-            duration: .3,
+            duration: .6,
             onComplete: () => {
                 let stopper = setTimeout(() => {
                     gsapper2.kill();
@@ -560,20 +577,19 @@ export default class Game {
         this.powerup();
     }
 
-    private powerUpChecker(mask: PIXI.Graphics){
-        if(mask.height >= this.fullbarheight){
-            this.powerOff(this.origheightleft, this.origpositionleft, this.origheightright, this.origpositionright);
+    private powerUpChecker(position: number){
+        if(position <= 0){
+            this.powerOff(this.origpositionleft, this.origpositionright);
         }
     }
 
-    private powerOn(mask: PIXI.Graphics, bar: PIXI.Sprite){
+    private powerOn(mask: PIXI.AnimatedSprite, position: number){
         let gsapper = gsap.to(mask, {
-            height: mask.height = mask.height + this.baradd,
-            y: (bar.position.y + bar.height) - mask.height,
+            y: (this.pipeSprite.height / 2) + position,
             duration: 1,
             onComplete: () => {
                 let stopper = setTimeout(() => {
-                    this.powerUpChecker(mask);
+                    this.powerUpChecker(position);
                     gsapper.kill();
                     clearTimeout(stopper);
                 }, 1000);
@@ -583,10 +599,12 @@ export default class Game {
 
     private updateBar(type: string){
         if(type == 'right'){
-            this.powerOn(this.rightBarMask, this.rightBar);
+            this.shape2_level -= this.baradd;
+            this.powerOn(this.rightBar, this.shape2_level);
         }
         else{
-            this.powerOn(this.leftBarMask, this.leftBar);
+            this.shape1_level -= this.baradd;
+            this.powerOn(this.leftBar, this.shape1_level);
         }
     }
 

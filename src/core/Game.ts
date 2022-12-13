@@ -17,6 +17,8 @@ import Modal from './components/Modal';
 import ParentModal from './components/Modal/ParentModal';
 import Win from './components/Popup/Win';
 
+const {Howl, Howler} = require('howler');
+
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
 
@@ -63,13 +65,15 @@ export default class Game {
   private winPopupAnimation: Win;
   private tickervalid: Boolean = false;
   private allbet: number = 0;
+  private sound: Array<any>;
+  private soundid: Array<any> = [];
   private readonly powerup: number = 40;
 
   constructor() {
     this.setSettings();
     this.setRenderer();
 
-    new Loader(this.main, this.init.bind(this));
+    new Loader(this.main, this.init.bind(this), this.sounds.bind(this));
   }
   private init() {
     this.setContainers(); 
@@ -161,25 +165,40 @@ export default class Game {
     this.main.stage.addChild(this.mainContainer);
 
 
-    // this.dive();
+    this.dive();
     // this.winPopup(2500, 50);
   }
 
   private dive() {
+    let index = 0;
+    let volume = 1;
+    let volume2 = 0.0;
     this.scene.bubbleAnimate();
-
+    // this.soundPlay(false, 2);
+    // this.soundPlay(false, 3, volume2);
     this.diveGroupAnimation.forEach((el: any) => {
       gsap.to(el.sprite, {
         y: el.posY??0,
         alpha: el.alpha??1,
-        duration: this.animationSpeed,
+        // duration: this.animationSpeed,
+        onUpdate: () => {
+          volume2 += 0.003;
+          volume -= 0.003;
+          // if(volume > 0){
+          //   this.volumeTransition(volume, 1);
+          // }
+          // if(volume2 < 1){
+          //   this.volumeTransition(volume2, 3);
+          // }
+        },
         onComplete: () => {
           this.homeContainer.removeChild(this.home.container);
           this.stopAndPlay(true);
           Functions.toggleAnimations(this.scene.homeAnimations, false);
           Functions.toggleAnimations(this.scene.oceanBedAnimations, true);
-
-          
+          this.soundStop(2);
+          this.soundStop(1);
+          this.volumeTransition(1.0, 3);
           if(this.game > 0)
             this.slotPlay();
 
@@ -360,11 +379,15 @@ export default class Game {
     this.parentmodal.container.alpha = 0;
     this.modalheight = this.parentmodal.container.height;
     //create modal component
-    this.modal = new Modal(this.main, this.parentmodal.container);
+    this.modal = new Modal(this.main, this.parentmodal.container, this.toggleSoundMusic.bind(this));
     this.modal.close.addListener("pointerdown", this.showModal.bind(this));
-    this.modal.gamesettings.toggleSprite.forEach(btn => {
+    this.modal.gamesettings.toggleSprite.forEach((btn, index) => {
+      let type = "music";
+      if(index == 1){
+        type = "effect"
+      }
       btn.addListener("pointerdown", () => {
-        this.modal.gamesettings.toggleOnOff(btn);
+        this.modal.gamesettings.toggleOnOff(btn, type);
       });
     });
     this.modalContainer.addChild(this.modal.container);
@@ -543,6 +566,41 @@ export default class Game {
     gsap.to(this.modal.container,{
       alpha : alpha, duration : .5
     });
+  }
+
+  //sounds
+  private sounds(play: Boolean, bgm: Array<any>){
+    this.sound = bgm;
+    // this.soundPlay(play, 0);
+    // this.soundPlay(play, 1);
+  }
+
+  private soundPlay(play: Boolean, index: number, volume: number = 1){
+    let id = this.sound[index].play();
+    this.sound[index].volume(volume, this.soundid[index])
+    this.soundid.push(id);
+    if(!play){
+      let bool = play ? true : false;
+      this.sound[index].mute(bool, this.soundid[index]);
+    }
+  }
+
+  private soundStop(index: number){
+    this.sound[index].stop(this.soundid[index]);
+    let newarray: Array<any> = [];
+    this.soundid.forEach((element: any, num: number) => {
+      if(index != num){
+        newarray.push(element);
+      }
+    });
+    this.soundid = newarray;
+  }
+
+  private volumeTransition(volume: number, index: number){
+    this.sound[index].volume(volume.toFixed(2), this.soundid[index]);
+  }
+
+  private toggleSoundMusic(bool: Boolean){
   }
   // end julius code
 }

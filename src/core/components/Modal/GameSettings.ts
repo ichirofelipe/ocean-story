@@ -10,9 +10,10 @@ export default class GameSettings {
     private subdescstyle: PIXI.TextStyle;
     private toggleoff: PIXI.Texture;
     private toggleon: PIXI.Texture;
+    private togglemusic: (type: Boolean) => void;
     public toggleSprite: Array<PIXI.Sprite> = [];
 
-    constructor(app: PIXI.Application, container: PIXI.Container) {
+    constructor(app: PIXI.Application, container: PIXI.Container, togglemusic: (type: Boolean) => void) {
         this.gamesettings = new PIXI.Container();
         this.container = container;
         this.app = app;
@@ -37,6 +38,7 @@ export default class GameSettings {
             fontWeight: 'bold',
             fill: '#AAAAAA'
         });
+        this.togglemusic = togglemusic;
         this.init();
     }
 
@@ -68,12 +70,19 @@ export default class GameSettings {
         this.container.addChild(this.gamesettings);
     }
 
-    public toggleOnOff(btn: PIXI.Sprite){
+    public toggleOnOff(btn: PIXI.Sprite, type: string){
+        let bool: Boolean;
         if(btn.texture == this.toggleon){
             btn.texture = this.toggleoff;
+            bool = true;
         }
         else{
             btn.texture = this.toggleon;
+            bool = false;
         }
+
+        // if(type == "music"){
+        //     this.togglemusic(bool);
+        // }
     }
 }

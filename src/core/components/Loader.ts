@@ -14,15 +14,17 @@ export default class Loader {
     private text: PIXI.Text;
     private btn1: PIXI.Sprite;
     private btn2: PIXI.Sprite;
+    private bgm: Array<any> = [];
+    private sounds: (type: Boolean, bgm: Array<any>) => void;
     private onAssetsLoaded: () => void;
 
-    constructor(app: PIXI.Application, onAssetsLoaded: () => void) {
+    constructor(app: PIXI.Application, onAssetsLoaded: () => void, sounds: (type: Boolean, bgm: Array<any>) => void) {
         this.app = app;
         this.loader = app.loader;
         this.container = new PIXI.Container();
         this.btncontainer = new PIXI.Container();
         this.onAssetsLoaded = onAssetsLoaded;
-        
+        this.sounds = sounds;
         WebFont.load({
             google: {
               families: ['Libre Franklin', 'Questrial', 'Libre Franklin:900', 'Libre Franklin:500', 'Luckiest Guy', 'Montserrat']
@@ -142,14 +144,22 @@ export default class Loader {
         this.loader.add('spinall', 'assets/images/plinko/spinall.json');
         this.loader.add('nospin', 'assets/images/plinko/nospin.json');
 
+        //new plinko
+        this.loader.add('newplinko', 'assets/images/plinko/newplinko.json');
+
+        //music index 0
+        this.setUpSounds('assets/sounds/bgm.mp3', true);
+        this.setUpSounds('assets/sounds/seashore.mp3', true);
+        this.setUpSounds('assets/sounds/bonus-exit-transition.mp3', false);
+        this.setUpSounds('assets/sounds/under-water-draft.mp3', true);
     }
 
     private createLoadingScreen(appWidth: number, appHeight: number) {
         const logo = PIXI.Sprite.from('assets/images/loading/logo.png');
         logo.width = 277;
-        logo.height = 131;
+        logo.height = 19;
         logo.position.x = (appWidth / 2) - (logo.width / 2);
-        logo.position.y = appHeight * .2;
+        logo.position.y = appHeight * .4;
         this.loadingoff = PIXI.Sprite.from('assets/images/loading/loadingoff.png');
         this.loadingoff.width = 277;
         this.loadingoff.height = 6;
@@ -209,19 +219,21 @@ export default class Loader {
     }
 
     private startgame(play: Boolean){
-        var sound = new Howl({
-            src: ['assets/sounds/bgm.mp3'],
-            loop: true
-        });
-        let id = sound.play();
-        if(!play){
-            sound.mute(true, id);
-        }
         this.app.stage.removeChild(this.container);
         this.onAssetsLoaded();
+        this.sounds(play, this.bgm);
     }
 
     private getRandomInt(min: number, max: number) {
         return Math.random() * (max - min) + min;
+    }
+
+    private setUpSounds(music: any, loop: Boolean){
+        const sound = new Howl({
+            src: [music],
+            loop: loop,
+            volume: 1
+        });
+        this.bgm.push(sound);
     }
 }

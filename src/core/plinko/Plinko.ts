@@ -84,8 +84,8 @@ export default class Game {
         this.loader = loader;
         this.stage = this.loader.resources!.plinko.textures!['stage.png'];
         this.pipe = this.loader.resources!.plinko.textures!['pipe.png'];
-        this.bar1 = this.loader.resources!.plinko.textures!['bar1.png'];
-        this.bar2 = this.loader.resources!.plinko.textures!['bar2.png'];
+        this.bar1 = this.loader.resources!.newplinko.textures!['frame_levelbar_1.png'];
+        this.bar2 = this.loader.resources!.newplinko.textures!['frame_levelbar_1.png'];
         this.barcontent = this.loader.resources!.plinko.textures!['barcontent.png'];
         this.charAssets = [
             this.loader.resources!.fish1.textures,
@@ -220,10 +220,10 @@ export default class Game {
         const posycontent = 123;
         //left
         this.barSpriteLeft = new PIXI.Sprite(this.bar1);
-        this.barSpriteLeft.width = 85;
+        this.barSpriteLeft.width = 60;
         this.barSpriteLeft.height = this.stageSprite.height + 11;
         this.barSpriteLeft.position.y = (this.pipeSprite.height / 2);
-        this.barSpriteLeft.position.x = -9;
+        this.barSpriteLeft.position.x = 2;
         this.container2.addChild(this.barSpriteLeft);
 
         //left bar content
@@ -248,10 +248,10 @@ export default class Game {
 
         //right
         this.barSpriteRight = new PIXI.Sprite(this.bar2);
-        this.barSpriteRight.width = 85;
+        this.barSpriteRight.width = 60;
         this.barSpriteRight.height = this.stageSprite.height + 11;
         this.barSpriteRight.position.y = (this.pipeSprite.height / 2);
-        this.barSpriteRight.position.x = this.stageSprite.width - 26;
+        this.barSpriteRight.position.x = this.stageSprite.width - 14;
         this.container2.addChild(this.barSpriteRight);
 
         //right bar content

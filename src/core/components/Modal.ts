@@ -16,11 +16,13 @@ export default class Modal {
     public gamesettings: GameSettings;
     private gamerules: GameRules;
     public close: PIXI.Sprite;
+    private togglemusic: (type: Boolean) => void;
     private readonly sidepadding: number = 200;
 
-    constructor(app: PIXI.Application, container: PIXI.Container) {
+    constructor(app: PIXI.Application, container: PIXI.Container, togglemusic: (type: Boolean) => void) {
         this.container = container;
         this.app = app;
+        this.togglemusic = togglemusic;
         this.init();
     }
 
@@ -85,7 +87,7 @@ export default class Modal {
         this.container.addChild(this.close);
 
         //game settings
-        this.gamesettings = new GameSettings(this.app,this.container);
+        this.gamesettings = new GameSettings(this.app,this.container,this.togglemusic);
         this.gamesettings.gamesettings.alpha = 0;
 
         //paytable

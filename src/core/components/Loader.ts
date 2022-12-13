@@ -221,6 +221,7 @@ export default class Loader {
     private startgame(play: Boolean){
         this.app.stage.removeChild(this.container);
         this.onAssetsLoaded();
+        console.log(play)
         this.sounds(play, this.bgm);
     }
 

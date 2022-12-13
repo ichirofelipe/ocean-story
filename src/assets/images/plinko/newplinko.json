@@ -84,7 +84,7 @@
 			"frame": {
 				"x": 449,
 				"y": 1,
-				"w": 560,
+				"w": 572,
 				"h": 285
 			},
 			"rotated": false,
@@ -92,11 +92,11 @@
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 560,
+				"w": 572,
 				"h": 285
 			},
 			"sourceSize": {
-				"w": 560,
+				"w": 572,
 				"h": 285
 			}
 		}
@@ -107,7 +107,7 @@
 		"image": "newplinko.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 1010,
+			"w": 1022,
 			"h": 657
 		},
 		"scale": "1"

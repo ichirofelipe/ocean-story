@@ -1,0 +1,615 @@
+{
+	"frames": {
+		"clam-gold_00000.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00001.png": {
+			"frame": {
+				"x": 303,
+				"y": 1,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00002.png": {
+			"frame": {
+				"x": 605,
+				"y": 1,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00003.png": {
+			"frame": {
+				"x": 907,
+				"y": 1,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00004.png": {
+			"frame": {
+				"x": 1209,
+				"y": 1,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00005.png": {
+			"frame": {
+				"x": 1,
+				"y": 254,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00006.png": {
+			"frame": {
+				"x": 303,
+				"y": 254,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00007.png": {
+			"frame": {
+				"x": 605,
+				"y": 254,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00008.png": {
+			"frame": {
+				"x": 907,
+				"y": 254,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00009.png": {
+			"frame": {
+				"x": 1209,
+				"y": 254,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00010.png": {
+			"frame": {
+				"x": 1,
+				"y": 507,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00011.png": {
+			"frame": {
+				"x": 303,
+				"y": 507,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00012.png": {
+			"frame": {
+				"x": 605,
+				"y": 507,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00013.png": {
+			"frame": {
+				"x": 907,
+				"y": 507,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00014.png": {
+			"frame": {
+				"x": 1209,
+				"y": 507,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00015.png": {
+			"frame": {
+				"x": 1,
+				"y": 760,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00016.png": {
+			"frame": {
+				"x": 303,
+				"y": 760,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00017.png": {
+			"frame": {
+				"x": 605,
+				"y": 760,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00018.png": {
+			"frame": {
+				"x": 907,
+				"y": 760,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00019.png": {
+			"frame": {
+				"x": 1209,
+				"y": 760,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00020.png": {
+			"frame": {
+				"x": 1,
+				"y": 1013,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00021.png": {
+			"frame": {
+				"x": 303,
+				"y": 1013,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00022.png": {
+			"frame": {
+				"x": 605,
+				"y": 1013,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00023.png": {
+			"frame": {
+				"x": 907,
+				"y": 1013,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00024.png": {
+			"frame": {
+				"x": 1209,
+				"y": 1013,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00025.png": {
+			"frame": {
+				"x": 1511,
+				"y": 1,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00026.png": {
+			"frame": {
+				"x": 1511,
+				"y": 254,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00027.png": {
+			"frame": {
+				"x": 1511,
+				"y": 507,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00028.png": {
+			"frame": {
+				"x": 1511,
+				"y": 760,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		},
+		"clam-gold_00029.png": {
+			"frame": {
+				"x": 1511,
+				"y": 1013,
+				"w": 300,
+				"h": 251
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 300,
+				"h": 251
+			},
+			"sourceSize": {
+				"w": 300,
+				"h": 251
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "clam-gold.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 1812,
+			"h": 1265
+		},
+		"scale": "1"
+	}
+}

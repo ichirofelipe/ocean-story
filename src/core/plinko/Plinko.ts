@@ -75,15 +75,17 @@ export default class Game {
     private ballIndex: number = 0;
     private origpositionright: number;
     private origpositionleft: number;
+    private adjusty: number;
+    private stageWidth: number;
+    private dropperposx: number;
+    private barleftposx: number;
     private readonly fullbarheight: number = 335;
     private readonly baradd: number = 5.8;
     private readonly reelSpeed: number = 4;
-    private readonly ballRadius: number = 14;
-    private readonly pinRadius: number = 5;
-    private readonly pinGap: number = 10;
+    private readonly ballRadius: number = 13;
+    private readonly pinRadius: number = 4;
+    private readonly pinGap: number = 9;
     private readonly stageHeight: number = .6;
-    private readonly stageWidth: number = .9;
-    private readonly adjusty: number = 4;
     private readonly clawspeed: number = 4;
 
     constructor(app: PIXI.Application, loader: PIXI.Loader, updategameplus: () => void, updategameminus: () => void, decmoney: () => void, dropoff: () => void, addmoney: (type: number) => void, powerup: () => void) {
@@ -119,6 +121,27 @@ export default class Game {
         this.updategameplus = updategameplus;
         this.updategameminus = updategameminus;
         this.powerup = powerup;
+        this.stageWidth = .9;
+        this.dropperposx = 15;
+        this.barleftposx = 5;
+        if(this.clawspeed == 4){
+            this.adjusty = 5;
+            this.stageWidth = .91;
+            this.dropperposx = 14;
+            this.barleftposx = 3;
+        }
+        else if(this.clawspeed == 5){
+            this.adjusty = 3;
+        }
+        else if(this.clawspeed == 3){
+            this.adjusty = 4;
+            this.stageWidth = .91;
+            this.dropperposx = 14;
+            this.barleftposx = 3;
+        }
+        else{
+            this.adjusty = 4;
+        }
         this.init();
     }
 
@@ -189,14 +212,15 @@ export default class Game {
             this.craneTextures.push(this.craneTexture);
         } 
         this.craneAnimate = new PIXI.AnimatedSprite(this.craneTextures);
-        this.craneAnimate.width = 55;
-        this.craneAnimate.height = 80;
-        this.ball = new Coin((this.craneAnimate.width - (this.ballRadius * 2)), this.craneAnimate.height - this.ballRadius, this.ballRadius, this.loader);
+        this.craneAnimate.width = 40;
+        this.craneAnimate.height = 81;
+        this.ball = new Coin(20, 64, this.ballRadius, this.loader);
         this.dropperContainer.addChild(this.craneAnimate);
         this.dropperContainer.addChild(this.ball.ball);
+        
         this.dropperContainer.position.y = this.pipeSprite.height - 40;
-        this.dropperContainer.position.x = 4;
-        this.craneAnimate.animationSpeed = 0.2;
+        this.dropperContainer.position.x = this.dropperposx;
+        this.craneAnimate.animationSpeed = .9;
         this.container.addChild(this.dropperContainer);
     }
 
@@ -233,8 +257,8 @@ export default class Game {
         } 
 
         this.container2 = new PIXI.Container();
-        const barleftposx = 5;
-        const barrightposx = 19;
+        const barleftposx = this.barleftposx;
+        const barrightposx = 18;
 
         //back left
         this.barSpriteLeft_back = new PIXI.Sprite(this.bar1_back);
@@ -327,7 +351,7 @@ export default class Game {
 
         let x = 0;
         let y = 0;
-        let adjustx = 12;
+        let adjustx = 8;
         let adjusty = 15;
 
         for(let r = 0; r < this.pinrow; r++){
@@ -394,19 +418,18 @@ export default class Game {
 
     private movementsCrane(){
         const path = [
-            { pointup1 : 24, pointup2 : 6, pointupright1 : 405, pointupright2 : 21, pointdown1 : 184, pointdownright1 : 23, pointdownright2 : 402, pointupleft1 : 20, pointupleft2 : 20 },
-            { pointup1 : 25, pointup2 : 7, pointupright1 : 404, pointupright2 : 21, pointdown1 : 184, pointdownright1 : 23, pointdownright2 : 405, pointupleft1 : 19, pointupleft2 : 20  },
-            { pointup1 : 26, pointup2 : 6, pointupright1 : 403.1, pointupright2 : 17, pointdown1 : 184, pointdownright1 : 23, pointdownright2 : 405, pointupleft1 : 22, pointupleft2 : 20  },
-            { pointup1 : 27, pointup2 : 6, pointupright1 : 402, pointupright2 : 17, pointdown1 : 184, pointdownright1 : 23, pointdownright2 : 405, pointupleft1 : 23, pointupleft2 : 20  },
-            { pointup1 : 24, pointup2 : 8.5, pointupright1 : 401, pointupright2 : 17, pointdown1 : 184, pointdownright1 : 23, pointdownright2 : 405, pointupleft1 : 24, pointupleft2 : 20  }
+            { pointup1 : 11, pointup2 : 424, pointupright1 : 405, pointupright2 : 21, pointdown1 : 184, pointdownright1 : 11, pointdownright2 : 15, pointupleft1 : 20, pointupleft2 : 20 },
+            { pointup1 : 11, pointup2 : 424, pointupright1 : 404, pointupright2 : 21, pointdown1 : 184, pointdownright1 : 11, pointdownright2 : 15, pointupleft1 : 19, pointupleft2 : 20  },
+            { pointup1 : 11, pointup2 : 426, pointupright1 : 403.1, pointupright2 : 17, pointdown1 : 184, pointdownright1 : 11, pointdownright2 : 15, pointupleft1 : 22, pointupleft2 : 20  },
+            { pointup1 : 13, pointup2 : 425, pointupright1 : 402, pointupright2 : 17, pointdown1 : 184, pointdownright1 : 13, pointdownright2 : 15, pointupleft1 : 23, pointupleft2 : 20  },
+            { pointup1 : 13, pointup2 : 424, pointupright1 : 401, pointupright2 : 17, pointdown1 : 184, pointdownright1 : 13, pointdownright2 : 15, pointupleft1 : 24, pointupleft2 : 20  }
         ]
         //crane up
         if(this.up){
             if(this.dropperContainer.position.y <= path[this.clawspeed - 1].pointup1){
-                this.dropperContainer.position.y -= this.clawspeed;
                 this.dropperContainer.position.x += this.clawspeed; 
-                if(this.dropperContainer.position.y <= path[this.clawspeed - 1].pointup2){
-                    this.upright = true;
+                if(this.dropperContainer.position.x >= path[this.clawspeed - 1].pointup2){
+                    this.down = true;
                     this.up = false;
                 }
             }
@@ -415,25 +438,25 @@ export default class Game {
             }
         }
         //crane go to right
-        if(this.upright){
-            if(this.dropperContainer.position.x >= path[this.clawspeed - 1].pointupright1){
-                this.dropperContainer.position.y += this.clawspeed;
-                this.dropperContainer.position.x += this.clawspeed;
-                if(this.dropperContainer.position.y >= path[this.clawspeed - 1].pointupright2){
-                    this.upright = false;
-                    this.down = true;
-                }
-            }
-            else{
-                this.dropperContainer.position.x += this.clawspeed;
-            }
-        }
+        // if(this.upright){
+        //     if(this.dropperContainer.position.x >= path[this.clawspeed - 1].pointupright1){
+        //         this.dropperContainer.position.y += this.clawspeed;
+        //         this.dropperContainer.position.x += this.clawspeed;
+        //         if(this.dropperContainer.position.y >= path[this.clawspeed - 1].pointupright2){
+        //             this.upright = false;
+        //             this.down = true;
+        //         }
+        //     }
+        //     else{
+        //         this.dropperContainer.position.x += this.clawspeed;
+        //     }
+        // }
         //crane go down
         if(this.down){
             this.dropperContainer.position.y += this.clawspeed;
             if(this.dropperContainer.position.y >= path[this.clawspeed - 1].pointdown1){
                 if(!this.haveBall){
-                    this.ball = new Coin((this.craneAnimate.width - (this.ballRadius * 2)), this.craneAnimate.height - this.ballRadius, this.ballRadius, this.loader);
+                    this.ball = new Coin(20, 64, this.ballRadius, this.loader);
                     this.dropperContainer.addChild(this.ball.ball);
                     this.haveBall = true;
                     if(this.startDrop){
@@ -447,10 +470,9 @@ export default class Game {
         //crane go up in right
         if(this.downright){
             if(this.dropperContainer.position.y <= path[this.clawspeed - 1].pointdownright1){
-                this.dropperContainer.position.y -= this.clawspeed;
                 this.dropperContainer.position.x -= this.clawspeed;
                 if(this.dropperContainer.position.x <= path[this.clawspeed - 1].pointdownright2){
-                    this.upleft = true;
+                    this.downleft = true;
                     this.downright = false;
                 }
             }
@@ -458,25 +480,25 @@ export default class Game {
                 this.dropperContainer.position.y -= this.clawspeed;
             }
         }
-        //crane goto left
-        if(this.upleft){
-            if(this.dropperContainer.position.x <= path[this.clawspeed - 1].pointupleft1){
-                this.dropperContainer.position.y += this.clawspeed;
-                this.dropperContainer.position.x -= this.clawspeed;
-                if(this.dropperContainer.position.y >= path[this.clawspeed - 1].pointupleft2){
-                    this.downleft = true;
-                    this.upleft = false;
-                }
-            }
-            else{
-                this.dropperContainer.position.x -= this.clawspeed;
-            }
-        }
+        // //crane goto left
+        // if(this.upleft){
+        //     if(this.dropperContainer.position.x <= path[this.clawspeed - 1].pointupleft1){
+        //         this.dropperContainer.position.y += this.clawspeed;
+        //         this.dropperContainer.position.x -= this.clawspeed;
+        //         if(this.dropperContainer.position.y >= path[this.clawspeed - 1].pointupleft2){
+        //             this.downleft = true;
+        //             this.upleft = false;
+        //         }
+        //     }
+        //     else{
+        //         this.dropperContainer.position.x -= this.clawspeed;
+        //     }
+        // }
         //crane go down
         if(this.downleft){
             if(this.dropperContainer.position.y >= path[this.clawspeed - 1].pointdown1){
                 if(!this.haveBall){
-                    this.ball = new Coin((this.craneAnimate.width - (this.ballRadius * 2)), this.craneAnimate.height - this.ballRadius, this.ballRadius, this.loader);
+                    this.ball = new Coin(20, 64, this.ballRadius, this.loader);
                     this.dropperContainer.addChild(this.ball.ball);
                     this.haveBall = true;
                     if(this.startDrop){
@@ -491,14 +513,14 @@ export default class Game {
             }
         }
         if(this.isDrop){
-            if(this.dropperContainer.position.x >= 110 && this.dropperContainer.position.x <= 370){
-                if(this.upright){
-                    if(this.dropperContainer.position.x >= 111 + Math.round(this.getRandomInt(30, 258))){
+            if(this.dropperContainer.position.x >= 115 && this.dropperContainer.position.x <= 365){
+                if(this.downright){
+                    if(this.dropperContainer.position.x <= 364 - Math.round(this.getRandomInt(30, 258))){
                         this.dropBallAnimation();
                     }
                 }
-                if(this.upleft){
-                    if(this.dropperContainer.position.x <= 369 - Math.round(this.getRandomInt(30, 258))){
+                if(this.up){
+                    if(this.dropperContainer.position.x >= 114 + Math.round(this.getRandomInt(30, 258))){
                         this.dropBallAnimation();
                     }
                 }
@@ -524,11 +546,11 @@ export default class Game {
                 this.haveBall = false;
                 this.dropperContainer.removeChild(this.ball.ball);
                 let posx = 0;
-                if(this.upleft){
-                    posx = -2;
+                if(this.downright){
+                    posx = this.clawspeed;
                 }
-                if(this.upright){
-                    posx = 2;
+                if(this.downleft){
+                    posx = -(this.clawspeed);
                 }
                 const x = (this.dropperContainer.position.x) + (this.craneAnimate.width - (this.ballRadius * 2)) + posx;
                 const y = this.dropperContainer.position.y + (this.craneAnimate.height - this.ballRadius);

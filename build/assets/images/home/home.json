@@ -1,43 +1,123 @@
 {
 	"frames": {
-		"background.jpg": {
+		"pause.png": {
 			"frame": {
 				"x": 1,
 				"y": 1,
-				"w": 960,
-				"h": 1080
+				"w": 234,
+				"h": 234
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 960,
-				"h": 1080
+				"w": 234,
+				"h": 234
 			},
 			"sourceSize": {
-				"w": 960,
-				"h": 1080
+				"w": 234,
+				"h": 234
+			}
+		},
+		"plinkoui.png": {
+			"frame": {
+				"x": 237,
+				"y": 1,
+				"w": 463,
+				"h": 429
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 463,
+				"h": 429
+			},
+			"sourceSize": {
+				"w": 463,
+				"h": 429
+			}
+		},
+		"radiooff.png": {
+			"frame": {
+				"x": 702,
+				"y": 1,
+				"w": 49,
+				"h": 49
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 49,
+				"h": 49
+			},
+			"sourceSize": {
+				"w": 49,
+				"h": 49
+			}
+		},
+		"radioon.png": {
+			"frame": {
+				"x": 753,
+				"y": 1,
+				"w": 49,
+				"h": 49
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 49,
+				"h": 49
+			},
+			"sourceSize": {
+				"w": 49,
+				"h": 49
+			}
+		},
+		"slotui.png": {
+			"frame": {
+				"x": 804,
+				"y": 1,
+				"w": 1138,
+				"h": 640
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1138,
+				"h": 640
+			},
+			"sourceSize": {
+				"w": 1138,
+				"h": 640
 			}
 		},
 		"start.png": {
 			"frame": {
-				"x": 963,
+				"x": 1944,
 				"y": 1,
-				"w": 1000,
-				"h": 403
+				"w": 234,
+				"h": 234
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 403
+				"w": 234,
+				"h": 234
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 403
+				"w": 234,
+				"h": 234
 			}
 		}
 	},
@@ -47,8 +127,8 @@
 		"image": "home.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 1964,
-			"h": 1082
+			"w": 2179,
+			"h": 642
 		},
 		"scale": "1"
 	}

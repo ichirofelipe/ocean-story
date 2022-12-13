@@ -4,300 +4,300 @@
 			"frame": {
 				"x": 1,
 				"y": 1,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"a.png": {
 			"frame": {
-				"x": 1003,
+				"x": 193,
 				"y": 1,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"anglerfish.png": {
 			"frame": {
-				"x": 2005,
+				"x": 385,
 				"y": 1,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"bonus.png": {
 			"frame": {
 				"x": 1,
-				"y": 1003,
-				"w": 1000,
-				"h": 1000
+				"y": 193,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"fish.png": {
 			"frame": {
-				"x": 1003,
-				"y": 1003,
-				"w": 1000,
-				"h": 1000
+				"x": 193,
+				"y": 193,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
-		"hermit-crab.png": {
+		"hermitcrab.png": {
 			"frame": {
-				"x": 2005,
-				"y": 1003,
-				"w": 1000,
-				"h": 1000
+				"x": 385,
+				"y": 193,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"jackpot.png": {
 			"frame": {
 				"x": 1,
-				"y": 2005,
-				"w": 1000,
-				"h": 1000
+				"y": 385,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"k.png": {
 			"frame": {
-				"x": 1003,
-				"y": 2005,
-				"w": 1000,
-				"h": 1000
+				"x": 193,
+				"y": 385,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"sea orchin.png": {
 			"frame": {
-				"x": 2005,
-				"y": 2005,
-				"w": 1000,
-				"h": 1000
+				"x": 385,
+				"y": 385,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"seahorse.png": {
 			"frame": {
-				"x": 3007,
+				"x": 577,
 				"y": 1,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"starfish.png": {
 			"frame": {
-				"x": 3007,
-				"y": 1003,
-				"w": 1000,
-				"h": 1000
+				"x": 577,
+				"y": 193,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"stingray.png": {
 			"frame": {
-				"x": 3007,
-				"y": 2005,
-				"w": 1000,
-				"h": 1000
+				"x": 577,
+				"y": 385,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"treasure chest.png": {
 			"frame": {
 				"x": 1,
-				"y": 3007,
-				"w": 1000,
-				"h": 1000
+				"y": 577,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"turtle.png": {
 			"frame": {
-				"x": 1003,
-				"y": 3007,
-				"w": 1000,
-				"h": 1000
+				"x": 193,
+				"y": 577,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		},
 		"wild.png": {
 			"frame": {
-				"x": 2005,
-				"y": 3007,
-				"w": 1000,
-				"h": 1000
+				"x": 385,
+				"y": 577,
+				"w": 190,
+				"h": 190
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			},
 			"sourceSize": {
-				"w": 1000,
-				"h": 1000
+				"w": 190,
+				"h": 190
 			}
 		}
 	},
@@ -307,8 +307,8 @@
 		"image": "symbols.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 4008,
-			"h": 4008
+			"w": 768,
+			"h": 768
 		},
 		"scale": "1"
 	}

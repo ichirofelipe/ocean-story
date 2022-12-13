@@ -330,9 +330,19 @@
   "Fishes": [
     {
       "name": "fishes",
-      "animationSpeed": 0.4,
+      "animationSpeed": 0.5,
       "isAnimated": true,
-      "isPlay": false
+      "isPlay": false,
+      "direction": 0,
+      "count": 4
+    },
+    {
+      "name": "fishes",
+      "animationSpeed": 0.5,
+      "isAnimated": true,
+      "isPlay": false,
+      "direction": 1,
+      "count": 6
     }
   ]
 }

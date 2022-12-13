@@ -20,10 +20,70 @@
 				"h": 230
 			}
 		},
-		"reels.png": {
+		"mask.png": {
 			"frame": {
 				"x": 403,
 				"y": 1,
+				"w": 908,
+				"h": 637
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 908,
+				"h": 637
+			},
+			"sourceSize": {
+				"w": 908,
+				"h": 637
+			}
+		},
+		"reel_bg.png": {
+			"frame": {
+				"x": 1,
+				"y": 640,
+				"w": 908,
+				"h": 637
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 908,
+				"h": 637
+			},
+			"sourceSize": {
+				"w": 908,
+				"h": 637
+			}
+		},
+		"reel_frame.png": {
+			"frame": {
+				"x": 1313,
+				"y": 1,
+				"w": 908,
+				"h": 637
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 908,
+				"h": 637
+			},
+			"sourceSize": {
+				"w": 908,
+				"h": 637
+			}
+		},
+		"reels.png": {
+			"frame": {
+				"x": 911,
+				"y": 640,
 				"w": 908,
 				"h": 637
 			},
@@ -47,8 +107,8 @@
 		"image": "slot.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 1312,
-			"h": 639
+			"w": 2222,
+			"h": 1278
 		},
 		"scale": "1"
 	}

@@ -5,9 +5,6 @@ import Globals from '../../tools/globals.json';
 
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
-import Helpers from '../../tools/Helpers';
-import { AnimatedSprite, settings } from 'pixi.js';
-import { clear } from 'console';
 import Functions from '../../../Functions';
 
 gsap.registerPlugin(PixiPlugin);
@@ -23,7 +20,8 @@ export default class Reel {
   private reelSpeed: number = 25; //spin velocity
   public reelOffsetX: number = ReelOffsetX; //block spacing
   public reelOffsetY: number = ReelOffsetY; //block spacing
-  private reelMask: PIXI.Graphics;
+  private reelMask: PIXI.Sprite;
+  private reelMask2: PIXI.Graphics;
   private spinTicker: PIXI.Ticker;
   private spinDuration: number = 2; //seconds
   private spinStart: number;
@@ -55,9 +53,6 @@ export default class Reel {
 
       reelBlock.container.y = (reelBlock.size + this.reelOffsetY) * index;
 
-      if(index == 0 || index == this.blocks.length - 1)
-        reelBlock.container.alpha = 0;
-
       this.reelBlocks.push(reelBlock);
       this.container.addChild(reelBlock.container)
     })
@@ -83,13 +78,9 @@ export default class Reel {
       yoyo: true,
       delay: this.spinSuccessionDelay * (this.reelIndex + 1),
       onComplete: () => {
+        this.toggleMask(true);
         this.spinTicker.start();
         this.spinStart = Date.now() + (this.spinDuration*1000) + this.prolongSpin();
-        this.reelBlocks.forEach((block, index) => {
-          if(index == 0 || index == this.reelBlocks.length - 1)
-            block.container.alpha = 1;
-        })
-        this.activateMask(true);
         return;
       }
     })
@@ -143,6 +134,7 @@ export default class Reel {
   private doneSpin() {
     this.spinTicker.stop();
     let bounceForce = 20;
+    this.toggleMask(false);
 
     if(!this.reelEffectsFlag){
 
@@ -152,15 +144,10 @@ export default class Reel {
         repeat: 1,
         yoyo: true,
         onComplete: () => {
-          this.activateMask(false);
           this.hideReelEffects();
           if(this.reelIndex == Columns - 1){
             this.reelStopped();
           }
-          this.reelBlocks.forEach((block, index) => {
-            if(index == 0 || index == this.reelBlocks.length - 1)
-              block.container.alpha = 0;
-          })
         }
       })
 
@@ -172,15 +159,10 @@ export default class Reel {
         yoyo: true,
         ease: 'power.in',
         onComplete: () => {
-          this.activateMask(false);
           this.hideReelEffects();
           if(this.reelIndex == Columns - 1){
             this.reelStopped();
           }
-          this.reelBlocks.forEach((block, index) => {
-            if(index == 0 || index == this.reelBlocks.length - 1)
-              block.container.alpha = 0;
-          })
         }
       })
 
@@ -196,34 +178,44 @@ export default class Reel {
   }
 
   private createMask() {
+    //GRAPHICS MASK
     const sizeAdjustment = ((this.reelBlocks[0].size * (this.reelBlocks[0].overlapPixels - 1)) / 2);
     const posY = ((this.reelBlocks[0].size * (Rows - ActualRows)) / 2);
     const height = (this.reelBlocks[0].size * ActualRows);
     const width = this.reelBlocks[0].size * this.reelBlocks[0].overlapPixels;
 
-    this.reelMask = new PIXI.Graphics();
-    this.reelMask.beginFill(0x000000)
-    .drawRect(0, posY - 3, width * this.reelBlocks[0].overlapPixels, height)
+    this.reelMask2 = new PIXI.Graphics();
+    this.reelMask2.beginFill(0x000000)
+    .drawRect(0, posY , width * this.reelBlocks[0].overlapPixels, height)
     .endFill();
-    this.reelMask.alpha = (this.reelIndex + 1)*0.15;
-    this.reelMask.x -= sizeAdjustment;
-    this.reelMask.y += sizeAdjustment;
+    this.reelMask2.x -= sizeAdjustment;
+    this.reelMask2.y += sizeAdjustment;
 
+    //SPRITE MASK
+    const maskTexture = this.app.loader.resources!.slot.textures!['mask.png'];
+    this.reelMask = new PIXI.Sprite(maskTexture);
+    this.reelMask.x = -0.5 - ((this.reelBlocks[0].size - this.reelOffsetX) * this.reelIndex) + (1.5 * this.reelIndex);
+    this.reelMask.y = ((this.reelBlocks[0].size * this.reelBlocks[0].overlapPixels)/2) + 15;
+    this.reelMask.width = this.app.screen.width + 3;
+    this.reelMask.height = (this.reelBlocks[0].size * this.reelBlocks[0].overlapPixels)*3;
+    this.reelMask.alpha = 0;
+
+    this.container.addChild(this.reelMask2);
     this.container.addChild(this.reelMask);
-    this.container.mask = this.reelMask;
+    this.container.mask = this.reelMask2;
+    
+    // mask.alpha = 0.15*(this.reelIndex + 1);
   }
 
-  private activateMask(active: boolean) {
-    const sizeAdjustment = 10;
-
-    if(this.reelMask === undefined)
-      return;
+  private toggleMask(active: boolean = true) {
     if(active){
-      this.reelMask.y += sizeAdjustment;
-      this.reelMask.height -= sizeAdjustment;
-    } else{
-      this.reelMask.y -= sizeAdjustment;
-      this.reelMask.height += sizeAdjustment;
+      this.reelMask.alpha = 1;
+      this.reelMask2.alpha = 0;
+      this.container.mask = this.reelMask;
+    } else {
+      this.reelMask.alpha = 0;
+      this.reelMask2.alpha = 1;
+      this.container.mask = this.reelMask2;
     }
   }
 
@@ -232,7 +224,7 @@ export default class Reel {
       let reelEffect = Functions.getSprite(this.app.loader, effect);
       reelEffect.height = this.reelBlocks[0].size * ActualRows - 5;
       reelEffect.width = this.reelBlocks[0].size * this.reelBlocks[0].overlapPixels;
-      reelEffect.y = this.reelMask.y;
+      reelEffect.y = 15;
       reelEffect.alpha = 0.01;
 
       this.reelEffects.push(reelEffect);

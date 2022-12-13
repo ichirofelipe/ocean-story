@@ -60,6 +60,8 @@ export default class Block{
       this.symbolSprite.y += this.sizeAdjustment/2;
     }
 
+    this.symbolSprite.x += 5;
+
     const imgContainer = new PIXI.Graphics();
     imgContainer.beginFill(0x00000000)
     .drawRect(0,0,this.size * this.overlapPixels,this.size * this.overlapPixels)

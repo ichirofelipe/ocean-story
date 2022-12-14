@@ -81,8 +81,8 @@ export default class Reel {
         this.toggleMask(true);
         this.spinTicker.start();
         this.spinStart = Date.now() + (this.spinDuration*1000) + this.prolongSpin();
-
         readySpin.kill();
+        
         return;
       }
     })
@@ -134,7 +134,7 @@ export default class Reel {
   }
 
   private doneSpin() {
-    this.spinTicker.stop();
+    this.spinTicker.destroy();
     let bounceForce = 20;
     this.toggleMask(false);
 
@@ -150,7 +150,7 @@ export default class Reel {
           if(this.reelIndex == Columns - 1){
             this.reelStopped();
           }
-
+          
           bounce.kill();
         }
       })
@@ -167,7 +167,7 @@ export default class Reel {
           if(this.reelIndex == Columns - 1){
             this.reelStopped();
           }
-
+          
           bounce.kill();
         }
       })

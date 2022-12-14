@@ -167,17 +167,17 @@ export default class Bonus {
         let img = Functions.getSprite(this.app.loader, bigClamSettings);
         img.y = (this.bigClam.height - img.height) / 2;
         img.x = (this.bigClam.width - img.width) / 2;
-    
+        
         this.bigClam.removeChildren();
         this.bigClam.addChild(img)
         this.createDisplayValue(this.bigClam, this.bigClamValue);
-
+        
         let money = this.bonusPay * (this.bigClamValue / 100);
         let delayBeforeExit = setTimeout(() => {
           this.bonusDone(money);
           clearTimeout(delayBeforeExit);
         }, 5000);
-
+        
         clamVibrate.kill();
       }
     })
@@ -353,6 +353,7 @@ export default class Bonus {
           ease: 'none',
           onComplete: () => {
             clamAnim.revert();
+            clamAnim.kill();
           }
         })
 
@@ -370,10 +371,11 @@ export default class Bonus {
             this.bigClamValue = this.activeClams[0].value;
             this.positionText.text = this.activeClams[0].position + 1;
             this.activeClams[0].positionText.text = smallClamNewIndex + 1;
-
+            
             let offerMoney = this.bonusPay * (this.bigClamValue / 100);
             this.updateText(this.offerText, `${Functions.formatNum(offerMoney)}`);
             this.showBigClam();
+            bigClamAnim.kill();
           }
         })
       }

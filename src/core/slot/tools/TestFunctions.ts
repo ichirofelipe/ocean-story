@@ -98,7 +98,7 @@ export default class TestFunctions {
         reelResult.push([]);
       }
 
-      // if(plinkoSymbol == 1){
+      if(plinkoSymbol == 1){
 
         Reel.forEach((reel, rIndex) => {
           
@@ -117,30 +117,30 @@ export default class TestFunctions {
 
         if(winnings.length > 0 || this.bonusWin)
           this.winFunction(winnings)
-      // }
-      // else if (plinkoSymbol == 2){
-      //   this.money += this.bet/2;
-      //   this.fishTotal++;
-      // }
-      // else if (plinkoSymbol == 4){
-      //   this.money += this.bet*2;
-      //   this.treasureTotal++;
-      // }
-      // else if (plinkoSymbol == 5){
-      //   if(Math.floor(Math.random() * 2) == 0){
-      //     this.leftbar+=1;
-      //   }
-      //   else{
-      //     this.rightbar+=1;
-      //   }
+      }
+      else if (plinkoSymbol == 2){
+        this.money += this.bet/2;
+        this.fishTotal++;
+      }
+      else if (plinkoSymbol == 4){
+        this.money += this.bet*2;
+        this.treasureTotal++;
+      }
+      else if (plinkoSymbol == 5){
+        if(Math.floor(Math.random() * 2) == 0){
+          this.leftbar+=1;
+        }
+        else{
+          this.rightbar+=1;
+        }
 
-      //   if(this.leftbar >= 50 || this.rightbar >= 50){
-      //     this.money += (this.bet * 40);
-      //     this.leftbar = 0;
-      //     this.rightbar = 0;
-      //     this.waterTotal++;
-      //   }
-      // }
+        if(this.leftbar >= 50 || this.rightbar >= 50){
+          this.money += (this.bet * 40);
+          this.leftbar = 0;
+          this.rightbar = 0;
+          this.waterTotal++;
+        }
+      }
     }
 
     // LOG IMPORTANT STATISTICS

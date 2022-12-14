@@ -113,7 +113,7 @@ export default class Clam {
         let img = Functions.getSprite(this.app.loader, this.clamSettings);
         img.y = (this.clam.height - img.height) / 2;
         img.x = (this.clam.width - img.width) / 2;
-    
+        
         this.clam.removeChildren();
         this.clam.addChild(img)
         this.createDisplayValue();

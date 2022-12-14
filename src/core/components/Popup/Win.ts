@@ -248,7 +248,9 @@ export default class Win {
         onRepeat: () => {
           animationX.restart();
         }
+
       })
+      this.toRemoveAnimations.push(animationX, animationY);
 
     }
 
@@ -283,6 +285,8 @@ export default class Win {
         }
       })
 
+      this.toRemoveAnimations.push(animationX, animationY);
+
     }
 
     this.container.addChild(this.bubblesContainer);
@@ -298,6 +302,7 @@ export default class Win {
     this.displayMoney.text = `$${Functions.formatNum(this.money)}`;
     this.delayBeforeClose = setTimeout(() => {
       this.hide();
+      clearTimeout(this.delayBeforeClose);
     }, 3000);
   }
 
@@ -305,11 +310,17 @@ export default class Win {
     const overlayShow = gsap.to(this.overlay, {
       alpha: 1,
       duration: 0.8,
+      onComplete: () => {
+        overlayShow.kill();
+      }
     })
     const overlayScale = gsap.to(this.win.scale, {
       x: 1,
       y: 1,
-      duration: 0.8
+      duration: 0.8,
+      onComplete: () => {
+        overlayScale.kill();
+      }
     })
 
     let target = { val: 0 };
@@ -324,6 +335,7 @@ export default class Win {
       onComplete: () => {
         this.delayBeforeClose = setTimeout(() => {
           this.hide();
+          clearTimeout(this.delayBeforeClose);
         }, 3000);
       }
     })
@@ -332,11 +344,12 @@ export default class Win {
   }
 
   public hide() {
-    clearTimeout(this.delayBeforeClose);
-
     const overlayHide = gsap.to(this.overlay, {
       alpha: 0,
       duration: 0.8,
+      onComplete: () => {
+        overlayHide.kill();
+      }
     })
     const overlayScale = gsap.to(this.win.scale, {
       x: 0,
@@ -345,17 +358,22 @@ export default class Win {
       onComplete: () => {
         this.overlay.interactive = false;
         this.closeWin();
+        overlayScale.kill();
       }
     })
     const overlayMoney = gsap.to(this.displayMoney, {
       alpha: 0,
       duration: 0.8,
+      onComplete: () => {
+        overlayMoney.kill();
+      }
     })
     const coinsContainer = gsap.to(this.coinsContainer, {
       alpha: 0,
       duration: 0.8,
       onComplete: () => {
         this.container.removeChild(this.coinsContainer);
+        coinsContainer.kill();
       }
     })
     const bubblesContainer = gsap.to(this.bubblesContainer, {
@@ -363,6 +381,7 @@ export default class Win {
       duration: 0.8,
       onComplete: () => {
         this.container.removeChild(this.bubblesContainer);
+        bubblesContainer.kill();
       }
     })
 

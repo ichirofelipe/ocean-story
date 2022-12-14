@@ -148,20 +148,22 @@ export default class Home {
 
   private setSpinMax(){
     this.bigger = true;
-    gsap.to(this.playbtnAnimate, {
+    const spinMaxAnimate = gsap.to(this.playbtnAnimate, {
       width: 250, height: 250, duration: 1,
       onComplete: () => {
         this.setSpinMin();
+        spinMaxAnimate.kill();
       }
     });
   }
 
   private setSpinMin(){
     this.bigger = false;
-    gsap.to(this.playbtnAnimate, {
+    const spinMinAnimate = gsap.to(this.playbtnAnimate, {
       width: 200, height: 200, duration: 1,
       onComplete: () => {
         this.setSpinMax();
+        spinMinAnimate.kill();
       }
     });
   }
@@ -285,20 +287,36 @@ export default class Home {
       this.radiobuttons[ind].texture = off;
     }
 
-    gsap.to(this.uis[this.lastindex],{
-      alpha: 0, duration: 1
+    const toggleAnimate1 = gsap.to(this.uis[this.lastindex],{
+      alpha: 0,
+      duration: 1,
+      onComplete: () => {
+        toggleAnimate1.kill();
+      }
     });
 
-    gsap.to(this.uis[ind],{
-      alpha: 1, duration: 1
+    const toggleAnimate2 = gsap.to(this.uis[ind],{
+      alpha: 1,
+      duration: 1,
+      onComplete: () => {
+        toggleAnimate2.kill();
+      }
     });
 
-    gsap.to(this.uistext[this.lastindex],{
-      alpha: 0, duration: 1
+    const toggleAnimate3 = gsap.to(this.uistext[this.lastindex],{
+      alpha: 0,
+      duration: 1,
+      onComplete: () => {
+        toggleAnimate3.kill();
+      }
     });
 
-    gsap.to(this.uistext[ind],{
-      alpha: 1, duration: 1
+    const toggleAnimate4 = gsap.to(this.uistext[ind],{
+      alpha: 1,
+      duration: 1,
+      onComplete: () => {
+        toggleAnimate4.kill();
+      }
     });
 
     this.lastindex = ind;

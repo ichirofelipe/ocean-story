@@ -203,7 +203,7 @@ export default class Game {
           this.volumeTransition(1.0, 3);
           if(this.game > 0)
             this.slotPlay();
-
+          
           diveAnimate.kill();
           // this.startBonusGame(3);
         }
@@ -221,7 +221,7 @@ export default class Game {
           this.stopAndPlay(false);
           Functions.toggleAnimations(this.scene.homeAnimations, true);
           Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
-
+          
           riseAnimate.kill();
         }
       })

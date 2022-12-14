@@ -41,7 +41,6 @@ export default class Slot {
     this.createBackground();
     this.createFrame();
     this.createLogo();
-    // this.createMask();
   }
 
   public updateFunctions(){
@@ -54,7 +53,7 @@ export default class Slot {
   }
 
   private createGenerateEvent() {
-    window.addEventListener('keypress', e => this.testResult(e))
+    window.document.addEventListener('keypress', e => this.testResult(e))
   }
 
   private createReelsContainer() {
@@ -91,22 +90,8 @@ export default class Slot {
     this.container.addChild(this.frame);
   }
 
-  private createMask() {
-    const maskTexture = this.app.loader.resources!.slot.textures!['mask.png'];
-    this.mask = new PIXI.Sprite(maskTexture);
-    this.mask.x = ReelOffsetX/2 - (this.frameWidthAdjustment/2) - 4;
-    this.mask.y = (ReelOffsetY/2) - (this.frameHeightAdjustment/2) + 5;
-    this.mask.width = this.app.screen.width - ReelOffsetX + this.frameWidthAdjustment;
-    this.mask.height = this.background.height;
-    this.reelsContainer.container.addChild(this.mask);
-  }
-
-  public moveMask() {
-    console.log('move mask');
-  }
-
   private testResult(e: any) {
-    if(e.keyCode != 13 || Globals.isSpinning)
+    if(e.keyCode != 13)
       return;
 
     this.testFunctions.testResult()

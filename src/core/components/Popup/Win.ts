@@ -13,6 +13,8 @@ export default class Win {
   private app: PIXI.Application;
   public container: PIXI.Container;
   private coinsContainer: PIXI.Container;
+  private leftCoinAnimation: any;
+  private rightCoinAnimation: any;
   private bubblesContainer: PIXI.Container;
   private money: number;
   private bet: number;
@@ -38,7 +40,6 @@ export default class Win {
 
   constructor(app: PIXI.Application, money: number, bet: number, closeWin: () => void) {
     this.app = app;
-    console.log(money);
     this.money = money;
     this.bet = bet;
     this.container = new PIXI.Container;
@@ -134,7 +135,7 @@ export default class Win {
       
       this.coinsContainer.addChild(coin);
 
-      const coinAnimation = gsap.to(coin, {
+      this.leftCoinAnimation = gsap.to(coin, {
         rotation: Math.random() * 20,
         duration: 3,
         ease: "sine.in",
@@ -159,7 +160,7 @@ export default class Win {
             coin.y = this.app.screen.height - Functions.randMinMax(100,350);
             coin.scale.set(Functions.randMinMax(0.15, 0.25));
             coin.x = - coin.width;
-            coinAnimation.repeat();
+            this.leftCoinAnimation.repeat();
           }
         }
       })
@@ -181,7 +182,7 @@ export default class Win {
       
       this.coinsContainer.addChild(coin);
 
-      const coinAnimation = gsap.to(coin, {
+      this.rightCoinAnimation = gsap.to(coin, {
         rotation: Math.random() * 20,
         duration: 3,
         ease: "sine.in",
@@ -206,7 +207,7 @@ export default class Win {
             coin.y = this.app.screen.height - Functions.randMinMax(100,350);
             coin.scale.set(Functions.randMinMax(0.15, 0.25));
             coin.x = this.app.screen.width;
-            coinAnimation.repeat();
+            this.rightCoinAnimation.repeat();
           }
         }
       })
@@ -342,7 +343,6 @@ export default class Win {
       y: 0,
       duration: 0.8,
       onComplete: () => {
-        console.log('close');
         this.overlay.interactive = false;
         this.closeWin();
       }
@@ -366,6 +366,6 @@ export default class Win {
       }
     })
 
-    this.toRemoveAnimations.push(overlayHide, overlayScale, overlayMoney, coinsContainer, bubblesContainer);
+    this.toRemoveAnimations.push(overlayHide, overlayScale, overlayMoney, coinsContainer, bubblesContainer, this.leftCoinAnimation, this.rightCoinAnimation);
   }
 }

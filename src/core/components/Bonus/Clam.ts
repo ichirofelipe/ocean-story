@@ -103,7 +103,7 @@ export default class Clam {
     this.clam.pivot.x = this.clam.width/2;
     this.clam.pivot.y = this.clam.height/2;
     this.clam.rotation = 10 * Math.PI / 180;
-    gsap.to(this.clam, {
+    const clamVibrate = gsap.to(this.clam, {
       rotation: -10 * Math.PI / 180,
       duration: 0.1,
       repeat: 3,
@@ -117,6 +117,8 @@ export default class Clam {
         this.clam.removeChildren();
         this.clam.addChild(img)
         this.createDisplayValue();
+        
+        clamVibrate.kill();
       }
     })
   }
@@ -147,25 +149,34 @@ export default class Clam {
 
   public disable(text:boolean = true) {
     if(text){
-      gsap.to(this.positionText, {
+      const disableAnimate = gsap.to(this.positionText, {
         alpha: 0,
         duration: 0.5,
-        ease: 'none'
+        ease: 'none',
+        onComplete: () => {
+          disableAnimate.kill();
+        }
       })
     }
-    gsap.to(this.clam, {
+    const clamDisableAnimate = gsap.to(this.clam, {
       alpha: 0.5,
       duration: 0.5,
-      ease: 'none'
+      ease: 'none',
+      onComplete: () => {
+        clamDisableAnimate.kill();
+      }
     })
     this.clam.interactiveChildren = false;
   }
 
   public enable() {
-    gsap.to(this.clam, {
+    const enableAnimate = gsap.to(this.clam, {
       alpha: 1,
       duration: 0.5,
-      ease: 'none'
+      ease: 'none',
+      onComplete: () => {
+        enableAnimate.kill();
+      }
     })
     this.clam.interactiveChildren = true;
   }

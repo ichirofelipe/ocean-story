@@ -71,7 +71,7 @@ export default class Reel {
     this.spinTicker.add(this.spinner.bind(this));
     this.reelStopped = reelStopped;
 
-    gsap.to(this.container, {
+    const readySpin = gsap.to(this.container, {
       y: this.container.y - 25,
       duration: this.spinBounce,
       repeat: 1,
@@ -81,6 +81,8 @@ export default class Reel {
         this.toggleMask(true);
         this.spinTicker.start();
         this.spinStart = Date.now() + (this.spinDuration*1000) + this.prolongSpin();
+
+        readySpin.kill();
         return;
       }
     })
@@ -138,7 +140,7 @@ export default class Reel {
 
     if(!this.reelEffectsFlag){
 
-      gsap.to(this.container, {
+      const bounce = gsap.to(this.container, {
         y: this.container.y + bounceForce,
         duration: this.spinBounce,
         repeat: 1,
@@ -148,11 +150,13 @@ export default class Reel {
           if(this.reelIndex == Columns - 1){
             this.reelStopped();
           }
+
+          bounce.kill();
         }
       })
 
     } else{
-      gsap.to(this.container, {
+      const bounce = gsap.to(this.container, {
         y: this.container.y + 15,
         duration: 0.1,
         repeat: 1,
@@ -163,15 +167,20 @@ export default class Reel {
           if(this.reelIndex == Columns - 1){
             this.reelStopped();
           }
+
+          bounce.kill();
         }
       })
 
-      gsap.to(this.app.stage, {
+      const stageShock = gsap.to(this.app.stage, {
         y: this.app.stage.y + 15,
         duration: 0.1,
         repeat: 1,
         yoyo: true,
         ease: 'power.in',
+        onComplete: () => {
+          stageShock.kill();
+        }
       })
 
     }
@@ -211,10 +220,12 @@ export default class Reel {
     if(active){
       this.reelMask.alpha = 1;
       this.reelMask2.alpha = 0;
+      this.container.mask = null;
       this.container.mask = this.reelMask;
     } else {
       this.reelMask.alpha = 0;
       this.reelMask2.alpha = 1;
+      this.container.mask = null;
       this.container.mask = this.reelMask2;
     }
   }
@@ -238,11 +249,14 @@ export default class Reel {
     this.reelEffectsFlag = true;
     
     this.reelEffects.forEach(effect => {
-      gsap.to(effect, {
+      const showAnimate = gsap.to(effect, {
         alpha: 1,
         duration: 0.5,
         onStart: () => {
           effect.play();
+        },
+        onComplete: () => {
+          showAnimate.kill();
         }
       })
     })
@@ -252,11 +266,12 @@ export default class Reel {
     this.reelEffectsFlag = false;
 
     this.reelEffects.forEach(effect => {
-      gsap.to(effect, {
+      const hideAnimate = gsap.to(effect, {
         alpha: 0.01,
         duration: 0.5,
         onComplete: () => {
           effect.gotoAndStop(0);
+          hideAnimate.kill();
         }
       })
     })

@@ -132,15 +132,21 @@ export default class Bonus {
     this.bigClamIndex = position;
     this.bigClamValue = value;
 
-    gsap.to(this.bigClam, {
+    const showClam = gsap.to(this.bigClam, {
       alpha: 1,
       duration: 0.5,
-      ease: 'none'
+      ease: 'none',
+      onComplete: () => {
+        showClam.kill();
+      }
     })
-    gsap.to(this.positionText, {
+    const showText = gsap.to(this.positionText, {
       alpha: 1,
       duration: 0.5,
-      ease: 'none'
+      ease: 'none',
+      onComplete: () => {
+        showText.kill();
+      }
     })
   }
 
@@ -151,7 +157,7 @@ export default class Bonus {
     this.bigClam.pivot.x = this.bigClam.width/2;
     this.bigClam.pivot.y = this.bigClam.height/2;
     this.bigClam.rotation = 10 * Math.PI / 180;
-    gsap.to(this.bigClam, {
+    const clamVibrate = gsap.to(this.bigClam, {
       rotation: -10 * Math.PI / 180,
       duration: 0.1,
       repeat: 3,
@@ -171,6 +177,8 @@ export default class Bonus {
           this.bonusDone(money);
           clearTimeout(delayBeforeExit);
         }, 5000);
+
+        clamVibrate.kill();
       }
     })
   }
@@ -269,23 +277,25 @@ export default class Bonus {
   }
 
   private actionEnable() {
-    gsap.to(this.actionsBlock, {
+    const showAnimate = gsap.to(this.actionsBlock, {
       alpha: 1,
       duration: 0.5,
       ease: 'none',
       onComplete: () => {
         this.actionsBlock.interactiveChildren = true;
+        showAnimate.kill();
       }
     })
   }
 
   private actionDisable() {
-    gsap.to(this.actionsBlock, {
+    const disableAnimate = gsap.to(this.actionsBlock, {
       alpha: 0,
       duration: 0.5,
       ease: 'none',
       onComplete: () => {
         this.actionsBlock.interactiveChildren = false;
+        disableAnimate.kill();
       }
     })
   }
@@ -328,7 +338,6 @@ export default class Bonus {
 
     if(data.bigClam !== undefined){
       if(this.actionType == 0){
-
         let offerMoney = this.bonusPay * (this.bigClamValue / 100);
         this.updateText(this.offerText, `${Functions.formatNum(offerMoney)}`);
         this.showBigClam();

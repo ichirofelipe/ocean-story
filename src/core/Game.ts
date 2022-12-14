@@ -179,7 +179,7 @@ export default class Game {
     this.soundPlay(this.globalbool, 2);
     this.soundPlay(this.globalbool, 3, volume2);
     this.diveGroupAnimation.forEach((el: any) => {
-      gsap.to(el.sprite, {
+      const diveAnimate = gsap.to(el.sprite, {
         y: el.posY??0,
         alpha: el.alpha??1,
         duration: this.animationSpeed,
@@ -204,6 +204,7 @@ export default class Game {
           if(this.game > 0)
             this.slotPlay();
 
+          diveAnimate.kill();
           // this.startBonusGame(3);
         }
       })
@@ -213,13 +214,15 @@ export default class Game {
   private rise() {
     this.riseGroupAnimation.forEach((el: any) => {
 
-      gsap.to(el.sprite, {
+      const riseAnimate = gsap.to(el.sprite, {
         y: el.posY??0,
         alpha: el.alpha??1,
         onComplete: () => {
           this.stopAndPlay(false);
           Functions.toggleAnimations(this.scene.homeAnimations, true);
           Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
+
+          riseAnimate.kill();
         }
       })
     })
@@ -568,8 +571,12 @@ export default class Game {
     if(this.modal.container.alpha == 0){
       alpha = 1;
     }
-    gsap.to(this.modal.container,{
-      alpha : alpha, duration : .5
+    const showAnimate = gsap.to(this.modal.container,{
+      alpha : alpha,
+      duration : .5,
+      onComplete: () => {
+        showAnimate.kill();
+      }
     });
   }
 

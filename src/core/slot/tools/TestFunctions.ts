@@ -7,9 +7,9 @@ export default class TestFunctions {
   private bet: number;
   private RTP: number;
   private totalCombination: number = 1;
-  private repeat: number = 10000;
+  private repeat: number = 1000;
   private lowestLineCombination: number = 3;
-  private baseMoney:number = 10000000;
+  private baseMoney:number = 100000;
   private money!:number;
   private beforeMoney!:number;
   private bonusWin: number = 0;
@@ -17,7 +17,7 @@ export default class TestFunctions {
   //STATISTICS VARIABLES
   private winCount: number = 0;
   private highestBalance: number = 0;
-  private totalSpin: number = 0;
+  private totalDrop: number = 0;
   private winCountAll: number = 0;
   private lines: Array<number> = [0, 0, 0];
   private bonusWinCount: number = 0;
@@ -30,6 +30,12 @@ export default class TestFunctions {
   private totalNormalCombination: number = 0;
   private bonusPattern: string = '';
   private formula: Array<object>;
+  private plinkoReel: Array<number> = [1,1,1,1,1,1,2,2,2,3,4,5,5,5];
+  private leftbar: number = 0;
+  private rightbar: number = 0;
+  private fishTotal: number = 0;
+  private treasureTotal: number = 0;
+  private waterTotal: number = 0;
 
   constructor(bet: number, RTP: number) {
     this.bet = bet;
@@ -83,26 +89,58 @@ export default class TestFunctions {
         console.log('Insufficient Balance!:', this.money);
         continue;
       }
-
-      this.money-= this.bet;
-      this.totalSpin++;
       
-      reelResult.push([]);
+      let plinkoSymbol = this.plinkoReel[Math.floor(Math.random() * this.plinkoReel.length)];
+      this.money-= this.bet;
+      this.totalDrop++;
 
-      Reel.forEach((reel, rIndex) => {
-        reelResult[rep].push([]);
+      if(reelResult[rep] === undefined){
+        reelResult.push([]);
+      }
 
-        for(let row = 0; row < 3; row++){
-          reelResult[rep][rIndex].push(reel[Math.floor(Math.random() * reel.length)]);
-        }
+      // if(plinkoSymbol == 1){
 
-      })
+        Reel.forEach((reel, rIndex) => {
+          
+          if(reelResult[rep][rIndex] === undefined){
+            reelResult[rep].push([]);
+          }
+
+          for(let row = 0; row < 3; row++){
+            reelResult[rep][rIndex].push(reel[Math.floor(Math.random() * reel.length)]);
+          }
+          
+        })
 
 
-      let winnings = this.checkWin(reelResult[rep]);
+        let winnings = this.checkWin(reelResult[rep]);
 
-      if(winnings.length > 0 || this.bonusWin)
-        this.winFunction(winnings)
+        if(winnings.length > 0 || this.bonusWin)
+          this.winFunction(winnings)
+      // }
+      // else if (plinkoSymbol == 2){
+      //   this.money += this.bet/2;
+      //   this.fishTotal++;
+      // }
+      // else if (plinkoSymbol == 4){
+      //   this.money += this.bet*2;
+      //   this.treasureTotal++;
+      // }
+      // else if (plinkoSymbol == 5){
+      //   if(Math.floor(Math.random() * 2) == 0){
+      //     this.leftbar+=1;
+      //   }
+      //   else{
+      //     this.rightbar+=1;
+      //   }
+
+      //   if(this.leftbar >= 50 || this.rightbar >= 50){
+      //     this.money += (this.bet * 40);
+      //     this.leftbar = 0;
+      //     this.rightbar = 0;
+      //     this.waterTotal++;
+      //   }
+      // }
     }
 
     // LOG IMPORTANT STATISTICS
@@ -113,22 +151,26 @@ export default class TestFunctions {
     // console.log('current balance:', this.money);
     // console.log('Total Repeat Win Count:', this.winCount);
     // console.log('Overall Win Count:', this.winCountAll);
-    // console.log('Total Spins:', this.totalSpin);
+    console.log('Total Drops:', this.totalDrop);
     // console.log('Highest Balance:', this.highestBalance);
     // console.log('5 lines won:', this.lines[0]);
     // console.log('4 lines won:', this.lines[1]);
     // console.log('3 lines won:', this.lines[2]);
-    // console.log('Bonus Total Count:', this.bonusWinCount);
-    // console.log('Win Percentage', `${(this.winCountAll/this.totalSpin)*100}%`);
-    // console.log('Total Payout Percentage', `${(this.money/this.baseMoney)*100}%`);
+    console.log('Bonus Total Count:', this.bonusWinCount);
+    console.log('Win Percentage', `${(this.winCountAll/this.totalDrop)*100}%`);
+    console.log('Total Payout Percentage', `${(this.money/this.baseMoney)*100}%`);
     console.log('Total Repeat Payout Percentage', `${(this.money/this.beforeMoney)*100}%`);
-
+    console.log('Left Bar Status', this.leftbar);
+    console.log('Right Bar Status', this.rightbar);
+    console.log('Fish Total', this.fishTotal);
+    console.log('Treasure Total', this.treasureTotal);
+    console.log('Water Total', this.waterTotal);
     // console.log('Unique Patterns and Pay:', this.uniqueWinPatterns);
     // console.log('Total Normal Combination:', this.totalNormalCombination);
-    console.log('Total Bonus Combination Count:', this.totalBonusCombination);
+    // console.log('Total Bonus Combination Count:', this.totalBonusCombination);
     // console.log('Unique Patterns Length:', this.jsonCombination.length);
-    console.log('RTP:', this.sumOfUniquePatterns/(this.totalCombination*this.bet));
-    console.log('Total Sum Combinations:', this.formula);
+    // console.log('RTP:', this.sumOfUniquePatterns/(this.totalCombination*this.bet));
+    // console.log('Total Sum Combinations:', this.formula);
     // this.blocksWinrate.forEach((winrate, index) => {
     //   console.log(`${index}'s winrate:`, winrate);
     // })
@@ -165,11 +207,11 @@ export default class TestFunctions {
     this.bonusWin = 0;
 
     //CHECK BONUS COMBINATION
-    reels.forEach((reel, index) => {  
-      let bonusBlocks = reel.filter(val => val == BonusNumber);
-      if(bonusBlocks.length > 0)
-        this.bonusWin++
-    });
+    // reels.forEach((reel, index) => {  
+    //   let bonusBlocks = reel.filter(val => val == BonusNumber);
+    //   if(bonusBlocks.length > 0)
+    //     this.bonusWin++
+    // });
 
     Pattern.forEach((pat, patIndex) => {
       let counter = 0;
@@ -185,7 +227,6 @@ export default class TestFunctions {
             blocks.push(reel[pat[index] - 1]);
           }
         });
-        
         if (this.combinationValidation([...combination.values()]))
         winningPattern.push({'index': patIndex,'combination': [...combination.values()], 'colCount': columnCount, 'blocks': blocks});
         counter++;

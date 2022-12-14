@@ -53,8 +53,6 @@ export default class ReelsContainer {
     // SET TO DEFAULT VALUE
     Globals.slowSpinStart = -1;
 
-    console.log(this.reelsArray);
-
     // CHECK FOR BLOCK COUNT TO ANIMATE SLOW MO SPIN
     this.reelsArray.forEach((reel, reelIndex) => {
       const blockArray = reel.filter((block, index) => {

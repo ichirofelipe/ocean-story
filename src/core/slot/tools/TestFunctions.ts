@@ -7,9 +7,9 @@ export default class TestFunctions {
   private bet: number;
   private RTP: number;
   private totalCombination: number = 1;
-  private repeat: number = 1000;
+  private repeat: number = 10000;
   private lowestLineCombination: number = 3;
-  private baseMoney:number = 100000;
+  private baseMoney:number = 10000000;
   private money!:number;
   private beforeMoney!:number;
   private bonusWin: number = 0;
@@ -176,7 +176,7 @@ export default class TestFunctions {
     console.log('Star Total', this.starTotal);
     // console.log('Unique Patterns and Pay:', this.uniqueWinPatterns);
     // console.log('Total Normal Combination:', this.totalNormalCombination);
-    // console.log('Total Bonus Combination Count:', this.totalBonusCombination);
+    console.log('Total Bonus Combination Count:', this.totalBonusCombination);
     // console.log('Unique Patterns Length:', this.jsonCombination.length);
     // console.log('RTP:', this.sumOfUniquePatterns/(this.totalCombination*this.bet));
     // console.log('Total Sum Combinations:', this.formula);
@@ -213,7 +213,7 @@ export default class TestFunctions {
   // CHECK FOR WINNING PATTERNS
   private checkWin (reels: Array<Array<number>>) {
     let winningPattern: Array<any> = [];
-    let bonusWin = 0;
+    this.bonusWin = 0;
 
     //CHECK BONUS COMBINATION
     // reels.forEach((reel, index) => {  
@@ -224,20 +224,20 @@ export default class TestFunctions {
     reels.forEach((reel, reelIndex) => {  
       let bonusBlocks = reel.filter(val => val == BonusNumber);
       if(bonusBlocks.length > 0)
-        bonusWin++
+        this.bonusWin++
     });
 
-    if(bonusWin == 3){
+    if(this.bonusWin == 3){
       console.log('BONUS GAME 3!');
       this.freeSpin += 10;
     }
 
-    if(bonusWin == 4){
+    if(this.bonusWin == 4){
       console.log('BONUS GAME 4!');
       this.freeSpin += 15;
     }
 
-    if(bonusWin == 5){
+    if(this.bonusWin == 5){
       console.log('BONUS GAME 5!');
       this.freeSpin += 25;
     }
@@ -263,22 +263,22 @@ export default class TestFunctions {
       
     });
 
-    // if(this.bonusWin >= 3){
-    //   this.bonusPattern = '_';
-    //   reels.forEach((reel, index) => {
-    //     let columnChecked = false;
-    //     // if(index == 0 || index == reels.length - 1)
-    //     //   return;
-    //     // if(reel !== undefined)
-    //     //   this.bonusPattern += `${reel.join('-')}-`;
-    //     reel.forEach((block,bIndex) => {
-    //       if(block == 4 && !columnChecked){
-    //         this.bonusPattern += `${index}-${bIndex}/`;
-    //         columnChecked = true;
-    //       }
-    //     })
-    //   })
-    // }
+    if(this.bonusWin == 5){
+      this.bonusPattern = '_';
+      reels.forEach((reel, index) => {
+        let columnChecked = false;
+        // if(index == 0 || index == reels.length - 1)
+        //   return;
+        // if(reel !== undefined)
+        //   this.bonusPattern += `${reel.join('-')}-`;
+        reel.forEach((block,bIndex) => {
+          if(block == 5 && !columnChecked){
+            this.bonusPattern += `${index}-${bIndex}/`;
+            // columnChecked = true;
+          }
+        })
+      })
+    }
     
     
     return winningPattern;
@@ -295,21 +295,21 @@ export default class TestFunctions {
 
   // UPDATE VARIABLES AFTER WINNING SPINS
   private winFunction(winnings: Array<any>) {
-    // if(this.bonusWin >= 3){
+    if(this.bonusWin == 5){
     //   this.money += this.computeBonusPayOut();
     //   this.bonusWinCount++;
 
-    //   if(this.uniqueWinPatterns[this.bonusPattern] === undefined){
-    //     this.sumOfUniquePatterns += this.computeBonusPayOut();
-    //     this.totalBonusCombination++;
-    //     this.uniqueWinPatterns[this.bonusPattern] = this.computeBonusPayOut();
+      if(this.uniqueWinPatterns[this.bonusPattern] === undefined){
+        // this.sumOfUniquePatterns += this.computeBonusPayOut();
+        this.totalBonusCombination++;
+        // this.uniqueWinPatterns[this.bonusPattern] = this.computeBonusPayOut();
 
-    //     this.formula.forEach((eq: any) => {
-    //       if(eq.lines == this.bonusWin && eq.wilds == 0 && eq.symbol == 4)
-    //         eq.total -= this.computeBonusPayOut();
-    //     })
-    //   }
-    // }
+        // this.formula.forEach((eq: any) => {
+        //   if(eq.lines == this.bonusWin && eq.wilds == 0 && eq.symbol == 4)
+        //     eq.total -= this.computeBonusPayOut();
+        // })
+      }
+    }
 
     winnings.forEach(win => {
 

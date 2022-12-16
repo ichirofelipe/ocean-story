@@ -51,7 +51,7 @@ export default class Game {
   private arrDrop: Array<number> = [5, 10, 25, 50, 100, 250, 500, 1000, -1];
   private money: number = 100000;
   private win: number = -1;
-  private game: number = 0;
+  private game: number = 100;
   private drop: number = 5;
   private parentcontroller: ParentController;
   private parentmodal: ParentModal;

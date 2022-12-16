@@ -7,9 +7,9 @@ export default class TestFunctions {
   private bet: number;
   private RTP: number;
   private totalCombination: number = 1;
-  private repeat: number = 1000;
+  private repeat: number = 10000;
   private lowestLineCombination: number = 3;
-  private baseMoney:number = 100000;
+  private baseMoney:number = 10000000;
   private money!:number;
   private beforeMoney!:number;
   private bonusWin: number = 0;
@@ -36,6 +36,8 @@ export default class TestFunctions {
   private fishTotal: number = 0;
   private treasureTotal: number = 0;
   private waterTotal: number = 0;
+  private starTotal: number = 0;
+  private freeSpin: number = 0;
 
   constructor(bet: number, RTP: number) {
     this.bet = bet;
@@ -90,8 +92,13 @@ export default class TestFunctions {
         continue;
       }
       
-      let plinkoSymbol = this.plinkoReel[Math.floor(Math.random() * this.plinkoReel.length)];
-      this.money-= this.bet;
+      let plinkoSymbol = this.plinkoReel[Math.floor(Functions.randMinMax(0, this.plinkoReel.length))];
+      if(this.freeSpin == 0){
+        this.money-= this.bet;
+      } else {
+        this.freeSpin--;
+        plinkoSymbol = 1;
+      }
       this.totalDrop++;
 
       if(reelResult[rep] === undefined){
@@ -99,6 +106,7 @@ export default class TestFunctions {
       }
 
       if(plinkoSymbol == 1){
+        this.starTotal++;
 
         Reel.forEach((reel, rIndex) => {
           
@@ -115,7 +123,7 @@ export default class TestFunctions {
 
         let winnings = this.checkWin(reelResult[rep]);
 
-        if(winnings.length > 0 || this.bonusWin)
+        if(winnings.length > 0)
           this.winFunction(winnings)
       }
       else if (plinkoSymbol == 2){
@@ -165,9 +173,10 @@ export default class TestFunctions {
     console.log('Fish Total', this.fishTotal);
     console.log('Treasure Total', this.treasureTotal);
     console.log('Water Total', this.waterTotal);
+    console.log('Star Total', this.starTotal);
     // console.log('Unique Patterns and Pay:', this.uniqueWinPatterns);
     // console.log('Total Normal Combination:', this.totalNormalCombination);
-    // console.log('Total Bonus Combination Count:', this.totalBonusCombination);
+    console.log('Total Bonus Combination Count:', this.totalBonusCombination);
     // console.log('Unique Patterns Length:', this.jsonCombination.length);
     // console.log('RTP:', this.sumOfUniquePatterns/(this.totalCombination*this.bet));
     // console.log('Total Sum Combinations:', this.formula);
@@ -212,6 +221,26 @@ export default class TestFunctions {
     //   if(bonusBlocks.length > 0)
     //     this.bonusWin++
     // });
+    reels.forEach((reel, reelIndex) => {  
+      let bonusBlocks = reel.filter(val => val == BonusNumber);
+      if(bonusBlocks.length > 0)
+        this.bonusWin++
+    });
+
+    if(this.bonusWin == 3){
+      console.log('BONUS GAME 3!');
+      this.freeSpin += 10;
+    }
+
+    if(this.bonusWin == 4){
+      console.log('BONUS GAME 4!');
+      this.freeSpin += 15;
+    }
+
+    if(this.bonusWin == 5){
+      console.log('BONUS GAME 5!');
+      this.freeSpin += 25;
+    }
 
     Pattern.forEach((pat, patIndex) => {
       let counter = 0;
@@ -234,7 +263,7 @@ export default class TestFunctions {
       
     });
 
-    if(this.bonusWin >= 3){
+    if(this.bonusWin == 5){
       this.bonusPattern = '_';
       reels.forEach((reel, index) => {
         let columnChecked = false;
@@ -243,9 +272,9 @@ export default class TestFunctions {
         // if(reel !== undefined)
         //   this.bonusPattern += `${reel.join('-')}-`;
         reel.forEach((block,bIndex) => {
-          if(block == 4 && !columnChecked){
+          if(block == 5 && !columnChecked){
             this.bonusPattern += `${index}-${bIndex}/`;
-            columnChecked = true;
+            // columnChecked = true;
           }
         })
       })
@@ -266,19 +295,19 @@ export default class TestFunctions {
 
   // UPDATE VARIABLES AFTER WINNING SPINS
   private winFunction(winnings: Array<any>) {
-    if(this.bonusWin >= 3){
-      this.money += this.computeBonusPayOut();
-      this.bonusWinCount++;
+    if(this.bonusWin == 5){
+    //   this.money += this.computeBonusPayOut();
+    //   this.bonusWinCount++;
 
       if(this.uniqueWinPatterns[this.bonusPattern] === undefined){
-        this.sumOfUniquePatterns += this.computeBonusPayOut();
+        // this.sumOfUniquePatterns += this.computeBonusPayOut();
         this.totalBonusCombination++;
-        this.uniqueWinPatterns[this.bonusPattern] = this.computeBonusPayOut();
+        // this.uniqueWinPatterns[this.bonusPattern] = this.computeBonusPayOut();
 
-        this.formula.forEach((eq: any) => {
-          if(eq.lines == this.bonusWin && eq.wilds == 0 && eq.symbol == 4)
-            eq.total -= this.computeBonusPayOut();
-        })
+        // this.formula.forEach((eq: any) => {
+        //   if(eq.lines == this.bonusWin && eq.wilds == 0 && eq.symbol == 4)
+        //     eq.total -= this.computeBonusPayOut();
+        // })
       }
     }
 

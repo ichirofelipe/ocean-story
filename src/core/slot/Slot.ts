@@ -135,6 +135,8 @@ export default class Slot {
         })
       }
     })
+
+    //TO FIX !!!! DO NOT PUSH SAME SYMBOL PATH TO BE ANIMATED
   }
 
   private createLogo() {

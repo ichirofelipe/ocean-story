@@ -38,13 +38,28 @@ export default class ReelsContainer {
 
   public spinReels(doneSpin: () => void) {
     // CHECK FOR BONUS ANIMATION
-    this.slowSpinValidation();
-    this.reels.forEach((reel, index) => {
-      reel.blocks = this.reelsArray[index];
-      reel.startSpin( () => {
-        doneSpin()
-      });
+    this.slowSpinValidation();  
+
+    const spinTicker = new PIXI.Ticker();
+    
+    spinTicker.add(delta => {
+      this.reels.forEach((reel, index) => {
+        reel.blocks = this.reelsArray[index];
+        
+        if(reel.reelSpinFlag == -1){
+          reel.startSpin( () => {
+            doneSpin()
+            spinTicker.destroy();
+            this.reels.forEach(reel => reel.reelSpinFlag = -1);
+          });
+        } else if(reel.reelSpinFlag == 1) {
+          reel.spinner();
+        }
+  
+      })
     })
+    
+    spinTicker.start();
   }
 
   private slowSpinValidation() {

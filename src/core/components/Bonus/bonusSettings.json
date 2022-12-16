@@ -13,7 +13,7 @@
       "clams": 3
     },
     {
-      "instruction": "Total Money Offer",
+      "instruction": "Total Spin Offer",
       "offer": true,
       "action": true
     },
@@ -22,7 +22,7 @@
       "clams": 2
     },
     {
-      "instruction": "Total Money Offer",
+      "instruction": "Total Spin Offer",
       "offer": true,
       "action": true
     },
@@ -51,5 +51,19 @@
     "width": 300,
     "animationSpeed": 0.15,
     "isAnimated": true
-  }
+  },
+  "bonusStats": [
+    {
+      "min": 5,
+      "max": 15
+    },
+    {
+      "min": 10,
+      "max": 20
+    },
+    {
+      "min": 20,
+      "max": 30
+    }
+  ]
 }

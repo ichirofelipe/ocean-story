@@ -99,6 +99,7 @@ export default class TestFunctions {
         this.freeSpin--;
         plinkoSymbol = 1;
       }
+      
       this.totalDrop++;
 
       if(reelResult[rep] === undefined){
@@ -229,17 +230,17 @@ export default class TestFunctions {
 
     if(this.bonusWin == 3){
       console.log('BONUS GAME 3!');
-      this.freeSpin += 10;
+      this.freeSpin += Math.floor(Functions.randMinMax(5,16));
     }
 
     if(this.bonusWin == 4){
       console.log('BONUS GAME 4!');
-      this.freeSpin += 15;
+      this.freeSpin += Math.floor(Functions.randMinMax(10,21));
     }
 
     if(this.bonusWin == 5){
       console.log('BONUS GAME 5!');
-      this.freeSpin += 25;
+      this.freeSpin += Math.floor(Functions.randMinMax(20,31));
     }
 
     Pattern.forEach((pat, patIndex) => {

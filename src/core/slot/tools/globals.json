@@ -1,4 +1,5 @@
 {
   "isSpinning": false,
-  "slowSpinStart": -1
+  "slowSpinStart": -1,
+  "freeGameCount": 0
 }

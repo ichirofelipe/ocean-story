@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import Functions from '../../Functions';
 import Helpers from '../../slot/tools/Helpers';
-import { clamSettings } from './bonusSettings.json';
+import { clamSettings, bonusStats } from './bonusSettings.json';
 
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
@@ -16,6 +16,7 @@ export default class Clam {
   public value: number;
   private perColumn: number = 2;
   public position: number;
+  public bonusCount: number;
   public positionText: PIXI.Text;
   public clam: PIXI.Graphics;
   private clamSettings = {
@@ -26,11 +27,12 @@ export default class Clam {
   }
   private onClick: () => void;
 
-  constructor(app: PIXI.Application, value: number, position: number, frame: PIXI.Sprite, onClick: () => void){
+  constructor(app: PIXI.Application, value: number, position: number, bonusCount: number, frame: PIXI.Sprite, onClick: () => void){
     this.app = app;
     this.frame = frame;
     this.value = value;
     this.position = position;
+    this.bonusCount = bonusCount;
     this.container = new PIXI.Container;
     this.onClick = onClick;
 
@@ -44,9 +46,9 @@ export default class Clam {
   }
 
   private updateSettings() {
-    if(this.value > 20)
+    if(this.value > bonusStats[this.bonusCount - 3].min + 3)
       this.clamSettings.name = 'clam-white';
-    if(this.value > 70)
+    if(this.value > bonusStats[this.bonusCount - 3].min + 7)
       this.clamSettings.name = 'clam-gold';
   }
 

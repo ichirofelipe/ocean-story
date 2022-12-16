@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import TestFunctions from './tools/TestFunctions';
 import Functions from './tools/Functions';
+import GFunctions from '../Functions';
 import Globals from './tools/globals.json';
 import ReelsContainer from './components/reel/ReelsContainer';
 import {ReelOffsetX, ReelOffsetY, Pattern} from './tools/settings.json';
@@ -111,8 +112,14 @@ export default class Slot {
     });
   }
 
-  public getBonusPayout(bonusCount: number) {
-    return this.functions.computeBonusPayOut(bonusCount);
+  public getBonusNumSpin(bonusCount: number) {
+    if(bonusCount == 3){
+      return GFunctions.randMinMax(5, 16);
+    } else if(bonusCount == 4){
+      return GFunctions.randMinMax(10, 21);
+    } else{
+      return GFunctions.randMinMax(20, 31);
+    }
   }
 
   private getSymbolsToAnimate(result: Array<any>) {

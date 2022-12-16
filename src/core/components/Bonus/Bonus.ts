@@ -1,11 +1,12 @@
 import * as PIXI from 'pixi.js';
 import Helpers from '../../slot/tools/Helpers';
 import Clam from './Clam';
-import { Flow, bigClamSettings, clamSettings } from './bonusSettings.json';
+import { Flow, bigClamSettings, clamSettings, bonusStats } from './bonusSettings.json';
 
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import Functions from '../../Functions';
+import { off } from 'process';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -27,14 +28,14 @@ export default class Bonus {
   private sequence: number = 0;
   private clamsToPick: number = 0;
   private actionType: number;
+  public bonusCount: number;
   private activeClams: Array<Clam> = [];
-  private bonusPay: number;
-  private bonusDone: (money: number) => void;
+  private bonusDone: (spin: number) => void;
   
-  constructor(app: PIXI.Application, clams: Array<number>, bonusPay: number, bonusDone: (money: number) => void) {
+  constructor(app: PIXI.Application, clams: Array<number>, bonusCount: number, bonusDone: (spin: number) => void) {
     this.app = app;
     this.clams = clams;
-    this.bonusPay = bonusPay;
+    this.bonusCount = bonusCount;
     this.container = new PIXI.Container;
     this.bonusDone = bonusDone;
 
@@ -78,7 +79,7 @@ export default class Bonus {
 
   private createClams() {
     this.clams.forEach((val, index) => {
-      const clam = new Clam(this.app, val, index, this.frame, () => {
+      const clam = new Clam(this.app, val, index, this.bonusCount, this.frame, () => {
         
         if(this.bigClamIndex === undefined){
           this.bigClamText(clam);
@@ -90,7 +91,8 @@ export default class Bonus {
 
         
         this.clamsToPick--;
-        this.activeClams = this.activeClams.filter(aClam => aClam.value != clam.value);
+        this.clams.splice(clam.position, 1);
+        this.activeClams = this.activeClams.filter(aClam => aClam.position != clam.position);
         this.nextSequence();
       });
 
@@ -118,9 +120,9 @@ export default class Bonus {
   }
 
   private setBigClam() {
-    if(this.bigClamValue > 20)
+    if(this.bigClamValue > bonusStats[this.bonusCount - 3].min + 3)
       bigClamSettings.name = 'clam-white';
-    if(this.bigClamValue > 70)
+    if(this.bigClamValue > bonusStats[this.bonusCount - 3].min + 7)
       bigClamSettings.name = 'clam-gold';
   }
 
@@ -172,9 +174,9 @@ export default class Bonus {
         this.bigClam.addChild(img)
         this.createDisplayValue(this.bigClam, this.bigClamValue);
         
-        let money = this.bonusPay * (this.bigClamValue / 100);
+        let spin = this.bigClamValue;
         let delayBeforeExit = setTimeout(() => {
-          this.bonusDone(money);
+          this.bonusDone(spin);
           clearTimeout(delayBeforeExit);
         }, 5000);
         
@@ -303,7 +305,7 @@ export default class Bonus {
 
   private continueBonusSequence() {
     let data = Flow[this.sequence];
-
+    
     if(data.action !== undefined){
       this.actionEnable();
     } else {
@@ -312,18 +314,11 @@ export default class Bonus {
 
     this.offerText.text = '';
     if(data.offer !== undefined){
-      this.offerValue = Functions.randMinMax(20, 60);
-      let offerMoney = 0;
-      if(Functions.randMinMax(-1.5,1) > 0){
-        this.offerValue += 5;
-      } else {
-        this.offerValue -= 5;
-      }
-      offerMoney = this.bonusPay * (this.offerValue / 100);
+      let offerSpin = this.getOfferedSpin();
 
       if(this.sequence < Flow.length - 1){
-        this.bigClamValue = this.offerValue;
-        this.updateText(this.offerText, `${Functions.formatNum(offerMoney)}`);
+        this.bigClamValue = offerSpin;
+        this.updateText(this.offerText, `${Functions.formatNum(offerSpin, 0)}`);
       }
     }
     
@@ -338,8 +333,8 @@ export default class Bonus {
 
     if(data.bigClam !== undefined){
       if(this.actionType == 0){
-        let offerMoney = this.bonusPay * (this.bigClamValue / 100);
-        this.updateText(this.offerText, `${Functions.formatNum(offerMoney)}`);
+        let offerSpin = this.bigClamValue;
+        this.updateText(this.offerText, `${Functions.formatNum(offerSpin, 0)}`);
         this.showBigClam();
 
       } else {
@@ -372,8 +367,8 @@ export default class Bonus {
             this.positionText.text = this.activeClams[0].position + 1;
             this.activeClams[0].positionText.text = smallClamNewIndex + 1;
             
-            let offerMoney = this.bonusPay * (this.bigClamValue / 100);
-            this.updateText(this.offerText, `${Functions.formatNum(offerMoney)}`);
+            let offerSpin = this.bigClamValue;
+            this.updateText(this.offerText, `${Functions.formatNum(offerSpin, 0)}`);
             this.showBigClam();
             bigClamAnim.kill();
           }
@@ -383,6 +378,34 @@ export default class Bonus {
 
     let newIntructionText = data.instruction.replace('{clams}', `${this.clamsToPick}`);
     this.updateText(this.instructionText, newIntructionText);
+  }
+
+  private getOfferedSpin() {
+    let offerSpin = 0;
+    let stats = bonusStats[this.bonusCount - 3];
+
+    this.activeClams.forEach(clam => {
+      offerSpin += clam.value;
+    })
+    
+    offerSpin = Math.floor(offerSpin/this.activeClams.length);
+
+    if(Functions.randMinMax(-1.5,1) > 0){
+      offerSpin += 2;
+    } else {
+      offerSpin -= 2;
+    }
+
+    if(offerSpin > stats.max){
+      offerSpin = stats.max;
+    }
+    
+    if(offerSpin < stats.min){
+      offerSpin = stats.min;
+    }
+
+
+    return offerSpin;
   }
 
   private updateText(text: PIXI.Text, string: string) {

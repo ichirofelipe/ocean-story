@@ -72,8 +72,9 @@ export default class Win {
       if((this.money/this.bet) >= 40)
         this.winSettings.name = 'mega_win'
     } else if(this.type == 0) {
-      if(this.money > bonusStats[this.bet - 3].min + 3)
-        this.winSettings.name = 'big_win'
+      
+      this.winSettings.name = 'big_win'
+
       if(this.money > bonusStats[this.bet - 3].min + 7)
         this.winSettings.name = 'mega_win'
     }

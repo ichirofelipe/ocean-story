@@ -177,6 +177,7 @@ export default class Game {
   }
 
   private dive() {
+    let animationFlag = false;
     let index = 0;
     let volume = 1;
     let volume2 = 0.0;
@@ -199,36 +200,45 @@ export default class Game {
           }
         },
         onComplete: () => {
-          this.homeContainer.removeChild(this.home.container);
-          Functions.toggleAnimations(this.scene.homeAnimations, false);
-          Functions.toggleAnimations(this.scene.oceanBedAnimations, true);
-          this.soundStop(2);
-          this.soundStop(1);
-          this.volumeTransition(1.0, 3);
-          if(this.freeGame <= 0)
-            this.stopAndPlay(true);
-          if(this.game > 0)
-            this.slotPlay();
-          
-          diveAnimate.kill();
-          // this.startBonusGame(5);
+          if(!animationFlag){
+            this.homeContainer.removeChild(this.home.container);
+            Functions.toggleAnimations(this.scene.homeAnimations, false);
+            Functions.toggleAnimations(this.scene.oceanBedAnimations, true);
+            this.soundStop(2);
+            this.soundStop(1);
+            this.volumeTransition(1.0, 3);
+            if(this.freeGame <= 0)
+              this.stopAndPlay(true);
+            if(this.game > 0)
+              this.slotPlay();
+            animationFlag = true;
+
+            diveAnimate.kill();
+            // this.startBonusGame(5);
+          }
         }
       })
     })
   }
   
   private rise() {
+    let animationFlag = false;
+    Globals.isSpinning = true;
+
     this.riseGroupAnimation.forEach((el: any) => {
 
       const riseAnimate = gsap.to(el.sprite, {
         y: el.posY??0,
         alpha: el.alpha??1,
         onComplete: () => {
-          this.stopAndPlay(false);
-          Functions.toggleAnimations(this.scene.homeAnimations, true);
-          Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
-          
-          riseAnimate.kill();
+          if(!animationFlag){
+            this.stopAndPlay(false);
+            Functions.toggleAnimations(this.scene.homeAnimations, true);
+            Functions.toggleAnimations(this.scene.oceanBedAnimations, false);
+            animationFlag = true;
+
+            riseAnimate.kill();
+          }
         }
       })
     })
@@ -237,6 +247,7 @@ export default class Game {
 
   private slotPlay() {
     // VALIDATION TO CHECK IF SLOT IS CURRENTLY SPINNING
+    console.log('play');
     if(Globals.isSpinning)
       return;
     Globals.isSpinning = true;

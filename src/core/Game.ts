@@ -86,7 +86,7 @@ export default class Game {
     this.setContainers(); 
     this.createScene();
     this.createHome();
-    // this.createSlot();
+    this.createSlot();
     this.createControllers();
     this.createPlinko();
     this.createModal();
@@ -137,15 +137,16 @@ export default class Game {
     this.plinko.stage.addChild(this.plinkogame.container2);
     this.gameContainer.addChild(this.plinko.stage);
   }
-  // private createSlot() {
-  //   this.slot = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
-  //   this.slot.loader = this.main.loader;
-  //   this.slotgame = new Slot(this.slot, this.bet, this.RTP);
-  //   this.slot.stage.addChild(this.slotgame.container);
-  //   this.slot.stage.x = this.baseWidth/2;
-  //   this.slot.stage.y = 120;
-  //   this.gameContainer.addChild(this.slot.stage);
-  // }
+  private createSlot() {
+    this.slot = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
+    this.slot.loader = this.main.loader;
+    this.slotgame = new Slot(this.slot, this.bet, this.RTP);
+    this.slot.stage.addChild(this.slotgame.container);
+    this.slot.stage.x = this.baseWidth/2;
+    this.slot.stage.y = 120;
+    this.gameContainer.addChild(this.slot.stage);
+  }
+
   private setObjAnimation() {
     this.diveGroupAnimation = Functions.objGroupAnimation(
       [
@@ -258,16 +259,16 @@ export default class Game {
       if(this.slotgame.symbolsToAnimate.length > 0){
         this.addMoney(3, money);
 
-  //       //PLAY SYMBOL ANIMATION
-  //       Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
+        //PLAY SYMBOL ANIMATION
+        Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
 
-  //       if((money/this.bet) < 20){
+        if((money/this.bet) < 20){
 
-  //         let winPopupDelay = setTimeout(() => {
-  //           this.stopSymbolAnimation();
-  //           clearTimeout(winPopupDelay);
-  //         }, 4000);
-  //       }
+          let winPopupDelay = setTimeout(() => {
+            this.stopSymbolAnimation();
+            clearTimeout(winPopupDelay);
+          }, 4000);
+        }
 
       }
       else{
@@ -286,21 +287,21 @@ export default class Game {
     });
   }
 
-  // private stopSymbolAnimation() {
-  //   Functions.toggleAnimations(this.slotgame.symbolsToAnimate, false);
-  //   this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 0);
+  private stopSymbolAnimation() {
+    Functions.toggleAnimations(this.slotgame.symbolsToAnimate, false);
+    this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 0);
 
-  //   // CHECK IF THERE IS BONUS COMBINATION
-  //   if(this.slotgame.bonusCount >= 3){
-  //     this.startBonusGame(this.slotgame.bonusCount);
-  //     return
-  //   }
+    // CHECK IF THERE IS BONUS COMBINATION
+    if(this.slotgame.bonusCount >= 3){
+      this.startBonusGame(this.slotgame.bonusCount);
+      return
+    }
     
-  //   Globals.isSpinning = false;
-  //   if(this.game > 0){
-  //     this.slotPlay();
-  //   }
-  // }
+    Globals.isSpinning = false;
+    if(this.game > 0){
+      this.slotPlay();
+    }
+  }
 
   private startBonusGame(bonusCount: number) {
     // const bonusPay = this.slotgame.getBonusPayout(bonusCount);

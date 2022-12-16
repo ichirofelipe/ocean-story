@@ -7,7 +7,7 @@ export default class TestFunctions {
   private bet: number;
   private RTP: number;
   private totalCombination: number = 1;
-  private repeat: number = 1000;
+  private repeat: number = 10000;
   private lowestLineCombination: number = 3;
   private baseMoney:number = 100000;
   private money!:number;
@@ -99,6 +99,7 @@ export default class TestFunctions {
         this.freeSpin--;
         plinkoSymbol = 1;
       }
+      
       this.totalDrop++;
 
       if(reelResult[rep] === undefined){
@@ -229,17 +230,17 @@ export default class TestFunctions {
 
     if(bonusWin == 3){
       console.log('BONUS GAME 3!');
-      this.freeSpin += 10;
+      this.freeSpin += Math.floor(Functions.randMinMax(5,16));
     }
 
     if(bonusWin == 4){
       console.log('BONUS GAME 4!');
-      this.freeSpin += 15;
+      this.freeSpin += Math.floor(Functions.randMinMax(10,21));
     }
 
     if(bonusWin == 5){
       console.log('BONUS GAME 5!');
-      this.freeSpin += 25;
+      this.freeSpin += Math.floor(Functions.randMinMax(20,31));
     }
 
     Pattern.forEach((pat, patIndex) => {

@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import Helpers from '../../slot/tools/Helpers';
 import { clear } from 'console';
+import {bonusStats} from '../Bonus/bonusSettings.json';
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
@@ -18,6 +19,7 @@ export default class Win {
   private bubblesContainer: PIXI.Container;
   private money: number;
   private bet: number;
+  private type: number;
   private overlay: PIXI.Sprite;
   private displayMoney: PIXI.Text;
   private win: PIXI.Sprite;
@@ -38,10 +40,11 @@ export default class Win {
   private overlayMoneyAnimation: any;
   public toRemoveAnimations: Array<any> = [];
 
-  constructor(app: PIXI.Application, money: number, bet: number, closeWin: () => void) {
+  constructor(app: PIXI.Application, money: number, bet: number, type: number, closeWin: () => void) {
     this.app = app;
     this.money = money;
     this.bet = bet;
+    this.type = type;
     this.container = new PIXI.Container;
     this.coinsContainer = new PIXI.Container;
     this.bubblesContainer = new PIXI.Container;
@@ -62,10 +65,18 @@ export default class Win {
   }
 
   private setInitValues() {
-    if((this.money/this.bet) >= 20)
-      this.winSettings.name = 'big_win'
-    if((this.money/this.bet) >= 40)
-      this.winSettings.name = 'mega_win'
+    console.log(this.type, bonusStats, this.bet);
+    if(this.type == 1){
+      if((this.money/this.bet) >= 20)
+        this.winSettings.name = 'big_win'
+      if((this.money/this.bet) >= 40)
+        this.winSettings.name = 'mega_win'
+    } else if(this.type == 0) {
+      if(this.money > bonusStats[this.bet - 3].min + 3)
+        this.winSettings.name = 'big_win'
+      if(this.money > bonusStats[this.bet - 3].min + 7)
+        this.winSettings.name = 'mega_win'
+    }
   }
 
   private createOverlay() {
@@ -299,7 +310,10 @@ export default class Win {
     }
     this.moneyAnimationFlag = true;
     this.overlayMoneyAnimation.kill();
-    this.displayMoney.text = `$${Functions.formatNum(this.money)}`;
+    if(this.type == 1)
+      this.displayMoney.text = `$${Functions.formatNum(this.money)}`;
+    if(this.type == 0)
+      this.displayMoney.text = `${Functions.formatNum(this.money, 0)} FREE SPINS!!!`;
     this.delayBeforeClose = setTimeout(() => {
       this.hide();
       clearTimeout(this.delayBeforeClose);
@@ -329,7 +343,10 @@ export default class Win {
       duration: 4,
       ease: "power1.in",
       onUpdate: () => {
-        this.displayMoney.text = `$${Functions.formatNum(target.val)}`;
+        if(this.type == 1)
+          this.displayMoney.text = `$${Functions.formatNum(target.val)}`;
+        if(this.type == 0)
+          this.displayMoney.text = `${Functions.formatNum(target.val, 0)} FREE SPINS!!!`;
         this.displayMoney.x = (this.app.screen.width - this.displayMoney.width) / 2;
       },
       onComplete: () => {

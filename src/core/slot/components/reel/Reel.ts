@@ -138,7 +138,35 @@ export default class Reel {
     this.toggleMask(false);
     this.reelSpinFlag = 0;
 
-    if(!this.reelEffectsFlag){
+    if(Globals.freeGameCount > 0){
+      const bounce = gsap.to(this.container, {
+        y: this.container.y + 8,
+        duration: 0.1,
+        repeat: 1,
+        yoyo: true,
+        ease: 'power.in',
+        onComplete: () => {
+          this.hideReelEffects();
+          if(this.reelIndex == Columns - 1){
+            this.reelStopped();
+          }
+          
+          bounce.kill();
+        }
+      })
+
+      const stageShock = gsap.to(this.app.stage, {
+        y: this.app.stage.y + 8,
+        duration: 0.1,
+        repeat: 1,
+        yoyo: true,
+        ease: 'power.in',
+        onComplete: () => {
+          stageShock.kill();
+        }
+      })
+    }
+    else if(!this.reelEffectsFlag){
 
       const bounce = gsap.to(this.container, {
         y: this.container.y + bounceForce,

@@ -91,7 +91,7 @@ export default class Game {
     constructor(app: PIXI.Application, loader: PIXI.Loader, updategameplus: () => void, updategameminus: () => void, decmoney: () => void, dropoff: () => void, addmoney: (type: number) => void, powerup: () => void) {
         this.app = app;
         this.loader = loader;
-        this.stage = this.loader.resources!.plinko.textures!['stage.png'];
+        this.stage = this.loader.resources!.newplinko.textures!['stage.png'];
         this.pipe = this.loader.resources!.newplinko.textures!['golden_pipe.png'];
         this.bar1 = this.loader.resources!.newplinko.textures!['frame_levelbar_1.png'];
         this.bar2 = this.loader.resources!.newplinko.textures!['frame_levelbar_1.png'];
@@ -111,9 +111,9 @@ export default class Game {
             this.loader.resources!.bomb.textures,
             this.loader.resources!.starfish4.textures,
             this.loader.resources!.bottle.textures,
-            this.loader.resources!.bomb.textures,
+            this.loader.resources!.starfish5.textures,
             this.loader.resources!.treasure.textures,
-            this.loader.resources!.starfish5.textures
+            this.loader.resources!.starfish6.textures
         ];
         this.decmoney = decmoney;
         this.dropoff = dropoff;

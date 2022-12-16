@@ -261,7 +261,7 @@ export default class Ball {
             charindex = -1;
         }
         //check if starfish spin all
-        else if(charindex == 2 || charindex == 4 || charindex == 7 || charindex == 9 || charindex == 13){
+        else if(charindex == 2 || charindex == 4 || charindex == 7 || charindex == 9 || charindex == 11 || charindex == 13){
             texture = this.spinalltextures;
             this.createSprite(texture,ball,false,false,0,0,0,false,'',true);
             charindex = -1;

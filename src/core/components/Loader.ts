@@ -126,6 +126,7 @@ export default class Loader {
         this.loader.add('starfish3', 'assets/images/plinko/starfish3.json');
         this.loader.add('starfish4', 'assets/images/plinko/starfish4.json');
         this.loader.add('starfish5', 'assets/images/plinko/starfish5.json');
+        this.loader.add('starfish6', 'assets/images/plinko/starfish6.json');
         this.loader.add('bomb', 'assets/images/plinko/bomb.json');
         this.loader.add('treasure', 'assets/images/plinko/treasure.json');
         this.loader.add('bottle', 'assets/images/plinko/bottle.json');

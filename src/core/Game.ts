@@ -81,7 +81,7 @@ export default class Game {
     this.setContainers(); 
     this.createScene();
     this.createHome();
-    this.createSlot();
+    // this.createSlot();
     this.createControllers();
     this.createPlinko();
     this.createModal();
@@ -132,15 +132,15 @@ export default class Game {
     this.plinko.stage.addChild(this.plinkogame.container2);
     this.gameContainer.addChild(this.plinko.stage);
   }
-  private createSlot() {
-    this.slot = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
-    this.slot.loader = this.main.loader;
-    this.slotgame = new Slot(this.slot, this.bet, this.RTP);
-    this.slot.stage.addChild(this.slotgame.container);
-    this.slot.stage.x = this.baseWidth/2;
-    this.slot.stage.y = 120;
-    this.gameContainer.addChild(this.slot.stage);
-  }
+  // private createSlot() {
+  //   this.slot = new PIXI.Application({ width: this.baseWidth/2, height: this.baseHeight });
+  //   this.slot.loader = this.main.loader;
+  //   this.slotgame = new Slot(this.slot, this.bet, this.RTP);
+  //   this.slot.stage.addChild(this.slotgame.container);
+  //   this.slot.stage.x = this.baseWidth/2;
+  //   this.slot.stage.y = 120;
+  //   this.gameContainer.addChild(this.slot.stage);
+  // }
   private setObjAnimation() {
     this.diveGroupAnimation = Functions.objGroupAnimation(
       [
@@ -201,8 +201,8 @@ export default class Game {
           this.soundStop(2);
           this.soundStop(1);
           this.volumeTransition(1.0, 3);
-          if(this.game > 0)
-            this.slotPlay();
+          // if(this.game > 0)
+          //   this.slotPlay();
           
           diveAnimate.kill();
           // this.startBonusGame(3);
@@ -229,52 +229,52 @@ export default class Game {
     // this.stopAndPlay(false);
   }
 
-  private slotPlay() {
-    // VALIDATION TO CHECK IF SLOT IS CURRENTLY SPINNING
-    if(Globals.isSpinning)
-      return;
-    Globals.isSpinning = true;
-    this.updateGameMinus();
-    this.slotgame.getResult((money: number) => {
-      //CHECK IF THERE ARE SYMBOLS TO ANIMATE
-      if(this.slotgame.symbolsToAnimate.length > 0){
-        this.addMoney(3, money);
+  // private slotPlay() {
+  //   // VALIDATION TO CHECK IF SLOT IS CURRENTLY SPINNING
+  //   if(Globals.isSpinning)
+  //     return;
+  //   Globals.isSpinning = true;
+  //   this.updateGameMinus();
+  //   this.slotgame.getResult((money: number) => {
+  //     //CHECK IF THERE ARE SYMBOLS TO ANIMATE
+  //     if(this.slotgame.symbolsToAnimate.length > 0){
+  //       this.addMoney(3, money);
 
-        //PLAY SYMBOL ANIMATION
-        Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
+  //       //PLAY SYMBOL ANIMATION
+  //       Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
 
-        if((money/this.bet) < 20){
+  //       if((money/this.bet) < 20){
 
-          let winPopupDelay = setTimeout(() => {
-            this.stopSymbolAnimation();
-            clearTimeout(winPopupDelay);
-          }, 4000);
-        }
+  //         let winPopupDelay = setTimeout(() => {
+  //           this.stopSymbolAnimation();
+  //           clearTimeout(winPopupDelay);
+  //         }, 4000);
+  //       }
 
-      }
-      else{
-        Globals.isSpinning = false;
-        if(this.game > 0)
-          this.slotPlay();
-      }
-    });
-  }
+  //     }
+  //     else{
+  //       Globals.isSpinning = false;
+  //       if(this.game > 0)
+  //         this.slotPlay();
+  //     }
+  //   });
+  // }
 
-  private stopSymbolAnimation() {
-    Functions.toggleAnimations(this.slotgame.symbolsToAnimate, false);
-    this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 0);
+  // private stopSymbolAnimation() {
+  //   Functions.toggleAnimations(this.slotgame.symbolsToAnimate, false);
+  //   this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 0);
 
-    // CHECK IF THERE IS BONUS COMBINATION
-    if(this.slotgame.bonusCount >= 3){
-      this.startBonusGame(this.slotgame.bonusCount);
-      return
-    }
+  //   // CHECK IF THERE IS BONUS COMBINATION
+  //   if(this.slotgame.bonusCount >= 3){
+  //     this.startBonusGame(this.slotgame.bonusCount);
+  //     return
+  //   }
     
-    Globals.isSpinning = false;
-    if(this.game > 0){
-      this.slotPlay();
-    }
-  }
+  //   Globals.isSpinning = false;
+  //   if(this.game > 0){
+  //     this.slotPlay();
+  //   }
+  // }
 
   private startBonusGame(bonusCount: number) {
     const bonusPay = this.slotgame.getBonusPayout(bonusCount);
@@ -314,8 +314,8 @@ export default class Game {
 
     if((money/this.bet) < 20){
       Globals.isSpinning = false;
-      if(this.game > 0)
-        this.slotPlay();
+      // if(this.game > 0)
+        // this.slotPlay();
     }
 
   }
@@ -328,7 +328,7 @@ export default class Game {
   }
 
   private removeWin() {
-    this.stopSymbolAnimation();
+    // this.stopSymbolAnimation();
     Functions.killAnimations(this.winPopupAnimation.toRemoveAnimations);
 
     this.mainContainer.removeChild(this.winPopupAnimation.container);
@@ -453,7 +453,7 @@ export default class Game {
   private updateGamePlus(){
     this.game += 1;
     this.controller.gameinbox.updateGame(this.game);
-    this.slotPlay();
+    // this.slotPlay();
   }
   private updateGameMinus(){
     this.game -= 1;
@@ -520,7 +520,7 @@ export default class Game {
     }
   }
   private plusDrop(){
-    this.resetGame();
+    // this.resetGame();
     if(this.arrDropIndex < this.arrDrop.length - 1){
       this.arrDropIndex += 1;
       this.drop = this.arrDrop[this.arrDropIndex];

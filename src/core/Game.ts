@@ -177,6 +177,7 @@ export default class Game {
     // this.winPopup(2500, 50);
   }
 
+  // DIVE FUNCTION TO GO TO THE MAIN GAME OR UNDER THE OCEAN/ISLAND
   private dive() {
     let animationFlag = false;
     let index = 0;
@@ -222,6 +223,7 @@ export default class Game {
     })
   }
   
+  // RISE FUNCTION TO GO TO HOME PAGE OR ISLAND
   private rise() {
     let animationFlag = false;
     Globals.isSpinning = true;
@@ -246,6 +248,8 @@ export default class Game {
     // this.stopAndPlay(false);
   }
 
+
+  // FUNCTION TO BE CALLED TO IF SLOT NEEDS TO START PLAYING
   private slotPlay() {
     // VALIDATION TO CHECK IF SLOT IS CURRENTLY SPINNING
     console.log('play');
@@ -287,6 +291,7 @@ export default class Game {
     });
   }
 
+  // STOP SYMBOL ANIMATIONS
   private stopSymbolAnimation() {
     Functions.toggleAnimations(this.slotgame.symbolsToAnimate, false);
     this.slotgame.symbolsToAnimate.forEach(element => element.zIndex = 0);
@@ -303,6 +308,7 @@ export default class Game {
     }
   }
 
+  // FUNCTION TO BE CALLED IF BONUS GAME NEEDS TO START
   private startBonusGame(bonusCount: number) {
     // const bonusPay = this.slotgame.getBonusPayout(bonusCount);
     const arrayBonusPay = [
@@ -330,6 +336,7 @@ export default class Game {
     this.rise();
   }
 
+  // FUNCTION TO BE CALLED IF BONUS GAME IS DONE
   private bonusDone(spin: number) {
     let bonusCount = this.bonus.bonusCount;
     this.slotgame.bonusCount = 0;
@@ -349,6 +356,7 @@ export default class Game {
 
   }
 
+  // FUNCTION FOR CALLING BIG AND MEGA WIN ANIMATION (IF TYPE == 1 "money is displayed", TYPE == 0 "free sping count is displayed")
   private winPopup(money:number, bet:number, type: number = 1) {
     this.winPopupAnimation = new Win(this.main, money, bet, type, this.removeWin.bind(this));
     this.winPopupAnimation.container.zIndex = 10;
@@ -356,6 +364,7 @@ export default class Game {
     this.mainContainer.addChild(this.winPopupAnimation.container);
   }
 
+  // REMOVE BIG AND MEGA WIN ANIMATION
   private removeWin() {
     // this.stopSymbolAnimation();
     Functions.killAnimations(this.winPopupAnimation.toRemoveAnimations);

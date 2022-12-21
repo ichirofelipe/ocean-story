@@ -1,10 +1,25 @@
 import * as PIXI from 'pixi.js';
+
+// TEST FUNCTION -- FOR GENERATING TEST RESULTS FOR SLOT GAME WITH RTP COMPUTATIONS BASED ON THE ASSIGNED VALUE
+// this is used for testing if RTP is genrating results correctly by pressing ENTER KEY
 import TestFunctions from './tools/TestFunctions';
+
+// FUNCTION -- FOR GENERATING REAL RESULTS FOR SLOT GAME WITH RTP COMPUTATIONS BASED ON THE ASSIGNED VALUE
 import Functions from './tools/Functions';
+
+// GLOBAL FUNCTIONS
 import GFunctions from '../Functions';
+
+// GLOBAL VARIABLES FOR SLOT GAME
 import Globals from './tools/globals.json';
+
+// REELS CONTAINER
 import ReelsContainer from './components/reel/ReelsContainer';
+
+// SLOT SETTINGS OR SLOT CONFIG
 import {ReelOffsetX, ReelOffsetY, Pattern} from './tools/settings.json';
+
+// SLOT HELPERS AUTO WIDTH AUTO HEIGHT AND SETTINGS OBJECT VALUES
 import Helpers from './tools/Helpers';
 
 export default class Slot {
@@ -29,7 +44,11 @@ export default class Slot {
     this.container = new PIXI.Container;
     this.bet = bet;
     this.RTP = RTP;
+
+    // INIATIALIZE TEST FUNCTION
     this.testFunctions = new TestFunctions(this.bet, this.RTP);
+
+    // INITIALIZE REAL FUNCTION FOR REAL RESULTS
     this.functions = new Functions(this.bet, this.RTP);
 
     this.init();
@@ -44,21 +63,28 @@ export default class Slot {
     this.createLogo();
   }
 
+  // UPDATE VALUES OF FUNCTIONS FOR GENERATING RESULTS
   public updateFunctions(){
     this.testFunctions = new TestFunctions(this.bet, this.RTP);
     this.functions = new Functions(this.bet, this.RTP);
   }
 
+  // SETTING SLOT CONTAINER TO SORTABLE
   private settings() {
     this.container.sortableChildren = true;
   }
 
+  // CALLING TEST RESULT GENERATOR ON PRESSING ENTER KEY
   private createGenerateEvent() {
     window.document.addEventListener('keypress', e => this.testResult(e))
   }
 
+  // INITIALIZE REELS CONTAINER
   private createReelsContainer() {
+
+    // GENERATE INITIAL REEL VALUES FOR DISPLAY
     let initReelsArray = this.functions.generateResult();
+
     this.reelsContainer = new ReelsContainer(this.app, initReelsArray);
     this.reelsContainer.container.x = (this.app.screen.width/2) - (this.reelsContainer.container.width/2);
     this.reelsContainer.container.y = (this.app.screen.width/2) - (this.reelsContainer.container.width/2);
@@ -67,6 +93,7 @@ export default class Slot {
     this.container.addChild(this.reelsContainer.container);
   }
 
+  // INITIALIZE BACKGROUND
   private createBackground() {
     const texture = this.app.loader.resources!.slot.textures!['reel_bg.png'];
     this.background = new PIXI.Sprite(texture);
@@ -79,6 +106,7 @@ export default class Slot {
     this.container.addChild(this.background);
   }
 
+  // INITIALIZE FRAME
   private createFrame() {
     const texture = this.app.loader.resources!.slot.textures!['reel_frame.png'];
     this.frame = new PIXI.Sprite(texture);
@@ -91,6 +119,7 @@ export default class Slot {
     this.container.addChild(this.frame);
   }
 
+  // FUNCTION FOR TEST RESULT
   private testResult(e: any) {
     if(e.keyCode != 13)
       return;
@@ -98,20 +127,23 @@ export default class Slot {
     this.testFunctions.testResult()
   }
 
+  // GET NEW RESULT TO BE SHOWN
+  // PUBLIC FUNCTION CALLED FROM THE GAME.TS FOR GENERATING REAL RESULTS
   public getResult(winnings: (win: number) => void) {
-    const result = this.functions.generateResult();
-    const formattedResult = this.functions.formatResult(result);
-    const win = this.functions.getTotalWin(formattedResult);
+    const result = this.functions.generateResult();                   // THIS IS REAL RESULT
+    const formattedResult = this.functions.formatResult(result);      // FORMAT RESULTS FOR EASIER FOR LOOP OF GETTING DATA
+    const win = this.functions.getTotalWin(formattedResult);          // GET TOTAL WIN IN THE FORMATTED RESULT
     
-    this.bonusCount = 0;
-    this.getSymbolsToAnimate(formattedResult);
-    this.reelsContainer.reelsArray = result;
+    this.bonusCount = 0;                                              // RESET BONUS COUNT TO 0
+    this.getSymbolsToAnimate(formattedResult);                        // THIS IS TO INITIALIZE THE ARRAY FOR ALL SYMBOLS TO BE ANIMATED
+    this.reelsContainer.reelsArray = result;                          // PASS THE REEL RESULT TO THE PUBLIC VARIABLE IN REELS CONTAINER
 
-    this.reelsContainer.spinReels(() => {
-      winnings(win);
+    this.reelsContainer.spinReels(() => {                             // CALL PUBLIC FUNCTION IN REELS CONTAINER TO SPIN THE REELS
+      winnings(win);                                                  // CALL THE CALLBACK FUNCTION TO PASS THE TOTAL WINS
     });
   }
 
+  // GET NUMBER MINIMUM AND MAXIMUM FREE SPIN FOR THE SLOT BONUS GAME
   public getBonusNumSpin(bonusCount: number) {
     if(bonusCount == 3){
       return GFunctions.randMinMax(5, 16);
@@ -122,11 +154,14 @@ export default class Slot {
     }
   }
 
+  // FUNCTION FOR GETTING ALL SYMBOLS TO BE ANIMATED
   private getSymbolsToAnimate(result: Array<any>) {
     this.symbolsToAnimate = [];
     
     result.forEach(res => {
       if(res.index == -1){
+
+        //GET BONUS SYMBOLS TO BE ANIMATED IF BONUS PATTERN IS SATISFIED
         this.bonusCount = res.colCount;
         res.combination.forEach((pat:string) => {
           let reelIndex = Number(pat.split('-')[0]);
@@ -136,6 +171,8 @@ export default class Slot {
         })
       }
       else{
+
+        // GET ALL WINNING LETTER AND CHARACTER SYMBOLS TO BE ANIMATED
         Pattern[res.index].forEach((value, reelIndex) => {
           if(reelIndex < res.colCount)
             this.symbolsToAnimate.push(this.reelsContainer.reels[reelIndex].reelBlocks[value].symbolSprite);
@@ -146,6 +183,7 @@ export default class Slot {
     //TO FIX !!!! DO NOT PUSH SAME SYMBOL PATH TO BE ANIMATED
   }
 
+  // INITIALIZE LOGO
   private createLogo() {
     const texture = this.app.loader.resources!.slot.textures!['logo.png'];
     this.logo = new PIXI.Sprite(texture);

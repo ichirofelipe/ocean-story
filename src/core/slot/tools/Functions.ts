@@ -57,6 +57,7 @@ export default class Functions {
     return result;
   }
 
+  // FORMAT RESULT
   public formatResult(reels: Array<Array<number>>) {
     let winningPattern: Array<any> = [];
     let bonusWin = 0;
@@ -77,11 +78,14 @@ export default class Functions {
       })
     });
 
+    // IF THREE OR MORE REELS HAS THE BONUS SYMBOL THEN PASS THE BONUS SYMBOLS INDEXES
     if(bonusWin >= 3){
       console.log('BONUS GAME!');
       winningPattern.push({'index': -1,'combination': bonusPattern, 'colCount': bonusWin});
     }
 
+    // CHECKING OF SATISFIED PATTERNS
+    // CHECK THE PATTERNS TO BE SATISFIED IN THE SETTINGS.JSON FILE
     Pattern.forEach((pat, patIndex) => {
       let counter = 0;
   
@@ -117,6 +121,7 @@ export default class Functions {
     return false
   }
 
+  // GET THE TOTAL PAYOUT FOR ALL WINNING CHARACTER AND SYMBOL COMBINATION
   public getTotalWin(result: Array<any>){
     let totalWin = 0;
 
@@ -145,6 +150,7 @@ export default class Functions {
   }
 
   // COMPUTE THE PAYOUT FOR BONUS COMBINATION
+  // THIS IS NOT USED!!!
   public computeBonusPayOut(bonusCount: number) {
     let payLine = Helpers.getKeyValue(Paylines)(`lines-${bonusCount}` as keyof typeof Paylines);
     let payOut = (((Helpers.getKeyValue(Payouts)(`char-${BonusNumber}` as keyof typeof Payouts) * bonusCount) * payLine) * this.RTP) * this.bet;

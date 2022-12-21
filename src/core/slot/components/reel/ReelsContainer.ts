@@ -23,6 +23,7 @@ export default class ReelsContainer {
     this.createReels();
   }
 
+  // CREATE ALL REELS WITH CORRESPONDING BLOCK VALUES
   private createReels() {
     this.reelsArray.forEach((reel, index) => {
       this.reel = new Reel(this.app, reel, index);
@@ -30,14 +31,17 @@ export default class ReelsContainer {
       this.reel.reelEffects[0].x = this.reel.container.x;
       this.reel.reelEffects[1].x = this.reel.container.x;
       this.reels.push(this.reel);
-      this.container.addChild(this.reel.reelEffects[0]);
-      this.container.addChild(this.reel.container);
-      this.container.addChild(this.reel.reelEffects[1]);
+
+      this.container.addChild(this.reel.reelEffects[0]);              // ADD THE REEL EFFECT (BACKGROUND)
+      this.container.addChild(this.reel.container);                   // ADD THE REEL CONTAINER
+      this.container.addChild(this.reel.reelEffects[1]);              // ADD THE REEL SECOND EFFECTS (BORDER)
     })
   }
 
+  // FUNCTION TO SPIN REELS OUT THE REEL.TS
   public spinReels(doneSpin: () => void) {
-    // CHECK FOR BONUS ANIMATION
+
+    // CHECK FOR BONUS ANIMATION (IF BONUS IS TRUE THEN PROLONG THE SPIN FOR EACH PEDING REEL)
     this.slowSpinValidation();  
 
     const spinTicker = new PIXI.Ticker();
@@ -62,6 +66,7 @@ export default class ReelsContainer {
     spinTicker.start();
   }
 
+  // VALIDATE RESULTS TO CHECK IF BONUS PATTERN IS SATISFIED
   private slowSpinValidation() {
     let blockCount = 0;
 

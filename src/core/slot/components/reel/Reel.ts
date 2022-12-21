@@ -48,6 +48,7 @@ export default class Reel {
     this.createReelEffect();
   }
 
+  // CREATE MULTIPLE BLOCKS FOR EACH REEL
   private createBlocks() {
     this.blocks.forEach((block, index) => {
       const reelBlock = new Block(this.app, block);
@@ -61,12 +62,14 @@ export default class Reel {
     this.container.y = - this.reelBlocks[0].size;
   }
 
+  // THIS FUNCTION IS CALLED WHILE THE REEL IS SPINNING TO REPLICATE A REEL SPINNING AND DISPLAYING RANDOM VALUES
   private blockRandomizer(block: Block, index: number) {
     let randNum = ReelValues[index][Math.floor(Math.random() * ReelValues[index].length)];
     block.value = randNum;
     block.updateValue();
   }
 
+  // THIS FUNCTION IS CALLED BEFORE THE ACTUAL SPIN AND HAVE THE REEL GO UP FOR A BIT BEFORE SPINNING
   public startSpin(reelStopped: () => void) {
     this.reelStopped = reelStopped;
     this.reelSpinFlag = 0;
@@ -78,9 +81,9 @@ export default class Reel {
       yoyo: true,
       delay: this.spinSuccessionDelay * (this.reelIndex + 1),
       onComplete: () => {
-        this.reelSpinFlag = 1;
-        this.toggleMask(true);
-        this.spinStart = Date.now() + (this.spinDuration*1000) + this.prolongSpin();
+        this.reelSpinFlag = 1;                                                              // TOGGLE SPINNING FLAG TO TRUE
+        this.toggleMask(true);                                                              // MASK TOGGLING IS SET TO TRUE
+        this.spinStart = Date.now() + (this.spinDuration*1000) + this.prolongSpin();        // CHECK IF RESULT HAS SATISFIED THE PATTERN FOR BONUS GAME FOR PROLONGED SPINNING
         readySpin.kill();
         
         return;
@@ -89,6 +92,7 @@ export default class Reel {
     
   }
 
+  // FUNCTION TO PROLONG THE SPIN FOR EACH REEL AFTER TWO REELS HAD A BONUS DISPLAYED 
   private prolongSpin() {
     if(Globals.slowSpinStart == -1)
       return 0;
@@ -97,6 +101,8 @@ export default class Reel {
     return 2000 * ((this.reelIndex - Globals.slowSpinStart) + 1);
   }
 
+
+  // THE FUNCTION FOR SPINNING THE REEL
   public spinner() {
     let reelSpeed = this.reelSpeed;
 
@@ -120,6 +126,7 @@ export default class Reel {
           block.value = this.blocks[index];
           block.updateValue();
         }else{
+          // CALL FUNCTION FOR RANDOMIZING THE BLOCKS
           this.blockRandomizer(block, index);
         }
       }
@@ -133,6 +140,7 @@ export default class Reel {
     })
   }
 
+  // THIS FUNCTION IS CALLED AFTER THE SPIN TO ANIMATED THE REEL BOUNCING AFTER STOPPING
   private doneSpin() {
     let bounceForce = 20;
     this.toggleMask(false);
@@ -147,6 +155,8 @@ export default class Reel {
         ease: 'power.in',
         onComplete: () => {
           this.hideReelEffects();
+          
+          // CHECK IF THE LAST REEL HAS STOPPED (IF TRUE EXECUTE CALLBACK TO SHOW RESULTS)
           if(this.reelIndex == Columns - 1){
             this.reelStopped();
           }
@@ -175,6 +185,8 @@ export default class Reel {
         yoyo: true,
         onComplete: () => {
           this.hideReelEffects();
+
+          // CHECK IF THE LAST REEL HAS STOPPED (IF TRUE EXECUTE CALLBACK TO SHOW RESULTS)
           if(this.reelIndex == Columns - 1){
             this.reelStopped();
           }
@@ -192,6 +204,8 @@ export default class Reel {
         ease: 'power.in',
         onComplete: () => {
           this.hideReelEffects();
+
+          // CHECK IF THE LAST REEL HAS STOPPED (IF TRUE EXECUTE CALLBACK TO SHOW RESULTS)
           if(this.reelIndex == Columns - 1){
             this.reelStopped();
           }
@@ -214,6 +228,7 @@ export default class Reel {
     }
   }
 
+  // REEL MASK
   private createMask() {
     //GRAPHICS MASK
     const sizeAdjustment = ((this.reelBlocks[0].size * (this.reelBlocks[0].overlapPixels - 1)) / 2);
@@ -244,6 +259,7 @@ export default class Reel {
     // mask.alpha = 0.15*(this.reelIndex + 1);
   }
 
+  // FUNCTION FOR TOGGLING REEL MASK
   private toggleMask(active: boolean = true) {
     if(active){
       this.reelMask.alpha = 1;
@@ -258,6 +274,7 @@ export default class Reel {
     }
   }
 
+  // FUNCTION FOR REEL EFFECTS WHEN SLOWING DOWN
   private createReelEffect() {
     ReelEffects.forEach(effect => {
       let reelEffect = Functions.getSprite(this.app.loader, effect);
@@ -273,6 +290,7 @@ export default class Reel {
     
   }
   
+  // FUNCTION TO SHOW THE REEL EFFECTS WHEN REEL IS SLOWING DOWN
   public showReelEffects() {
     this.reelEffectsFlag = true;
     
@@ -290,6 +308,7 @@ export default class Reel {
     })
   }
 
+  // FUNCTION TO HIDE THE REEL EFFECTS
   public hideReelEffects() {
     this.reelEffectsFlag = false;
 

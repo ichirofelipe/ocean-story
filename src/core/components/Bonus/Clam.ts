@@ -27,6 +27,11 @@ export default class Clam {
   }
   private onClick: () => void;
 
+  // POSITION = INDEX FOR EACH CLAM ALSO USED FOR POSITION
+  // VALUE = THE VALUE FOR EACH CLAM
+  // BONUSCOUNT = THE NUMBER OF COLUMN WITH BONUS NUMBER
+  // FRAME = FRAME SPRITE IS PASSED (ONLY USED FOR POSITIONING OF CLAMS)
+  // ONCLICK = CALLBACK TO BE USED AFTER CLICKING ON THE CLAM
   constructor(app: PIXI.Application, value: number, position: number, bonusCount: number, frame: PIXI.Sprite, onClick: () => void){
     this.app = app;
     this.frame = frame;
@@ -45,6 +50,7 @@ export default class Clam {
     this.createPositionLabel();
   }
 
+  // UPDATE THE NAME VALUE FOR EACH CLAM TO DETERMINE IF CLAM SHOULD SHOW (GOLD, SILVER, BLACK) PEARL
   private updateSettings() {
     if(this.value > bonusStats[this.bonusCount - 3].min + 3)
       this.clamSettings.name = 'clam-white';
@@ -52,6 +58,7 @@ export default class Clam {
       this.clamSettings.name = 'clam-gold';
   }
 
+  // CREATE THE CLAM
   private createInteractiveClam() {
     const texture = this.app.loader.resources!.homebonus.textures!['clamp-close.png'];
     let img = new PIXI.Sprite(texture);
@@ -82,6 +89,7 @@ export default class Clam {
     this.container.addChild(this.clam);
   }
 
+  // CREATE THE POSITION TEXT FOR CLAM
   private createPositionLabel() {
     let style = new PIXI.TextStyle({
       fontFamily: 'Montserrat',
@@ -99,6 +107,7 @@ export default class Clam {
     this.clam.addChild(this.positionText);
   }
 
+  // FUNCTION FOR OPENNING THE CLAM
   public openClam() {
     this.clam.x += this.clam.width/2;
     this.clam.y += this.clam.height/2;
@@ -125,6 +134,7 @@ export default class Clam {
     })
   }
 
+  // CREATE THE VALUE TEXT DISPLAY FOR THE CLAM
   private createDisplayValue() {
     let style = new PIXI.TextStyle({
       fontFamily: 'Luckiest Guy',
@@ -149,6 +159,7 @@ export default class Clam {
     this.clam.addChild(textValue);
   }
 
+  // FUNCTION TO DISABLE THE CLAM
   public disable(text:boolean = true) {
     if(text){
       const disableAnimate = gsap.to(this.positionText, {
@@ -171,6 +182,7 @@ export default class Clam {
     this.clam.interactiveChildren = false;
   }
 
+  // FUNCTION TO ENABLE THE CLAM
   public enable() {
     const enableAnimate = gsap.to(this.clam, {
       alpha: 1,

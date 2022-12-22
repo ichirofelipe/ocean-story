@@ -32,6 +32,10 @@ export default class Bonus {
   private activeClams: Array<Clam> = [];
   private bonusDone: (spin: number) => void;
   
+  // clams = array of numbers for the clams to be opened for bonus game
+  // bonusCount = to determine how many columns had the bonus number to determine how many spins for MIN and MAX
+  // example 3 columns with bonus number will display a minimum of 5 spins to a maximum of 15 spins
+  // bonusDone = callback if bonus game is done
   constructor(app: PIXI.Application, clams: Array<number>, bonusCount: number, bonusDone: (spin: number) => void) {
     this.app = app;
     this.clams = clams;
@@ -54,6 +58,7 @@ export default class Bonus {
     this.continueBonusSequence();
   }
 
+  // INITIALIZE FRAME FOR BONUS GAME
   private createFrame() {
     const texture = this.app.loader.resources!.homebonus.textures!['frame.png'];
     this.frame = new PIXI.Sprite(texture);
@@ -65,6 +70,7 @@ export default class Bonus {
     this.container.addChild(this.frame);
   }
 
+  // INITIALIZE LOGO FOR BONUS GAME
   private createLogo() {
     const texture = this.app.loader.resources!.slot.textures!['logo.png'];
     this.logo = new PIXI.Sprite(texture);
@@ -77,22 +83,37 @@ export default class Bonus {
     this.container.addChild(this.logo);
   }
 
+  // INITIALIZE CLAMS FOR BONUS GAME
   private createClams() {
     this.clams.forEach((val, index) => {
+
       const clam = new Clam(this.app, val, index, this.bonusCount, this.frame, () => {
         
+        // THIS IS THE START OF THE CALL BACK FUNCTION AFTER CLICKING ON EACH CLAM
+
+        // CHECK IF BIG CLAM IS UNDEFINED TO KNOW IF ITS THE FIRST CLAM THAT THE PLAYER SELECTED
         if(this.bigClamIndex === undefined){
+          
+          // SET FIRST CLAM AS THE BIG CLAM TO BE OPENED FOR LATER
           this.bigClamText(clam);
           this.setBigClam();
           clam.disable();
         } else{
+
+          // IF BIG CLAM IS ALREADY SELECTED OPEN THE NEXT SELECTED CLAM
           clam.openClam();
         }
 
-        
+        // DECREMENT THE TOTAL CLAMS TO BE SELECTED FOR EACH ROUND
         this.clamsToPick--;
+
+        // REMOVE CLAM FROM ARRAY
         this.clams.splice(clam.position, 1);
+
+        // FILTER ACTIVE CLAMS TO HAVE A LIST OF HOW MANY REMAINING ACTIVE CLAMS CAN PLAYER STILL SELECT
         this.activeClams = this.activeClams.filter(aClam => aClam.position != clam.position);
+
+        // GO TO THE NEXT PHASE OF THE BONUS GAME
         this.nextSequence();
       });
 
@@ -101,6 +122,7 @@ export default class Bonus {
     })
   }
 
+  // CREATE THE BIG CLAM
   private createBigClam() {
     const texture = this.app.loader.resources!.homebonus.textures!['clamp-close.png'];
     let img = new PIXI.Sprite(texture);
@@ -119,6 +141,7 @@ export default class Bonus {
     this.container.addChild(this.bigClam);
   }
 
+  // SET THE NAME VALUE FOR THE BIG CLAM
   private setBigClam() {
     if(this.bigClamValue > bonusStats[this.bonusCount - 3].min + 3)
       bigClamSettings.name = 'clam-white';
@@ -126,6 +149,7 @@ export default class Bonus {
       bigClamSettings.name = 'clam-gold';
   }
 
+  // CREATE THE TEXT FOR BIG CLAM
   private bigClamText(clam: Clam) {
     const {position, value} = clam;
 
@@ -152,6 +176,7 @@ export default class Bonus {
     })
   }
 
+  // FUNCTION FOR REPLACING THE SPRITE OF THE BIG CLAM WITH ANIMATED SPRITE TO DISPLAY OPENING ANIMATION
   private showBigClam() {
     this.setBigClam();
     this.bigClam.x += this.bigClam.width/2;
@@ -185,6 +210,7 @@ export default class Bonus {
     })
   }
 
+  // CREATE THE POSITION TEXT OF CLAM
   private createPositionText(position: number, value: number) {
     let style = new PIXI.TextStyle({
       fontFamily: 'Montserrat',
@@ -202,6 +228,7 @@ export default class Bonus {
     this.bigClam.addChild(this.positionText);
   }
 
+  // CREATE THE INSTRUCTION TEXT FOR BONUS GAME
   private createInstructionText() {
     let style = new PIXI.TextStyle({
       fontFamily: 'Montserrat',
@@ -223,6 +250,7 @@ export default class Bonus {
     this.container.addChild(this.instructionText);
   }
 
+  // CREATE THE OFFER TEXT FOR BONUS GAME
   private createOfferText() {
     let style = new PIXI.TextStyle({
       fontFamily: 'Luckiest Guy',
@@ -247,6 +275,7 @@ export default class Bonus {
     this.container.addChild(this.offerText);
   }
 
+  // CREATE THE ACTIONS FOR BONUS GAME (ACCEPT AND DECLINE)
   private createActions() {
     const acceptTexture = this.app.loader.resources!.homebonus.textures!['accept.png'];
     const rejectTexture = this.app.loader.resources!.homebonus.textures!['reject.png'];
@@ -268,8 +297,13 @@ export default class Bonus {
       this.actionsBlock.addChild(button);
     })
 
+    // IF USER SELECTED ACCEPT
     this.actionsBlock.children[0].addListener('pointerdown', this.acceptOffer.bind(this));
+
+    // IF USER SELECTED DECLINE, BONUS GAME WILL PROCEED TO NEXT SEQUENCE
     this.actionsBlock.children[1].addListener('pointerdown', this.nextSequence.bind(this));
+
+
     this.actionsBlock.x = this.frame.x + ((this.frame.width - this.actionsBlock.width) / 2)
     this.actionsBlock.y = this.offerText.y + this.offerText.height + 10;
     this.actionsBlock.alpha = 0;
@@ -278,6 +312,7 @@ export default class Bonus {
     this.container.addChild(this.actionsBlock);
   }
 
+  // FUNCTION TO ENABLE ACTIONS BLOCK
   private actionEnable() {
     const showAnimate = gsap.to(this.actionsBlock, {
       alpha: 1,
@@ -290,6 +325,7 @@ export default class Bonus {
     })
   }
 
+  // FUNCTION TO DISABLE ACTIONS BLOCK
   private actionDisable() {
     const disableAnimate = gsap.to(this.actionsBlock, {
       alpha: 0,
@@ -303,19 +339,24 @@ export default class Bonus {
   }
 
 
+  // FUNCTION TO PROCEED WITH THE NEXT SEQUENCE IN THE BONUS GAME
+  // CHECK ALL THE SEQUENCE OF THE BONUS GAME IN bonusSettings.json (flow) ARRAY PROPERTY
   private continueBonusSequence() {
     let data = Flow[this.sequence];
     
+    // CHECK IF ACTION SHOULD BE DISPLAYED
     if(data.action !== undefined){
       this.actionEnable();
     } else {
       this.actionDisable();
     }
 
+    // FUNCTION TO RESET OFFER TEXT AND REPLACE OFFER
     this.offerText.text = '';
     if(data.offer !== undefined){
       let offerSpin = this.getOfferedSpin();
 
+      // CHECK IF THE SEQUENCE NUMBER IS THE LAST PART OF BONUS GAME
       if(this.sequence < Flow.length - 1){
         this.bigClamValue = offerSpin;
         this.updateText(this.offerText, `${Functions.formatNum(offerSpin, 0)}`);
@@ -325,19 +366,25 @@ export default class Bonus {
     if(data.clams !== undefined && this.clamsToPick == 0)
       this.clamsToPick = data.clams;
 
+    // CHECK IF CLAMS IS READY FOR SELECTING TO ENABLE OR DISABLE CLAMS
     if(data.clams !== undefined){
       this.activeClams.forEach(clam => clam.enable());
     } else {
       this.activeClams.forEach(clam => clam.disable(false));
     }
 
+    // CHECK IF BIGCLAM IS SELECTED
     if(data.bigClam !== undefined){
+
+      // CHECK IF ACTION TYPE IS ACCEPT
       if(this.actionType == 0){
         let offerSpin = this.bigClamValue;
         this.updateText(this.offerText, `${Functions.formatNum(offerSpin, 0)}`);
         this.showBigClam();
 
-      } else {
+      } 
+      // THIS IS IF ACTION TYPE IS DECLINE THEN SWAP THE LAST CLAM TO THE BIG CLAM WHICH IS THE FIRST CLAM SELECTED BY THE PLAYER
+      else {
         let clam = this.activeClams[0].clam;
         const clamAnim = gsap.to(clam, {
           height: this.bigClam.height,
@@ -376,10 +423,12 @@ export default class Bonus {
       }
     }
 
+    // UPDATE THE INSTRUCTION TEXT
     let newIntructionText = data.instruction.replace('{clams}', `${this.clamsToPick}`);
     this.updateText(this.instructionText, newIntructionText);
   }
 
+  // GET THE OFFERED SPIN WITH A BIT OF RNG
   private getOfferedSpin() {
     let offerSpin = 0;
     let stats = bonusStats[this.bonusCount - 3];
@@ -413,6 +462,7 @@ export default class Bonus {
     text.x = this.frame.x + ((this.frame.width - text.width) / 2);
   }
 
+  // FUNCTION FOR NEXT PROCEEDING TO NEXT SEQUENCE
   private nextSequence() {
     this.actionType = 1;
     if(this.clamsToPick == 0)
@@ -420,12 +470,14 @@ export default class Bonus {
     this.continueBonusSequence();
   }
 
+  // FUNCTION TO CALL IF PLAYER ACCEPTED THE OFFER
   private acceptOffer() {
     this.actionType = 0;
     this.sequence = Flow.length - 1;
     this.continueBonusSequence();
   }
 
+  // CREATE THE VALUE FOR CLAM
   private createDisplayValue(clam: PIXI.Graphics, value: number) {
     let style = new PIXI.TextStyle({
       fontFamily: 'Luckiest Guy',

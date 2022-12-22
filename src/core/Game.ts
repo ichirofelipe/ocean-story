@@ -268,39 +268,45 @@ export default class Game {
 
     this.slotgame.getResult((money: number) => {
       //CHECK IF THERE ARE SYMBOLS TO ANIMATE
+      let timeout = 0;
       if(this.freeGame > 0){
         this.slotgame.showFreeSpinDisplay();
+        timeout = 1500;
       }
 
-      if(this.slotgame.symbolsToAnimate.length > 0){
-        this.addMoney(3, money);
-
-        //PLAY SYMBOL ANIMATION
-        Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
-
-        if((money/this.bet) < 20){
-
-          let winPopupDelay = setTimeout(() => {
-            this.stopSymbolAnimation();
-            clearTimeout(winPopupDelay);
-          }, 4000);
+      const delay = setTimeout(() => {
+        if(this.slotgame.symbolsToAnimate.length > 0){
+          this.addMoney(3, money);
+  
+          //PLAY SYMBOL ANIMATION
+          Functions.toggleAnimations(this.slotgame.symbolsToAnimate, true);
+  
+          if((money/this.bet) < 20){
+  
+            let winPopupDelay = setTimeout(() => {
+              this.stopSymbolAnimation();
+              clearTimeout(winPopupDelay);
+            }, 4000);
+          }
+  
+        }
+        else{
+          Globals.isSpinning = false;
+          if(this.game > 0)
+            this.slotPlay();
+        }
+  
+        if(this.freeGame > 0){
+          this.freeGame--;
+          this.slotgame.freeSpinCount = this.freeGame;
+          this.slotgame.updateFreeSpinText();
+        }
+        else {
+          this.stopAndPlay(true);
         }
 
-      }
-      else{
-        Globals.isSpinning = false;
-        if(this.game > 0)
-          this.slotPlay();
-      }
-
-      if(this.freeGame > 0){
-        this.freeGame--;
-        this.slotgame.freeSpinCount = this.freeGame;
-        this.slotgame.updateFreeSpinText();
-      }
-      else {
-        this.stopAndPlay(true);
-      }
+        clearTimeout(delay);
+      }, timeout);
 
     });
   }

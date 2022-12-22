@@ -154,7 +154,7 @@ export default class Slot {
 
     this.container.addChild(this.freeSpinDisCont);
 
-    // this.showFreeSpinDisplay();
+    // this.hideFreeSpinDisplay();
   }
 
   // FUNCTION TO SHOW FREE SPIN DISPLAY

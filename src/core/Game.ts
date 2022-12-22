@@ -209,10 +209,15 @@ export default class Game {
             this.soundStop(2);
             this.soundStop(1);
             this.volumeTransition(1.0, 3);
-            if(this.freeGame <= 0)
+            if(this.freeGame <= 0){
               this.stopAndPlay(true);
-            if(this.game > 0)
+            } else {
+              this.slotgame.showFreeSpinDisplay();
+            }
+            if(this.game > 0){
+              Globals.isSpinning = false;
               this.slotPlay();
+            }
             animationFlag = true;
 
             diveAnimate.kill();
@@ -258,8 +263,15 @@ export default class Game {
     Globals.isSpinning = true;
     Globals.freeGameCount = this.freeGame;
     this.updateGameMinus();
+    
+    this.slotgame.hideFreeSpinDisplay();
+
     this.slotgame.getResult((money: number) => {
       //CHECK IF THERE ARE SYMBOLS TO ANIMATE
+      if(this.freeGame > 0){
+        this.slotgame.showFreeSpinDisplay();
+      }
+
       if(this.slotgame.symbolsToAnimate.length > 0){
         this.addMoney(3, money);
 
@@ -283,6 +295,8 @@ export default class Game {
 
       if(this.freeGame > 0){
         this.freeGame--;
+        this.slotgame.freeSpinCount = this.freeGame;
+        this.slotgame.updateFreeSpinText();
       }
       else {
         this.stopAndPlay(true);
@@ -346,6 +360,9 @@ export default class Game {
     this.dive();
 
     this.freeGame += spin;
+    this.slotgame.freeSpinCount = this.freeGame;
+    this.slotgame.updateFreeSpinText();
+
     this.game += spin;
     this.controller.gameinbox.updateGame(this.game);
 

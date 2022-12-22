@@ -22,9 +22,16 @@ import {ReelOffsetX, ReelOffsetY, Pattern} from './tools/settings.json';
 // SLOT HELPERS AUTO WIDTH AUTO HEIGHT AND SETTINGS OBJECT VALUES
 import Helpers from './tools/Helpers';
 
+import { gsap } from "gsap";
+import { PixiPlugin } from "gsap/PixiPlugin";
+
+gsap.registerPlugin(PixiPlugin);
+PixiPlugin.registerPIXI(PIXI);
+
 export default class Slot {
   private app: PIXI.Application;
   public container: PIXI.Container;
+  private freeSpinDisCont: PIXI.Container;
   private testFunctions: TestFunctions;
   private functions: Functions;
   public bet: number = 1;
@@ -38,6 +45,8 @@ export default class Slot {
   private frameWidthAdjustment: number = 10;
   public symbolsToAnimate: Array<PIXI.AnimatedSprite> = [];
   public bonusCount: number = 0;
+  public freeSpinCount: number = 0;
+  private freeSpinText: PIXI.Text;
 
   constructor(app: PIXI.Application, bet: number, RTP: number) {
     this.app = app;
@@ -60,6 +69,8 @@ export default class Slot {
     this.createReelsContainer();
     this.createBackground();
     this.createFrame();
+    this.createFreeSpinDisplay();
+    this.createFreeSpinText();
     this.createLogo();
   }
 
@@ -117,6 +128,93 @@ export default class Slot {
     this.frame.zIndex = 0;
 
     this.container.addChild(this.frame);
+  }
+
+  // INITIALIZE FREE SPIN DISPLAY
+  private createFreeSpinDisplay() {
+    this.freeSpinDisCont = new PIXI.Container();
+    const overlay = new PIXI.Graphics();
+    overlay.beginFill(0x2387c0)
+    .drawRect(0, 0, this.frame.width, this.frame.height)
+    .endFill();
+    overlay.alpha = 0.4;
+
+    const texture = this.app.loader.resources!.slot.textures!['mask.png'];
+    const mask = new PIXI.Sprite(texture);
+    mask.width = this.reelsContainer.container.width;
+    mask.height = (this.reelsContainer.reels[0].reelBlocks[0].size * this.reelsContainer.reels[0].reelBlocks[0].overlapPixels) * 3;
+    
+    this.freeSpinDisCont.addChild(overlay);
+    this.freeSpinDisCont.addChild(mask);
+    this.freeSpinDisCont.mask = mask;
+    this.freeSpinDisCont.y = -21.5;
+    this.freeSpinDisCont.x = -2.5;
+    this.freeSpinDisCont.zIndex = 1;
+    this.freeSpinDisCont.alpha = 0.01;
+
+    this.container.addChild(this.freeSpinDisCont);
+
+    // this.showFreeSpinDisplay();
+  }
+
+  // FUNCTION TO SHOW FREE SPIN DISPLAY
+  public showFreeSpinDisplay() {
+    // const show = gsap.to(this.freeSpinDisCont, {
+    //   alpha: 1,
+    //   duration: 500,
+    //   onComplete: () => {
+    //     show.kill();
+    //   }
+    // })
+    this.freeSpinDisCont.alpha = 1;
+  }
+
+  // FUNCTION TO HIDE FREE SPIN DISPLAY
+  public hideFreeSpinDisplay() {
+    // const hide = gsap.to(this.freeSpinDisCont, {
+    //   alpha: .01,
+    //   duration: 500,
+    //   onComplete: () => {
+    //     hide.kill();
+    //   }
+    // })
+    this.freeSpinDisCont.alpha = 0.01;
+  }
+
+  // INITIALIZE FREE SPIN TEXT
+  private createFreeSpinText() {
+    const style = new PIXI.TextStyle({
+      fontFamily: 'Luckiest Guy',
+      fontSize: 40,
+      fillGradientType: 0,
+      fill: ['#f1c001', '#bf6600'],
+      fillGradientStops: [0.4, 0.9],
+      fontWeight: 'bold',
+      stroke: "#00000080",
+      strokeThickness: 5,
+      letterSpacing: 3,
+      dropShadow: true,
+      dropShadowAlpha: 0.5,
+      dropShadowDistance: 0,
+      dropShadowBlur: 3
+    });
+
+    this.freeSpinText = new PIXI.Text(this.freeSpinCount, style);
+    const label = new PIXI.Text('Free Spin', style);
+    
+    this.freeSpinDisCont.addChild(label);
+    this.freeSpinDisCont.addChild(this.freeSpinText);
+    
+    label.x = (this.freeSpinDisCont.width - label.width) / 2;
+    label.y = ((this.freeSpinDisCont.height - label.height) / 2) - 20;
+    this.freeSpinText.x = (this.freeSpinDisCont.width - this.freeSpinText.width) / 2;
+    this.freeSpinText.y = ((this.freeSpinDisCont.height - this.freeSpinText.height) / 2) + 20;
+  }
+
+  public updateFreeSpinText() {
+    this.freeSpinText.text = this.freeSpinCount;
+    this.freeSpinText.x = (this.freeSpinDisCont.width - this.freeSpinText.width) / 2;
+    this.freeSpinText.y = ((this.freeSpinDisCont.height - this.freeSpinText.height) / 2) + 20;
   }
 
   // FUNCTION FOR TEST RESULT

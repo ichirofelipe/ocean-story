@@ -84,7 +84,7 @@
 			"frame": {
 				"x": 449,
 				"y": 1,
-				"w": 560,
+				"w": 572,
 				"h": 285
 			},
 			"rotated": false,
@@ -92,12 +92,32 @@
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 560,
+				"w": 572,
 				"h": 285
 			},
 			"sourceSize": {
-				"w": 560,
+				"w": 572,
 				"h": 285
+			}
+		},
+		"stage.png": {
+			"frame": {
+				"x": 1023,
+				"y": 1,
+				"w": 652,
+				"h": 664
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 652,
+				"h": 664
+			},
+			"sourceSize": {
+				"w": 652,
+				"h": 664
 			}
 		}
 	},
@@ -107,8 +127,8 @@
 		"image": "newplinko.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 1010,
-			"h": 657
+			"w": 1676,
+			"h": 666
 		},
 		"scale": "1"
 	}

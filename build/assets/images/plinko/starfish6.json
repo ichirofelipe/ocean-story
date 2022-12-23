@@ -1,614 +1,614 @@
 {
 	"frames": {
-		"claw_00000.png": {
+		"blue-starfish_00000.png": {
 			"frame": {
 				"x": 1,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00001.png": {
+		"blue-starfish_00001.png": {
 			"frame": {
-				"x": 73,
+				"x": 153,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00002.png": {
+		"blue-starfish_00002.png": {
 			"frame": {
-				"x": 145,
+				"x": 305,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00003.png": {
+		"blue-starfish_00003.png": {
 			"frame": {
-				"x": 217,
+				"x": 457,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00004.png": {
+		"blue-starfish_00004.png": {
 			"frame": {
-				"x": 289,
+				"x": 609,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00005.png": {
+		"blue-starfish_00005.png": {
 			"frame": {
-				"x": 361,
+				"x": 761,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00006.png": {
+		"blue-starfish_00006.png": {
 			"frame": {
-				"x": 433,
+				"x": 913,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00007.png": {
+		"blue-starfish_00007.png": {
 			"frame": {
-				"x": 505,
+				"x": 1065,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00008.png": {
+		"blue-starfish_00008.png": {
 			"frame": {
-				"x": 577,
+				"x": 1217,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00009.png": {
-			"frame": {
-				"x": 649,
-				"y": 1,
-				"w": 70,
-				"h": 127
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 127
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 127
-			}
-		},
-		"claw_00010.png": {
-			"frame": {
-				"x": 721,
-				"y": 1,
-				"w": 70,
-				"h": 127
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 127
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 127
-			}
-		},
-		"claw_00011.png": {
-			"frame": {
-				"x": 793,
-				"y": 1,
-				"w": 70,
-				"h": 127
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 127
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 127
-			}
-		},
-		"claw_00012.png": {
-			"frame": {
-				"x": 865,
-				"y": 1,
-				"w": 70,
-				"h": 127
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 127
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 127
-			}
-		},
-		"claw_00013.png": {
-			"frame": {
-				"x": 937,
-				"y": 1,
-				"w": 70,
-				"h": 127
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 127
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 127
-			}
-		},
-		"claw_00014.png": {
-			"frame": {
-				"x": 1009,
-				"y": 1,
-				"w": 70,
-				"h": 127
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 127
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 127
-			}
-		},
-		"claw_00015.png": {
-			"frame": {
-				"x": 1081,
-				"y": 1,
-				"w": 70,
-				"h": 127
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 127
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 127
-			}
-		},
-		"claw_00016.png": {
-			"frame": {
-				"x": 1153,
-				"y": 1,
-				"w": 70,
-				"h": 127
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 127
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 127
-			}
-		},
-		"claw_00017.png": {
-			"frame": {
-				"x": 1225,
-				"y": 1,
-				"w": 70,
-				"h": 127
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 127
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 127
-			}
-		},
-		"claw_00018.png": {
-			"frame": {
-				"x": 1297,
-				"y": 1,
-				"w": 70,
-				"h": 127
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 127
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 127
-			}
-		},
-		"claw_00019.png": {
+		"blue-starfish_00009.png": {
 			"frame": {
 				"x": 1369,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00020.png": {
+		"blue-starfish_00010.png": {
 			"frame": {
-				"x": 1441,
+				"x": 1521,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00021.png": {
+		"blue-starfish_00011.png": {
 			"frame": {
-				"x": 1513,
+				"x": 1673,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00022.png": {
+		"blue-starfish_00012.png": {
 			"frame": {
-				"x": 1585,
+				"x": 1825,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00023.png": {
+		"blue-starfish_00013.png": {
 			"frame": {
-				"x": 1657,
+				"x": 1977,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00024.png": {
+		"blue-starfish_00014.png": {
 			"frame": {
-				"x": 1729,
+				"x": 2129,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00025.png": {
+		"blue-starfish_00015.png": {
 			"frame": {
-				"x": 1801,
+				"x": 2281,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00026.png": {
+		"blue-starfish_00016.png": {
 			"frame": {
-				"x": 1873,
+				"x": 2433,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00027.png": {
+		"blue-starfish_00017.png": {
 			"frame": {
-				"x": 1945,
+				"x": 2585,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00028.png": {
+		"blue-starfish_00018.png": {
 			"frame": {
-				"x": 2017,
+				"x": 2737,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			}
 		},
-		"claw_00029.png": {
+		"blue-starfish_00019.png": {
 			"frame": {
-				"x": 2089,
+				"x": 2889,
 				"y": 1,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
 			},
 			"sourceSize": {
-				"w": 70,
-				"h": 127
+				"w": 150,
+				"h": 150
+			}
+		},
+		"blue-starfish_00020.png": {
+			"frame": {
+				"x": 3041,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"blue-starfish_00021.png": {
+			"frame": {
+				"x": 3193,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"blue-starfish_00022.png": {
+			"frame": {
+				"x": 3345,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"blue-starfish_00023.png": {
+			"frame": {
+				"x": 3497,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"blue-starfish_00024.png": {
+			"frame": {
+				"x": 3649,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"blue-starfish_00025.png": {
+			"frame": {
+				"x": 3801,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"blue-starfish_00026.png": {
+			"frame": {
+				"x": 3953,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"blue-starfish_00027.png": {
+			"frame": {
+				"x": 4105,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"blue-starfish_00028.png": {
+			"frame": {
+				"x": 4257,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
+			}
+		},
+		"blue-starfish_00029.png": {
+			"frame": {
+				"x": 4409,
+				"y": 1,
+				"w": 150,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 150
 			}
 		}
 	},
 	"meta": {
 		"app": "http://www.codeandweb.com/texturepacker",
 		"version": "1.0",
-		"image": "crane.png",
+		"image": "starfish6.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 2160,
-			"h": 129
+			"w": 4560,
+			"h": 152
 		},
 		"scale": "1"
 	}

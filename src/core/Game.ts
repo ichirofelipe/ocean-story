@@ -270,11 +270,16 @@ export default class Game {
       //CHECK IF THERE ARE SYMBOLS TO ANIMATE
       let timeout = 0;
       if(this.freeGame > 0){
+        this.freeGame--;
+        this.slotgame.freeSpinCount = this.freeGame;
+        this.slotgame.updateFreeSpinText();
         this.slotgame.showFreeSpinDisplay();
         timeout = 1500;
+      } else {
+        this.stopAndPlay(true);
       }
 
-      const delay = setTimeout(() => {
+      
         if(this.slotgame.symbolsToAnimate.length > 0){
           this.addMoney(3, money);
   
@@ -291,22 +296,14 @@ export default class Game {
   
         }
         else{
-          Globals.isSpinning = false;
-          if(this.game > 0)
-            this.slotPlay();
-        }
-  
-        if(this.freeGame > 0){
-          this.freeGame--;
-          this.slotgame.freeSpinCount = this.freeGame;
-          this.slotgame.updateFreeSpinText();
-        }
-        else {
-          this.stopAndPlay(true);
-        }
+          const delay = setTimeout(() => {
+            Globals.isSpinning = false;
+            if(this.game > 0)
+              this.slotPlay();
 
-        clearTimeout(delay);
-      }, timeout);
+            clearTimeout(delay);
+          }, timeout);
+        }
 
     });
   }

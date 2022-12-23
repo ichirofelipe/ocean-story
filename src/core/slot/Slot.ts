@@ -200,7 +200,7 @@ export default class Slot {
     });
 
     this.freeSpinText = new PIXI.Text(this.freeSpinCount, style);
-    const label = new PIXI.Text('Free Spin', style);
+    const label = new PIXI.Text('Free Spin Left', style);
     
     this.freeSpinDisCont.addChild(label);
     this.freeSpinDisCont.addChild(this.freeSpinText);
